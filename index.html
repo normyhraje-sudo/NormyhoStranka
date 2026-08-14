@@ -27,9 +27,10 @@
             line-height: 1.6;
             padding-top: 70px;
             -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
         }
 
-        /* ===== MENU ===== */
+        /* ===== MENU + BURGER ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -72,11 +73,45 @@
             font-size: 1.3rem;
         }
 
+        /* ===== BURGER MENU ===== */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.3rem;
+            background: none;
+            border: none;
+            touch-action: manipulation;
+        }
+
+        .burger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #f8fafc;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
         .nav-links {
             display: flex;
             gap: 0.2rem;
             flex-wrap: wrap;
             list-style: none;
+            transition: all 0.3s ease;
         }
 
         .nav-links a {
@@ -184,65 +219,91 @@
             text-transform: uppercase;
         }
 
-        /* ===== BUBLINY V HERO ===== */
-        .bubble-grid {
+        /* ===== EXPERIMENTÁLNÍ KARTY MÍSTO BUBLIN ===== */
+        .exp-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
+            gap: 1.2rem;
             margin-top: 2.5rem;
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .bubble {
-            background: rgba(255, 255, 255, 0.06);
+        .exp-card {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 1.5rem;
-            padding: 1.2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             color: #f8fafc;
             touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
         }
 
-        .bubble:active {
+        .exp-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .exp-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .exp-card:active {
             transform: scale(0.95);
         }
 
-        .bubble .bubble-icon {
-            font-size: 1.8rem;
+        .exp-card .exp-icon {
+            font-size: 2rem;
             color: #fbbf24;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
             display: block;
         }
 
-        .bubble .bubble-number {
-            font-size: 1.6rem;
+        .exp-card .exp-number {
+            font-size: 1.8rem;
             font-weight: 900;
             color: #fbbf24;
             display: block;
-            line-height: 1.2;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
         }
 
-        .bubble .bubble-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            opacity: 0.9;
+        .exp-card .exp-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            opacity: 0.95;
             margin-top: 0.2rem;
             display: block;
         }
 
-        .bubble .bubble-desc {
+        .exp-card .exp-desc {
             font-size: 0.65rem;
-            opacity: 0.7;
+            opacity: 0.6;
             margin-top: 0.2rem;
             display: block;
         }
 
-        /* ===== PROGRAMOVÉ BANNERY (před každou sekcí) ===== */
+        .exp-card .exp-emoji {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ===== PROGRAMOVÉ BANNERY ===== */
         .program-banner {
             padding: 1.8rem 0;
             text-align: center;
@@ -351,7 +412,7 @@
             margin: -1.8rem auto 2.5rem auto;
         }
 
-        /* ===== INOVATIVNÍ BUBLINY PRO "PROČ" (2×2 mřížka) ===== */
+        /* ===== INOVATIVNÍ "PROČ" - KARTY S ČÍSLY ===== */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -442,17 +503,37 @@
             letter-spacing: 0.5px;
         }
 
-        /* ===== INFO BUBLINY ===== */
-        .info-bubbles {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        /* ===== "CO CHYSTÁME" - JAKO SLIDER ===== */
+        .slider-wrapper {
+            overflow-x: auto;
+            padding: 1rem 0.5rem 2rem 0.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            display: flex;
             gap: 1.2rem;
-            margin-top: 2rem;
+            scrollbar-width: thin;
+            scrollbar-color: #fbbf24 #e2e8f0;
         }
 
-        .info-bubble {
+        .slider-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .slider-wrapper::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 9999px;
+        }
+
+        .slider-wrapper::-webkit-scrollbar-thumb {
+            background: #fbbf24;
+            border-radius: 9999px;
+        }
+
+        .slider-item {
+            flex: 0 0 220px;
+            scroll-snap-align: start;
             background: #ffffff;
-            border-radius: 1.8rem;
+            border-radius: 2rem;
             padding: 1.8rem 1.2rem;
             text-align: center;
             border: 1px solid #e2e8f0;
@@ -461,34 +542,47 @@
             touch-action: manipulation;
         }
 
-        .info-bubble:active {
+        .slider-item:active {
             transform: scale(0.96);
         }
 
-        .info-bubble:hover {
-            transform: translateY(-6px);
+        .slider-item:hover {
+            transform: translateY(-6px) scale(1.02);
             border-color: #fbbf24;
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
         }
 
-        .info-bubble .bubble-icon {
-            font-size: 2.2rem;
+        .slider-item .slide-icon {
+            font-size: 2.5rem;
             color: #fbbf24;
             margin-bottom: 0.6rem;
             display: block;
         }
 
-        .info-bubble h4 {
-            font-size: 1rem;
+        .slider-item h4 {
+            font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 0.3rem;
             color: #0f172a;
         }
 
-        .info-bubble p {
+        .slider-item p {
             font-size: 0.85rem;
             color: #64748b;
             line-height: 1.5;
+        }
+
+        .slider-item .slide-tag {
+            display: inline-block;
+            margin-top: 0.6rem;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 0.15rem 0.8rem;
+            border-radius: 9999px;
+            letter-spacing: 0.3px;
         }
 
         /* ===== PROJEKTY ===== */
@@ -564,190 +658,107 @@
             color: #166534;
         }
 
-        /* ===== KANDIDÁTI ===== */
-        .candidates-list {
-            display: flex;
-            flex-direction: column;
+        /* ===== KDO JSME - ORIGINÁLNÍ STYL ===== */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             max-width: 1000px;
             margin: 0 auto;
         }
 
-        .candidate-profile {
-            display: flex;
-            gap: 1.8rem;
+        .team-card {
             background: #ffffff;
-            border-radius: 1.5rem;
-            padding: 1.8rem;
-            border: 1px solid #e2e8f0;
+            border-radius: 2rem;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 2px solid #e2e8f0;
             transition: all 0.35s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-            align-items: flex-start;
+            position: relative;
+            overflow: hidden;
             touch-action: manipulation;
         }
 
-        .candidate-profile:active {
-            transform: scale(0.98);
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .candidate-profile:hover {
+        .team-card:hover::before {
+            opacity: 1;
+        }
+
+        .team-card:active {
+            transform: scale(0.97);
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
             border-color: #fbbf24;
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-            transform: translateX(4px);
         }
 
-        .candidate-photo {
-            flex-shrink: 0;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
-            border: 4px solid #fbbf24;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .candidate-photo .photo-placeholder {
-            color: #94a3b8;
-            font-size: 0.65rem;
-            text-align: center;
-            padding: 0.3rem;
-            line-height: 1.2;
-        }
-
-        .candidate-photo .photo-placeholder i {
-            font-size: 2rem;
+        .team-card .team-emoji {
+            font-size: 3rem;
             display: block;
-            margin-bottom: 0.1rem;
-            color: #cbd5e1;
+            margin-bottom: 0.3rem;
         }
 
-        .candidate-profile:hover .candidate-photo {
-            border-color: #f59e0b;
-            box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.15);
-        }
-
-        .candidate-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .candidate-info .candidate-number {
-            display: inline-block;
-            font-size: 0.6rem;
+        .team-card .team-number {
+            font-size: 0.7rem;
             font-weight: 800;
-            color: #0f172a;
-            background: #fef9e7;
-            padding: 0.15rem 0.8rem;
-            border-radius: 9999px;
-            border: 1px solid #fbbf24;
-            margin-bottom: 0.2rem;
-            letter-spacing: 0.3px;
-        }
-
-        .candidate-info .candidate-tag {
-            display: inline-block;
-            font-size: 0.6rem;
-            font-weight: 700;
             color: #fbbf24;
-            background: rgba(251, 191, 36, 0.12);
+            background: rgba(251, 191, 36, 0.1);
+            display: inline-block;
             padding: 0.15rem 0.8rem;
             border-radius: 9999px;
-            margin-left: 0.3rem;
-            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
         }
 
-        .candidate-info h3 {
-            font-size: 1.4rem;
-            font-weight: 800;
+        .team-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
             color: #0f172a;
-            margin: 0.1rem 0 0.1rem 0;
+            margin-bottom: 0.2rem;
         }
 
-        .candidate-info .position {
-            font-size: 0.85rem;
+        .team-card .team-role {
+            font-size: 0.8rem;
             font-weight: 600;
             color: #fbbf24;
             margin-bottom: 0.4rem;
         }
 
-        .candidate-info .bio {
+        .team-card p {
             color: #475569;
             font-size: 0.85rem;
-            margin-bottom: 0.8rem;
-            line-height: 1.6;
+            line-height: 1.5;
+            margin-bottom: 0.6rem;
         }
 
-        .candidate-priorities {
+        .team-card .team-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.3rem 0.6rem;
-            margin-bottom: 0.8rem;
+            justify-content: center;
+            gap: 0.3rem 0.5rem;
         }
 
-        .candidate-priorities .priority {
+        .team-card .team-tags span {
             background: #f1f5f9;
-            padding: 0.15rem 0.8rem;
+            padding: 0.1rem 0.7rem;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 500;
             color: #1e293b;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            border: 1px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .candidate-priorities .priority i {
-            color: #fbbf24;
-            font-size: 0.4rem;
-        }
-
-        .candidate-profile:hover .priority {
-            border-color: #e2e8f0;
-            background: #f8fafc;
-        }
-
-        .candidate-social {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .candidate-social a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: #64748b;
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 0.2rem 0.8rem;
-            border-radius: 9999px;
-            background: #f1f5f9;
-            transition: all 0.25s ease;
-            border: 1px solid transparent;
-            touch-action: manipulation;
-        }
-
-        .candidate-social a:active {
-            transform: scale(0.95);
-        }
-
-        .candidate-social a:hover {
-            background: #0f172a;
-            color: #f8fafc;
-            border-color: #fbbf24;
-            transform: scale(1.03);
-        }
-
-        .candidate-social a i {
-            font-size: 0.9rem;
         }
 
         /* ===== PATIČKA ===== */
@@ -764,11 +775,11 @@
         /* ===== RESPONZIVITA ===== */
         @media (max-width: 1024px) {
             .grid-3,
-            .info-bubbles {
+            .team-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .bubble-grid {
+            .exp-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -783,27 +794,43 @@
             }
 
             .navbar .container {
-                flex-direction: column;
-                gap: 0.3rem;
+                flex-direction: row;
                 padding: 0 0.8rem;
             }
 
-            .navbar .logo {
-                font-size: 1rem;
+            .burger {
+                display: flex;
             }
 
             .nav-links {
-                justify-content: center;
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 0.5rem 0;
                 gap: 0.1rem;
+                background: rgba(15, 23, 42, 0.98);
+                border-radius: 0 0 1rem 1rem;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                border-bottom: 2px solid #fbbf24;
+            }
+
+            .nav-links.open {
+                display: flex;
             }
 
             .nav-links a {
-                font-size: 0.65rem;
-                padding: 0.25rem 0.6rem;
+                font-size: 0.85rem;
+                padding: 0.6rem 1.2rem;
+                justify-content: center;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             }
 
-            .nav-links a i {
-                font-size: 0.6rem;
+            .nav-links a:last-child {
+                border-bottom: none;
             }
 
             .hero {
@@ -839,31 +866,28 @@
                 font-size: 1.8rem;
             }
 
-            .grid-3,
-            .info-bubbles {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .bubble-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .exp-grid {
+                grid-template-columns: 1fr 1fr;
                 gap: 0.8rem;
             }
 
-            .bubble {
-                padding: 1rem 0.8rem;
+            .exp-card {
+                padding: 1.2rem 0.8rem;
                 border-radius: 1.2rem;
             }
 
-            .bubble .bubble-number {
-                font-size: 1.3rem;
+            .exp-card .exp-number {
+                font-size: 1.4rem;
             }
 
-            .bubble .bubble-icon {
+            .exp-card .exp-icon {
+                font-size: 1.6rem;
+            }
+
+            .exp-card .exp-emoji {
                 font-size: 1.5rem;
             }
 
-            /* ===== INOVATIVNÍ PROČ - MOBIL ===== */
             .why-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -889,12 +913,35 @@
                 font-size: 2rem;
             }
 
-            .info-bubble {
+            .slider-item {
+                flex: 0 0 180px;
                 padding: 1.2rem 1rem;
             }
 
-            .info-bubble .bubble-icon {
-                font-size: 1.8rem;
+            .slider-item .slide-icon {
+                font-size: 2rem;
+            }
+
+            .slider-item h4 {
+                font-size: 0.95rem;
+            }
+
+            .grid-3,
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .team-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .team-card .team-emoji {
+                font-size: 2.5rem;
+            }
+
+            .team-card h3 {
+                font-size: 1.1rem;
             }
 
             .project-card {
@@ -908,40 +955,6 @@
             .project-card h4 {
                 font-size: 1rem;
             }
-
-            /* ===== KANDIDÁTI MOBIL ===== */
-            .candidate-profile {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                padding: 1.5rem 1.2rem;
-                gap: 1rem;
-            }
-
-            .candidate-photo {
-                width: 90px;
-                height: 90px;
-            }
-
-            .candidate-photo .photo-placeholder i {
-                font-size: 1.8rem;
-            }
-
-            .candidate-info h3 {
-                font-size: 1.2rem;
-            }
-
-            .candidate-priorities {
-                justify-content: center;
-            }
-
-            .candidate-social {
-                justify-content: center;
-            }
-
-            .candidate-info .bio {
-                font-size: 0.8rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -954,26 +967,34 @@
                 padding: 0.3rem 1rem;
             }
 
-            .bubble-grid {
+            .exp-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.5rem;
             }
 
-            .bubble {
+            .exp-card {
                 padding: 0.8rem 0.5rem;
                 border-radius: 1rem;
             }
 
-            .bubble .bubble-number {
-                font-size: 1.1rem;
+            .exp-card .exp-number {
+                font-size: 1.2rem;
             }
 
-            .bubble .bubble-label {
+            .exp-card .exp-label {
                 font-size: 0.65rem;
             }
 
-            .bubble .bubble-desc {
+            .exp-card .exp-desc {
                 font-size: 0.55rem;
+            }
+
+            .exp-card .exp-icon {
+                font-size: 1.3rem;
+            }
+
+            .exp-card .exp-emoji {
+                font-size: 1.3rem;
             }
 
             .program-banner h2 {
@@ -984,51 +1005,49 @@
                 font-size: 1.5rem;
             }
 
-            .nav-links a {
-                font-size: 0.55rem;
-                padding: 0.2rem 0.5rem;
+            .slider-item {
+                flex: 0 0 150px;
+                padding: 1rem 0.8rem;
             }
 
-            .why-card {
-                padding: 1.2rem 1rem;
+            .slider-item .slide-icon {
+                font-size: 1.6rem;
             }
 
-            .why-card .card-icon {
-                font-size: 1.8rem;
+            .slider-item h4 {
+                font-size: 0.85rem;
             }
 
-            .candidate-photo {
-                width: 75px;
-                height: 75px;
+            .slider-item p {
+                font-size: 0.75rem;
             }
 
-            .candidate-info h3 {
-                font-size: 1rem;
+            .team-card .team-emoji {
+                font-size: 2rem;
             }
 
-            .candidate-priorities .priority {
-                font-size: 0.65rem;
-                padding: 0.1rem 0.6rem;
+            .team-card h3 {
+                font-size: 0.95rem;
             }
         }
 
         /* ===== DOTYKOVÉ OPTIMALIZACE ===== */
         @media (hover: none) {
             .why-card:hover,
-            .info-bubble:hover,
+            .team-card:hover,
             .project-card:hover,
-            .candidate-profile:hover {
+            .slider-item:hover {
                 transform: none !important;
             }
 
             .why-card:active,
-            .info-bubble:active,
+            .team-card:active,
             .project-card:active,
-            .candidate-profile:active {
+            .slider-item:active {
                 transform: scale(0.97) !important;
             }
 
-            .bubble:active {
+            .exp-card:active {
                 transform: scale(0.95) !important;
             }
         }
@@ -1036,18 +1055,23 @@
 </head>
 <body>
 
-    <!-- ===== MENU ===== -->
+    <!-- ===== MENU + BURGER ===== -->
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="logo">
                 <i class="fas fa-flag"></i>
                 <span>Naše</span> Vesnice
             </div>
-            <ul class="nav-links">
+            <button class="burger" id="burger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#proc"><i class="fas fa-question-circle"></i> Proč</a></li>
                 <li><a href="#co-chystame"><i class="fas fa-calendar-alt"></i> Co chystáme</a></li>
                 <li><a href="#projekty"><i class="fas fa-seedling"></i> Projekty</a></li>
-                <li><a href="#kandidati"><i class="fas fa-user-check"></i> Kandidáti</a></li>
+                <li><a href="#kdo-jsme"><i class="fas fa-user-check"></i> Kdo jsme</a></li>
             </ul>
         </div>
     </nav>
@@ -1059,30 +1083,31 @@
             <h1>Rozumná změna. <br /><span class="highlight">Společný směr.</span> Živá Vesnice.</h1>
             <p>Chceme obec, která drží pohromadě, umí naslouchat a hledá řešení, která dávají smysl.</p>
 
-            <div class="bubble-grid">
-                <div class="bubble">
-                    <span class="bubble-icon"><i class="fas fa-users"></i></span>
-                    <span class="bubble-number">800</span>
-                    <span class="bubble-label">obyvatel</span>
-                    <span class="bubble-desc">každý hlas se počítá</span>
+            <!-- ===== EXPERIMENTÁLNÍ KARTY ===== -->
+            <div class="exp-grid">
+                <div class="exp-card">
+                    <span class="exp-emoji">👥</span>
+                    <span class="exp-number">800</span>
+                    <span class="exp-label">obyvatel</span>
+                    <span class="exp-desc">každý hlas se počítá</span>
                 </div>
-                <div class="bubble">
-                    <span class="bubble-icon"><i class="fas fa-calendar-check"></i></span>
-                    <span class="bubble-number">12+</span>
-                    <span class="bubble-label">akcí za rok</span>
-                    <span class="bubble-desc">kultura, sport, sousedství</span>
+                <div class="exp-card">
+                    <span class="exp-emoji">🎯</span>
+                    <span class="exp-number">12+</span>
+                    <span class="exp-label">akcí za rok</span>
+                    <span class="exp-desc">kultura, sport, sousedství</span>
                 </div>
-                <div class="bubble">
-                    <span class="bubble-icon"><i class="fas fa-tree"></i></span>
-                    <span class="bubble-number">5</span>
-                    <span class="bubble-label">nových projektů</span>
-                    <span class="bubble-desc">zeleň, hřiště, cesty</span>
+                <div class="exp-card">
+                    <span class="exp-emoji">🌳</span>
+                    <span class="exp-number">5</span>
+                    <span class="exp-label">nových projektů</span>
+                    <span class="exp-desc">zeleň, hřiště, cesty</span>
                 </div>
-                <div class="bubble">
-                    <span class="bubble-icon"><i class="fas fa-hand-holding-heart"></i></span>
-                    <span class="bubble-number">100%</span>
-                    <span class="bubble-label">transparentnost</span>
-                    <span class="bubble-desc">rozhodujeme společně</span>
+                <div class="exp-card">
+                    <span class="exp-emoji">🤝</span>
+                    <span class="exp-number">100%</span>
+                    <span class="exp-label">transparentnost</span>
+                    <span class="exp-desc">rozhodujeme společně</span>
                 </div>
             </div>
         </div>
@@ -1134,7 +1159,7 @@
         </div>
     </section>
 
-    <!-- ===== PROGRAM 2 + CO CHYSTÁME ===== -->
+    <!-- ===== PROGRAM 2 + CO CHYSTÁME (SLIDER) ===== -->
     <div class="program-banner p2" id="co-banner">
         <div class="container">
             <span class="program-number">✦ 02</span>
@@ -1145,48 +1170,56 @@
     <section class="section" id="co-chystame">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Co chystáme pro naši vesnici</h2>
-            <p class="section-subtitle">Konkrétní plány a akce, které oživí náš společný prostor.</p>
+            <p class="section-subtitle">Projíždějte plány prstem a objevte, co chystáme.</p>
 
-            <div class="info-bubbles">
-                <div class="info-bubble">
-                    <span class="bubble-icon"><i class="fas fa-tree"></i></span>
+            <div class="slider-wrapper">
+                <div class="slider-item">
+                    <span class="slide-icon"><i class="fas fa-tree"></i></span>
                     <h4>Revitalizace návsi</h4>
-                    <p>Nové lavičky, zeleň, dětské prvky a posezení pro všechny generace.</p>
+                    <p>Nové lavičky, zeleň a posezení pro všechny.</p>
+                    <span class="slide-tag">Připravujeme</span>
                 </div>
-                <div class="info-bubble">
-                    <span class="bubble-icon"><i class="fas fa-futbol"></i></span>
+                <div class="slider-item">
+                    <span class="slide-icon"><i class="fas fa-futbol"></i></span>
                     <h4>Multifunkční hřiště</h4>
-                    <p>Sportoviště pro mladé i dospělé – fotbal, basket, workoutová hřiště.</p>
+                    <p>Fotbal, basket, workout pro mladé i dospělé.</p>
+                    <span class="slide-tag">Plánujeme</span>
                 </div>
-                <div class="info-bubble">
-                    <span class="bubble-icon"><i class="fas fa-walking"></i></span>
+                <div class="slider-item">
+                    <span class="slide-icon"><i class="fas fa-walking"></i></span>
                     <h4>Bezpečné cesty</h4>
-                    <p>Chodníky k zastávkám a osvětlené stezky pro bezpečný pohyb po obci.</p>
+                    <p>Chodníky a osvětlené stezky po celé obci.</p>
+                    <span class="slide-tag">V přípravě</span>
                 </div>
-                <div class="info-bubble">
-                    <span class="bubble-icon"><i class="fas fa-beer"></i></span>
+                <div class="slider-item">
+                    <span class="slide-icon"><i class="fas fa-beer"></i></span>
                     <h4>Zázemí pro setkávání</h4>
-                    <p>Místo pro grilování, sousedské akce a komunitní večery pod širým nebem.</p>
+                    <p>Grilování, sousedské akce a komunitní večery.</p>
+                    <span class="slide-tag">Chystáme</span>
                 </div>
-                <div class="info-bubble">
-                    <span class="bubble-icon"><i class="fas fa-bicycle"></i></span>
+                <div class="slider-item">
+                    <span class="slide-icon"><i class="fas fa-bicycle"></i></span>
                     <h4>Cyklostezky</h4>
-                    <p>Propojení s okolím a bezpečné trasy do práce i na výlety.</p>
+                    <p>Propojení s okolím a bezpečné trasy.</p>
+                    <span class="slide-tag">Jednáme</span>
                 </div>
-                <div class="info-bubble">
-                    <span class="bubble-icon"><i class="fas fa-music"></i></span>
+                <div class="slider-item">
+                    <span class="slide-icon"><i class="fas fa-music"></i></span>
                     <h4>Kulturní akce</h4>
-                    <p>Koncerty, trhy, tradiční slavnosti a filmové večery pro všechny.</p>
+                    <p>Koncerty, trhy, slavnosti a filmové večery.</p>
+                    <span class="slide-tag">Plánujeme</span>
                 </div>
-                <div class="info-bubble">
-                    <span class="bubble-icon"><i class="fas fa-seedling"></i></span>
+                <div class="slider-item">
+                    <span class="slide-icon"><i class="fas fa-seedling"></i></span>
                     <h4>Komunitní zahrada</h4>
-                    <p>Společné pěstování, záhonky pro rodiny a místo pro odpočinek.</p>
+                    <p>Společné pěstování a místo pro odpočinek.</p>
+                    <span class="slide-tag">Rozjíždíme</span>
                 </div>
-                <div class="info-bubble">
-                    <span class="bubble-icon"><i class="fas fa-wifi"></i></span>
+                <div class="slider-item">
+                    <span class="slide-icon"><i class="fas fa-wifi"></i></span>
                     <h4>Digitální služby</h4>
-                    <p>Bezplatné Wi-Fi na návsi, digitální úřad a přístup k informacím online.</p>
+                    <p>Wi-Fi na návsi a digitální úřad online.</p>
+                    <span class="slide-tag">Spouštíme</span>
                 </div>
             </div>
         </div>
@@ -1208,295 +1241,150 @@
                 <div class="project-card">
                     <i class="fas fa-tree"></i>
                     <h4>Veřejná zeleň a místa k odpočinku</h4>
-                    <p>Více stromů, laviček a příjemných míst pro setkávání v celé obci.</p>
+                    <p>Více stromů, laviček a příjemných míst pro setkávání.</p>
                     <span class="status">Plánujeme</span>
                 </div>
                 <div class="project-card">
                     <i class="fas fa-child"></i>
                     <h4>Zázemí pro rodiny a seniory</h4>
-                    <p>Programy pro nejmladší i nejstarší obyvatele, sousedská výpomoc a společný čas.</p>
+                    <p>Programy pro nejmladší i nejstarší obyvatele.</p>
                     <span class="status">Hledáme řešení</span>
                 </div>
                 <div class="project-card">
                     <i class="fas fa-walking"></i>
                     <h4>Bezpečné cesty po obci</h4>
-                    <p>Chodníky, přechody a stezky, po kterých se dá bez obav projít celou vesnicí.</p>
+                    <p>Chodníky, přechody a stezky pro bezpečný pohyb.</p>
                     <span class="status">V přípravě</span>
                 </div>
                 <div class="project-card">
                     <i class="fas fa-bicycle"></i>
                     <h4>Propojení s okolím</h4>
-                    <p>Cyklostezky a trasy, které usnadní pohyb mezi částmi obce i do přírody.</p>
+                    <p>Cyklostezky a trasy do přírody i do práce.</p>
                     <span class="status">Jednáme</span>
                 </div>
                 <div class="project-card">
                     <i class="fas fa-wifi"></i>
                     <h4>Moderní obecní služby</h4>
-                    <p>Fungující internet, digitální úřad a snadný přístup k informacím.</p>
+                    <p>Internet, digitální úřad a snadný přístup k informacím.</p>
                     <span class="status">Rozjíždíme</span>
                 </div>
                 <div class="project-card">
                     <i class="fas fa-drumstick-bite"></i>
                     <h4>Podpora spolků a sousedských akcí</h4>
-                    <p>Pomoc kulturním, sportovním i zájmovým aktivitám, které stmelují komunitu.</p>
+                    <p>Pomoc kulturním a sportovním aktivitám.</p>
                     <span class="status">Podporujeme</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== KANDIDÁTI (bez samostatného banneru) ===== -->
-    <section class="section" id="kandidati">
+    <!-- ===== KDO JSME - ORIGINÁLNÍ STYL ===== -->
+    <section class="section" id="kdo-jsme">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-user-check"></i> Kdo jsme</h2>
             <p class="section-subtitle">Jsme vaši sousedé a známé tváře z obce. Spojuje nás chuť pracovat pro místo, kde žijeme.</p>
 
-            <div class="candidates-list">
-
-                <!-- KANDIDÁT 1 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#1</span>
-                            <span class="candidate-tag">Lídr</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Žiji v obci přes 15 let a za tu dobu jsem měl možnost poznat její život i proměny. Baví mě mluvit s lidmi osobně, poslouchat různé názory a hledat věcná řešení.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Otevřená komunikace</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Podpora sousedství</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Rozvoj veřejného prostoru</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <span class="team-emoji">🧑‍💼</span>
+                    <span class="team-number">#1</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Lídr týmu</div>
+                    <p>15 let v obci. Baví mě mluvit s lidmi a hledat řešení.</p>
+                    <div class="team-tags">
+                        <span>Komunikace</span>
+                        <span>Rozvoj</span>
                     </div>
                 </div>
-
-                <!-- KANDIDÁT 2 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#2</span>
-                            <span class="candidate-tag">Místopředseda</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Do týmu přináším praktickou zkušenost s rozvojem a fungováním veřejné správy. Věřím, že úřad je tu především pro občany – má jim umět naslouchat.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Transparentnost</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Služby občanům</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Rozumné investice</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+                <div class="team-card">
+                    <span class="team-emoji">👩‍💼</span>
+                    <span class="team-number">#2</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Místopředseda</div>
+                    <p>Zkušenosti z veřejné správy. Věřím v úřad pro občany.</p>
+                    <div class="team-tags">
+                        <span>Transparentnost</span>
+                        <span>Investice</span>
                     </div>
                 </div>
-
-                <!-- KANDIDÁT 3 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#3</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Práce s lidmi mě naučila trpělivosti, empatii a umění naslouchat. Přála bych si, aby byla naše vesnice místem, kde se dobře žije dětem, rodinám i seniorům.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Rodiny a děti</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Kultura a sport</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Bezpečné prostředí</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+                <div class="team-card">
+                    <span class="team-emoji">👩‍🏫</span>
+                    <span class="team-number">#3</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Člen týmu</div>
+                    <p>Práce s lidmi mě naučila empatii a naslouchání.</p>
+                    <div class="team-tags">
+                        <span>Rodiny</span>
+                        <span>Kultura</span>
                     </div>
                 </div>
-
-                <!-- KANDIDÁT 4 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#4</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">V obci žiji s rodinou a záleží mi na tom, jak se tu bude žít nám i našim dětem. Vidím zde mnoho míst, která lze zlepšit i s relativně malým úsilím.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Prostředí pro život</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Místní podněty</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Viditelné výsledky</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+                <div class="team-card">
+                    <span class="team-emoji">🧑‍🌾</span>
+                    <span class="team-number">#4</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Člen týmu</div>
+                    <p>Chci zlepšit místa, kde žijeme – i malé změny mají smysl.</p>
+                    <div class="team-tags">
+                        <span>Prostředí</span>
+                        <span>Podněty</span>
                     </div>
                 </div>
-
-                <!-- KANDIDÁT 5 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#5</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Mám k naší obci hluboký vztah, žiji zde už mnoho let. Baví mě přicházet s novými nápady a nebojím se přiložit ruku k dílu.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Komunitní akce</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Spolupráce</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Tradice a nové nápady</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+                <div class="team-card">
+                    <span class="team-emoji">🎨</span>
+                    <span class="team-number">#5</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Člen týmu</div>
+                    <p>Mám rád nové nápady a nebojím se přiložit ruku k dílu.</p>
+                    <div class="team-tags">
+                        <span>Akce</span>
+                        <span>Tradice</span>
                     </div>
                 </div>
-
-                <!-- KANDIDÁT 6 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#6</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Jsem přesvědčen, že bez otevřené komunikace a včasných informací se dobrá rozhodnutí dělají těžko. Lidé mají vědět, co se chystá.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Informovanost</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Zapojení občanů</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Kvalita života</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+                <div class="team-card">
+                    <span class="team-emoji">💡</span>
+                    <span class="team-number">#6</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Člen týmu</div>
+                    <p>Bez otevřené komunikace se dobrá rozhodnutí dělají těžko.</p>
+                    <div class="team-tags">
+                        <span>Informovanost</span>
+                        <span>Zapojení</span>
                     </div>
                 </div>
-
-                <!-- KANDIDÁT 7 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#7</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Pocházím z rodiny, která v obci žije už po generace, a proto mám k ní silný vztah. Chci přispět k tomu, aby naše vesnice zůstala příjemným místem.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Zachování rázu obce</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Moderní přístup</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Mezigenerační dialog</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+                <div class="team-card">
+                    <span class="team-emoji">📜</span>
+                    <span class="team-number">#7</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Člen týmu</div>
+                    <p>Rodina tu žije generace. Chci zachovat ráz obce.</p>
+                    <div class="team-tags">
+                        <span>Památky</span>
+                        <span>Generace</span>
                     </div>
                 </div>
-
-                <!-- KANDIDÁT 8 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#8</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Zajímá mě ochrana přírody a kvalita života v obci. Prosazuji praktická řešení, která pomáhají lidem i prostředí kolem nás.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Životní prostředí</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Udržitelnost</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Zdravé okolí</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+                <div class="team-card">
+                    <span class="team-emoji">🌿</span>
+                    <span class="team-number">#8</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Člen týmu</div>
+                    <p>Příroda a kvalita života – praktická řešení pro lidi i okolí.</p>
+                    <div class="team-tags">
+                        <span>Životní prostředí</span>
+                        <span>Udržitelnost</span>
                     </div>
                 </div>
-
-                <!-- KANDIDÁT 9 -->
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#9</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Mám zkušenosti s plánováním a rozvojem. Chci, aby se obec rozvíjela promyšleně, s ohledem na potřeby obyvatel a dlouhodobou udržitelnost.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Rozvoj obce</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Inovace</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Spolupráce</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
+                <div class="team-card">
+                    <span class="team-emoji">📐</span>
+                    <span class="team-number">#9</span>
+                    <h3>Jméno Příjmení</h3>
+                    <div class="team-role">Člen týmu</div>
+                    <p>Plánování a rozvoj s dlouhodobým výhledem pro celou obec.</p>
+                    <div class="team-tags">
+                        <span>Rozvoj</span>
+                        <span>Inovace</span>
                     </div>
                 </div>
-
-            </div><!-- /candidates-list -->
+            </div>
         </div>
     </section>
 
@@ -1506,6 +1394,25 @@
             <p><i class="fas fa-flag" style="color:#fbbf24;"></i> Naše Vesnice – společný směr &copy; 2026</p>
         </div>
     </footer>
+
+    <!-- ===== BURGER MENU SCRIPT ===== -->
+    <script>
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        // Zavření menu po kliknutí na odkaz
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+    </script>
 
 </body>
 </html>
