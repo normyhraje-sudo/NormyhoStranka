@@ -128,6 +128,20 @@
             pointer-events: none;
         }
 
+        /* ----- NOVÉ: tlačítko Zpět na menu ----- */
+        .back-button {
+            background: #64748b;
+            box-shadow: 0 7px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
+            font-size: 1rem;
+            padding: 0.4rem 1.5rem;
+        }
+        .back-button:active {
+            box-shadow: 0 2px 0 #475569;
+        }
+        .back-button:hover {
+            background: #94a3b8;
+        }
+
         .status {
             color: #94a3b8;
             font-size: 1rem;
@@ -142,6 +156,15 @@
             color: #64748b;
             font-size: 0.85rem;
             margin-top: 0.2rem;
+        }
+
+        .bottom-bar {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 0.5rem;
         }
 
         @media (max-width: 760px) {
@@ -167,6 +190,10 @@
                 font-size: 1rem;
                 padding: 0.4rem 1.2rem;
             }
+            .back-button {
+                font-size: 0.9rem;
+                padding: 0.3rem 1rem;
+            }
         }
     </style>
 </head>
@@ -187,6 +214,13 @@
         <span class="status" id="statusMsg">Použij šipky ← → ↑ ↓ nebo WASD</span>
     </div>
     <div class="controls-hint">⬆⬇ Pohybuj se všemi směry!</div>
+
+    <!-- NOVÉ: Spodní lišta s tlačítkem Zpět na menu -->
+    <div class="bottom-bar">
+        <a href="index.html" class="back-button" style="text-decoration: none; color: #0b0f1a; background: #64748b; font-weight: 700; font-size: 1rem; padding: 0.4rem 1.5rem; border-radius: 60px; box-shadow: 0 7px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5); cursor: pointer; transition: all 0.07s ease; display: inline-flex; align-items: center; gap: 0.5rem; border: none;">
+            ⬅ Zpět na menu
+        </a>
+    </div>
 </div>
 
 <script>
