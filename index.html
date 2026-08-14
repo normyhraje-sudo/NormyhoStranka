@@ -5,61 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Volby - Vesnice</title>
   <style>
-    :root{--bg:#f3f4f6;--card:#fff;--accent:#2563eb;--muted:#6b7280}
+    :root{--bg:#f7fafc;--card:#ffffff;--accent:#0ea5e9;--dark:#0f172a;--muted:#6b7280}
     *{box-sizing:border-box}
-    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0;background:var(--bg);color:#111}
-    header{background:linear-gradient(90deg, #0ea5e9 0%, #6366f1 100%);color:white;padding:36px 20px;text-align:center}
-    header h1{margin:0;font-size:28px;letter-spacing:0.2px}
-    header p{margin:6px 0 0;color:rgba(255,255,255,0.9)}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0;background:var(--bg);color:var(--dark)}
 
-    main{max-width:1100px;margin:28px auto;padding:0 20px}
-    .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
-    .search{flex:1;min-width:220px}
-    input[type="search"]{width:100%;padding:10px 12px;border-radius:8px;border:1px solid #e6e9ef;background:white}
-    .actions{display:flex;gap:8px}
-    button.btn{background:var(--accent);color:white;padding:10px 14px;border:none;border-radius:8px;cursor:pointer}
-    button.ghost{background:transparent;border:1px solid #d1d5db;color:var(--muted)}
+    /* Sticky nav */
+    nav{position:sticky;top:0;z-index:40;background:linear-gradient(90deg,#0ea5e9, #6366f1);color:white;padding:10px 20px;display:flex;align-items:center;gap:18px}
+    .brand{font-weight:700;font-size:18px}
+    .nav-links{display:flex;gap:10px;overflow:auto}
+    .nav-links a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 12px;border-radius:8px}
+    .nav-links a.active{background:rgba(255,255,255,0.12)}
 
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.06);display:flex;flex-direction:column}
-    .card h3{margin:0 0 6px;font-size:18px}
-    .meta{color:var(--muted);font-size:13px;margin-bottom:10px}
-    .platform{flex:1;margin-bottom:12px}
-    .platform ul{margin:6px 0 0 18px;padding:0;color:#111}
-    .vote-row{display:flex;align-items:center;gap:10px}
-    .count{font-weight:700;background:#f1f5f9;padding:6px 10px;border-radius:8px}
+    /* Hero */
+    .hero{background:linear-gradient(180deg, rgba(99,102,241,0.08), transparent);padding:60px 20px 36px;text-align:center}
+    .hero h1{font-size:48px;margin:0;color:var(--dark);letter-spacing:-1px}
+    .hero p{margin:10px 0 0;color:var(--muted);font-size:16px}
 
-    footer{max-width:1100px;margin:28px auto 60px;padding:18px 20px;background:transparent;color:var(--muted);font-size:14px;text-align:center}
-    .brand{font-weight:600;color:var(--accent)}
+    main{max-width:1000px;margin:28px auto;padding:0 20px}
+    .candidate{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06);margin-bottom:18px}
+    .candidate h2{margin:0 0 6px}
+    .meta{color:var(--muted);font-size:14px;margin-bottom:10px}
+    .platform ul{margin:6px 0 0 18px}
 
-    @media (max-width:480px){header h1{font-size:20px}}
+    footer{max-width:1000px;margin:36px auto 60px;padding:18px 20px;background:transparent;color:var(--muted);font-size:14px;text-align:center}
+
+    @media (max-width:640px){.hero h1{font-size:34px;padding:0 8px}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Volby do zastupitelstva - Vesnice</h1>
-    <p>Seznam kandidátů a jejich programy. Podpoř svého favorita lokálně!</p>
+  <nav aria-label="Hlavní navigace">
+    <div class="brand">Vesnice • Volby 2026</div>
+    <div class="nav-links" id="navLinks" role="navigation" aria-label="Seznam kandidátů">
+      <!-- Odkazy budou doplněny JS -->
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Volby do zastupitelstva — Vesnice</h1>
+    <p>Vyberte svého zástupce. Přečtěte si programy kandidátů a zapojte se do dění v obci.</p>
   </header>
 
-  <main>
-    <section class="controls">
-      <div class="search">
-        <label for="q" class="sr-only">Hledat kandidáta</label>
-        <input id="q" type="search" placeholder="Hledej kandidáta (jméno nebo cíl)..." />
-      </div>
-      <div class="actions">
-        <button id="resetVotes" class="btn ghost">Resetovat hlasy (lokálně)</button>
-        <button id="randomize" class="btn">Náhodné hlasy (demo)</button>
-      </div>
-    </section>
-
-    <section class="grid" id="candidates">
-      <!-- Kandidáti budou vykresleni JS -->
-    </section>
+  <main id="content">
+    <!-- Kandidáti budou vykresleni sem -->
   </main>
 
   <footer>
-    <div>Vesnice • Volby 2026 — Informace slouží k demonstraci. &nbsp; <span class="brand">Občanská iniciativa Vesnice</span>.</div>
+    <div>Vesnice • Volby 2026 — Informace slouží k demonstraci. &nbsp; Občanská iniciativa Vesnice.</div>
     <div style="margin-top:8px;color:#9ca3af;font-size:13px">Kontakt: volby@vesnice.example • Telefon: +420 123 456 789</div>
   </footer>
 
@@ -113,99 +105,96 @@
       ]}
     ];
 
-    const candidatesEl = document.getElementById('candidates');
-    const qInput = document.getElementById('q');
+    const navLinks = document.getElementById('navLinks');
+    const content = document.getElementById('content');
 
-    // Load votes from localStorage or init
-    function loadVotes(){
-      const votes = JSON.parse(localStorage.getItem('votes') || '{}');
-      return votes;
-    }
-    function saveVotes(votes){ localStorage.setItem('votes', JSON.stringify(votes)); }
+    // Render nav links
+    function renderNav(){
+      // Home link
+      const home = document.createElement('a');
+      home.href = '#top';
+      home.textContent = 'Domů';
+      home.addEventListener('click', (e)=>{e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'});});
+      navLinks.appendChild(home);
 
-    function render(){
-      const q = qInput.value.trim().toLowerCase();
-      const votes = loadVotes();
-      candidatesEl.innerHTML = '';
+      // Candidate links
       candidates.forEach(c => {
-        const hay = (c.name + ' ' + c.platform.join(' ')).toLowerCase();
-        if(q && !hay.includes(q)) return;
+        const a = document.createElement('a');
+        a.href = '#'+c.id;
+        a.textContent = c.name.split(' ')[0]; // krátký label
+        navLinks.appendChild(a);
+      });
 
-        const card = document.createElement('article');
-        card.className = 'card';
+      // Contact
+      const contact = document.createElement('a');
+      contact.href = '#kontakt';
+      contact.textContent = 'Kontakt';
+      navLinks.appendChild(contact);
+    }
 
-        const h = document.createElement('h3');
+    // Render candidate sections
+    function renderCandidates(){
+      candidates.forEach(c => {
+        const sec = document.createElement('section');
+        sec.className = 'candidate';
+        sec.id = c.id;
+
+        const h = document.createElement('h2');
         h.textContent = c.name;
-        card.appendChild(h);
+        sec.appendChild(h);
 
         const meta = document.createElement('div');
         meta.className = 'meta';
         meta.textContent = `Věk: ${c.age} let`;
-        card.appendChild(meta);
+        sec.appendChild(meta);
 
         const plat = document.createElement('div');
         plat.className = 'platform';
         const ul = document.createElement('ul');
         c.platform.forEach(p => { const li = document.createElement('li'); li.textContent = p; ul.appendChild(li); });
         plat.appendChild(ul);
-        card.appendChild(plat);
+        sec.appendChild(plat);
 
-        const voteRow = document.createElement('div');
-        voteRow.className = 'vote-row';
+        content.appendChild(sec);
+      });
 
-        const btn = document.createElement('button');
-        btn.className = 'btn';
-        btn.textContent = 'Podpořím';
-        btn.addEventListener('click', () => {
-          votes[c.id] = (votes[c.id]||0) + 1;
-          saveVotes(votes);
-          updateCounts();
-          // jednoduchá animace
-          btn.animate([{transform:'scale(1)'},{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:180});
+      // Kontakt sekce (kotva)
+      const kontakt = document.createElement('section');
+      kontakt.id = 'kontakt';
+      kontakt.className = 'candidate';
+      kontakt.innerHTML = '<h2>Kontakt</h2><div class="meta">Máte otázky? Napište nám nebo zavolejte.</div><p style="margin-top:8px">E‑mail: <strong>volby@vesnice.example</strong><br>Telefon: +420 123 456 789</p>';
+      content.appendChild(kontakt);
+    }
+
+    // Highlight active nav link while scrolling
+    function setupObserver(){
+      const links = Array.from(navLinks.querySelectorAll('a'));
+      const sections = candidates.map(c => document.getElementById(c.id));
+      sections.push(document.getElementById('kontakt'));
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const id = entry.target.id;
+          const link = navLinks.querySelector(`a[href="#${id}"]`);
+          if(entry.isIntersecting){
+            links.forEach(l => l.classList.remove('active'));
+            if(link) link.classList.add('active');
+          }
         });
+      },{root:null,rootMargin:'-40% 0px -40% 0px',threshold:0});
 
-        const count = document.createElement('div');
-        count.className = 'count';
-        count.id = 'count-'+c.id;
-        count.textContent = votes[c.id]||0;
-
-        voteRow.appendChild(btn);
-        voteRow.appendChild(count);
-        card.appendChild(voteRow);
-
-        candidatesEl.appendChild(card);
-      });
+      sections.forEach(s => { if(s) obs.observe(s); });
     }
 
-    function updateCounts(){
-      const votes = loadVotes();
-      candidates.forEach(c => {
-        const el = document.getElementById('count-'+c.id);
-        if(el) el.textContent = votes[c.id]||0;
-      });
+    // Initialize
+    renderNav();
+    renderCandidates();
+    setupObserver();
+
+    // Ensure top anchor exists for 'Domů'
+    if(!document.getElementById('top')){
+      const top = document.createElement('div'); top.id='top'; top.style.height='0'; document.body.prepend(top);
     }
-
-    // Reset votes locally (for demo)
-    document.getElementById('resetVotes').addEventListener('click', () => {
-      if(!confirm('Opravdu chceš resetovat hlasy v tomto prohlížeči?')) return;
-      localStorage.removeItem('votes');
-      render();
-    });
-
-    // Randomize demo votes
-    document.getElementById('randomize').addEventListener('click', () => {
-      const votes = {};
-      candidates.forEach(c => votes[c.id] = Math.floor(Math.random()*120));
-      saveVotes(votes);
-      updateCounts();
-      render();
-    });
-
-    // Search input
-    qInput.addEventListener('input', () => render());
-
-    // Initial render
-    render();
   </script>
 </body>
 </html>
