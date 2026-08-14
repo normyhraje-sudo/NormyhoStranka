@@ -877,7 +877,7 @@
             color: #166534;
         }
 
-        /* ===== KANDIDÁTI ===== */
+        /* ===== KANDIDÁTI - JEDINEČNÉ BARVY ===== */
         .candidates-list {
             display: flex;
             flex-direction: column;
@@ -897,6 +897,23 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
             align-items: center;
             touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .candidate-profile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .candidate-profile:hover::before {
+            opacity: 1;
         }
 
         .candidate-profile:active {
@@ -904,9 +921,198 @@
         }
 
         .candidate-profile:hover {
-            border-color: #fbbf24;
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
             transform: translateX(6px);
+        }
+
+        /* ===== BARVY KANDIDÁTŮ ===== */
+        .candidate-profile.color-gold::before {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+        }
+        .candidate-profile.color-gold .candidate-photo {
+            border-color: #fbbf24;
+        }
+        .candidate-profile.color-gold .candidate-tag {
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.15);
+        }
+        .candidate-profile.color-gold .position {
+            color: #fbbf24;
+        }
+        .candidate-profile.color-gold .priority i {
+            color: #fbbf24;
+        }
+        .candidate-profile.color-gold .candidate-social a:hover {
+            background: #fbbf24;
+            color: #0f172a;
+        }
+
+        .candidate-profile.color-green::before {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+        .candidate-profile.color-green .candidate-photo {
+            border-color: #10b981;
+        }
+        .candidate-profile.color-green .candidate-tag {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+        }
+        .candidate-profile.color-green .position {
+            color: #10b981;
+        }
+        .candidate-profile.color-green .priority i {
+            color: #10b981;
+        }
+        .candidate-profile.color-green .candidate-social a:hover {
+            background: #10b981;
+            color: #0f172a;
+        }
+
+        .candidate-profile.color-blue::before {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+        }
+        .candidate-profile.color-blue .candidate-photo {
+            border-color: #3b82f6;
+        }
+        .candidate-profile.color-blue .candidate-tag {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.15);
+        }
+        .candidate-profile.color-blue .position {
+            color: #3b82f6;
+        }
+        .candidate-profile.color-blue .priority i {
+            color: #3b82f6;
+        }
+        .candidate-profile.color-blue .candidate-social a:hover {
+            background: #3b82f6;
+            color: #0f172a;
+        }
+
+        .candidate-profile.color-red::before {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+        }
+        .candidate-profile.color-red .candidate-photo {
+            border-color: #ef4444;
+        }
+        .candidate-profile.color-red .candidate-tag {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+        }
+        .candidate-profile.color-red .position {
+            color: #ef4444;
+        }
+        .candidate-profile.color-red .priority i {
+            color: #ef4444;
+        }
+        .candidate-profile.color-red .candidate-social a:hover {
+            background: #ef4444;
+            color: #0f172a;
+        }
+
+        .candidate-profile.color-purple::before {
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+        }
+        .candidate-profile.color-purple .candidate-photo {
+            border-color: #8b5cf6;
+        }
+        .candidate-profile.color-purple .candidate-tag {
+            color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.15);
+        }
+        .candidate-profile.color-purple .position {
+            color: #8b5cf6;
+        }
+        .candidate-profile.color-purple .priority i {
+            color: #8b5cf6;
+        }
+        .candidate-profile.color-purple .candidate-social a:hover {
+            background: #8b5cf6;
+            color: #0f172a;
+        }
+
+        .candidate-profile.color-indigo::before {
+            background: linear-gradient(90deg, #4f46e5, #4338ca);
+        }
+        .candidate-profile.color-indigo .candidate-photo {
+            border-color: #4f46e5;
+        }
+        .candidate-profile.color-indigo .candidate-tag {
+            color: #4f46e5;
+            background: rgba(79, 70, 229, 0.15);
+        }
+        .candidate-profile.color-indigo .position {
+            color: #4f46e5;
+        }
+        .candidate-profile.color-indigo .priority i {
+            color: #4f46e5;
+        }
+        .candidate-profile.color-indigo .candidate-social a:hover {
+            background: #4f46e5;
+            color: #0f172a;
+        }
+
+        .candidate-profile.color-teal::before {
+            background: linear-gradient(90deg, #14b8a6, #0d9488);
+        }
+        .candidate-profile.color-teal .candidate-photo {
+            border-color: #14b8a6;
+        }
+        .candidate-profile.color-teal .candidate-tag {
+            color: #14b8a6;
+            background: rgba(20, 184, 166, 0.15);
+        }
+        .candidate-profile.color-teal .position {
+            color: #14b8a6;
+        }
+        .candidate-profile.color-teal .priority i {
+            color: #14b8a6;
+        }
+        .candidate-profile.color-teal .candidate-social a:hover {
+            background: #14b8a6;
+            color: #0f172a;
+        }
+
+        .candidate-profile.color-orange::before {
+            background: linear-gradient(90deg, #f97316, #ea580c);
+        }
+        .candidate-profile.color-orange .candidate-photo {
+            border-color: #f97316;
+        }
+        .candidate-profile.color-orange .candidate-tag {
+            color: #f97316;
+            background: rgba(249, 115, 22, 0.15);
+        }
+        .candidate-profile.color-orange .position {
+            color: #f97316;
+        }
+        .candidate-profile.color-orange .priority i {
+            color: #f97316;
+        }
+        .candidate-profile.color-orange .candidate-social a:hover {
+            background: #f97316;
+            color: #0f172a;
+        }
+
+        .candidate-profile.color-pink::before {
+            background: linear-gradient(90deg, #ec4899, #db2777);
+        }
+        .candidate-profile.color-pink .candidate-photo {
+            border-color: #ec4899;
+        }
+        .candidate-profile.color-pink .candidate-tag {
+            color: #ec4899;
+            background: rgba(236, 72, 153, 0.15);
+        }
+        .candidate-profile.color-pink .position {
+            color: #ec4899;
+        }
+        .candidate-profile.color-pink .priority i {
+            color: #ec4899;
+        }
+        .candidate-profile.color-pink .candidate-social a:hover {
+            background: #ec4899;
+            color: #0f172a;
         }
 
         .candidate-photo {
@@ -942,11 +1148,9 @@
             font-size: 3.2rem;
             display: block;
             margin-bottom: 0.2rem;
-            color: #cbd5e1;
         }
 
         .candidate-profile:hover .candidate-photo {
-            border-color: #f59e0b;
             box-shadow: 0 0 0 10px rgba(251, 191, 36, 0.15);
         }
 
@@ -972,8 +1176,6 @@
             display: inline-block;
             font-size: 0.75rem;
             font-weight: 700;
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.12);
             padding: 0.2rem 1rem;
             border-radius: 9999px;
             margin-left: 0.5rem;
@@ -987,10 +1189,14 @@
             margin: 0.2rem 0 0.1rem 0;
         }
 
+        .candidate-info h3 .candidate-emoji {
+            font-size: 1.6rem;
+            margin-right: 0.3rem;
+        }
+
         .candidate-info .position {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #fbbf24;
             margin-bottom: 0.6rem;
         }
 
@@ -1023,7 +1229,6 @@
         }
 
         .candidate-priorities .priority i {
-            color: #fbbf24;
             font-size: 0.5rem;
         }
 
@@ -1056,17 +1261,6 @@
 
         .candidate-social a:active {
             transform: scale(0.95);
-        }
-
-        .candidate-social a:hover {
-            background: #0f172a;
-            color: #f8fafc;
-            border-color: #fbbf24;
-            transform: scale(1.03);
-        }
-
-        .candidate-social a i {
-            font-size: 1.1rem;
         }
 
         /* ===== PATIČKA ===== */
@@ -1503,7 +1697,7 @@
         </div>
     </header>
 
-    <!-- ===== MLADÁ SEKCE (NOVÁ) ===== -->
+    <!-- ===== MLADÁ SEKCE ===== -->
     <section class="young-section" id="mladi">
         <div class="container">
             <span class="young-badge"><i class="fas fa-rocket"></i> Pro mladé a odvážné</span>
@@ -1737,25 +1931,27 @@
             <p class="section-subtitle">Jsme vaši sousedé a známé tváře z obce. Spojuje nás chuť pracovat pro místo, kde žijeme.</p>
 
             <div class="candidates-list">
-                <div class="candidate-profile">
+
+                <!-- ===== 1. ZEMĚDĚLEC ===== -->
+                <div class="candidate-profile color-gold">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
+                            <i class="fas fa-tractor"></i>
                             Foto
                         </div>
                     </div>
                     <div class="candidate-info">
                         <div>
                             <span class="candidate-number">#1</span>
-                            <span class="candidate-tag">Lídr</span>
+                            <span class="candidate-tag">🌾 Zemědělec</span>
                         </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Zkušený zastupitel</div>
-                        <p class="bio">Žiji v obci přes 15 let a za tu dobu jsem měl možnost poznat její život i proměny. Baví mě mluvit s lidmi osobně, poslouchat různé názory a hledat věcná řešení. Chci, aby se v naší vesnici znovu více potkávali lidé napříč generacemi.</p>
+                        <h3><span class="candidate-emoji">🚜</span> Pavel Novotný</h3>
+                        <div class="position">Hospodář a vášnivý včelař</div>
+                        <p class="bio">Obhospodařuji pole už 25 let. Vím, co znamená poctivá práce a úcta k půdě. Chci, aby naše vesnice měla zdravé okolí, kvalitní potraviny a místo, kde se lidé nebojí pustit do podnikání.</p>
                         <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Otevřená komunikace</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Podpora sousedství</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Rozvoj veřejného prostoru</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Místní potraviny</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Péče o krajinu</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Podpora farmářů</span>
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
@@ -1763,25 +1959,26 @@
                     </div>
                 </div>
 
-                <div class="candidate-profile">
+                <!-- ===== 2. VČELAŘ ===== -->
+                <div class="candidate-profile color-orange">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
+                            <i class="fas fa-jar"></i>
                             Foto
                         </div>
                     </div>
                     <div class="candidate-info">
                         <div>
                             <span class="candidate-number">#2</span>
-                            <span class="candidate-tag">Místopředseda</span>
+                            <span class="candidate-tag">🍯 Včelař</span>
                         </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Expert na rozvoj</div>
-                        <p class="bio">Do týmu přináším praktickou zkušenost s rozvojem a fungováním veřejné správy. Věřím, že úřad je tu především pro občany – má jim umět naslouchat a srozumitelně komunikovat. Chci přispět k tomu, aby se důležité věci řešily s rozvahou a respektem.</p>
+                        <h3><span class="candidate-emoji">🐝</span> Jana Medová</h3>
+                        <div class="position">Včelařka a ekoložka</div>
+                        <p class="bio">Včely mi změnily život. Naučily mě pokoře a trpělivosti. Chci v obci podporovat ekologické projekty, vysazovat květnaté louky a ukázat, že i malá obec může žít v souladu s přírodou.</p>
                         <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Transparentnost</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Služby občanům</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Rozumné investice</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Biodiverzita</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Včelí stezky</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Ekologická výchova</span>
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
@@ -1789,25 +1986,26 @@
                     </div>
                 </div>
 
-                <div class="candidate-profile">
+                <!-- ===== 3. ARCHITEKTKA ===== -->
+                <div class="candidate-profile color-blue">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
+                            <i class="fas fa-drafting-compass"></i>
                             Foto
                         </div>
                     </div>
                     <div class="candidate-info">
                         <div>
                             <span class="candidate-number">#3</span>
-                            <span class="candidate-tag">Člen týmu</span>
+                            <span class="candidate-tag">🏗️ Architektka</span>
                         </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Pedagožka</div>
-                        <p class="bio">Práce s lidmi mě naučila trpělivosti, empatii a umění naslouchat. Přála bych si, aby byla naše vesnice místem, kde se dobře žije dětem, rodinám, mladým lidem i seniorům. Ráda podporuji kulturní a sportovní život a společná setkávání.</p>
+                        <h3><span class="candidate-emoji">🏡</span> Klára Hrubá</h3>
+                        <div class="position">Architektka a urbanistka</div>
+                        <p class="bio">Věřím, že hezké prostředí dělá lidi šťastnějšími. Navrhuji veřejná prostranství, která spojují lidi a dávají obci duši. Chci, aby se u nás dalo žít, pracovat i odpočívat.</p>
                         <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Rodiny a děti</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Kultura a sport</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Bezpečné prostředí</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Veřejný prostor</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Zelená architektura</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Komunitní plánování</span>
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
@@ -1815,25 +2013,26 @@
                     </div>
                 </div>
 
-                <div class="candidate-profile">
+                <!-- ===== 4. UČITEL ===== -->
+                <div class="candidate-profile color-red">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
+                            <i class="fas fa-chalkboard-user"></i>
                             Foto
                         </div>
                     </div>
                     <div class="candidate-info">
                         <div>
                             <span class="candidate-number">#4</span>
-                            <span class="candidate-tag">Člen týmu</span>
+                            <span class="candidate-tag">📚 Učitel</span>
                         </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Místní aktivista</div>
-                        <p class="bio">V obci žiji s rodinou a záleží mi na tom, jak se tu bude žít nám i našim dětem. Vidím zde mnoho míst, která lze zlepšit i s relativně malým úsilím. Občané i naše obec si změnu zaslouží a chci být součástí změn, které budou opravdu vidět.</p>
+                        <h3><span class="candidate-emoji">👨‍🏫</span> Michal Zelený</h3>
+                        <div class="position">Pedagog a vychovatel</div>
+                        <p class="bio">Děti jsou naše budoucnost. Učím už 20 let a vím, že kvalitní zázemí pro mladé je základ. Chci v obci vybudovat centrum pro volný čas, doučování a mimoškolní aktivity.</p>
                         <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Prostředí pro život</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Místní podněty</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Viditelné výsledky</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Vzdělávání</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Volný čas dětí</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Rodinné centrum</span>
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
@@ -1841,25 +2040,26 @@
                     </div>
                 </div>
 
-                <div class="candidate-profile">
+                <!-- ===== 5. KREATIVEC ===== -->
+                <div class="candidate-profile color-purple">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
+                            <i class="fas fa-palette"></i>
                             Foto
                         </div>
                     </div>
                     <div class="candidate-info">
                         <div>
                             <span class="candidate-number">#5</span>
-                            <span class="candidate-tag">Člen týmu</span>
+                            <span class="candidate-tag">🎨 Kreativec</span>
                         </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Organizátorka akcí</div>
-                        <p class="bio">Mám k naší obci hluboký vztah, žiji zde už mnoho let. Baví mě přicházet s novými nápady a nebojím se přiložit ruku k dílu. Ráda se podílím na akcích, při kterých se lidé potkávají, poznávají a vytvářejí společné vzpomínky.</p>
+                        <h3><span class="candidate-emoji">🖌️</span> Tereza Malá</h3>
+                        <div class="position">Designérka a kurátorka</div>
+                        <p class="bio">Kultura a umění oživují každou vesnici. Pořádám výstavy, dílny a akce, které stmelují komunitu. Chci, aby naše obec měla svůj kulturní program a byla místem, kam se lidé rádi vrací.</p>
                         <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Komunitní akce</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Spolupráce</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Tradice a nové nápady</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Kulturní akce</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Umělecké dílny</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Komunitní galerie</span>
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
@@ -1867,31 +2067,114 @@
                     </div>
                 </div>
 
-                <div class="candidate-profile">
+                <!-- ===== 6. PRÁVNIČKA ===== -->
+                <div class="candidate-profile color-indigo">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
+                            <i class="fas fa-scale-balanced"></i>
                             Foto
                         </div>
                     </div>
                     <div class="candidate-info">
                         <div>
                             <span class="candidate-number">#6</span>
-                            <span class="candidate-tag">Člen týmu</span>
+                            <span class="candidate-tag">⚖️ Právnička</span>
                         </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Manažer</div>
-                        <p class="bio">Jsem přesvědčen, že bez otevřené komunikace a včasných informací se dobrá rozhodnutí dělají těžko. Stejně by podle mě měla fungovat i obec – lidé mají vědět, co se chystá, a dostat prostor říct svůj názor dřív, než je rozhodnuto.</p>
+                        <h3><span class="candidate-emoji">📜</span> Martina Spravedlivá</h3>
+                        <div class="position">Advokátka a mediátorka</div>
+                        <p class="bio">Spravedlnost a férovost jsou pro mě klíčové. Pomáhám lidem řešit spory a hledat konsenzus. V obci chci prosazovat transparentní rozhodování a zapojování občanů do dění.</p>
                         <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Informovanost</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Zapojení občanů</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Kvalita života</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Transparentnost</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Občanské poradenství</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Férové jednání</span>
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
                         </div>
                     </div>
                 </div>
+
+                <!-- ===== 7. ZAHRADNICE ===== -->
+                <div class="candidate-profile color-green">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-seedling"></i>
+                            Foto
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#7</span>
+                            <span class="candidate-tag">🌱 Zahradnice</span>
+                        </div>
+                        <h3><span class="candidate-emoji">🌸</span> Anna Květová</h3>
+                        <div class="position">Zahradnice a permakulturistka</div>
+                        <p class="bio">Zeleň je srdce vesnice. Už roky se starám o veřejné prostory a učím lidi pěstovat. Chci, aby naše obec kvetla a měla komunitní zahrady, kde se budou potkávat všechny generace.</p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Komunitní zahrady</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Veřejná zeleň</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Permakultura</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 8. SPORTOVEC ===== -->
+                <div class="candidate-profile color-teal">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-bicycle"></i>
+                            Foto
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#8</span>
+                            <span class="candidate-tag">🚴 Sportovec</span>
+                        </div>
+                        <h3><span class="candidate-emoji">⚽</span> Tomáš Běhal</h3>
+                        <div class="position">Trenér a sportovní nadšenec</div>
+                        <p class="bio">Sport spojuje. Trénuji děti i dospělé a vím, jak moc chybí kvalitní zázemí. Chci vybudovat moderní hřiště, běžecké trasy a podporovat všechny sportovní aktivity v obci.</p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Sportoviště</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Dětské týmy</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Zdravý životní styl</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 9. HUDEBNÍK ===== -->
+                <div class="candidate-profile color-pink">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-music"></i>
+                            Foto
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#9</span>
+                            <span class="candidate-tag">🎵 Hudebník</span>
+                        </div>
+                        <h3><span class="candidate-emoji">🎸</span> David Nota</h3>
+                        <div class="position">Hudebník a producent</div>
+                        <p class="bio">Hudba dělá lidi šťastnými. Pořádám koncerty, festivaly a hudební dílny pro všechny věkové kategorie. Chci, aby naše vesnice žila hudbou a měla svou kulturní značku.</p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Kulturní akce</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Hudební dílny</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Festivaly</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1927,7 +2210,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // ===== SLIDER - VYLEPŠENÉ OVLÁDÁNÍ =====
+        // ===== SLIDER =====
         const track = document.getElementById('sliderTrack');
         const prevBtn = document.getElementById('sliderPrev');
         const nextBtn = document.getElementById('sliderNext');
@@ -1939,7 +2222,6 @@
         let autoScrollInterval = null;
         let isHovering = false;
 
-        // Vytvoření teček
         const items = track.querySelectorAll('.slider-item');
         const totalItems = items.length;
 
@@ -1959,14 +2241,13 @@
 
         function updateDots() {
             const scrollPos = track.scrollLeft;
-            const itemWidth = items[0].offsetWidth + 24; // šířka + gap
+            const itemWidth = items[0].offsetWidth + 24;
             const currentIndex = Math.round(scrollPos / itemWidth);
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
         }
 
-        // Drag & Drop
         track.addEventListener('mousedown', (e) => {
             isDragging = true;
             track.classList.add('dragging');
@@ -1999,7 +2280,6 @@
             }
         });
 
-        // Touch events pro mobil
         track.addEventListener('touchstart', (e) => {
             isDragging = true;
             startX = e.touches[0].pageX - track.offsetLeft;
@@ -2020,14 +2300,12 @@
             startAutoScroll();
         });
 
-        // Kolečko myši
         track.addEventListener('wheel', (e) => {
             e.preventDefault();
             track.scrollLeft += e.deltaY * 0.8;
             updateDots();
         }, { passive: false });
 
-        // Šipky
         const scrollAmount = 300;
 
         prevBtn.addEventListener('click', () => {
@@ -2044,7 +2322,6 @@
             setTimeout(startAutoScroll, 3000);
         });
 
-        // Automatické přehrávání
         function startAutoScroll() {
             if (isHovering) return;
             stopAutoScroll();
@@ -2066,7 +2343,6 @@
             }
         }
 
-        // Pozastavení při najetí myší
         track.addEventListener('mouseenter', () => {
             isHovering = true;
             stopAutoScroll();
@@ -2077,13 +2353,8 @@
             startAutoScroll();
         });
 
-        // Aktualizace teček při scrollování
         track.addEventListener('scroll', updateDots);
-
-        // Spuštění automatického scrollování
         setTimeout(startAutoScroll, 2000);
-
-        // Aktualizace teček po resize
         window.addEventListener('resize', updateDots);
     </script>
 </body>
