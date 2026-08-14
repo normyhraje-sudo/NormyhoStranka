@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Běhačka - pohyb všemi směry</title>
     <style>
         * {
@@ -19,25 +19,30 @@
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', system-ui, sans-serif;
+            overflow: hidden; /* Zabraňuje scrollování na mobilu */
+            touch-action: none;
+            padding: 0.5rem;
         }
 
         .game-container {
             background: #1e2a3a;
-            padding: 2rem 2rem 1.8rem;
-            border-radius: 3.5rem;
+            padding: 1.5rem 1.5rem 1.5rem;
+            border-radius: 3rem;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
+            max-width: 750px;
+            width: 100%;
         }
 
         h1 {
             color: #f0e9d8;
             font-weight: 500;
-            font-size: 2.2rem;
+            font-size: 2rem;
             letter-spacing: 3px;
             text-shadow: 0 3px 0 #0b0f1a;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
         h1 span {
             color: #facc15;
@@ -49,33 +54,33 @@
             justify-content: space-between;
             align-items: center;
             color: #cbd5e1;
-            font-size: 1.2rem;
-            padding: 0.2rem 0.3rem 0.8rem;
+            font-size: 1.1rem;
+            padding: 0.2rem 0.3rem 0.6rem;
             border-bottom: 1px solid #3a4a5e;
-            margin-bottom: 1.2rem;
-            gap: 1rem;
+            margin-bottom: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
         }
 
         .stats > div {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             background: #0f1a2a;
-            padding: 0.2rem 1.2rem 0.2rem 0.8rem;
+            padding: 0.15rem 1rem 0.15rem 0.6rem;
             border-radius: 40px;
             box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
         }
 
         .stats .icon {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             line-height: 1;
         }
         .stats .value {
             font-weight: 700;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             color: #facc15;
-            min-width: 2.5rem;
+            min-width: 2rem;
             text-align: center;
         }
         .stats .value.lives {
@@ -85,21 +90,24 @@
         canvas {
             display: block;
             background: #0b1622;
-            border-radius: 2rem;
+            border-radius: 1.8rem;
             box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 2px #334155;
-            width: 700px;
-            height: 400px;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 700 / 400;
             cursor: none;
-            touch-action: none;
+            touch-action: none; /* Důležité pro dotykové ovládání */
+            max-width: 700px;
         }
 
         .controls {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             align-items: center;
-            margin-top: 1.2rem;
+            margin-top: 1rem;
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
         }
 
         button {
@@ -107,15 +115,16 @@
             border: none;
             color: #0b0f1a;
             font-weight: 700;
-            font-size: 1.2rem;
-            padding: 0.5rem 2rem;
+            font-size: 1.1rem;
+            padding: 0.4rem 1.5rem;
             border-radius: 60px;
             box-shadow: 0 7px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             transition: all 0.07s ease;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            touch-action: manipulation;
         }
         button:active {
             transform: translateY(6px);
@@ -128,14 +137,25 @@
             pointer-events: none;
         }
 
-        /* ----- NOVÉ: tlačítko Zpět na menu ----- */
+        /* Tlačítko Zpět na menu */
         .back-button {
             background: #64748b;
             box-shadow: 0 7px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            color: #0b0f1a;
+            font-weight: 700;
             font-size: 1rem;
             padding: 0.4rem 1.5rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.07s ease;
+            touch-action: manipulation;
+            border: none;
         }
         .back-button:active {
+            transform: translateY(6px);
             box-shadow: 0 2px 0 #475569;
         }
         .back-button:hover {
@@ -144,55 +164,90 @@
 
         .status {
             color: #94a3b8;
-            font-size: 1rem;
+            font-size: 0.95rem;
             min-height: 2rem;
-            margin-top: 0.4rem;
             font-weight: 300;
             letter-spacing: 0.3px;
             text-align: center;
+            width: 100%;
         }
 
         .controls-hint {
             color: #64748b;
-            font-size: 0.85rem;
-            margin-top: 0.2rem;
+            font-size: 0.8rem;
+            margin-top: 0.1rem;
+            text-align: center;
         }
 
         .bottom-bar {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             align-items: center;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
+            width: 100%;
         }
 
-        @media (max-width: 760px) {
+        /* ----- RESPONZIVITA PRO MOBIL ----- */
+        @media (max-width: 600px) {
             .game-container {
-                padding: 1.2rem;
+                padding: 1rem;
                 border-radius: 2rem;
             }
-            canvas {
-                width: 90vw;
-                height: 55vw;
-            }
             h1 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
             .stats {
-                font-size: 1rem;
+                font-size: 0.9rem;
+                padding: 0.1rem 0 0.4rem;
             }
             .stats .value {
-                font-size: 1.3rem;
-                min-width: 1.8rem;
+                font-size: 1.2rem;
+                min-width: 1.5rem;
+            }
+            .stats .icon {
+                font-size: 1.2rem;
             }
             button {
-                font-size: 1rem;
-                padding: 0.4rem 1.2rem;
+                font-size: 0.9rem;
+                padding: 0.35rem 1.2rem;
             }
             .back-button {
-                font-size: 0.9rem;
-                padding: 0.3rem 1rem;
+                font-size: 0.85rem;
+                padding: 0.35rem 1.2rem;
+            }
+            .status {
+                font-size: 0.8rem;
+                min-height: 1.5rem;
+            }
+            .controls-hint {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .game-container {
+                padding: 0.7rem;
+                border-radius: 1.5rem;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+            .stats > div {
+                padding: 0.1rem 0.7rem 0.1rem 0.4rem;
+            }
+            .stats .value {
+                font-size: 1rem;
+                min-width: 1.2rem;
+            }
+            button {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.9rem;
+            }
+            .back-button {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.9rem;
             }
         }
     </style>
@@ -215,9 +270,9 @@
     </div>
     <div class="controls-hint">⬆⬇ Pohybuj se všemi směry!</div>
 
-    <!-- NOVÉ: Spodní lišta s tlačítkem Zpět na menu -->
+    <!-- Tlačítko Zpět na menu -->
     <div class="bottom-bar">
-        <a href="index.html" class="back-button" style="text-decoration: none; color: #0b0f1a; background: #64748b; font-weight: 700; font-size: 1rem; padding: 0.4rem 1.5rem; border-radius: 60px; box-shadow: 0 7px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5); cursor: pointer; transition: all 0.07s ease; display: inline-flex; align-items: center; gap: 0.5rem; border: none;">
+        <a href="index.html" class="back-button">
             ⬅ Zpět na menu
         </a>
     </div>
@@ -254,7 +309,7 @@
         let spawnCounter = 0;
         const SPAWN_RATE = 28;
 
-        // Ovládání - nyní i pro nahoru/dolů
+        // Ovládání
         let keys = {
             ArrowLeft: false,
             ArrowRight: false,
@@ -333,7 +388,7 @@
         function update() {
             if (gameOver || win) return;
 
-            // ----- Pohyb hráče (VŠEMI SMĚRY) -----
+            // ----- Pohyb hráče -----
             let dx = 0,
                 dy = 0;
             if (keys.ArrowLeft || keys.a) dx = -PLAYER_SPEED;
@@ -341,7 +396,7 @@
             if (keys.ArrowUp || keys.w) dy = -PLAYER_SPEED;
             if (keys.ArrowDown || keys.s) dy = PLAYER_SPEED;
 
-            // Normalizace diagonálního pohybu (aby nebyl rychlejší)
+            // Normalizace diagonálního pohybu
             if (dx !== 0 && dy !== 0) {
                 dx *= 0.707;
                 dy *= 0.707;
@@ -600,56 +655,119 @@
             keys = { ArrowLeft: false, ArrowRight: false, ArrowUp: false, ArrowDown: false, a: false, d: false, w: false, s: false };
         });
 
-        // ----- Dotykové ovládání (mobil) -----
+        // ============================================
+        //  🖐️ DOTYKOVÉ OVLÁDÁNÍ PRO MOBIL (VYLEPŠENÉ)
+        // ============================================
         let touchX = null,
             touchY = null;
+        let touchActive = false;
+
         canvas.addEventListener('touchstart', (e) => {
             e.preventDefault();
             const rect = canvas.getBoundingClientRect();
             const touch = e.touches[0];
-            touchX = touch.clientX - rect.left;
-            touchY = touch.clientY - rect.top;
-        });
+            // Přepočet souřadnic na canvas
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            touchX = (touch.clientX - rect.left) * scaleX;
+            touchY = (touch.clientY - rect.top) * scaleY;
+            touchActive = true;
+            
+            // Zobrazení nápovědy
+            statusMsg.textContent = '🎮 Přetahuj prstem pro pohyb!';
+        }, { passive: false });
+
         canvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
-            if (touchX === null || touchY === null) return;
+            if (!touchActive || touchX === null || touchY === null) return;
+            
             const rect = canvas.getBoundingClientRect();
             const touch = e.touches[0];
-            const newX = touch.clientX - rect.left;
-            const newY = touch.clientY - rect.top;
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            
+            const newX = (touch.clientX - rect.left) * scaleX;
+            const newY = (touch.clientY - rect.top) * scaleY;
 
             const dx = newX - touchX;
             const dy = newY - touchY;
 
             // Prah pro rozpoznání pohybu (aby nebyl příliš citlivý)
-            const threshold = 8;
-            keys.ArrowLeft = dx < -threshold;
-            keys.ArrowRight = dx > threshold;
-            keys.ArrowUp = dy < -threshold;
-            keys.ArrowDown = dy > threshold;
-
-            // Pokud je pohyb malý, vypneme všechny směry
-            if (Math.abs(dx) < threshold && Math.abs(dy) < threshold) {
-                keys.ArrowLeft = false;
-                keys.ArrowRight = false;
-                keys.ArrowUp = false;
-                keys.ArrowDown = false;
+            const threshold = 6;
+            
+            // Nastavení směru podle pohybu
+            if (Math.abs(dx) > threshold || Math.abs(dy) > threshold) {
+                // Primární směr podle větší osy
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    // Horizontální pohyb
+                    if (dx > 0) {
+                        keys.ArrowRight = true;
+                        keys.ArrowLeft = false;
+                    } else {
+                        keys.ArrowLeft = true;
+                        keys.ArrowRight = false;
+                    }
+                    // Vertikální vypneme
+                    keys.ArrowUp = false;
+                    keys.ArrowDown = false;
+                } else {
+                    // Vertikální pohyb
+                    if (dy > 0) {
+                        keys.ArrowDown = true;
+                        keys.ArrowUp = false;
+                    } else {
+                        keys.ArrowUp = true;
+                        keys.ArrowDown = false;
+                    }
+                    // Horizontální vypneme
+                    keys.ArrowLeft = false;
+                    keys.ArrowRight = false;
+                }
+                
+                // Aktualizace poslední pozice
+                touchX = newX;
+                touchY = newY;
             }
+        }, { passive: false });
 
-            touchX = newX;
-            touchY = newY;
-        });
         canvas.addEventListener('touchend', (e) => {
             e.preventDefault();
+            touchActive = false;
+            touchX = null;
+            touchY = null;
+            // Vypneme všechny směry
+            keys.ArrowLeft = false;
+            keys.ArrowRight = false;
+            keys.ArrowUp = false;
+            keys.ArrowDown = false;
+            statusMsg.textContent = '🖐️ Prst zvednut - postavička stojí';
+            
+            // Po 2 sekundách vrátíme normální zprávu
+            setTimeout(() => {
+                if (!gameOver && !win) {
+                    statusMsg.textContent = '🎮 Přetahuj prstem pro pohyb!';
+                }
+            }, 2000);
+        }, { passive: false });
+
+        // Také když prst opustí canvas
+        canvas.addEventListener('touchcancel', (e) => {
+            e.preventDefault();
+            touchActive = false;
             touchX = null;
             touchY = null;
             keys.ArrowLeft = false;
             keys.ArrowRight = false;
             keys.ArrowUp = false;
             keys.ArrowDown = false;
-        });
+        }, { passive: false });
 
         canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+        
+        // Zobrazení nápovědy pro mobil
+        if ('ontouchstart' in window) {
+            statusMsg.textContent = '🖐️ Přetahuj prstem po ploše pro pohyb!';
+        }
     })();
 </script>
 </body>
