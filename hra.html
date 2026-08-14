@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu her</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Běhačka - pohyb všemi směry</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
         body {
             min-height: 100vh;
             background: linear-gradient(145deg, #0f172a, #1e293b);
@@ -12,58 +19,604 @@
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', system-ui, sans-serif;
-            margin: 0;
         }
-        
-        .menu-container {
+
+        .game-container {
             background: #1e2a3a;
-            padding: 3rem 4rem;
-            border-radius: 3rem;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
-            text-align: center;
+            padding: 2rem 2rem 1.8rem;
+            border-radius: 3.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        
+
         h1 {
             color: #f0e9d8;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+            font-weight: 500;
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            text-shadow: 0 3px 0 #0b0f1a;
+            margin-bottom: 0.5rem;
         }
-        
-        .play-button {
+        h1 span {
+            color: #facc15;
+        }
+
+        .stats {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            padding: 0.2rem 0.3rem 0.8rem;
+            border-bottom: 1px solid #3a4a5e;
+            margin-bottom: 1.2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stats > div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #0f1a2a;
+            padding: 0.2rem 1.2rem 0.2rem 0.8rem;
+            border-radius: 40px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats .icon {
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+        .stats .value {
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: #facc15;
+            min-width: 2.5rem;
+            text-align: center;
+        }
+        .stats .value.lives {
+            color: #ef4444;
+        }
+
+        canvas {
+            display: block;
+            background: #0b1622;
+            border-radius: 2rem;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 2px #334155;
+            width: 700px;
+            height: 400px;
+            cursor: none;
+            touch-action: none;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
             background: #facc15;
             border: none;
             color: #0b0f1a;
             font-weight: 700;
-            font-size: 1.5rem;
-            padding: 0.8rem 3rem;
+            font-size: 1.2rem;
+            padding: 0.5rem 2rem;
             border-radius: 60px;
-            box-shadow: 0 8px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 7px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             transition: all 0.07s ease;
-            text-decoration: none;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        .play-button:hover {
-            transform: scale(1.05);
-        }
-        
-        .play-button:active {
+        button:active {
             transform: translateY(6px);
             box-shadow: 0 2px 0 #a07c0e;
+        }
+        button:disabled {
+            opacity: 0.5;
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #7a5f0b;
+            pointer-events: none;
+        }
+
+        .status {
+            color: #94a3b8;
+            font-size: 1rem;
+            min-height: 2rem;
+            margin-top: 0.4rem;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            text-align: center;
+        }
+
+        .controls-hint {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+
+        @media (max-width: 760px) {
+            .game-container {
+                padding: 1.2rem;
+                border-radius: 2rem;
+            }
+            canvas {
+                width: 90vw;
+                height: 55vw;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .stats {
+                font-size: 1rem;
+            }
+            .stats .value {
+                font-size: 1.3rem;
+                min-width: 1.8rem;
+            }
+            button {
+                font-size: 1rem;
+                padding: 0.4rem 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="menu-container">
-        <h1>🎮 Výběr hry</h1>
-        
-        <!-- TLAČÍTKO PRO PŘESMĚROVÁNÍ NA hra.html -->
-        <a href="hra.html" class="play-button">▶ Spustit hru</a>
-        
-        <p style="color: #94a3b8; margin-top: 1.5rem;">
-            Kliknutím spustíš běhačku
-        </p>
+
+<div class="game-container">
+    <h1>🏃 <span>BĚHAČKA</span></h1>
+
+    <div class="stats">
+        <div><span class="icon">🪙</span><span class="value" id="coinDisplay">0</span></div>
+        <div><span class="icon">❤️</span><span class="value lives" id="livesDisplay">3</span></div>
     </div>
+
+    <canvas id="gameCanvas" width="700" height="400"></canvas>
+
+    <div class="controls">
+        <button id="restartBtn">🔄 Nová hra</button>
+        <span class="status" id="statusMsg">Použij šipky ← → ↑ ↓ nebo WASD</span>
+    </div>
+    <div class="controls-hint">⬆⬇ Pohybuj se všemi směry!</div>
+</div>
+
+<script>
+    (function() {
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const coinDisplay = document.getElementById('coinDisplay');
+        const livesDisplay = document.getElementById('livesDisplay');
+        const statusMsg = document.getElementById('statusMsg');
+
+        // ----- Herní konstanty -----
+        const W = 700,
+            H = 400;
+        const PLAYER_WIDTH = 32;
+        const PLAYER_HEIGHT = 32;
+        const PLAYER_SPEED = 5.5;
+        const OBSTACLE_WIDTH = 20;
+        const OBSTACLE_HEIGHT = 30;
+        const COIN_SIZE = 18;
+
+        // ----- Herní stav -----
+        let player = { x: 80, y: H - 70, w: PLAYER_WIDTH, h: PLAYER_HEIGHT };
+        let coins = [];
+        let obstacles = [];
+        let score = 0;
+        let lives = 3;
+        let gameOver = false;
+        let win = false;
+        let frameId = null;
+        let spawnCounter = 0;
+        const SPAWN_RATE = 28;
+
+        // Ovládání - nyní i pro nahoru/dolů
+        let keys = {
+            ArrowLeft: false,
+            ArrowRight: false,
+            ArrowUp: false,
+            ArrowDown: false,
+            a: false,
+            d: false,
+            w: false,
+            s: false
+        };
+
+        // ----- Reset hry -----
+        function resetGame() {
+            if (frameId) {
+                cancelAnimationFrame(frameId);
+                frameId = null;
+            }
+
+            player.x = 80;
+            player.y = H - 70;
+            coins = [];
+            obstacles = [];
+            score = 0;
+            lives = 3;
+            gameOver = false;
+            win = false;
+            spawnCounter = 0;
+
+            coinDisplay.textContent = '0';
+            livesDisplay.textContent = '3';
+            statusMsg.textContent = '🏁 Sbírej mince a vyhýbej se překážkám!';
+            document.getElementById('restartBtn').disabled = false;
+
+            for (let i = 0; i < 6; i++) {
+                spawnCoin();
+            }
+
+            gameLoop();
+        }
+
+        // ----- Spawn mince -----
+        function spawnCoin() {
+            const x = Math.random() * (W - COIN_SIZE - 40) + 20;
+            const y = Math.random() * (H - COIN_SIZE - 80) + 30;
+            coins.push({
+                x: x,
+                y: y,
+                r: COIN_SIZE / 2,
+                collected: false
+            });
+        }
+
+        // ----- Spawn překážky -----
+        function spawnObstacle() {
+            const x = W + 20;
+            const y = Math.random() * (H - OBSTACLE_HEIGHT - 60) + 30;
+            const speed = 2.2 + Math.random() * 1.8;
+            obstacles.push({
+                x: x,
+                y: y,
+                w: OBSTACLE_WIDTH,
+                h: OBSTACLE_HEIGHT,
+                speed: speed
+            });
+        }
+
+        // ----- Kolize (AABB) -----
+        function rectCollide(r1, r2) {
+            return r1.x < r2.x + r2.w &&
+                r1.x + r1.w > r2.x &&
+                r1.y < r2.y + r2.h &&
+                r1.y + r1.h > r2.y;
+        }
+
+        // ----- Herní update -----
+        function update() {
+            if (gameOver || win) return;
+
+            // ----- Pohyb hráče (VŠEMI SMĚRY) -----
+            let dx = 0,
+                dy = 0;
+            if (keys.ArrowLeft || keys.a) dx = -PLAYER_SPEED;
+            if (keys.ArrowRight || keys.d) dx = PLAYER_SPEED;
+            if (keys.ArrowUp || keys.w) dy = -PLAYER_SPEED;
+            if (keys.ArrowDown || keys.s) dy = PLAYER_SPEED;
+
+            // Normalizace diagonálního pohybu (aby nebyl rychlejší)
+            if (dx !== 0 && dy !== 0) {
+                dx *= 0.707;
+                dy *= 0.707;
+            }
+
+            let newX = player.x + dx;
+            let newY = player.y + dy;
+
+            // Omezení v rámci canvasu
+            if (newX < 2) newX = 2;
+            if (newX + player.w > W - 2) newX = W - 2 - player.w;
+            if (newY < 2) newY = 2;
+            if (newY + player.h > H - 2) newY = H - 2 - player.h;
+
+            player.x = newX;
+            player.y = newY;
+
+            // ----- Posun překážek doleva -----
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const ob = obstacles[i];
+                ob.x -= ob.speed;
+
+                if (ob.x + ob.w < 0) {
+                    obstacles.splice(i, 1);
+                    continue;
+                }
+
+                if (rectCollide(player, ob)) {
+                    lives--;
+                    livesDisplay.textContent = lives;
+                    obstacles.splice(i, 1);
+                    statusMsg.textContent = '💥 Ztráta života!';
+
+                    if (lives <= 0) {
+                        gameOver = true;
+                        statusMsg.textContent = '💀 Konec hry! Klikni "Nová hra".';
+                        return;
+                    }
+                    spawnCoin();
+                    continue;
+                }
+            }
+
+            // ----- Spawn nových překážek -----
+            spawnCounter++;
+            if (spawnCounter % SPAWN_RATE === 0 && obstacles.length < 8) {
+                spawnObstacle();
+            }
+
+            // ----- Sbírání mincí -----
+            for (let i = coins.length - 1; i >= 0; i--) {
+                const coin = coins[i];
+                const dist = Math.hypot(
+                    (player.x + player.w / 2) - coin.x,
+                    (player.y + player.h / 2) - coin.y
+                );
+
+                if (dist < coin.r + Math.min(player.w, player.h) / 2.2) {
+                    coins.splice(i, 1);
+                    score++;
+                    coinDisplay.textContent = score;
+                    statusMsg.textContent = '🪙 +1 mince!';
+                    spawnCoin();
+
+                    if (score >= 20) {
+                        win = true;
+                        statusMsg.textContent = '🎉 VYHRÁL JSI! Nasbíral jsi 20 mincí! 🎉';
+                        return;
+                    }
+                    continue;
+                }
+            }
+
+            while (coins.length < 5) {
+                spawnCoin();
+            }
+        }
+
+        // ----- Vykreslení -----
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+
+            // Pozadí
+            ctx.strokeStyle = '#2a3f5a';
+            ctx.lineWidth = 1.5;
+            for (let i = 0; i < H; i += 35) {
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(W, i);
+                ctx.strokeStyle = 'rgba(60, 90, 120, 0.25)';
+                ctx.stroke();
+            }
+
+            // ----- Hráč -----
+            const px = player.x,
+                py = player.y;
+            const grad = ctx.createRadialGradient(px + 6, py + 6, 4, px + 16, py + 16, 24);
+            grad.addColorStop(0, '#60a5fa');
+            grad.addColorStop(0.7, '#2563eb');
+            grad.addColorStop(1, '#1e3a8a');
+            ctx.shadowColor = '#3b82f6';
+            ctx.shadowBlur = 18;
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.roundRect(px, py, player.w, player.h, 6);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // oči
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(px + 8, py + 8, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(px + 24, py + 8, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#0f172a';
+            ctx.beginPath();
+            ctx.arc(px + 10, py + 8, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(px + 26, py + 8, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // ----- Mince -----
+            for (const coin of coins) {
+                const g = ctx.createRadialGradient(
+                    coin.x - 4, coin.y - 4, 2,
+                    coin.x, coin.y, coin.r
+                );
+                g.addColorStop(0, '#fde047');
+                g.addColorStop(0.6, '#facc15');
+                g.addColorStop(1, '#b45309');
+                ctx.shadowColor = '#facc15';
+                ctx.shadowBlur = 16;
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.arc(coin.x, coin.y, coin.r, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = 'rgba(255,255,240,0.35)';
+                ctx.beginPath();
+                ctx.arc(coin.x - 4, coin.y - 5, 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // ----- Překážky -----
+            for (const ob of obstacles) {
+                const g = ctx.createRadialGradient(
+                    ob.x + 4, ob.y + 4, 3,
+                    ob.x + 10, ob.y + 10, 20
+                );
+                g.addColorStop(0, '#f87171');
+                g.addColorStop(0.5, '#dc2626');
+                g.addColorStop(1, '#7f1d1d');
+                ctx.shadowColor = '#ef4444';
+                ctx.shadowBlur = 18;
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.roundRect(ob.x, ob.y, ob.w, ob.h, 5);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(ob.x + 4, ob.y + 4);
+                ctx.lineTo(ob.x + ob.w - 4, ob.y + ob.h - 4);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(ob.x + ob.w - 4, ob.y + 4);
+                ctx.lineTo(ob.x + 4, ob.y + ob.h - 4);
+                ctx.stroke();
+            }
+
+            ctx.shadowBlur = 0;
+
+            // ----- Herní stav -----
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                ctx.fillRect(0, 0, W, H);
+                ctx.fillStyle = '#fca5a5';
+                ctx.font = 'bold 46px "Segoe UI", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('💀 GAME OVER', W / 2, H / 2 - 10);
+                ctx.font = '22px sans-serif';
+                ctx.fillStyle = '#e2e8f0';
+                ctx.fillText('Klikni "Nová hra"', W / 2, H / 2 + 50);
+            } else if (win) {
+                ctx.fillStyle = 'rgba(0,0,0,0.4)';
+                ctx.fillRect(0, 0, W, H);
+                ctx.fillStyle = '#fde047';
+                ctx.font = 'bold 48px "Segoe UI", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('🏆 VÍTĚZSTVÍ!', W / 2, H / 2 - 10);
+                ctx.font = '24px sans-serif';
+                ctx.fillStyle = '#f1f5f9';
+                ctx.fillText('Nasbíral jsi 20 mincí! 🎉', W / 2, H / 2 + 50);
+            }
+        }
+
+        // ----- Herní smyčka -----
+        function gameLoop() {
+            update();
+            draw();
+            frameId = requestAnimationFrame(gameLoop);
+        }
+
+        // ----- Ovládání kláves -----
+        function handleKeyDown(e) {
+            const key = e.key;
+            if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'a', 'd', 'w', 's'].includes(key)) {
+                e.preventDefault();
+                keys[key] = true;
+            }
+            if (key === ' ' || key === 'Space') {
+                e.preventDefault();
+                if (gameOver || win) {
+                    resetGame();
+                }
+            }
+        }
+
+        function handleKeyUp(e) {
+            const key = e.key;
+            if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'a', 'd', 'w', 's'].includes(key)) {
+                e.preventDefault();
+                keys[key] = false;
+            }
+        }
+
+        // ----- roundRect polyfill -----
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                if (r > w / 2) r = w / 2;
+                if (r > h / 2) r = h / 2;
+                this.moveTo(x + r, y);
+                this.arcTo(x + w, y, x + w, y + h, r);
+                this.arcTo(x + w, y + h, x, y + h, r);
+                this.arcTo(x, y + h, x, y, r);
+                this.arcTo(x, y, x + w, y, r);
+                return this;
+            };
+        }
+
+        // ----- Event listenery -----
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+
+        document.getElementById('restartBtn').addEventListener('click', resetGame);
+
+        resetGame();
+
+        window.addEventListener('blur', () => {
+            keys = { ArrowLeft: false, ArrowRight: false, ArrowUp: false, ArrowDown: false, a: false, d: false, w: false, s: false };
+        });
+
+        // ----- Dotykové ovládání (mobil) -----
+        let touchX = null,
+            touchY = null;
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            touchX = touch.clientX - rect.left;
+            touchY = touch.clientY - rect.top;
+        });
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (touchX === null || touchY === null) return;
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const newX = touch.clientX - rect.left;
+            const newY = touch.clientY - rect.top;
+
+            const dx = newX - touchX;
+            const dy = newY - touchY;
+
+            // Prah pro rozpoznání pohybu (aby nebyl příliš citlivý)
+            const threshold = 8;
+            keys.ArrowLeft = dx < -threshold;
+            keys.ArrowRight = dx > threshold;
+            keys.ArrowUp = dy < -threshold;
+            keys.ArrowDown = dy > threshold;
+
+            // Pokud je pohyb malý, vypneme všechny směry
+            if (Math.abs(dx) < threshold && Math.abs(dy) < threshold) {
+                keys.ArrowLeft = false;
+                keys.ArrowRight = false;
+                keys.ArrowUp = false;
+                keys.ArrowDown = false;
+            }
+
+            touchX = newX;
+            touchY = newY;
+        });
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            touchX = null;
+            touchY = null;
+            keys.ArrowLeft = false;
+            keys.ArrowRight = false;
+            keys.ArrowUp = false;
+            keys.ArrowDown = false;
+        });
+
+        canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+    })();
+</script>
 </body>
 </html>
