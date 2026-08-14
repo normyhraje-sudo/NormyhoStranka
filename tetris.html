@@ -134,11 +134,11 @@
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: #cbd5e1;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             padding: 0.6rem 0.8rem;
             border-radius: 1rem;
-            min-width: 50px;
-            min-height: 50px;
+            min-width: 55px;
+            min-height: 55px;
             cursor: pointer;
             touch-action: manipulation;
             transition: all 0.1s ease;
@@ -152,7 +152,7 @@
         .touch-btn:active {
             transform: translateY(4px);
             box-shadow: 0 0px 0 rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .touch-btn.rotate-btn {
@@ -184,10 +184,19 @@
 
         @media (max-width: 550px) {
             .touch-btn {
-                font-size: 1.2rem;
-                min-width: 40px;
-                min-height: 40px;
+                font-size: 1.3rem;
+                min-width: 45px;
+                min-height: 45px;
                 padding: 0.4rem 0.6rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .touch-btn {
+                font-size: 1rem;
+                min-width: 35px;
+                min-height: 35px;
+                padding: 0.2rem 0.4rem;
             }
         }
 
@@ -327,12 +336,6 @@
             h1 {
                 font-size: 1rem;
             }
-            .touch-btn {
-                font-size: 1rem;
-                min-width: 32px;
-                min-height: 32px;
-                padding: 0.2rem 0.4rem;
-            }
         }
 
         @media (min-width: 601px) {
@@ -360,7 +363,7 @@
         <div class="controls">
             <button id="restartBtn">🔄 Nová</button>
             <button id="pauseBtn">⏸ Pauza</button>
-            <a href="hra.html" class="back-button">⬅ Zpět</a>
+            <a href="hry.html" class="back-button">⬅ Zpět</a>
         </div>
         <div class="status" id="statusMsg">Použij šipky pro pohyb</div>
         <div class="hint">
@@ -833,6 +836,62 @@
             }
         }
 
+        // ----- Funkce pro dotyková tlačítka s opakováním -----
+        function setupTouchButton(btn, action) {
+            let intervalId = null;
+            let timeoutId = null;
+
+            function startAction(e) {
+                e.preventDefault();
+                // Okamžitá akce
+                action();
+
+                // První opakování po 200ms, pak každých 100ms
+                timeoutId = setTimeout(() => {
+                    intervalId = setInterval(action, 100);
+                }, 200);
+            }
+
+            function stopAction(e) {
+                e.preventDefault();
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                    timeoutId = null;
+                }
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+            }
+
+            // Dotykové události
+            btn.addEventListener('touchstart', startAction, { passive: false });
+            btn.addEventListener('touchend', stopAction, { passive: false });
+            btn.addEventListener('touchcancel', stopAction, { passive: false });
+
+            // Myš (pro testování na PC)
+            btn.addEventListener('mousedown', startAction);
+            btn.addEventListener('mouseup', stopAction);
+            btn.addEventListener('mouseleave', stopAction);
+        }
+
+        // Nastavení dotykových tlačítek s opakováním
+        setupTouchButton(touchLeft, moveLeft);
+        setupTouchButton(touchRight, moveRight);
+
+        // Rotace a drop bez opakování (stačí jednou)
+        touchRotate.addEventListener('click', rotatePiece);
+        touchRotate.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            rotatePiece();
+        }, { passive: false });
+
+        touchDrop.addEventListener('click', hardDrop);
+        touchDrop.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            hardDrop();
+        }, { passive: false });
+
         // ----- Inicializace -----
         function init() {
             window.addEventListener('keydown', handleKeyDown);
@@ -840,17 +899,11 @@
             restartBtn.addEventListener('click', startNewGame);
             pauseBtn.addEventListener('click', togglePause);
 
-            // Dotyková tlačítka
-            touchLeft.addEventListener('click', moveLeft);
-            touchRight.addEventListener('click', moveRight);
-            touchRotate.addEventListener('click', rotatePiece);
-            touchDrop.addEventListener('click', hardDrop);
-
-            // Zabránění scrollování při dotyku
+            // Zabránění scrollování při dotyku na tlačítka
             document.querySelectorAll('.touch-btn').forEach(btn => {
                 btn.addEventListener('touchstart', (e) => {
                     e.preventDefault();
-                });
+                }, { passive: false });
             });
 
             startNewGame();
