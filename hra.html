@@ -130,7 +130,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Každá hra má jinou barvu při najetí */
         .game-card.behacka:hover {
             border-color: #3b82f6;
             box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.4);
@@ -142,6 +141,35 @@
         .game-card.zavodni:hover {
             border-color: #ef4444;
             box-shadow: 0 12px 30px rgba(239, 68, 68, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ----- TLAČÍTKO ZPÁTKY NA HLAVNÍ STRÁNKU ----- */
+        .home-button {
+            background: #64748b;
+            box-shadow: 0 7px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            color: #0b0f1a;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.5rem 2rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.07s ease;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+
+        .home-button:active {
+            transform: translateY(6px);
+            box-shadow: 0 1px 0 #475569;
+        }
+
+        .home-button:hover {
+            background: #94a3b8;
+            transform: translateY(-2px);
         }
 
         .footer {
@@ -198,6 +226,10 @@
             .game-card .desc {
                 font-size: 0.7rem;
             }
+            .home-button {
+                font-size: 0.85rem;
+                padding: 0.4rem 1.5rem;
+            }
         }
 
         @media (max-width: 380px) {
@@ -211,6 +243,10 @@
             h1 {
                 font-size: 1.5rem;
             }
+            .home-button {
+                font-size: 0.75rem;
+                padding: 0.3rem 1.2rem;
+            }
         }
     </style>
 </head>
@@ -220,6 +256,9 @@
         <div class="logo">🎮</div>
         <h1><span class="highlight">HERNÍ</span> ROZCESTNÍK</h1>
         <p class="subtitle">Vyber si hru a bav se!</p>
+
+        <!-- TLAČÍTKO ZPÁTKY NA HLAVNÍ STRÁNKU -->
+        <a href="index.html" class="home-button">🏠 Hlavní stránka</a>
 
         <div class="games-grid">
             <!-- BĚHAČKA -->
