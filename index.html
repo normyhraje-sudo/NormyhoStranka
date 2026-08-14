@@ -303,6 +303,143 @@
             display: block;
         }
 
+        /* ===== MLADÁ SEKCE ===== */
+        .young-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #f8fafc;
+            border-bottom: 6px solid #fbbf24;
+            border-top: 6px solid #fbbf24;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .young-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .young-section .container {
+            max-width: 1280px;
+            padding: 0 1.5rem;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .young-section .young-badge {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            font-weight: 700;
+            padding: 0.3rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .young-section h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.8rem;
+        }
+
+        .young-section .young-subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .young-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .young-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .young-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .young-card:hover::before {
+            opacity: 1;
+        }
+
+        .young-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        .young-card:active {
+            transform: scale(0.96);
+        }
+
+        .young-card .young-icon {
+            font-size: 3rem;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .young-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #f8fafc;
+        }
+
+        .young-card p {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .young-card .young-tag {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 0.2rem 1.2rem;
+            border-radius: 9999px;
+            letter-spacing: 0.5px;
+        }
+
         /* ===== PROGRAMOVÉ BANNERY ===== */
         .program-banner {
             padding: 2.5rem 0;
@@ -369,7 +506,6 @@
             background: rgba(15, 23, 42, 0.15);
         }
 
-        /* ===== PROGRAM 4 - KDO JSME ===== */
         .program-banner.p4 {
             background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
             color: #f8fafc;
@@ -533,6 +669,13 @@
             scroll-behavior: smooth;
             scrollbar-width: thin;
             scrollbar-color: #fbbf24 #e2e8f0;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .slider-track.dragging {
+            cursor: grabbing;
+            scroll-snap-type: none;
         }
 
         .slider-track::-webkit-scrollbar {
@@ -638,6 +781,29 @@
             transform: scale(0.92);
         }
 
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: #fbbf24;
+            transform: scale(1.3);
+        }
+
         /* ===== PROJEKTY ===== */
         .grid-3 {
             display: grid;
@@ -711,7 +877,7 @@
             color: #166534;
         }
 
-        /* ===== KANDIDÁTI - STYL ANO (VERTIKÁLNÍ) ===== */
+        /* ===== KANDIDÁTI ===== */
         .candidates-list {
             display: flex;
             flex-direction: column;
@@ -927,6 +1093,10 @@
             .why-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .young-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -1096,7 +1266,19 @@
                 font-size: 1.2rem;
             }
 
-            /* ===== KANDIDÁTI MOBIL ===== */
+            .young-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .young-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .young-card {
+                padding: 1.8rem 1.5rem;
+            }
+
             .candidate-profile {
                 flex-direction: column;
                 align-items: center;
@@ -1231,6 +1413,10 @@
                 height: 38px;
                 font-size: 1rem;
             }
+
+            .young-section h2 {
+                font-size: 1.8rem;
+            }
         }
 
         /* ===== DOTYKOVÉ OPTIMALIZACE ===== */
@@ -1238,14 +1424,16 @@
             .why-card:hover,
             .project-card:hover,
             .slider-item:hover,
-            .candidate-profile:hover {
+            .candidate-profile:hover,
+            .young-card:hover {
                 transform: none !important;
             }
 
             .why-card:active,
             .project-card:active,
             .slider-item:active,
-            .candidate-profile:active {
+            .candidate-profile:active,
+            .young-card:active {
                 transform: scale(0.97) !important;
             }
 
@@ -1314,6 +1502,54 @@
             </div>
         </div>
     </header>
+
+    <!-- ===== MLADÁ SEKCE (NOVÁ) ===== -->
+    <section class="young-section" id="mladi">
+        <div class="container">
+            <span class="young-badge"><i class="fas fa-rocket"></i> Pro mladé a odvážné</span>
+            <h2>Vesnice není nuda 🔥</h2>
+            <p class="young-subtitle">Máme plány, které tě dostanou. Bydlení, kariéra, kultura, sport – všechno tady najdeš.</p>
+
+            <div class="young-grid">
+                <div class="young-card">
+                    <span class="young-icon"><i class="fas fa-wifi"></i></span>
+                    <h3>Rychlý internet</h3>
+                    <p>Optika po celé obci. Žádné lagy, žádné výmluvy. Pracuj z domu, streamuj, hraj hry.</p>
+                    <span class="young-tag">Hotovo</span>
+                </div>
+                <div class="young-card">
+                    <span class="young-icon"><i class="fas fa-mug-saucer"></i></span>
+                    <h3>Místo pro setkávání</h3>
+                    <p>Nová kavárna s posezením, coworkingový prostor a venkovní chill zóna.</p>
+                    <span class="young-tag">Chystáme</span>
+                </div>
+                <div class="young-card">
+                    <span class="young-icon"><i class="fas fa-gamepad"></i></span>
+                    <h3>Akce pro tebe</h3>
+                    <p>Turnaje, koncerty, filmové večery, grilovačky a spousta zábavy.</p>
+                    <span class="young-tag">Každý měsíc</span>
+                </div>
+                <div class="young-card">
+                    <span class="young-icon"><i class="fas fa-bicycle"></i></span>
+                    <h3>Bezpečné stezky</h3>
+                    <p>Nové cyklostezky a pěší trasy do okolí. Objevuj krajinu bez aut.</p>
+                    <span class="young-tag">V přípravě</span>
+                </div>
+                <div class="young-card">
+                    <span class="young-icon"><i class="fas fa-graduation-cap"></i></span>
+                    <h3>Workshopy a kurzy</h3>
+                    <p>Programování, podcasting, podnikání, grafika – rozvíjej se.</p>
+                    <span class="young-tag">Spouštíme</span>
+                </div>
+                <div class="young-card">
+                    <span class="young-icon"><i class="fas fa-people-group"></i></span>
+                    <h3>Mladý tým</h3>
+                    <p>Máme mladé lidi v zastupitelstvu. Tvoje nápady máme šanci prosadit.</p>
+                    <span class="young-tag">Jsme tu pro tebe</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- ===== PROGRAM 1 + PROČ ===== -->
     <div class="program-banner p1" id="proc-banner">
@@ -1429,6 +1665,7 @@
                     <button class="slider-btn" id="sliderPrev" aria-label="Předchozí"><i class="fas fa-chevron-left"></i></button>
                     <button class="slider-btn" id="sliderNext" aria-label="Další"><i class="fas fa-chevron-right"></i></button>
                 </div>
+                <div class="slider-dots" id="sliderDots"></div>
             </div>
         </div>
     </section>
@@ -1499,9 +1736,7 @@
             <h2 class="section-title"><i class="fas fa-user-check"></i> Kdo jsme</h2>
             <p class="section-subtitle">Jsme vaši sousedé a známé tváře z obce. Spojuje nás chuť pracovat pro místo, kde žijeme.</p>
 
-            <!-- ===== KANDIDÁTI - STYL ANO ===== -->
             <div class="candidates-list">
-
                 <div class="candidate-profile">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -1657,85 +1892,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#7</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Historik</div>
-                        <p class="bio">Pocházím z rodiny, která v obci žije už po generace, a proto mám k ní silný vztah. Chci přispět k tomu, aby naše vesnice zůstala příjemným místem pro život a zároveň se dokázala přizpůsobit potřebám dnešní doby.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Zachování rázu obce</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Moderní přístup</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Mezigenerační dialog</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#8</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Ekolog</div>
-                        <p class="bio">Zajímá mě ochrana přírody a kvalita života v obci. Prosazuji praktická řešení, která pomáhají lidem i prostředí kolem nás. Chci, aby naše vesnice byla připravená na výzvy budoucnosti.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Životní prostředí</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Udržitelnost</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Zdravé okolí</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="candidate-profile">
-                    <div class="candidate-photo">
-                        <div class="photo-placeholder">
-                            <i class="fas fa-user-circle"></i>
-                            Foto
-                        </div>
-                    </div>
-                    <div class="candidate-info">
-                        <div>
-                            <span class="candidate-number">#9</span>
-                            <span class="candidate-tag">Člen týmu</span>
-                        </div>
-                        <h3>Jméno Příjmení</h3>
-                        <div class="position">Plánovač</div>
-                        <p class="bio">Mám zkušenosti s plánováním a rozvojem. Chci, aby se obec rozvíjela promyšleně, s ohledem na potřeby obyvatel a dlouhodobou udržitelnost. Podporuji inovace a moderní přístupy.</p>
-                        <div class="candidate-priorities">
-                            <span class="priority"><i class="fas fa-circle"></i> Rozvoj obce</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Inovace</span>
-                            <span class="priority"><i class="fas fa-circle"></i> Spolupráce</span>
-                        </div>
-                        <div class="candidate-social">
-                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -1771,25 +1927,164 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // ===== SLIDER - ŠIPKY A SCROLL =====
+        // ===== SLIDER - VYLEPŠENÉ OVLÁDÁNÍ =====
         const track = document.getElementById('sliderTrack');
         const prevBtn = document.getElementById('sliderPrev');
         const nextBtn = document.getElementById('sliderNext');
+        const dotsContainer = document.getElementById('sliderDots');
 
+        let isDragging = false;
+        let startX = 0;
+        let scrollLeft = 0;
+        let autoScrollInterval = null;
+        let isHovering = false;
+
+        // Vytvoření teček
+        const items = track.querySelectorAll('.slider-item');
+        const totalItems = items.length;
+
+        items.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.classList.add('slider-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.dataset.index = index;
+            dot.addEventListener('click', () => {
+                const item = items[index];
+                item.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll('.slider-dot');
+
+        function updateDots() {
+            const scrollPos = track.scrollLeft;
+            const itemWidth = items[0].offsetWidth + 24; // šířka + gap
+            const currentIndex = Math.round(scrollPos / itemWidth);
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Drag & Drop
+        track.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            track.classList.add('dragging');
+            startX = e.pageX - track.offsetLeft;
+            scrollLeft = track.scrollLeft;
+            stopAutoScroll();
+        });
+
+        track.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            track.scrollLeft = scrollLeft - walk;
+        });
+
+        track.addEventListener('mouseup', () => {
+            isDragging = false;
+            track.classList.remove('dragging');
+            updateDots();
+            startAutoScroll();
+        });
+
+        track.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                track.classList.remove('dragging');
+                updateDots();
+                startAutoScroll();
+            }
+        });
+
+        // Touch events pro mobil
+        track.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX - track.offsetLeft;
+            scrollLeft = track.scrollLeft;
+            stopAutoScroll();
+        });
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].pageX - track.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            track.scrollLeft = scrollLeft - walk;
+        });
+
+        track.addEventListener('touchend', () => {
+            isDragging = false;
+            updateDots();
+            startAutoScroll();
+        });
+
+        // Kolečko myši
+        track.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            track.scrollLeft += e.deltaY * 0.8;
+            updateDots();
+        }, { passive: false });
+
+        // Šipky
         const scrollAmount = 300;
 
         prevBtn.addEventListener('click', () => {
             track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            setTimeout(updateDots, 300);
+            stopAutoScroll();
+            setTimeout(startAutoScroll, 3000);
         });
 
         nextBtn.addEventListener('click', () => {
             track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            setTimeout(updateDots, 300);
+            stopAutoScroll();
+            setTimeout(startAutoScroll, 3000);
         });
 
-        track.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            track.scrollLeft += e.deltaY;
-        }, { passive: false });
+        // Automatické přehrávání
+        function startAutoScroll() {
+            if (isHovering) return;
+            stopAutoScroll();
+            autoScrollInterval = setInterval(() => {
+                const maxScroll = track.scrollWidth - track.clientWidth;
+                if (track.scrollLeft >= maxScroll - 10) {
+                    track.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    track.scrollBy({ left: 280, behavior: 'smooth' });
+                }
+                setTimeout(updateDots, 300);
+            }, 4000);
+        }
+
+        function stopAutoScroll() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        // Pozastavení při najetí myší
+        track.addEventListener('mouseenter', () => {
+            isHovering = true;
+            stopAutoScroll();
+        });
+
+        track.addEventListener('mouseleave', () => {
+            isHovering = false;
+            startAutoScroll();
+        });
+
+        // Aktualizace teček při scrollování
+        track.addEventListener('scroll', updateDots);
+
+        // Spuštění automatického scrollování
+        setTimeout(startAutoScroll, 2000);
+
+        // Aktualizace teček po resize
+        window.addEventListener('resize', updateDots);
     </script>
 </body>
 </html>
