@@ -1,200 +1,243 @@
 <!doctype html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Volby - Vesnice</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vesnice — Naše vize</title>
+  <meta name="description" content="Inspirovaná prezentační stránka pro místní iniciativu ve Vesnici." />
   <style>
-    :root{--bg:#f7fafc;--card:#ffffff;--accent:#0ea5e9;--dark:#0f172a;--muted:#6b7280}
+    :root{
+      --bg:#fbfdff; --card:#ffffff; --accent:#0b84ff; --accent-2:#7c3aed; --muted:#667085; --glass: rgba(255,255,255,0.6);
+      --radius:14px; --max-width:1100px
+    }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0;background:var(--bg);color:var(--dark)}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#f8fbff, #f3f5ff);color:#0f172a}
 
-    /* Sticky nav */
-    nav{position:sticky;top:0;z-index:40;background:linear-gradient(90deg,#0ea5e9, #6366f1);color:white;padding:10px 20px;display:flex;align-items:center;gap:18px}
-    .brand{font-weight:700;font-size:18px}
-    .nav-links{display:flex;gap:10px;overflow:auto}
-    .nav-links a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 12px;border-radius:8px}
-    .nav-links a.active{background:rgba(255,255,255,0.12)}
+    /* header */
+    nav{position:sticky;top:12px;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px auto 0;max-width:var(--max-width);padding:6px 12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:12px;color:white;box-shadow:0 6px 18px rgba(11,132,255,0.12)}
+    .brand{font-weight:800;font-size:18px;padding:8px 12px}
+    .menu{display:flex;gap:8px;align-items:center;overflow:auto;padding-right:8px}
+    .menu a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+    .menu a.active{background:rgba(255,255,255,0.12)}
 
-    /* Hero */
-    .hero{background:linear-gradient(180deg, rgba(99,102,241,0.08), transparent);padding:60px 20px 36px;text-align:center}
-    .hero h1{font-size:48px;margin:0;color:var(--dark);letter-spacing:-1px}
-    .hero p{margin:10px 0 0;color:var(--muted);font-size:16px}
+    /* hero */
+    .hero{max-width:var(--max-width);margin:26px auto;padding:48px 24px;background:linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.5));border-radius:18px;display:flex;gap:24px;align-items:center}
+    .hero-left{flex:1}
+    .hero h1{margin:0;font-size:44px;line-height:1.02;color:var(--accent-2)}
+    .hero p{margin:12px 0;color:var(--muted);font-size:17px}
+    .cta{display:flex;gap:12px;margin-top:16px}
+    .btn{background:var(--accent);color:white;padding:12px 16px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+    .btn.secondary{background:transparent;color:var(--accent-2);border:2px solid rgba(124,58,237,0.12)}
 
-    main{max-width:1000px;margin:28px auto;padding:0 20px}
-    .candidate{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.06);margin-bottom:18px}
-    .candidate h2{margin:0 0 6px}
-    .meta{color:var(--muted);font-size:14px;margin-bottom:10px}
-    .platform ul{margin:6px 0 0 18px}
+    .hero-right{width:320px;background:linear-gradient(180deg,#fff, #f7f9ff);padding:18px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.04)}
+    .metrics{display:flex;flex-direction:column;gap:8px}
+    .metric{display:flex;justify-content:space-between;align-items:center}
+    .metric strong{font-size:20px;color:var(--accent-2)}
+    .meta{color:var(--muted)}
 
-    footer{max-width:1000px;margin:36px auto 60px;padding:18px 20px;background:transparent;color:var(--muted);font-size:14px;text-align:center}
+    /* sections */
+    main{max-width:var(--max-width);margin:28px auto;padding:0 18px}
+    .section{margin-bottom:24px}
+    .section h2{margin:0 0 12px;font-size:22px;color:var(--accent-2)}
 
-    @media (max-width:640px){.hero h1{font-size:34px;padding:0 8px}}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,23,0.06)}
+    .card h3{margin:0 0 8px}
+    .card p{margin:0;color:var(--muted)}
+
+    /* candidates list without names */
+    .cand-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+    .cand{display:flex;gap:12px;align-items:flex-start}
+    .avatar{width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:20px}
+    .cand .info{flex:1}
+    .cand .info h4{margin:0 0 6px}
+    .pill{display:inline-block;background:#eef2ff;color:var(--accent-2);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px}
+
+    footer{max-width:var(--max-width);margin:24px auto 60px;padding:18px;color:var(--muted);text-align:center}
+
+    @media (max-width:880px){.hero{flex-direction:column}.hero-right{width:100%}}
   </style>
 </head>
 <body>
   <nav aria-label="Hlavní navigace">
-    <div class="brand">Vesnice • Volby 2026</div>
-    <div class="nav-links" id="navLinks" role="navigation" aria-label="Seznam kandidátů">
-      <!-- Odkazy budou doplněny JS -->
+    <div class="brand">Vesnice — Naše vize</div>
+    <div class="menu" id="menu">
+      <a href="#home">Domů</a>
+      <a href="#pro">Proč</a>
+      <a href="#cil">Cíle</a>
+      <a href="#projekty">Projekty</a>
+      <a href="#kandidati">Kandidáti</a>
+      <a href="#kontakt">Kontakt</a>
     </div>
   </nav>
 
-  <header class="hero">
-    <h1>Volby do zastupitelstva — Vesnice</h1>
-    <p>Vyberte svého zástupce. Přečtěte si programy kandidátů a zapojte se do dění v obci.</p>
-  </header>
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <h1>Silná komunita. Jasná vize. Lepší Vesnice.</h1>
+      <p>Pracujeme pro kvalitní veřejný prostor, bezpečné a zdravé prostředí a podporu sousedských aktivit. Praktické kroky, měřitelné výsledky.</p>
+      <div class="cta">
+        <button class="btn" onclick="document.getElementById('kandidati').scrollIntoView({behavior:'smooth'})">Prohlédnout kandidáty</button>
+        <button class="btn secondary" onclick="document.getElementById('projekty').scrollIntoView({behavior:'smooth'})">Naše projekty</button>
+      </div>
+    </div>
+    <aside class="hero-right">
+      <div class="metrics">
+        <div class="metric"><div><small class="meta">Obyvatelů v obci</small><div><strong id="counter-pop">1 234</strong></div></div></div>
+        <div class="metric"><div><small class="meta">Realizovaných projektů</small><div><strong id="counter-proj">18</strong></div></div></div>
+        <div class="metric"><div><small class="meta">Dobrovolníků</small><div><strong id="counter-vol">67</strong></div></div></div>
+      </div>
+    </aside>
+  </section>
 
-  <main id="content">
-    <!-- Kandidáti budou vykresleni sem -->
+  <main>
+    <section class="section" id="pro">
+      <h2>Proč to děláme</h2>
+      <div class="grid">
+        <div class="card"><h3>Transparentní rozhodování</h3><p>Srozumitelně zveřejňovat rozpočet a postupy, aby každý věděl, kam jdou peníze.</p></div>
+        <div class="card"><h3>Dostupná infrastruktura</h3><p>Bezpečné chodníky, osvětlení, opravy místních komunikací a moderní veřejný prostor pro setkávání.</p></div>
+        <div class="card"><h3>Komunitní podpora</h3><p>Podpora místních aktivit, spolkové činnosti a projektů, které posilují sousedské vazby.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="cil">
+      <h2>Naše cíle</h2>
+      <div class="grid">
+        <div class="card"><h3>1) Zlepšit veřejný prostor</h3><p>Revitalizace náměstí, nové lavičky, bezpečné přechody pro chodce.</p></div>
+        <div class="card"><h3>2) Podpora rodin a seniorů</h3><p>Programy pro mladé rodiny, dostupné služby pro seniory a komunitní pomoc.</p></div>
+        <div class="card"><h3>3) Udržitelnost</h3><p>Zavádění úspor energie, rozšíření třídění odpadu a podpora cyklistiky.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="projekty">
+      <h2>Vybrané projekty</h2>
+      <div class="grid">
+        <div class="card"><h3>Komunitní zahrada</h3><p>Místo pro setkávání, výuku a společné pěstování potravy.</p></div>
+        <div class="card"><h3>Sportovní hřiště</h3><p>Revitalizace starého hřiště a zřízení multisportovního prostoru pro mládež.</p></div>
+        <div class="card"><h3>Osvětlení pěších tras</h3><p>Bezpečnější pohyb v noci a lepší propojení osad.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="kandidati">
+      <h2>Kandidáti a jejich priority</h2>
+      <div class="cand-grid">
+        <!-- 9 anonymních kandidátů -->
+        ${generateCandidatesHTML()}
+      </div>
+      <p style="margin-top:12px;color:var(--muted)">Poznámka: jména kandidátů jsou dočasně anonymizovaná — při finální verzi doplníme fotografie a stručné biografie.</p>
+    </section>
+
+    <section class="section" id="kontakt">
+      <h2>Kontakt</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Napište nám</h3>
+          <p class="meta">Pošlete nám zprávu — odpovíme co nejdříve.</p>
+          <form id="contactForm">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <input name="name" placeholder="Jméno" required style="padding:10px;border-radius:8px;border:1px solid #e6edf8" />
+              <input name="email" placeholder="E‑mail" required type="email" style="padding:10px;border-radius:8px;border:1px solid #e6edf8" />
+              <textarea name="message" placeholder="Zpráva" rows="4" style="padding:10px;border-radius:8px;border:1px solid #e6edf8"></textarea>
+              <div style="display:flex;gap:8px"><button class="btn" type="submit">Odeslat</button><button class="btn secondary" type="button" id="resetForm">Vyčistit</button></div>
+              <div id="formStatus" style="color:var(--muted);font-size:14px"></div>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Kontakt a sídlo</h3>
+          <p class="meta">Vesnice • Občanská iniciativa</p>
+          <p>Adresa: Náměstí 1, Vesnice<br>E‑mail: <a href="mailto:volby@vesnice.example">volby@vesnice.example</a><br>Telefon: +420 123 456 789</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
-    <div>Vesnice • Volby 2026 — Informace slouží k demonstraci. &nbsp; Občanská iniciativa Vesnice.</div>
-    <div style="margin-top:8px;color:#9ca3af;font-size:13px">Kontakt: volby@vesnice.example • Telefon: +420 123 456 789</div>
+    © Vesnice — Iniciativa pro lepší místní život. Všechny texty a grafika jsou ukázkové a slouží k demonstraci.
   </footer>
 
   <script>
-    // Kandidáti (náhodná jména a programy)
-    const candidates = [
-      {id:'c1', name:'Jan Novotný', age:49, platform:[
-        'Oprava místních komunikací a lepší veřejné osvětlení',
-        'Podpora místních živnostníků',
-        'Komunitní zahrada u náměstí'
-      ]},
-      {id:'c2', name:'Petr Svoboda', age:36, platform:[
-        'Bezpečné chodníky a úprava přechodů',
-        'Dotace na opravy střech pro seniory',
-        'Podpora místních školních projektů'
-      ]},
-      {id:'c3', name:'Lucie Dvořáková', age:42, platform:[
-        'Zvýšení transparentnosti rozpočtu',
-        'Wi‑Fi hotspoty na veřejných místech',
-        'Program pro mladé rodiny (slevy, kurzy)'
-      ]},
-      {id:'c4', name:'Martina Kovářová', age:31, platform:[
-        'Založení komunitního centra a knihovny',
-        'Ekologické třídění odpadu a osvěta',
-        'Cyklostezky mezi osadami'
-      ]},
-      {id:'c5', name:'Tomáš Marek', age:55, platform:[
-        'Podpora místního podnikání a trhů',
-        'Oprava potoka a zabránění erozím',
-        'Veteránské a kulturní akce pro obyvatele'
-      ]},
-      {id:'c6', name:'Eva Horáková', age:28, platform:[
-        'Levné sportovní aktivity pro mládež',
-        'Modernizace školní zahrady',
-        'Program zdraví pro seniory (domácí návštěvy)'
-      ]},
-      {id:'c7', name:'Milan Procházka', age:63, platform:[
-        'Údržba veřejných prostranství a laviček',
-        'Rozšíření sběrného dvoru',
-        'Péče o historii vesnice a památky'
-      ]},
-      {id:'c8', name:'Alena Černá', age:39, platform:[
-        'Zlepšení dodávek pitné vody a kontrola kvality',
-        'Podpora místních spolků a dobrovolnictví',
-        'Zřízení noční linky pro seniory'
-      ]},
-      {id:'c9', name:'Josef Kučera', age:46, platform:[
-        'Energetické úspory veřejných budov',
-        'Zřízení komunitní dílny pro kutily',
-        'Program pro zaměstnanost v regionu'
-      ]}
-    ];
+    // Small templating: generate candidates HTML without including real names
+    function generateCandidatesHTML(){
+      const programs = [
+        ['Revitalizovat veřejný prostor','Podpora místních spolků','Bezpečné cesty do školy'],
+        ['Podpora malých podniků','Zavádění úspor energie','Programy pro seniory'],
+        ['Vybudovat komunitní dílnu','Zlepšit vodovodní síť','Zvýšit transparentnost financí'],
+        ['Vytvořit nové hřiště','Podpora dobrovolnictví','Osvětlení turistických tras'],
+        ['Program pro mládež','Podpora kulturních akcí','Zlepšení dopravního spojení'],
+        ['Založit komunitní zahradu','Opravy komunikací','Podpora vzdělávání dospělých'],
+        ['Rozšíření sběrného dvoru','Obnova památek','Zřízení místní knihovny'],
+        ['Zlepšení kvality vody','Bezpečnostní opatření','Podpora rodin s dětmi'],
+        ['Energetické úspory v budovách','Vytvoření cyklostezek','Program pro zaměstnanost']
+      ];
 
-    const navLinks = document.getElementById('navLinks');
-    const content = document.getElementById('content');
-
-    // Render nav links
-    function renderNav(){
-      // Home link
-      const home = document.createElement('a');
-      home.href = '#top';
-      home.textContent = 'Domů';
-      home.addEventListener('click', (e)=>{e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'});});
-      navLinks.appendChild(home);
-
-      // Candidate links
-      candidates.forEach(c => {
-        const a = document.createElement('a');
-        a.href = '#'+c.id;
-        a.textContent = c.name.split(' ')[0]; // krátký label
-        navLinks.appendChild(a);
-      });
-
-      // Contact
-      const contact = document.createElement('a');
-      contact.href = '#kontakt';
-      contact.textContent = 'Kontakt';
-      navLinks.appendChild(contact);
+      let out = '';
+      for(let i=1;i<=9;i++){
+        const p = programs[i-1] || programs[0];
+        // avatar initials as number
+        out += `\n<div class="card cand">\n  <div class="avatar">${i}</div>\n  <div class="info">\n    <h4>Kandidát ${i} <span class="pill">Priorita ${i}</span></h4>\n    <div class="meta">Věk: ${25 + (i*3)} let</div>\n    <ul style="margin-top:8px">`;
+        p.forEach(item => { out += `<li style="margin-bottom:4px;color:${i%2?"#0f172a":"#243"}">${item}</li>` });
+        out += '</ul>\n  </div>\n</div>\n';
+      }
+      return out;
     }
 
-    // Render candidate sections
-    function renderCandidates(){
-      candidates.forEach(c => {
-        const sec = document.createElement('section');
-        sec.className = 'candidate';
-        sec.id = c.id;
+    // Insert generated HTML into the DOM
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // replace template placeholder
+      const grid = document.querySelector('.cand-grid');
+      grid.innerHTML = generateCandidatesHTML();
 
-        const h = document.createElement('h2');
-        h.textContent = c.name;
-        sec.appendChild(h);
-
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-        meta.textContent = `Věk: ${c.age} let`;
-        sec.appendChild(meta);
-
-        const plat = document.createElement('div');
-        plat.className = 'platform';
-        const ul = document.createElement('ul');
-        c.platform.forEach(p => { const li = document.createElement('li'); li.textContent = p; ul.appendChild(li); });
-        plat.appendChild(ul);
-        sec.appendChild(plat);
-
-        content.appendChild(sec);
-      });
-
-      // Kontakt sekce (kotva)
-      const kontakt = document.createElement('section');
-      kontakt.id = 'kontakt';
-      kontakt.className = 'candidate';
-      kontakt.innerHTML = '<h2>Kontakt</h2><div class="meta">Máte otázky? Napište nám nebo zavolejte.</div><p style="margin-top:8px">E‑mail: <strong>volby@vesnice.example</strong><br>Telefon: +420 123 456 789</p>';
-      content.appendChild(kontakt);
-    }
-
-    // Highlight active nav link while scrolling
-    function setupObserver(){
-      const links = Array.from(navLinks.querySelectorAll('a'));
-      const sections = candidates.map(c => document.getElementById(c.id));
-      sections.push(document.getElementById('kontakt'));
-
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const id = entry.target.id;
-          const link = navLinks.querySelector(`a[href="#${id}"]`);
-          if(entry.isIntersecting){
-            links.forEach(l => l.classList.remove('active'));
+      // simple active link on scroll
+      const links = Array.from(document.querySelectorAll('.menu a'));
+      const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(ent => {
+          if(ent.isIntersecting){
+            links.forEach(l=>l.classList.remove('active'));
+            const id = ent.target.id;
+            const link = document.querySelector('.menu a[href="#'+id+'"]');
             if(link) link.classList.add('active');
           }
         });
-      },{root:null,rootMargin:'-40% 0px -40% 0px',threshold:0});
+      },{root:null,rootMargin:'-30% 0px -60% 0px',threshold:0});
+      sections.forEach(s=>io.observe(s));
 
-      sections.forEach(s => { if(s) obs.observe(s); });
+      // contact form (demo: store locally)
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        // store demo message locally
+        const messages = JSON.parse(localStorage.getItem('messages')||'[]');
+        messages.push(Object.assign({time:new Date().toISOString()},data));
+        localStorage.setItem('messages',JSON.stringify(messages));
+        status.textContent = 'Děkujeme — zpráva byla uložena lokálně (demo).';
+        form.reset();
+      });
+      document.getElementById('resetForm').addEventListener('click',()=>{form.reset();status.textContent='';});
+
+      // animate counters (simple)
+      animateCounter('counter-pop',1234,800);
+      animateCounter('counter-proj',18,700);
+      animateCounter('counter-vol',67,900);
+    });
+
+    function animateCounter(id,to,duration){
+      const el = document.getElementById(id); if(!el) return;
+      const from = 0; const start = performance.now();
+      function step(ts){
+        const p = Math.min(1,(ts-start)/duration);
+        const v = Math.floor(from + (to-from)*easeOutCubic(p));
+        el.textContent = v.toLocaleString('cs-CZ');
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
     }
-
-    // Initialize
-    renderNav();
-    renderCandidates();
-    setupObserver();
-
-    // Ensure top anchor exists for 'Domů'
-    if(!document.getElementById('top')){
-      const top = document.createElement('div'); top.id='top'; top.style.height='0'; document.body.prepend(top);
-    }
+    function easeOutCubic(t){return 1 - Math.pow(1-t,3)}
   </script>
 </body>
 </html>
