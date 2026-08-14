@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Běhačka - pohyb všemi směry</title>
+    <title>Běhačka - s joystickem</title>
     <style>
         * {
             margin: 0;
@@ -19,9 +19,10 @@
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', system-ui, sans-serif;
-            overflow: hidden; /* Zabraňuje scrollování na mobilu */
+            overflow: hidden;
             touch-action: none;
             padding: 0.5rem;
+            position: relative;
         }
 
         .game-container {
@@ -34,6 +35,7 @@
             align-items: center;
             max-width: 750px;
             width: 100%;
+            position: relative;
         }
 
         h1 {
@@ -87,6 +89,13 @@
             color: #ef4444;
         }
 
+        /* Herní plocha */
+        .game-area {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+        }
+
         canvas {
             display: block;
             background: #0b1622;
@@ -95,9 +104,84 @@
             width: 100%;
             height: auto;
             aspect-ratio: 700 / 400;
+            touch-action: none;
             cursor: none;
-            touch-action: none; /* Důležité pro dotykové ovládání */
-            max-width: 700px;
+        }
+
+        /* ----- JOYSTICK (přes canvas) ----- */
+        .joystick-container {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.08), rgba(0,0,0,0.5));
+            border: 2px solid rgba(255,255,255,0.12);
+            box-shadow: 0 0 30px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.3);
+            touch-action: none;
+            display: none; /* Skrytý na PC, zobrazí se na dotykových zařízeních */
+            z-index: 10;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s ease;
+        }
+
+        .joystick-container.active {
+            transform: scale(1.05);
+            border-color: rgba(250, 204, 21, 0.3);
+        }
+
+        .joystick-knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 40%, #facc15, #eab308);
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 20px rgba(250, 204, 21, 0.3), inset 0 -4px 8px rgba(0,0,0,0.3);
+            transition: box-shadow 0.2s ease;
+            pointer-events: none;
+            touch-action: none;
+        }
+
+        .joystick-knob.active {
+            box-shadow: 0 4px 30px rgba(250, 204, 21, 0.6), inset 0 -4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Zobrazit joystick pouze na dotykových zařízeních */
+        @media (hover: none) and (pointer: coarse) {
+            .joystick-container {
+                display: block;
+            }
+        }
+
+        /* Menší joystick na malých obrazovkách */
+        @media (max-width: 500px) {
+            .joystick-container {
+                width: 90px;
+                height: 90px;
+                bottom: 15px;
+                left: 15px;
+            }
+            .joystick-knob {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .joystick-container {
+                width: 70px;
+                height: 70px;
+                bottom: 10px;
+                left: 10px;
+            }
+            .joystick-knob {
+                width: 30px;
+                height: 30px;
+            }
         }
 
         .controls {
@@ -137,7 +221,6 @@
             pointer-events: none;
         }
 
-        /* Tlačítko Zpět na menu */
         .back-button {
             background: #64748b;
             box-shadow: 0 7px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
@@ -189,7 +272,6 @@
             width: 100%;
         }
 
-        /* ----- RESPONZIVITA PRO MOBIL ----- */
         @media (max-width: 600px) {
             .game-container {
                 padding: 1rem;
@@ -262,7 +344,14 @@
         <div><span class="icon">❤️</span><span class="value lives" id="livesDisplay">3</span></div>
     </div>
 
-    <canvas id="gameCanvas" width="700" height="400"></canvas>
+    <div class="game-area">
+        <canvas id="gameCanvas" width="700" height="400"></canvas>
+        
+        <!-- JOYSTICK -->
+        <div class="joystick-container" id="joystickContainer">
+            <div class="joystick-knob" id="joystickKnob"></div>
+        </div>
+    </div>
 
     <div class="controls">
         <button id="restartBtn">🔄 Nová hra</button>
@@ -270,7 +359,6 @@
     </div>
     <div class="controls-hint">⬆⬇ Pohybuj se všemi směry!</div>
 
-    <!-- Tlačítko Zpět na menu -->
     <div class="bottom-bar">
         <a href="index.html" class="back-button">
             ⬅ Zpět na menu
@@ -286,6 +374,10 @@
         const coinDisplay = document.getElementById('coinDisplay');
         const livesDisplay = document.getElementById('livesDisplay');
         const statusMsg = document.getElementById('statusMsg');
+
+        // Joystick elementy
+        const joystickContainer = document.getElementById('joystickContainer');
+        const joystickKnob = document.getElementById('joystickKnob');
 
         // ----- Herní konstanty -----
         const W = 700,
@@ -320,6 +412,13 @@
             w: false,
             s: false
         };
+
+        // Joystick stav
+        let joystickActive = false;
+        let joystickDX = 0;
+        let joystickDY = 0;
+        const JOYSTICK_DEAD_ZONE = 0.1;
+        const JOYSTICK_MAX_RADIUS = 40;
 
         // ----- Reset hry -----
         function resetGame() {
@@ -388,13 +487,27 @@
         function update() {
             if (gameOver || win) return;
 
-            // ----- Pohyb hráče -----
+            // ----- Pohyb hráče (klávesy + joystick) -----
             let dx = 0,
                 dy = 0;
+            
+            // Klávesy
             if (keys.ArrowLeft || keys.a) dx = -PLAYER_SPEED;
             if (keys.ArrowRight || keys.d) dx = PLAYER_SPEED;
             if (keys.ArrowUp || keys.w) dy = -PLAYER_SPEED;
             if (keys.ArrowDown || keys.s) dy = PLAYER_SPEED;
+
+            // Joystick (pouze pokud není aktivní klávesový pohyb)
+            if (dx === 0 && dy === 0 && joystickActive) {
+                const magnitude = Math.sqrt(joystickDX * joystickDX + joystickDY * joystickDY);
+                if (magnitude > JOYSTICK_DEAD_ZONE) {
+                    const normalizedX = joystickDX / magnitude;
+                    const normalizedY = joystickDY / magnitude;
+                    const speed = Math.min(magnitude, 1) * PLAYER_SPEED;
+                    dx = normalizedX * speed;
+                    dy = normalizedY * speed;
+                }
+            }
 
             // Normalizace diagonálního pohybu
             if (dx !== 0 && dy !== 0) {
@@ -612,6 +725,9 @@
             if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'a', 'd', 'w', 's'].includes(key)) {
                 e.preventDefault();
                 keys[key] = true;
+                // Když se použijí klávesy, vypneme joystick
+                joystickActive = false;
+                resetJoystickKnob();
             }
             if (key === ' ' || key === 'Space') {
                 e.preventDefault();
@@ -628,6 +744,98 @@
                 keys[key] = false;
             }
         }
+
+        // ----- Joystick ovládání -----
+        function resetJoystickKnob() {
+            joystickKnob.style.transform = 'translate(-50%, -50%)';
+            joystickDX = 0;
+            joystickDY = 0;
+            joystickContainer.classList.remove('active');
+            joystickKnob.classList.remove('active');
+        }
+
+        function handleJoystickStart(e) {
+            e.preventDefault();
+            joystickActive = true;
+            joystickContainer.classList.add('active');
+            joystickKnob.classList.add('active');
+            
+            // Vypneme klávesy
+            keys.ArrowLeft = false;
+            keys.ArrowRight = false;
+            keys.ArrowUp = false;
+            keys.ArrowDown = false;
+            
+            const touch = e.touches ? e.touches[0] : e;
+            updateJoystickPosition(touch);
+        }
+
+        function handleJoystickMove(e) {
+            e.preventDefault();
+            if (!joystickActive) return;
+            const touch = e.touches ? e.touches[0] : e;
+            updateJoystickPosition(touch);
+        }
+
+        function updateJoystickPosition(touch) {
+            const rect = joystickContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            let dx = (touch.clientX - centerX);
+            let dy = (touch.clientY - centerY);
+            
+            const maxRadius = JOYSTICK_MAX_RADIUS * (rect.width / 120);
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Omezení na max radius
+            let clampedDx = dx;
+            let clampedDy = dy;
+            if (distance > maxRadius) {
+                clampedDx = (dx / distance) * maxRadius;
+                clampedDy = (dy / distance) * maxRadius;
+            }
+            
+            // Pohyb knoflíku
+            joystickKnob.style.transform = `translate(${-50 + (clampedDx / rect.width * 100)}%, ${-50 + (clampedDy / rect.height * 100)}%)`;
+            
+            // Normalizované hodnoty pro pohyb (-1 až 1)
+            const normalizedX = clampedDx / maxRadius;
+            const normalizedY = clampedDy / maxRadius;
+            
+            joystickDX = Math.max(-1, Math.min(1, normalizedX));
+            joystickDY = Math.max(-1, Math.min(1, normalizedY));
+        }
+
+        function handleJoystickEnd(e) {
+            e.preventDefault();
+            joystickActive = false;
+            resetJoystickKnob();
+        }
+
+        // ----- Nastavení joystick eventů -----
+        joystickContainer.addEventListener('touchstart', handleJoystickStart, { passive: false });
+        joystickContainer.addEventListener('touchmove', handleJoystickMove, { passive: false });
+        joystickContainer.addEventListener('touchend', handleJoystickEnd, { passive: false });
+        joystickContainer.addEventListener('touchcancel', handleJoystickEnd, { passive: false });
+
+        // Myš pro testování na PC
+        let mouseJoystickActive = false;
+        joystickContainer.addEventListener('mousedown', (e) => {
+            mouseJoystickActive = true;
+            handleJoystickStart(e);
+        });
+        window.addEventListener('mousemove', (e) => {
+            if (mouseJoystickActive) {
+                handleJoystickMove(e);
+            }
+        });
+        window.addEventListener('mouseup', (e) => {
+            if (mouseJoystickActive) {
+                mouseJoystickActive = false;
+                handleJoystickEnd(e);
+            }
+        });
 
         // ----- roundRect polyfill -----
         if (!CanvasRenderingContext2D.prototype.roundRect) {
@@ -653,120 +861,15 @@
 
         window.addEventListener('blur', () => {
             keys = { ArrowLeft: false, ArrowRight: false, ArrowUp: false, ArrowDown: false, a: false, d: false, w: false, s: false };
+            joystickActive = false;
+            resetJoystickKnob();
         });
 
-        // ============================================
-        //  🖐️ DOTYKOVÉ OVLÁDÁNÍ PRO MOBIL (VYLEPŠENÉ)
-        // ============================================
-        let touchX = null,
-            touchY = null;
-        let touchActive = false;
-
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            // Přepočet souřadnic na canvas
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            touchX = (touch.clientX - rect.left) * scaleX;
-            touchY = (touch.clientY - rect.top) * scaleY;
-            touchActive = true;
-            
-            // Zobrazení nápovědy
-            statusMsg.textContent = '🎮 Přetahuj prstem pro pohyb!';
-        }, { passive: false });
-
-        canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            if (!touchActive || touchX === null || touchY === null) return;
-            
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            
-            const newX = (touch.clientX - rect.left) * scaleX;
-            const newY = (touch.clientY - rect.top) * scaleY;
-
-            const dx = newX - touchX;
-            const dy = newY - touchY;
-
-            // Prah pro rozpoznání pohybu (aby nebyl příliš citlivý)
-            const threshold = 6;
-            
-            // Nastavení směru podle pohybu
-            if (Math.abs(dx) > threshold || Math.abs(dy) > threshold) {
-                // Primární směr podle větší osy
-                if (Math.abs(dx) > Math.abs(dy)) {
-                    // Horizontální pohyb
-                    if (dx > 0) {
-                        keys.ArrowRight = true;
-                        keys.ArrowLeft = false;
-                    } else {
-                        keys.ArrowLeft = true;
-                        keys.ArrowRight = false;
-                    }
-                    // Vertikální vypneme
-                    keys.ArrowUp = false;
-                    keys.ArrowDown = false;
-                } else {
-                    // Vertikální pohyb
-                    if (dy > 0) {
-                        keys.ArrowDown = true;
-                        keys.ArrowUp = false;
-                    } else {
-                        keys.ArrowUp = true;
-                        keys.ArrowDown = false;
-                    }
-                    // Horizontální vypneme
-                    keys.ArrowLeft = false;
-                    keys.ArrowRight = false;
-                }
-                
-                // Aktualizace poslední pozice
-                touchX = newX;
-                touchY = newY;
-            }
-        }, { passive: false });
-
-        canvas.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            touchActive = false;
-            touchX = null;
-            touchY = null;
-            // Vypneme všechny směry
-            keys.ArrowLeft = false;
-            keys.ArrowRight = false;
-            keys.ArrowUp = false;
-            keys.ArrowDown = false;
-            statusMsg.textContent = '🖐️ Prst zvednut - postavička stojí';
-            
-            // Po 2 sekundách vrátíme normální zprávu
-            setTimeout(() => {
-                if (!gameOver && !win) {
-                    statusMsg.textContent = '🎮 Přetahuj prstem pro pohyb!';
-                }
-            }, 2000);
-        }, { passive: false });
-
-        // Také když prst opustí canvas
-        canvas.addEventListener('touchcancel', (e) => {
-            e.preventDefault();
-            touchActive = false;
-            touchX = null;
-            touchY = null;
-            keys.ArrowLeft = false;
-            keys.ArrowRight = false;
-            keys.ArrowUp = false;
-            keys.ArrowDown = false;
-        }, { passive: false });
-
         canvas.addEventListener('contextmenu', (e) => e.preventDefault());
-        
+
         // Zobrazení nápovědy pro mobil
         if ('ontouchstart' in window) {
-            statusMsg.textContent = '🖐️ Přetahuj prstem po ploše pro pohyb!';
+            statusMsg.textContent = '🕹️ Použij joystick vlevo dole pro pohyb!';
         }
     })();
 </script>
