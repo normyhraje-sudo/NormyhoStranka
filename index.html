@@ -28,12 +28,6 @@
             padding-top: 80px;
         }
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
         /* ===== HLAVNÍ MENU ===== */
         .navbar {
             position: fixed;
@@ -108,7 +102,7 @@
             font-size: 0.8rem;
         }
 
-        /* ===== HERO ===== */
+        /* ===== HERO - CELÁ STRÁNKA ===== */
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1a2a4a 50%, #0f172a 100%);
             color: #f8fafc;
@@ -119,6 +113,11 @@
             padding-top: calc(5rem + 80px);
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
         .hero::before {
@@ -132,14 +131,19 @@
             border-radius: 50%;
         }
 
+        .hero .hero-content {
+            max-width: 900px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
         .hero h1 {
             font-size: 4rem;
             font-weight: 900;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            max-width: 900px;
             margin: 0 auto 1.2rem auto;
-            position: relative;
         }
 
         .hero .highlight {
@@ -164,7 +168,6 @@
             color: #cbd5e1;
             max-width: 700px;
             margin: 0 auto 2.5rem auto;
-            position: relative;
         }
 
         .hero .badge {
@@ -177,59 +180,9 @@
             font-size: 0.95rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            position: relative;
         }
 
-        /* ===== SEKCE ===== */
-        .section {
-            padding: 5rem 0;
-            position: relative;
-        }
-
-        .section-alt {
-            background: #f1f5f9;
-        }
-
-        .section-dark {
-            background: #0f172a;
-            color: #f8fafc;
-        }
-
-        .section-dark .section-title {
-            color: #f8fafc;
-        }
-
-        .section-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 3.5rem;
-            color: #0f172a;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .section-title i {
-            color: #fbbf24;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #64748b;
-            max-width: 700px;
-            margin: -2.5rem auto 3rem auto;
-        }
-
-        .section-dark .section-subtitle {
-            color: #94a3b8;
-        }
-
-        /* ===== VIZE - BANNERY ===== */
+        /* ===== VIZE - BANNERY (CELÁ ŠÍŘKA) ===== */
         .vision-banner {
             padding: 6rem 0;
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
@@ -239,6 +192,11 @@
             overflow: hidden;
             border-top: 4px solid #0f172a;
             border-bottom: 4px solid #0f172a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
         .vision-banner::before {
@@ -254,6 +212,9 @@
         .vision-banner .container {
             position: relative;
             z-index: 2;
+            max-width: 900px;
+            padding: 0 2rem;
+            width: 100%;
         }
 
         .vision-banner h2 {
@@ -313,7 +274,175 @@
             border-bottom-color: #0f172a;
         }
 
-        /* ===== KANDIDÁTI - VERTIKÁLNÍ LAYOUT ===== */
+        /* ===== SEKCE - CELÁ STRÁNKA ===== */
+        .section {
+            padding: 6rem 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .section-alt {
+            background: #f1f5f9;
+        }
+
+        .section-dark {
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        .section-dark .section-title {
+            color: #f8fafc;
+        }
+
+        .section .container {
+            max-width: 1280px;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .section-title i {
+            color: #fbbf24;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: -2.5rem auto 3rem auto;
+        }
+
+        .section-dark .section-subtitle {
+            color: #94a3b8;
+        }
+
+        /* ===== GRIDY ===== */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        /* ===== KARTY ===== */
+        .card {
+            background: #ffffff;
+            padding: 2.5rem 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+            border-color: #fbbf24;
+        }
+
+        .card .icon {
+            font-size: 2.8rem;
+            color: #fbbf24;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #0f172a;
+        }
+
+        .card p {
+            color: #475569;
+            font-size: 1rem;
+        }
+
+        /* ===== PROJEKTY ===== */
+        .project-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.08);
+            border-color: #fbbf24;
+        }
+
+        .project-card i {
+            font-size: 3rem;
+            color: #fbbf24;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-card h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-card p {
+            color: #475569;
+        }
+
+        .project-card .status {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 1.2rem;
+            border-radius: 9999px;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* ===== KANDIDÁTI ===== */
         .candidates-list {
             display: flex;
             flex-direction: column;
@@ -463,7 +592,6 @@
             background: #f8fafc;
         }
 
-        /* ===== SOCIÁLNÍ SÍTĚ (pouze FB) ===== */
         .candidate-social {
             display: flex;
             gap: 0.8rem;
@@ -496,216 +624,7 @@
             font-size: 1.1rem;
         }
 
-        /* ===== OSTATNÍ SEKCE ===== */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .card {
-            background: #ffffff;
-            padding: 2.5rem 2rem;
-            border-radius: 1.5rem;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-            border-color: #fbbf24;
-        }
-
-        .card .icon {
-            font-size: 2.8rem;
-            color: #fbbf24;
-            margin-bottom: 1.2rem;
-            display: inline-block;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: #0f172a;
-        }
-
-        .card p {
-            color: #475569;
-            font-size: 1rem;
-        }
-
-        .project-card {
-            background: #ffffff;
-            border-radius: 1.5rem;
-            padding: 2.5rem 2rem;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.08);
-            border-color: #fbbf24;
-        }
-
-        .project-card i {
-            font-size: 3rem;
-            color: #fbbf24;
-            margin-bottom: 1.2rem;
-        }
-
-        .project-card h4 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-        }
-
-        .project-card p {
-            color: #475569;
-        }
-
-        .project-card .status {
-            display: inline-block;
-            margin-top: 1rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.2rem 1.2rem;
-            border-radius: 9999px;
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        /* ===== TIMELINE ===== */
-        .timeline-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-        }
-
-        .timeline-item {
-            background: #ffffff;
-            padding: 2rem 1.5rem;
-            border-radius: 1.2rem;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.06);
-            border-color: #fbbf24;
-        }
-
-        .timeline-item .month {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #fbbf24;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .timeline-item .date {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #0f172a;
-            margin: 0.2rem 0;
-        }
-
-        .timeline-item .dot {
-            width: 12px;
-            height: 12px;
-            background: #fbbf24;
-            border-radius: 50%;
-            margin: 0.5rem auto;
-        }
-
-        .timeline-item h5 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-item p {
-            font-size: 0.9rem;
-            color: #64748b;
-        }
-
-        /* ===== KONTAKT ===== */
-        .contact-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem 3rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .contact-item i {
-            font-size: 1.8rem;
-            color: #fbbf24;
-            width: 2.2rem;
-            text-align: center;
-        }
-
-        .contact-cta {
-            background-color: #fbbf24;
-            color: #0f172a;
-            font-weight: 700;
-            padding: 0.9rem 2.8rem;
-            border-radius: 9999px;
-            text-decoration: none;
-            transition: all 0.25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-cta:hover {
-            background-color: #f59e0b;
-            transform: scale(1.03);
-        }
-
+        /* ===== PATIČKA ===== */
         .footer {
             background: #0f172a;
             color: #94a3b8;
@@ -713,13 +632,13 @@
             text-align: center;
             border-top: 2px solid #fbbf24;
             font-size: 0.9rem;
+            width: 100%;
         }
 
         /* ===== RESPO ===== */
         @media (max-width: 1024px) {
             .grid-3,
-            .grid-2,
-            .timeline-grid {
+            .grid-2 {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -752,6 +671,7 @@
             .hero {
                 padding-top: calc(4rem + 110px);
                 padding-bottom: 4rem;
+                min-height: 90vh;
             }
 
             .hero h1 {
@@ -774,24 +694,19 @@
                 font-size: 1rem;
             }
 
+            .vision-banner {
+                min-height: 90vh;
+                padding: 4rem 0;
+            }
+
+            .section {
+                min-height: auto;
+                padding: 4rem 0;
+            }
+
             .grid-3,
-            .grid-2,
-            .timeline-grid {
+            .grid-2 {
                 grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 0 1.2rem;
-            }
-
-            .contact-wrapper {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 1rem;
             }
 
             .candidate-profile {
@@ -849,14 +764,13 @@
                 <li><a href="#proč"><i class="fas fa-question-circle"></i> Proč</a></li>
                 <li><a href="#projekty"><i class="fas fa-seedling"></i> Projekty</a></li>
                 <li><a href="#kandidáti"><i class="fas fa-user-check"></i> Kandidáti</a></li>
-                <li><a href="#kontakt"><i class="fas fa-envelope"></i> Kontakt</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- ===== HERO ===== -->
     <header class="hero" id="home">
-        <div class="container">
+        <div class="hero-content">
             <span class="badge"><i class="fas fa-users"></i> Společně pro obec</span>
             <h1>Rozumná změna. <br /><span class="highlight">Společný směr.</span> Živá Vesnice.</h1>
             <p>Chceme obec, která drží pohromadě, umí naslouchat a hledá řešení, která dávají smysl.</p>
@@ -873,8 +787,8 @@
         </div>
     </section>
 
-    <!-- ===== PROČ ===== -->
-    <section class="section" id="proč">
+    <!-- ===== PROČ - CELÁ STRÁNKA ===== -->
+    <section class="section section-alt" id="proč">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-compass"></i> Proč jdeme do toho</h2>
             <p class="section-subtitle">Víme, že obec posouvají lidé, kteří mají chuť se zapojit a dívat se dopředu.</p>
@@ -908,8 +822,8 @@
         </div>
     </section>
 
-    <!-- ===== PROJEKTY ===== -->
-    <section class="section section-alt" id="projekty">
+    <!-- ===== PROJEKTY - CELÁ STRÁNKA ===== -->
+    <section class="section" id="projekty">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-tasks"></i> Na co se zaměříme</h2>
             <p class="section-subtitle">Konkrétní kroky, které pomohou posunout naši vesnici kupředu.</p>
@@ -964,7 +878,7 @@
         </div>
     </section>
 
-    <!-- ===== KANDIDÁTI ===== -->
+    <!-- ===== KANDIDÁTI - CELÁ STRÁNKA ===== -->
     <section class="section section-alt" id="kandidáti">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-user-check"></i> Kdo jsme</h2>
@@ -995,10 +909,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- Ostatní sítě jsou skryté, ale můžeš je odkomentovat -->
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1026,9 +936,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1056,9 +963,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1086,9 +990,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1116,9 +1017,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1146,9 +1044,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1176,9 +1071,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1206,9 +1098,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1236,9 +1125,6 @@
                         </div>
                         <div class="candidate-social">
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                            <!-- <a href="#"><i class="fab fa-x-twitter"></i> X</a> -->
-                            <!-- <a href="#"><i class="fab fa-instagram"></i> Instagram</a> -->
-                            <!-- <a href="#"><i class="fab fa-youtube"></i> Youtube</a> -->
                         </div>
                     </div>
                 </div>
@@ -1247,33 +1133,7 @@
         </div>
     </section>
 
-    <!-- ===== KONTAKT ===== -->
-    <section class="section section-dark" id="kontakt">
-        <div class="container">
-            <h2 class="section-title"><i class="fas fa-envelope"></i> Kontakt</h2>
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-pin"></i>
-                        <span>Náměstí 1, Vesnice</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>volby@vesnice.example</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+420 123 456 789</span>
-                    </div>
-                </div>
-                <a href="mailto:volby@vesnice.example" class="contact-cta">
-                    <i class="fas fa-paper-plane"></i> Napište nám
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== PATIČKA ===== -->
+    <!-- ===== PATIČKA (bez kontaktu) ===== -->
     <footer class="footer">
         <div class="container">
             <p><i class="fas fa-flag" style="color:#fbbf24;"></i> Naše Vesnice – společný směr &copy; 2026</p>
