@@ -35,12 +35,10 @@
             overflow-x: hidden;
             font-size: 18px;
             min-height: 100vh;
-            /* ===== KURZOR - SVĚTLE MODRÁ ===== */
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'%3E%3C/path%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'%3E%3C/path%3E%3Cpath d='M2 2l7.586 7.586'%3E%3C/path%3E%3Ccircle cx='11' cy='11' r='2'%3E%3C/circle%3E%3C/svg%3E") 4 4, auto;
         }
 
-        /* ===== KURZOR PRO ODKAZY ===== */
-        a, button, .candidate-profile, .why-card, .focus-card, .slider-item, .exp-card, .focus-list-item, .timeline-osa-item .osa-content {
+        a, button, .candidate-profile, .why-card, .volby-card, .slider-item, .exp-card, .timeline-osa-item .osa-content {
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'%3E%3C/path%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'%3E%3C/path%3E%3Cpath d='M2 2l7.586 7.586'%3E%3C/path%3E%3Ccircle cx='11' cy='11' r='2'%3E%3C/circle%3E%3C/svg%3E") 4 4, pointer;
         }
 
@@ -902,23 +900,23 @@
             transform: scale(1.3);
         }
 
-        /* ===== L-SHAPE GRID + MOBILNÍ SEZNAM ===== */
-        .focus-grid {
+        /* ===== VOLBY KARTY ===== */
+        .volby-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             max-width: 1100px;
             margin: 0 auto;
         }
 
-        .focus-card {
+        .volby-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border-radius: 2rem;
+            border-radius: 2.5rem;
             padding: 2rem 1.8rem;
             border: 2px solid rgba(226, 232, 240, 0.5);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
             touch-action: manipulation;
             position: relative;
@@ -927,194 +925,183 @@
             flex-direction: column;
         }
 
-        .focus-card::before {
+        .volby-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            height: 5px;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
         }
 
-        .focus-card:hover::before {
+        .volby-card:hover::before {
             opacity: 1;
         }
 
-        .focus-card:hover {
-            transform: translateY(-6px);
+        .volby-card:hover {
+            transform: translateY(-10px) scale(1.02);
             border-color: #fbbf24;
-            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
         }
 
-        .focus-card:active {
-            transform: scale(0.97);
+        .volby-card:active {
+            transform: scale(0.96);
         }
 
-        .focus-card.card-large {
-            grid-column: span 2;
-            grid-row: span 1;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 2rem 2.5rem;
+        .volby-card.color-green::before {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+        .volby-card.color-green .volby-icon {
+            color: #10b981;
+        }
+        .volby-card.color-green .volby-hlas {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        .volby-card.color-green .volby-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
         }
 
-        .focus-card.card-large .focus-icon {
+        .volby-card.color-blue::before {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+        }
+        .volby-card.color-blue .volby-icon {
+            color: #3b82f6;
+        }
+        .volby-card.color-blue .volby-hlas {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+        .volby-card.color-blue .volby-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .volby-card.color-orange::before {
+            background: linear-gradient(90deg, #f97316, #ea580c);
+        }
+        .volby-card.color-orange .volby-icon {
+            color: #f97316;
+        }
+        .volby-card.color-orange .volby-hlas {
+            background: rgba(249, 115, 22, 0.1);
+            color: #f97316;
+        }
+        .volby-card.color-orange .volby-tag {
+            background: rgba(249, 115, 22, 0.1);
+            color: #f97316;
+        }
+
+        .volby-card.color-purple::before {
+            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+        }
+        .volby-card.color-purple .volby-icon {
+            color: #8b5cf6;
+        }
+        .volby-card.color-purple .volby-hlas {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+        }
+        .volby-card.color-purple .volby-tag {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+        }
+
+        .volby-card .volby-icon {
             font-size: 3.2rem;
-            margin-bottom: 0;
-        }
-
-        .focus-card.card-large .focus-text {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .focus-card.card-large .focus-title {
-            font-size: 1.6rem;
-        }
-
-        .focus-card.card-large .focus-desc {
-            font-size: 1.05rem;
-            margin-bottom: 0;
-        }
-
-        .focus-card.card-large .focus-tag {
-            margin-top: 0;
-        }
-
-        .focus-card .focus-number {
-            font-size: 0.7rem;
-            font-weight: 800;
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.12);
-            padding: 0.15rem 0.8rem;
-            border-radius: 9999px;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-            align-self: flex-start;
-        }
-
-        .focus-card .focus-icon {
-            font-size: 2.4rem;
             margin-bottom: 0.5rem;
             display: block;
+            transition: all 0.4s ease;
         }
 
-        .focus-card .focus-title {
-            font-size: 1.2rem;
+        .volby-card:hover .volby-icon {
+            transform: scale(1.15) rotate(-8deg);
+        }
+
+        .volby-card .volby-title {
+            font-size: 1.3rem;
             font-weight: 700;
             color: #0f172a;
             margin-bottom: 0.3rem;
             line-height: 1.2;
         }
 
-        .focus-card .focus-desc {
+        .volby-card .volby-desc {
             color: #475569;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 0.6rem;
+            margin-bottom: 1rem;
             flex: 1;
         }
 
-        .focus-card .focus-tag {
+        .volby-card .volby-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .volby-card .volby-tag {
             display: inline-block;
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.1);
-            padding: 0.15rem 0.8rem;
+            padding: 0.2rem 1rem;
             border-radius: 9999px;
-            letter-spacing: 0.3px;
-            align-self: flex-start;
+            letter-spacing: 0.5px;
         }
 
-        /* ===== MOBIL - VERTIKÁLNÍ SEZNAM ===== */
-        .focus-list-mobile {
-            display: none;
-            flex-direction: column;
-            gap: 1.5rem;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 0.5rem;
-        }
-
-        .focus-list-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
-            transition: all 0.2s ease;
-        }
-
-        .focus-list-item:last-child {
-            border-bottom: none;
-        }
-
-        .focus-list-item:hover {
-            background: rgba(251, 191, 36, 0.04);
-            margin: 0 -0.5rem;
-            padding: 1rem 0.5rem;
-            border-radius: 1rem;
-        }
-
-        .focus-list-item .list-number {
-            flex-shrink: 0;
-            width: 28px;
-            height: 28px;
-            background: #fbbf24;
-            color: #0f172a;
-            border-radius: 50%;
-            display: flex;
+        .volby-card .volby-hlas {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 800;
-            margin-top: 2px;
-        }
-
-        .focus-list-item .list-icon {
-            flex-shrink: 0;
-            font-size: 1.8rem;
-            width: 40px;
-            text-align: center;
-        }
-
-        .focus-list-item .list-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .focus-list-item .list-content .list-title {
-            font-size: 1.05rem;
+            gap: 0.4rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 0.1rem;
-        }
-
-        .focus-list-item .list-content .list-desc {
-            font-size: 0.9rem;
-            color: #475569;
-            line-height: 1.5;
-        }
-
-        .focus-list-item .list-tag {
-            flex-shrink: 0;
-            font-size: 0.6rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.1);
-            padding: 0.15rem 0.8rem;
+            padding: 0.2rem 1rem;
             border-radius: 9999px;
-            letter-spacing: 0.3px;
-            align-self: center;
+        }
+
+        .volby-card .volby-hlas i {
+            font-size: 0.8rem;
+        }
+
+        /* ===== MOBIL - HORIZONTÁLNÍ SCROLL ===== */
+        .volby-scroll-mobile {
+            display: none;
+            gap: 1.2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #fbbf24 #e2e8f0;
+            max-width: 100%;
+        }
+
+        .volby-scroll-mobile::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .volby-scroll-mobile::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 9999px;
+        }
+
+        .volby-scroll-mobile::-webkit-scrollbar-thumb {
+            background: #fbbf24;
+            border-radius: 9999px;
+        }
+
+        .volby-scroll-mobile .volby-card {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            min-height: 240px;
         }
 
         /* ===== KANDIDÁTI ===== */
@@ -1522,12 +1509,8 @@
 
         /* ===== RESPONZIVITA ===== */
         @media (max-width: 1024px) {
-            .focus-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .focus-card.card-large {
-                grid-column: span 2;
+            .volby-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1650,6 +1633,10 @@
                 font-size: 2.2rem;
             }
 
+            .vesnice-section .vesnice-subtitle {
+                font-size: 1.05rem;
+            }
+
             .timeline-osa {
                 padding: 1rem 0 1rem 2rem;
             }
@@ -1716,12 +1703,12 @@
                 font-size: 2.6rem;
             }
 
-            /* L-Shape na mobilu - schovat, zobrazit seznam */
-            .focus-grid {
+            /* ===== VOLBY - MOBIL ===== */
+            .volby-grid {
                 display: none;
             }
 
-            .focus-list-mobile {
+            .volby-scroll-mobile {
                 display: flex;
             }
 
@@ -1849,6 +1836,10 @@
                 background: linear-gradient(135deg, #ecfdf5 0%, #dbeafe 100%);
             }
 
+            .vesnice-section .vesnice-subtitle {
+                font-size: 0.95rem;
+            }
+
             .timeline-osa {
                 padding: 0.5rem 0 0.5rem 1.5rem;
             }
@@ -1888,35 +1879,23 @@
                 font-size: 1.8rem;
             }
 
-            .focus-list-item {
-                flex-wrap: wrap;
-                gap: 0.3rem 0.8rem;
-                padding: 0.8rem 0;
+            .volby-scroll-mobile .volby-card {
+                flex: 0 0 250px;
+                padding: 1.5rem 1.2rem;
+                border-radius: 1.8rem;
+                min-height: 200px;
             }
 
-            .focus-list-item .list-icon {
-                font-size: 1.5rem;
-                width: 32px;
+            .volby-scroll-mobile .volby-card .volby-icon {
+                font-size: 2.4rem;
             }
 
-            .focus-list-item .list-content .list-title {
-                font-size: 0.95rem;
+            .volby-scroll-mobile .volby-card .volby-title {
+                font-size: 1.1rem;
             }
 
-            .focus-list-item .list-content .list-desc {
-                font-size: 0.8rem;
-            }
-
-            .focus-list-item .list-tag {
-                font-size: 0.55rem;
-                padding: 0.1rem 0.6rem;
-                margin-left: auto;
-            }
-
-            .focus-list-item .list-number {
-                width: 24px;
-                height: 24px;
-                font-size: 0.6rem;
+            .volby-scroll-mobile .volby-card .volby-desc {
+                font-size: 0.85rem;
             }
 
             .slider-item {
@@ -1961,20 +1940,18 @@
         /* ===== DOTYKOVÉ OPTIMALIZACE ===== */
         @media (hover: none) {
             .why-card:hover,
-            .focus-card:hover,
+            .volby-card:hover,
             .slider-item:hover,
             .candidate-profile:hover,
-            .timeline-osa-item .osa-content:hover,
-            .focus-list-item:hover {
+            .timeline-osa-item .osa-content:hover {
                 transform: none !important;
             }
 
             .why-card:active,
-            .focus-card:active,
+            .volby-card:active,
             .slider-item:active,
             .candidate-profile:active,
-            .timeline-osa-item .osa-content:active,
-            .focus-list-item:active {
+            .timeline-osa-item .osa-content:active {
                 transform: scale(0.97) !important;
             }
 
@@ -2235,128 +2212,138 @@
             <h2 class="section-title"><i class="fas fa-bullseye"></i> Na co se zaměříme</h2>
             <p class="section-subtitle">Konkrétní kroky, které pomohou posunout naši vesnici kupředu.</p>
 
-            <!-- ===== L-SHAPE GRID (DESKTOP) ===== -->
-            <div class="focus-grid">
+            <!-- ===== DESKTOP: VOLBY KARTY ===== -->
+            <div class="volby-grid">
                 
-                <!-- Karta 1 - velká 2x1 (L-shape) -->
-                <div class="focus-card card-large">
-                    <span class="focus-icon">🌳</span>
-                    <div class="focus-text">
-                        <span class="focus-number">#1</span>
-                        <h3 class="focus-title">Veřejná zeleň a místa k odpočinku</h3>
-                        <p class="focus-desc">Více stromů, laviček a příjemných míst pro setkávání.</p>
-                        <span class="focus-tag">🌱 Plánujeme</span>
+                <!-- Karta 1 - zelená -->
+                <div class="volby-card color-green">
+                    <span class="volby-icon">🌳</span>
+                    <h3 class="volby-title">Veřejná zeleň</h3>
+                    <p class="volby-desc">Více stromů, laviček a příjemných míst pro setkávání. Zeleň dělá vesnici živější.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Plánujeme</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 92 %</span>
                     </div>
                 </div>
 
-                <!-- Karta 2 -->
-                <div class="focus-card">
-                    <span class="focus-number">#2</span>
-                    <span class="focus-icon">👨‍👩‍👧‍👦</span>
-                    <h3 class="focus-title">Zázemí pro rodiny a seniory</h3>
-                    <p class="focus-desc">Programy pro nejmladší i nejstarší obyvatele.</p>
-                    <span class="focus-tag">🏠 Hledáme řešení</span>
+                <!-- Karta 2 - oranžová -->
+                <div class="volby-card color-orange">
+                    <span class="volby-icon">👨‍👩‍👧‍👦</span>
+                    <h3 class="volby-title">Zázemí pro rodiny</h3>
+                    <p class="volby-desc">Programy pro nejmladší i nejstarší obyvatele. Místo pro všechny generace.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Hledáme řešení</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 78 %</span>
+                    </div>
                 </div>
 
-                <!-- Karta 3 -->
-                <div class="focus-card">
-                    <span class="focus-number">#3</span>
-                    <span class="focus-icon">🚶</span>
-                    <h3 class="focus-title">Bezpečné cesty po obci</h3>
-                    <p class="focus-desc">Chodníky, přechody a stezky pro bezpečný pohyb.</p>
-                    <span class="focus-tag">🛤️ V přípravě</span>
+                <!-- Karta 3 - modrá -->
+                <div class="volby-card color-blue">
+                    <span class="volby-icon">🚶</span>
+                    <h3 class="volby-title">Bezpečné cesty</h3>
+                    <p class="volby-desc">Chodníky, přechody a stezky pro bezpečný pohyb pěších i cyklistů.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">V přípravě</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 85 %</span>
+                    </div>
                 </div>
 
-                <!-- Karta 4 -->
-                <div class="focus-card">
-                    <span class="focus-number">#4</span>
-                    <span class="focus-icon">🚴</span>
-                    <h3 class="focus-title">Propojení s okolím</h3>
-                    <p class="focus-desc">Cyklostezky a trasy do přírody i do práce.</p>
-                    <span class="focus-tag">🚵 Jednáme</span>
+                <!-- Karta 4 - fialová -->
+                <div class="volby-card color-purple">
+                    <span class="volby-icon">🚴</span>
+                    <h3 class="volby-title">Propojení s okolím</h3>
+                    <p class="volby-desc">Cyklostezky a trasy do přírody i do práce. Objevuj okolí bez aut.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Jednáme</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 71 %</span>
+                    </div>
                 </div>
 
-                <!-- Karta 5 -->
-                <div class="focus-card">
-                    <span class="focus-number">#5</span>
-                    <span class="focus-icon">💻</span>
-                    <h3 class="focus-title">Moderní obecní služby</h3>
-                    <p class="focus-desc">Internet, digitální úřad a snadný přístup k informacím.</p>
-                    <span class="focus-tag">📡 Rozjíždíme</span>
+                <!-- Karta 5 - modrá -->
+                <div class="volby-card color-blue">
+                    <span class="volby-icon">💻</span>
+                    <h3 class="volby-title">Moderní obecní služby</h3>
+                    <p class="volby-desc">Internet, digitální úřad a snadný přístup k informacím online.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Rozjíždíme</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 88 %</span>
+                    </div>
                 </div>
 
-                <!-- Karta 6 -->
-                <div class="focus-card">
-                    <span class="focus-number">#6</span>
-                    <span class="focus-icon">🎭</span>
-                    <h3 class="focus-title">Podpora spolků a sousedských akcí</h3>
-                    <p class="focus-desc">Pomoc kulturním a sportovním aktivitám.</p>
-                    <span class="focus-tag">🎪 Podporujeme</span>
+                <!-- Karta 6 - fialová -->
+                <div class="volby-card color-purple">
+                    <span class="volby-icon">🎭</span>
+                    <h3 class="volby-title">Kultura a spolky</h3>
+                    <p class="volby-desc">Pomoc kulturním, sportovním a sousedským aktivitám v obci.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Podporujeme</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 76 %</span>
+                    </div>
                 </div>
 
             </div>
 
-            <!-- ===== VERTIKÁLNÍ SEZNAM (MOBIL) ===== -->
-            <div class="focus-list-mobile">
+            <!-- ===== MOBIL: HORIZONTÁLNÍ SCROLL ===== -->
+            <div class="volby-scroll-mobile">
                 
-                <div class="focus-list-item">
-                    <span class="list-number">1</span>
-                    <span class="list-icon">🌳</span>
-                    <div class="list-content">
-                        <div class="list-title">Veřejná zeleň a místa k odpočinku</div>
-                        <div class="list-desc">Více stromů, laviček a příjemných míst pro setkávání.</div>
+                <div class="volby-card color-green">
+                    <span class="volby-icon">🌳</span>
+                    <h3 class="volby-title">Veřejná zeleň</h3>
+                    <p class="volby-desc">Více stromů, laviček a příjemných míst.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Plánujeme</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 92 %</span>
                     </div>
-                    <span class="list-tag">Plánujeme</span>
                 </div>
 
-                <div class="focus-list-item">
-                    <span class="list-number">2</span>
-                    <span class="list-icon">👨‍👩‍👧‍👦</span>
-                    <div class="list-content">
-                        <div class="list-title">Zázemí pro rodiny a seniory</div>
-                        <div class="list-desc">Programy pro nejmladší i nejstarší obyvatele.</div>
+                <div class="volby-card color-orange">
+                    <span class="volby-icon">👨‍👩‍👧‍👦</span>
+                    <h3 class="volby-title">Zázemí pro rodiny</h3>
+                    <p class="volby-desc">Programy pro nejmladší i seniory.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Hledáme řešení</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 78 %</span>
                     </div>
-                    <span class="list-tag">Hledáme řešení</span>
                 </div>
 
-                <div class="focus-list-item">
-                    <span class="list-number">3</span>
-                    <span class="list-icon">🚶</span>
-                    <div class="list-content">
-                        <div class="list-title">Bezpečné cesty po obci</div>
-                        <div class="list-desc">Chodníky, přechody a stezky pro bezpečný pohyb.</div>
+                <div class="volby-card color-blue">
+                    <span class="volby-icon">🚶</span>
+                    <h3 class="volby-title">Bezpečné cesty</h3>
+                    <p class="volby-desc">Chodníky a stezky pro bezpečný pohyb.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">V přípravě</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 85 %</span>
                     </div>
-                    <span class="list-tag">V přípravě</span>
                 </div>
 
-                <div class="focus-list-item">
-                    <span class="list-number">4</span>
-                    <span class="list-icon">🚴</span>
-                    <div class="list-content">
-                        <div class="list-title">Propojení s okolím</div>
-                        <div class="list-desc">Cyklostezky a trasy do přírody i do práce.</div>
+                <div class="volby-card color-purple">
+                    <span class="volby-icon">🚴</span>
+                    <h3 class="volby-title">Propojení s okolím</h3>
+                    <p class="volby-desc">Cyklostezky a trasy do přírody.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Jednáme</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 71 %</span>
                     </div>
-                    <span class="list-tag">Jednáme</span>
                 </div>
 
-                <div class="focus-list-item">
-                    <span class="list-number">5</span>
-                    <span class="list-icon">💻</span>
-                    <div class="list-content">
-                        <div class="list-title">Moderní obecní služby</div>
-                        <div class="list-desc">Internet, digitální úřad a snadný přístup k informacím.</div>
+                <div class="volby-card color-blue">
+                    <span class="volby-icon">💻</span>
+                    <h3 class="volby-title">Moderní služby</h3>
+                    <p class="volby-desc">Internet a digitální úřad online.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Rozjíždíme</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 88 %</span>
                     </div>
-                    <span class="list-tag">Rozjíždíme</span>
                 </div>
 
-                <div class="focus-list-item">
-                    <span class="list-number">6</span>
-                    <span class="list-icon">🎭</span>
-                    <div class="list-content">
-                        <div class="list-title">Podpora spolků a sousedských akcí</div>
-                        <div class="list-desc">Pomoc kulturním a sportovním aktivitám.</div>
+                <div class="volby-card color-purple">
+                    <span class="volby-icon">🎭</span>
+                    <h3 class="volby-title">Kultura a spolky</h3>
+                    <p class="volby-desc">Pomoc kulturním a sportovním akcím.</p>
+                    <div class="volby-footer">
+                        <span class="volby-tag">Podporujeme</span>
+                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 76 %</span>
                     </div>
-                    <span class="list-tag">Podporujeme</span>
                 </div>
 
             </div>
