@@ -14,11 +14,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== RESET ===== */
+        /* ===== RESET + OPTIMALIZACE ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         html {
@@ -32,12 +34,27 @@
             line-height: 1.7;
             padding-top: 80px;
             -webkit-tap-highlight-color: transparent;
+            -webkit-text-size-adjust: 100%;
             overflow-x: hidden;
             font-size: 18px;
             min-height: 100vh;
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'%3E%3C/path%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'%3E%3C/path%3E%3Cpath d='M2 2l7.586 7.586'%3E%3C/path%3E%3Ccircle cx='11' cy='11' r='2'%3E%3C/circle%3E%3C/svg%3E") 4 4, auto;
         }
 
+        /* ===== GPU AKCELERACE PRO ANIMACE ===== */
+        .why-card,
+        .volby-card,
+        .slider-item,
+        .candidate-profile,
+        .timeline-osa-item .osa-content,
+        .exp-card {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            contain: layout style paint;
+        }
+
+        /* ===== KURZOR PRO ODKAZY ===== */
         a, button, .candidate-profile, .why-card, .volby-card, .slider-item, .exp-card, .timeline-osa-item .osa-content {
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'%3E%3C/path%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'%3E%3C/path%3E%3Cpath d='M2 2l7.586 7.586'%3E%3C/path%3E%3Ccircle cx='11' cy='11' r='2'%3E%3C/circle%3E%3C/svg%3E") 4 4, pointer;
         }
@@ -49,8 +66,8 @@
             left: 0;
             width: 100%;
             background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
             padding: 0.6rem 0;
             border-bottom: 3px solid #fbbf24;
@@ -263,8 +280,6 @@
 
         .exp-card {
             background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 1.8rem;
             padding: 1.8rem 1.2rem;
@@ -457,8 +472,8 @@
 
         .timeline-osa-item .osa-content {
             background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             border-radius: 2rem;
             padding: 2rem 2.5rem;
             border: 2px solid rgba(226, 232, 240, 0.5);
@@ -662,8 +677,8 @@
 
         .why-card {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             border-radius: 2.5rem;
             padding: 2.5rem 2rem;
             border: 2px solid rgba(226, 232, 240, 0.6);
@@ -789,8 +804,8 @@
             flex: 0 0 260px;
             scroll-snap-align: start;
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             border-radius: 2.5rem;
             padding: 2rem 1.5rem;
             text-align: center;
@@ -911,8 +926,8 @@
 
         .volby-card {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             border-radius: 2.5rem;
             padding: 2rem 1.8rem;
             border: 2px solid rgba(226, 232, 240, 0.5);
@@ -2797,45 +2812,67 @@
         setTimeout(startAutoScroll, 2000);
         window.addEventListener('resize', updateDots);
 
-        // ===== AKTIVACE BODŮ PŘI SCROLLOVÁNÍ =====
+        // ===== AKTIVACE BODŮ PŘI SCROLLOVÁNÍ (OPTIMALIZOVANÉ) =====
         const timelineItems = document.querySelectorAll('.timeline-osa-item');
         const timelineOsa = document.getElementById('timelineOsa');
 
+        let scrollTimeout = null;
+        let lastScrollY = 0;
+
         function updateActiveTimelineItem() {
-            let activeIndex = 0;
-            const windowCenter = window.scrollY + window.innerHeight / 2;
+            // Rychlá kontrola, jestli se scrollování zastavilo
+            const currentScrollY = window.scrollY;
+            if (Math.abs(currentScrollY - lastScrollY) < 5) return;
+            lastScrollY = currentScrollY;
 
-            timelineItems.forEach((item, index) => {
-                const rect = item.getBoundingClientRect();
-                const itemCenter = rect.top + window.scrollY + rect.height / 2;
+            // Použití requestAnimationFrame pro plynulost
+            requestAnimationFrame(() => {
+                let activeIndex = 0;
+                const windowCenter = window.scrollY + window.innerHeight / 2;
 
-                if (itemCenter < windowCenter) {
-                    activeIndex = index;
+                timelineItems.forEach((item, index) => {
+                    const rect = item.getBoundingClientRect();
+                    const itemCenter = rect.top + window.scrollY + rect.height / 2;
+
+                    if (itemCenter < windowCenter) {
+                        activeIndex = index;
+                    }
+                });
+
+                // Odebrat active ze všech
+                timelineItems.forEach(item => item.classList.remove('active'));
+
+                // Přidat active na správný index
+                if (timelineItems[activeIndex]) {
+                    timelineItems[activeIndex].classList.add('active');
+                }
+
+                // Aktualizovat třídu na timeline
+                timelineOsa.className = 'timeline-osa';
+                const activeNumber = activeIndex + 1;
+                if (activeNumber >= 1 && activeNumber <= 4) {
+                    timelineOsa.classList.add('active-' + activeNumber);
                 }
             });
-
-            // Odebrat active ze všech
-            timelineItems.forEach(item => item.classList.remove('active'));
-
-            // Přidat active na správný index
-            if (timelineItems[activeIndex]) {
-                timelineItems[activeIndex].classList.add('active');
-            }
-
-            // Aktualizovat třídu na timeline
-            timelineOsa.className = 'timeline-osa';
-            const activeNumber = activeIndex + 1;
-            if (activeNumber >= 1 && activeNumber <= 4) {
-                timelineOsa.classList.add('active-' + activeNumber);
-            }
         }
 
-        // Spuštění při scrollování
-        window.addEventListener('scroll', updateActiveTimelineItem);
-        window.addEventListener('resize', updateActiveTimelineItem);
+        // ===== SCROLL S DEBOUNCE =====
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = requestAnimationFrame(updateActiveTimelineItem);
+        }, { passive: true });
+
+        // ===== RESIZE S DEBOUNCE =====
+        let resizeTimeout = null;
+        window.addEventListener('resize', () => {
+            if (resizeTimeout) clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(updateActiveTimelineItem, 100);
+        }, { passive: true });
 
         // Inicializace
-        setTimeout(updateActiveTimelineItem, 100);
+        setTimeout(updateActiveTimelineItem, 200);
     </script>
 </body>
 </html>
