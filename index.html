@@ -2141,7 +2141,7 @@
         </div>
     </section>
 
-    <!-- ===== PROGRAM 2 + CO CHYSTÁME (SLIDER) ===== -->
+    <!-- ===== PROGRAM 2 + CO CHYSTÁME (SLIDER - SPRÁVNĚ!) ===== -->
     <div class="program-banner p2" id="co-banner">
         <div class="container">
             <span class="program-number">✦ 02</span>
@@ -2156,54 +2156,39 @@
 
             <div class="slider-wrapper">
                 <div class="slider-track" id="sliderTrack">
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-tree"></i></span>
-                        <h4>Revitalizace návsi</h4>
-                        <p>Nové lavičky, zeleň a posezení pro všechny.</p>
-                        <span class="slide-tag">Připravujeme</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-futbol"></i></span>
-                        <h4>Multifunkční hřiště</h4>
-                        <p>Fotbal, basket, workout pro mladé i dospělé.</p>
-                        <span class="slide-tag">Plánujeme</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-walking"></i></span>
-                        <h4>Bezpečné cesty</h4>
-                        <p>Chodníky a osvětlené stezky po celé obci.</p>
-                        <span class="slide-tag">V přípravě</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-beer"></i></span>
-                        <h4>Zázemí pro setkávání</h4>
-                        <p>Grilování, sousedské akce a komunitní večery.</p>
-                        <span class="slide-tag">Chystáme</span>
-                    </div>
+                    
+                    <!-- 1. Cyklostezky -->
                     <div class="slider-item">
                         <span class="slide-icon"><i class="fas fa-bicycle"></i></span>
                         <h4>Cyklostezky</h4>
                         <p>Propojení s okolím a bezpečné trasy.</p>
-                        <span class="slide-tag">Jednáme</span>
+                        <span class="slide-tag">🚵 Jednáme</span>
                     </div>
+
+                    <!-- 2. Kulturní akce -->
                     <div class="slider-item">
                         <span class="slide-icon"><i class="fas fa-music"></i></span>
                         <h4>Kulturní akce</h4>
                         <p>Koncerty, trhy, slavnosti a filmové večery.</p>
-                        <span class="slide-tag">Plánujeme</span>
+                        <span class="slide-tag">🎪 Plánujeme</span>
                     </div>
+
+                    <!-- 3. Komunitní zahrada -->
                     <div class="slider-item">
                         <span class="slide-icon"><i class="fas fa-seedling"></i></span>
                         <h4>Komunitní zahrada</h4>
                         <p>Společné pěstování a místo pro odpočinek.</p>
-                        <span class="slide-tag">Rozjíždíme</span>
+                        <span class="slide-tag">🌱 Rozjíždíme</span>
                     </div>
+
+                    <!-- 4. Digitální služby -->
                     <div class="slider-item">
                         <span class="slide-icon"><i class="fas fa-wifi"></i></span>
                         <h4>Digitální služby</h4>
                         <p>Wi-Fi na návsi a digitální úřad online.</p>
-                        <span class="slide-tag">Spouštíme</span>
+                        <span class="slide-tag">📡 Spouštíme</span>
                     </div>
+
                 </div>
                 <div class="slider-controls">
                     <button class="slider-btn" id="sliderPrev" aria-label="Předchozí"><i class="fas fa-chevron-left"></i></button>
@@ -2671,15 +2656,6 @@
         const items = track.querySelectorAll('.slider-item');
         const totalItems = items.length;
 
-        // ===== VYTVOŘENÍ TĚČEK (POUZE 4) =====
-        const dotsContainer = document.getElementById('sliderDots');
-        const items = track.querySelectorAll('.slider-item');
-        const totalItems = items.length;
-        
-        // Vyčistit kontejner pro tečky
-        dotsContainer.innerHTML = '';
-        
-        // Vytvořit tečky podle počtu položek (4)
         items.forEach((_, index) => {
             const dot = document.createElement('button');
             dot.classList.add('slider-dot');
@@ -2691,18 +2667,7 @@
             });
             dotsContainer.appendChild(dot);
         });
-        
-        const dots = dotsContainer.querySelectorAll('.slider-dot');
-        
-        function updateDots() {
-            const scrollPos = track.scrollLeft;
-            const itemWidth = items[0].offsetWidth + 24;
-            const currentIndex = Math.round(scrollPos / itemWidth);
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
-        }
-        
+
         const dots = dotsContainer.querySelectorAll('.slider-dot');
 
         function updateDots() {
