@@ -110,11 +110,18 @@
             width: 100%;
         }
 
-        /* Joystick v controls row */
+        /* Joystick - SKRYTÝ na PC, VIDITELNÝ jen na dotykových zařízeních */
         .joystick-wrapper {
-            display: none; /* Skrytý na PC, zobrazí se na dotykových zařízeních */
+            display: none; /* Skrytý na PC */
             align-items: center;
             gap: 0.5rem;
+        }
+
+        /* Zobrazit joystick POUZE na dotykových zařízeních (mobil/tablet) */
+        @media (hover: none) and (pointer: coarse) {
+            .joystick-wrapper {
+                display: flex;
+            }
         }
 
         .joystick-label {
@@ -161,13 +168,6 @@
 
         .joystick-knob.active {
             box-shadow: 0 4px 30px rgba(250, 204, 21, 0.6), inset 0 -4px 8px rgba(0,0,0,0.3);
-        }
-
-        /* Zobrazit joystick pouze na dotykových zařízeních */
-        @media (hover: none) and (pointer: coarse) {
-            .joystick-wrapper {
-                display: flex;
-            }
         }
 
         /* Menší joystick na malých obrazovkách */
@@ -355,7 +355,7 @@
 
     <!-- OVLÁDACÍ LIŠTA -->
     <div class="controls-row">
-        <!-- JOYSTICK (vedle tlačítek) -->
+        <!-- JOYSTICK (viditelný POUZE na mobilu) -->
         <div class="joystick-wrapper">
             <span class="joystick-label">🕹️</span>
             <div class="joystick-container" id="joystickContainer">
@@ -827,7 +827,7 @@
         joystickContainer.addEventListener('touchend', handleJoystickEnd, { passive: false });
         joystickContainer.addEventListener('touchcancel', handleJoystickEnd, { passive: false });
 
-        // Myš pro testování na PC
+        // Myš pro testování na PC (aby šel joystick vyzkoušet i na PC)
         let mouseJoystickActive = false;
         joystickContainer.addEventListener('mousedown', (e) => {
             mouseJoystickActive = true;
