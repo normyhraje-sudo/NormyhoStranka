@@ -29,7 +29,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* ===== HLAVNÍ MENU - MOBIL OPTIMALIZACE ===== */
+        /* ===== MENU ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -104,7 +104,7 @@
             font-size: 0.7rem;
         }
 
-        /* ===== HERO - CELÁ STRÁNKA ===== */
+        /* ===== HERO ===== */
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1a2a4a 50%, #0f172a 100%);
             color: #f8fafc;
@@ -242,15 +242,15 @@
             display: block;
         }
 
-        /* ===== PROGRAM - JEN NADPISY (BANNERY 1/4) ===== */
+        /* ===== PROGRAMOVÉ BANNERY (před každou sekcí) ===== */
         .program-banner {
-            padding: 2rem 0;
+            padding: 1.8rem 0;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
-            min-height: 15vh;
+            min-height: 12vh;
         }
 
         .program-banner .container {
@@ -259,19 +259,19 @@
         }
 
         .program-banner h2 {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: 900;
             letter-spacing: -0.02em;
-            margin-bottom: 0.1rem;
         }
 
         .program-banner .program-number {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             display: inline-block;
-            padding: 0.15rem 1.2rem;
+            padding: 0.1rem 1.2rem;
             border-radius: 9999px;
             margin-bottom: 0.2rem;
+            letter-spacing: 1px;
         }
 
         .program-banner.p1 {
@@ -308,7 +308,7 @@
             background: rgba(15, 23, 42, 0.15);
         }
 
-        /* ===== PROČ - MODERNÍ BUBLINY ===== */
+        /* ===== SEKCE ===== */
         .section {
             padding: 4rem 0;
             width: 100%;
@@ -326,7 +326,7 @@
         }
 
         .section-title {
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             font-weight: 800;
             text-align: center;
             margin-bottom: 2.5rem;
@@ -351,57 +351,87 @@
             margin: -1.8rem auto 2.5rem auto;
         }
 
-        /* ===== MODERNÍ BUBLINY PRO "PROČ" ===== */
-        .why-bubbles {
+        /* ===== INOVATIVNÍ BUBLINY PRO "PROČ" (2×2 mřížka) ===== */
+        .why-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .why-bubble {
+        .why-card {
             background: #ffffff;
             border-radius: 2rem;
             padding: 2rem 1.8rem;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            transition: all 0.35s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
             touch-action: manipulation;
         }
 
-        .why-bubble:active {
-            transform: scale(0.96);
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .why-bubble:hover {
+        .why-card:hover::before {
+            opacity: 1;
+        }
+
+        .why-card:active {
+            transform: scale(0.97);
+        }
+
+        .why-card:hover {
             transform: translateY(-6px);
             border-color: #fbbf24;
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
         }
 
-        .why-bubble .bubble-icon {
+        .why-card .card-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fbbf24;
+            opacity: 0.2;
+            position: absolute;
+            top: 0.5rem;
+            right: 1.2rem;
+            line-height: 1;
+        }
+
+        .why-card .card-icon {
             font-size: 2.8rem;
             color: #fbbf24;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
             display: block;
         }
 
-        .why-bubble h3 {
+        .why-card h3 {
             font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: #0f172a;
         }
 
-        .why-bubble p {
+        .why-card p {
             color: #475569;
             font-size: 0.95rem;
             line-height: 1.6;
+            margin-bottom: 0.6rem;
         }
 
-        .why-bubble .bubble-tag {
+        .why-card .card-tag {
             display: inline-block;
-            margin-top: 0.8rem;
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -409,7 +439,7 @@
             background: rgba(251, 191, 36, 0.1);
             padding: 0.2rem 1rem;
             border-radius: 9999px;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
         }
 
         /* ===== INFO BUBLINY ===== */
@@ -731,18 +761,18 @@
             width: 100%;
         }
 
-        /* ===== RESPONZIVITA - MOBIL ===== */
+        /* ===== RESPONZIVITA ===== */
         @media (max-width: 1024px) {
             .grid-3,
-            .why-bubbles {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .info-bubbles {
                 grid-template-columns: repeat(2, 1fr);
             }
 
             .bubble-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -801,16 +831,15 @@
             }
 
             .program-banner {
-                min-height: 12vh;
+                min-height: 10vh;
                 padding: 1.2rem 0;
             }
 
             .program-banner h2 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
 
             .grid-3,
-            .why-bubbles,
             .info-bubbles {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -834,16 +863,30 @@
                 font-size: 1.5rem;
             }
 
-            .why-bubble {
+            /* ===== INOVATIVNÍ PROČ - MOBIL ===== */
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .why-card {
                 padding: 1.5rem 1.2rem;
             }
 
-            .why-bubble .bubble-icon {
+            .why-card .card-icon {
                 font-size: 2.2rem;
             }
 
-            .why-bubble h3 {
+            .why-card h3 {
                 font-size: 1.1rem;
+            }
+
+            .why-card p {
+                font-size: 0.85rem;
+            }
+
+            .why-card .card-number {
+                font-size: 2rem;
             }
 
             .info-bubble {
@@ -934,7 +977,7 @@
             }
 
             .program-banner h2 {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
 
             .section-title {
@@ -944,6 +987,14 @@
             .nav-links a {
                 font-size: 0.55rem;
                 padding: 0.2rem 0.5rem;
+            }
+
+            .why-card {
+                padding: 1.2rem 1rem;
+            }
+
+            .why-card .card-icon {
+                font-size: 1.8rem;
             }
 
             .candidate-photo {
@@ -963,14 +1014,14 @@
 
         /* ===== DOTYKOVÉ OPTIMALIZACE ===== */
         @media (hover: none) {
-            .why-bubble:hover,
+            .why-card:hover,
             .info-bubble:hover,
             .project-card:hover,
             .candidate-profile:hover {
                 transform: none !important;
             }
 
-            .why-bubble:active,
+            .why-card:active,
             .info-bubble:active,
             .project-card:active,
             .candidate-profile:active {
@@ -993,7 +1044,6 @@
                 <span>Naše</span> Vesnice
             </div>
             <ul class="nav-links">
-                <li><a href="#program"><i class="fas fa-bolt"></i> Program</a></li>
                 <li><a href="#proc"><i class="fas fa-question-circle"></i> Proč</a></li>
                 <li><a href="#co-chystame"><i class="fas fa-calendar-alt"></i> Co chystáme</a></li>
                 <li><a href="#projekty"><i class="fas fa-seedling"></i> Projekty</a></li>
@@ -1009,7 +1059,6 @@
             <h1>Rozumná změna. <br /><span class="highlight">Společný směr.</span> Živá Vesnice.</h1>
             <p>Chceme obec, která drží pohromadě, umí naslouchat a hledá řešení, která dávají smysl.</p>
 
-            <!-- ===== BUBLINY V HERO ===== -->
             <div class="bubble-grid">
                 <div class="bubble">
                     <span class="bubble-icon"><i class="fas fa-users"></i></span>
@@ -1039,63 +1088,60 @@
         </div>
     </header>
 
-    <!-- ===== PROGRAM - JEN NADPISY ===== -->
-    <section id="program">
-        <!-- PROGRAM 1 -->
-        <div class="program-banner p1">
-            <div class="container">
-                <span class="program-number">✦ PROGRAM 1</span>
-                <h2>Společný život v obci</h2>
-            </div>
+    <!-- ===== PROGRAM 1 + PROČ ===== -->
+    <div class="program-banner p1" id="proc-banner">
+        <div class="container">
+            <span class="program-number">✦ 01</span>
+            <h2>Společný život v obci</h2>
         </div>
+    </div>
 
-        <!-- PROGRAM 2 -->
-        <div class="program-banner p2">
-            <div class="container">
-                <span class="program-number">✦ PROGRAM 2</span>
-                <h2>Obec s rozmyslem</h2>
-            </div>
-        </div>
-
-        <!-- PROGRAM 3 -->
-        <div class="program-banner p3">
-            <div class="container">
-                <span class="program-number">✦ PROGRAM 3</span>
-                <h2>Život pro každou generaci</h2>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== PROČ - MODERNÍ BUBLINY ===== -->
     <section class="section section-alt" id="proc">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-compass"></i> Proč jdeme do toho</h2>
-            <p class="section-subtitle">Víme, že obec posouvají lidé, kteří mají chuť se zapojit a dívat se dopředu.</p>
+            <p class="section-subtitle">Víme, že obec posouvají lidé, kteří mají chuť se zapojit a dívat se dopředu. Naše motivace je jednoduchá – chceme, aby se tu dobře žilo všem.</p>
 
-            <div class="why-bubbles">
-                <div class="why-bubble">
-                    <span class="bubble-icon"><i class="fas fa-people-arrows"></i></span>
+            <div class="why-grid">
+                <div class="why-card">
+                    <span class="card-number">01</span>
+                    <span class="card-icon"><i class="fas fa-people-arrows"></i></span>
                     <h3>Lidé na prvním místě</h3>
-                    <p>Důležitá rozhodnutí a plány obce mají vycházet z potřeb těch, kteří v ní žijí.</p>
-                    <span class="bubble-tag">Nasloucháme</span>
+                    <p>Důležitá rozhodnutí a plány obce mají vycházet z potřeb těch, kteří v ní žijí. Posloucháme, co vás trápí a co byste chtěli změnit.</p>
+                    <span class="card-tag">Nasloucháme</span>
                 </div>
-                <div class="why-bubble">
-                    <span class="bubble-icon"><i class="fas fa-code-branch"></i></span>
+                <div class="why-card">
+                    <span class="card-number">02</span>
+                    <span class="card-icon"><i class="fas fa-code-branch"></i></span>
                     <h3>Různorodý tým</h3>
-                    <p>Společně jsme silnější. V týmu máme lidi různých profesí, věku i životních zkušeností.</p>
-                    <span class="bubble-tag">Spolupráce</span>
+                    <p>Společně jsme silnější. V týmu máme lidi různých profesí, věku i životních zkušeností. Každý přináší jiný pohled a umíme se doplňovat.</p>
+                    <span class="card-tag">Spolupráce</span>
                 </div>
-                <div class="why-bubble">
-                    <span class="bubble-icon"><i class="fas fa-gavel"></i></span>
+                <div class="why-card">
+                    <span class="card-number">03</span>
+                    <span class="card-icon"><i class="fas fa-gavel"></i></span>
                     <h3>Férová a jasná pravidla</h3>
-                    <p>Bez zbytečných složitostí, bez tajemství. Obyvatelé mají vědět, proč a jak se rozhoduje.</p>
-                    <span class="bubble-tag">Transparentnost</span>
+                    <p>Bez zbytečných složitostí, bez tajemství. Obyvatelé mají vědět, proč a jak se rozhoduje. Transparentnost je základ důvěry.</p>
+                    <span class="card-tag">Transparentnost</span>
+                </div>
+                <div class="why-card">
+                    <span class="card-number">04</span>
+                    <span class="card-icon"><i class="fas fa-lightbulb"></i></span>
+                    <h3>Inovace a odvaha</h3>
+                    <p>Nebojíme se nových nápadů a moderních řešení. Chceme, aby naše vesnice držela krok s dobou a byla připravená na budoucnost.</p>
+                    <span class="card-tag">Moderní přístup</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== CO CHYSTÁME - INFO BUBLINY ===== -->
+    <!-- ===== PROGRAM 2 + CO CHYSTÁME ===== -->
+    <div class="program-banner p2" id="co-banner">
+        <div class="container">
+            <span class="program-number">✦ 02</span>
+            <h2>Obec s rozmyslem</h2>
+        </div>
+    </div>
+
     <section class="section" id="co-chystame">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Co chystáme pro naši vesnici</h2>
@@ -1146,7 +1192,14 @@
         </div>
     </section>
 
-    <!-- ===== PROJEKTY ===== -->
+    <!-- ===== PROGRAM 3 + PROJEKTY ===== -->
+    <div class="program-banner p3" id="projekty-banner">
+        <div class="container">
+            <span class="program-number">✦ 03</span>
+            <h2>Život pro každou generaci</h2>
+        </div>
+    </div>
+
     <section class="section section-alt" id="projekty">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-tasks"></i> Na co se zaměříme</h2>
@@ -1192,7 +1245,7 @@
         </div>
     </section>
 
-    <!-- ===== KANDIDÁTI ===== -->
+    <!-- ===== KANDIDÁTI (bez samostatného banneru) ===== -->
     <section class="section" id="kandidati">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-user-check"></i> Kdo jsme</h2>
