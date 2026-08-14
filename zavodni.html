@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Závodní hra</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            overflow: hidden;
+            padding: 0.5rem;
+            touch-action: none;
+        }
+
+        .game-wrapper {
+            background: #1e2a3a;
+            padding: 1.2rem 1.5rem 1.5rem;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #f0e9d8;
+            font-weight: 500;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            text-shadow: 0 3px 0 #0b0f1a;
+            margin-bottom: 0.3rem;
+        }
+        h1 span {
+            color: #facc15;
+        }
+
+        .stats {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #cbd5e1;
+            font-size: 1rem;
+            padding: 0.2rem 0.3rem 0.5rem;
+            border-bottom: 1px solid #3a4a5e;
+            margin-bottom: 0.8rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stats > div {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #0f1a2a;
+            padding: 0.1rem 0.8rem 0.1rem 0.5rem;
+            border-radius: 40px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats .icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+        .stats .value {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #facc15;
+            min-width: 2rem;
+            text-align: center;
+        }
+        .stats .value.lives {
+            color: #ef4444;
+        }
+
+        canvas {
+            display: block;
+            background: #0b1622;
+            border-radius: 1.5rem;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 2px #334155;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 400 / 600;
+            max-width: 400px;
+            touch-action: none;
+        }
+
+        /* ----- DOTYKOVÉ OVLÁDÁNÍ (mobil) ----- */
+        .touch-controls {
+            display: none;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .touch-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #cbd5e1;
+            font-size: 1.6rem;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            min-width: 55px;
+            min-height: 55px;
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .touch-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .touch-btn.up-btn {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        .touch-btn.up-btn:active {
+            background: rgba(34, 197, 94, 0.35);
+        }
+
+        .touch-btn.down-btn {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .touch-btn.down-btn:active {
+            background: rgba(239, 68, 68, 0.35);
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .touch-controls {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .touch-btn {
+                font-size: 1.3rem;
+                min-width: 45px;
+                min-height: 45px;
+                padding: 0.3rem 0.7rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .touch-btn {
+                font-size: 1rem;
+                min-width: 35px;
+                min-height: 35px;
+                padding: 0.2rem 0.5rem;
+            }
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button {
+            background: #facc15;
+            border: none;
+            color: #0b0f1a;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.35rem 1.2rem;
+            border-radius: 60px;
+            box-shadow: 0 6px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.07s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            touch-action: manipulation;
+        }
+        button:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #a07c0e;
+        }
+
+        .back-button {
+            background: #64748b;
+            box-shadow: 0 6px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            color: #0b0f1a;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.35rem 1rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.07s ease;
+            border: none;
+        }
+        .back-button:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #475569;
+        }
+        .back-button:hover {
+            background: #94a3b8;
+        }
+
+        .status {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            min-height: 1.5rem;
+            font-weight: 300;
+            text-align: center;
+            margin-top: 0.2rem;
+            width: 100%;
+        }
+
+        .hint {
+            color: #64748b;
+            font-size: 0.65rem;
+            text-align: center;
+            margin-top: 0.1rem;
+        }
+
+        .hint kbd {
+            background: #0b1622;
+            padding: 0.05rem 0.5rem;
+            border-radius: 6px;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            font-size: 0.6rem;
+        }
+
+        @media (max-width: 450px) {
+            .game-wrapper {
+                padding: 1rem;
+                border-radius: 2rem;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            .stats {
+                font-size: 0.85rem;
+            }
+            .stats .value {
+                font-size: 1.1rem;
+                min-width: 1.5rem;
+            }
+            button {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.9rem;
+            }
+            .back-button {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.8rem;
+            }
+        }
+
+        @media (min-width: 601px) {
+            .touch-controls {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-wrapper">
+    <h1>🏎️ <span>ZÁVODY</span></h1>
+
+    <div class="stats">
+        <div><span class="icon">⭐</span><span class="value" id="scoreDisplay">0</span></div>
+        <div><span class="icon">❤️</span><span class="value lives" id="livesDisplay">3</span></div>
+        <div><span class="icon">⚡</span><span class="value" id="speedDisplay">1.0</span></div>
+    </div>
+
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+    <!-- DOTYKOVÉ OVLÁDÁNÍ (mobil) -->
+    <div class="touch-controls" id="touchControls">
+        <button class="touch-btn" id="touchLeft">◀</button>
+        <button class="touch-btn up-btn" id="touchUp">▲</button>
+        <button class="touch-btn" id="touchRight">▶</button>
+        <button class="touch-btn down-btn" id="touchDown">▼</button>
+    </div>
+
+    <div class="controls">
+        <button id="restartBtn">🔄 Nová</button>
+        <a href="hry.html" class="back-button">⬅ Zpět</a>
+    </div>
+    <div class="status" id="statusMsg">Použij šipky ← → ↑ ↓ nebo WASD</div>
+    <div class="hint">
+        <kbd>←</kbd> <kbd>→</kbd> pohyb &nbsp;·&nbsp; <kbd>↑</kbd> <kbd>W</kbd> zrychli &nbsp;·&nbsp; <kbd>↓</kbd> <kbd>S</kbd> zpomal
+    </div>
+</div>
+
+<script>
+    (function() {
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const livesDisplay = document.getElementById('livesDisplay');
+        const speedDisplay = document.getElementById('speedDisplay');
+        const statusMsg = document.getElementById('statusMsg');
+
+        // Dotyková tlačítka
+        const touchLeft = document.getElementById('touchLeft');
+        const touchRight = document.getElementById('touchRight');
+        const touchUp = document.getElementById('touchUp');
+        const touchDown = document.getElementById('touchDown');
+
+        // ----- Konfigurace -----
+        const W = 400,
+            H = 600;
+        const LANE_COUNT = 3;
+        const LANE_WIDTH = W / LANE_COUNT;
+
+        // ----- Herní objekty -----
+        let player = {
+            x: W / 2 - 20,
+            y: H - 100,
+            width: 40,
+            height: 60,
+            speed: 5
+        };
+
+        let enemies = [];
+        let score = 0;
+        let lives = 3;
+        let gameOver = false;
+        let frameId = null;
+        let spawnCounter = 0;
+        const SPAWN_RATE = 30;
+        let gameSpeed = 3;
+        let speedMultiplier = 1;
+
+        // Ovládání (klávesy)
+        let keys = {
+            ArrowLeft: false,
+            ArrowRight: false,
+            ArrowUp: false,
+            ArrowDown: false,
+            a: false,
+            d: false,
+            w: false,
+            s: false
+        };
+
+        // ----- Reset hry -----
+        function resetGame() {
+            if (frameId) {
+                cancelAnimationFrame(frameId);
+                frameId = null;
+            }
+
+            player.x = W / 2 - 20;
+            player.y = H - 100;
+            enemies = [];
+            score = 0;
+            lives = 3;
+            gameOver = false;
+            gameSpeed = 3;
+            speedMultiplier = 1;
+            spawnCounter = 0;
+
+            scoreDisplay.textContent = '0';
+            livesDisplay.textContent = '3';
+            speedDisplay.textContent = '1.0';
+            statusMsg.textContent = '🏁 Závod začíná! Vyhýbej se autům!';
+            document.getElementById('restartBtn').disabled = false;
+
+            gameLoop();
+        }
+
+        // ----- Spawn nepřítele -----
+        function spawnEnemy() {
+            const lane = Math.floor(Math.random() * LANE_COUNT);
+            const x = lane * LANE_WIDTH + LANE_WIDTH / 2 - 20;
+            const colors = ['#ef4444', '#f97316', '#a855f7', '#ec4899', '#3b82f6', '#22c55e'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            enemies.push({
+                x: x,
+                y: -60,
+                width: 40,
+                height: 60,
+                lane: lane,
+                color: color,
+                speed: gameSpeed * (0.8 + Math.random() * 0.4)
+            });
+        }
+
+        // ----- Kolize -----
+        function rectCollide(r1, r2) {
+            return r1.x < r2.x + r2.width &&
+                r1.x + r1.width > r2.x &&
+                r1.y < r2.y + r2.height &&
+                r1.y + r1.height > r2.y;
+        }
+
+        // ----- Herní update -----
+        function update() {
+            if (gameOver) return;
+
+            // ----- Pohyb hráče (klávesy) -----
+            let dx = 0;
+            let dy = 0;
+
+            if (keys.ArrowLeft || keys.a) dx = -player.speed;
+            if (keys.ArrowRight || keys.d) dx = player.speed;
+
+            // Zrychlení/zpomalení
+            if (keys.ArrowUp || keys.w) {
+                speedMultiplier = Math.min(2.5, speedMultiplier + 0.015);
+            }
+            if (keys.ArrowDown || keys.s) {
+                speedMultiplier = Math.max(0.5, speedMultiplier - 0.015);
+            }
+
+            // Aplikace pohybu
+            let newX = player.x + dx;
+            if (newX < 0) newX = 0;
+            if (newX + player.width > W) newX = W - player.width;
+            player.x = newX;
+
+            // Aktualizace rychlosti hry
+            gameSpeed = 3 * speedMultiplier;
+
+            // Spawn aut
+            spawnCounter++;
+            const spawnRate = Math.max(10, SPAWN_RATE - Math.floor(score / 50));
+            if (spawnCounter % spawnRate === 0) {
+                spawnEnemy();
+            }
+
+            // Pohyb nepřátel
+            for (let i = enemies.length - 1; i >= 0; i--) {
+                const enemy = enemies[i];
+                enemy.y += enemy.speed * speedMultiplier;
+
+                // Odstranění mimo obrazovku
+                if (enemy.y > H + 60) {
+                    enemies.splice(i, 1);
+                    score++;
+                    scoreDisplay.textContent = score;
+                    if (score % 10 === 0) {
+                        statusMsg.textContent = `⭐ +10 bodů! Úroveň ${Math.floor(score / 10) + 1}`;
+                    }
+                    continue;
+                }
+
+                // Kolize s hráčem
+                if (rectCollide(player, enemy)) {
+                    lives--;
+                    livesDisplay.textContent = lives;
+                    enemies.splice(i, 1);
+                    statusMsg.textContent = '💥 Náraz!';
+
+                    if (lives <= 0) {
+                        gameOver = true;
+                        statusMsg.textContent = '💀 KONEC HRY! Klikni "Nová".';
+                        return;
+                    }
+                    continue;
+                }
+            }
+
+            // Aktualizace rychlosti
+            speedDisplay.textContent = Math.round(speedMultiplier * 10) / 10;
+
+            // Automatické zvyšování obtížnosti
+            if (score > 0 && score % 20 === 0) {
+                speedMultiplier = Math.min(2.5, speedMultiplier + 0.02);
+            }
+        }
+
+        // ----- Vykreslení -----
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+
+            // ----- Silnice -----
+            ctx.fillStyle = '#1a2a3a';
+            ctx.fillRect(0, 0, W, H);
+
+            // Pruhy
+            ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < LANE_COUNT - 1; i++) {
+                const x = (i + 1) * LANE_WIDTH;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, H);
+                ctx.stroke();
+            }
+
+            // Čáry na silnici (animované)
+            ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+            ctx.lineWidth = 3;
+            ctx.setLineDash([20, 30]);
+            const offset = (Date.now() / 100) % 50;
+            for (let i = 0; i < LANE_COUNT; i++) {
+                const x = i * LANE_WIDTH + LANE_WIDTH / 2;
+                ctx.beginPath();
+                ctx.moveTo(x, -50 + offset);
+                ctx.lineTo(x, H + 50 + offset);
+                ctx.stroke();
+            }
+            ctx.setLineDash([]);
+
+            // Krajnice
+            ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, H);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(W, 0);
+            ctx.lineTo(W, H);
+            ctx.stroke();
+
+            // ----- Nepřátelé (auta) -----
+            for (const enemy of enemies) {
+                ctx.shadowColor = enemy.color;
+                ctx.shadowBlur = 20;
+                const grad = ctx.createRadialGradient(
+                    enemy.x + 8, enemy.y + 8, 5,
+                    enemy.x + 20, enemy.y + 30, 30
+                );
+                grad.addColorStop(0, enemy.color);
+                grad.addColorStop(0.6, enemy.color);
+                grad.addColorStop(1, '#1a1a2e');
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.roundRect(enemy.x, enemy.y, enemy.width, enemy.height, 8);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Okna
+                ctx.fillStyle = 'rgba(150, 200, 255, 0.3)';
+                ctx.beginPath();
+                ctx.roundRect(enemy.x + 6, enemy.y + 8, 8, 12, 3);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.roundRect(enemy.x + 26, enemy.y + 8, 8, 12, 3);
+                ctx.fill();
+
+                // Světla
+                ctx.fillStyle = '#facc15';
+                ctx.shadowColor = '#facc15';
+                ctx.shadowBlur = 10;
+                ctx.beginPath();
+                ctx.arc(enemy.x + 8, enemy.y + 2, 4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(enemy.x + 32, enemy.y + 2, 4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            // ----- Hráč (auto) -----
+            const px = player.x,
+                py = player.y;
+
+            ctx.shadowColor = '#3b82f6';
+            ctx.shadowBlur = 25;
+            const grad = ctx.createRadialGradient(
+                px + 8, py + 8, 5,
+                px + 20, py + 30, 30
+            );
+            grad.addColorStop(0, '#60a5fa');
+            grad.addColorStop(0.5, '#2563eb');
+            grad.addColorStop(1, '#1e3a8a');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.roundRect(px, py, player.width, player.height, 8);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Okna
+            ctx.fillStyle = 'rgba(150, 200, 255, 0.4)';
+            ctx.beginPath();
+            ctx.roundRect(px + 6, py + 8, 8, 14, 3);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.roundRect(px + 26, py + 8, 8, 14, 3);
+            ctx.fill();
+
+            // Přední světla
+            ctx.fillStyle = '#facc15';
+            ctx.shadowColor = '#facc15';
+            ctx.shadowBlur = 15;
+            ctx.beginPath();
+            ctx.arc(px + 8, py + 2, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(px + 32, py + 2, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Zadní světla
+            ctx.fillStyle = '#ef4444';
+            ctx.shadowColor = '#ef4444';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.arc(px + 8, py + player.height - 2, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(px + 32, py + player.height - 2, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // ----- Game Over overlay -----
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.fillRect(0, 0, W, H);
+                ctx.fillStyle = '#fca5a5';
+                ctx.font = 'bold 46px "Segoe UI", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('💥 GAME OVER', W / 2, H / 2 - 20);
+                ctx.font = '22px sans-serif';
+                ctx.fillStyle = '#e2e8f0';
+                ctx.fillText(`Skóre: ${score}`, W / 2, H / 2 + 45);
+                ctx.fillText('Klikni "Nová"', W / 2, H / 2 + 85);
+            }
+        }
+
+        // ----- Herní smyčka -----
+        function gameLoop() {
+            update();
+            draw();
+            frameId = requestAnimationFrame(gameLoop);
+        }
+
+        // ----- Ovládání kláves -----
+        function handleKeyDown(e) {
+            const key = e.key;
+            if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'a', 'd', 'w', 's'].includes(key)) {
+                e.preventDefault();
+                keys[key] = true;
+            }
+            if (key === ' ' || key === 'Space') {
+                e.preventDefault();
+                if (gameOver) {
+                    resetGame();
+                }
+            }
+        }
+
+        function handleKeyUp(e) {
+            const key = e.key;
+            if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'a', 'd', 'w', 's'].includes(key)) {
+                e.preventDefault();
+                keys[key] = false;
+            }
+        }
+
+        // ----- Dotyková tlačítka (mobil) -----
+        function setupTouchButton(id, onStart, onEnd) {
+            const btn = document.getElementById(id);
+            if (!btn) return;
+
+            btn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (onStart) onStart();
+            }, { passive: false });
+
+            btn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                if (onEnd) onEnd();
+            }, { passive: false });
+
+            btn.addEventListener('touchcancel', (e) => {
+                e.preventDefault();
+                if (onEnd) onEnd();
+            }, { passive: false });
+
+            // Pro myš (testování na PC)
+            btn.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                if (onStart) onStart();
+            });
+
+            btn.addEventListener('mouseup', (e) => {
+                e.preventDefault();
+                if (onEnd) onEnd();
+            });
+
+            btn.addEventListener('mouseleave', (e) => {
+                if (onEnd) onEnd();
+            });
+        }
+
+        // Nastavení dotykových tlačítek
+        setupTouchButton('touchLeft',
+            () => { keys.ArrowLeft = true; },
+            () => { keys.ArrowLeft = false; }
+        );
+
+        setupTouchButton('touchRight',
+            () => { keys.ArrowRight = true; },
+            () => { keys.ArrowRight = false; }
+        );
+
+        setupTouchButton('touchUp',
+            () => { keys.ArrowUp = true; },
+            () => { keys.ArrowUp = false; }
+        );
+
+        setupTouchButton('touchDown',
+            () => { keys.ArrowDown = true; },
+            () => { keys.ArrowDown = false; }
+        );
+
+        // ----- roundRect polyfill -----
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                if (r > w / 2) r = w / 2;
+                if (r > h / 2) r = h / 2;
+                this.moveTo(x + r, y);
+                this.arcTo(x + w, y, x + w, y + h, r);
+                this.arcTo(x + w, y + h, x, y + h, r);
+                this.arcTo(x, y + h, x, y, r);
+                this.arcTo(x, y, x + w, y, r);
+                return this;
+            };
+        }
+
+        // ----- Event listenery -----
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+
+        document.getElementById('restartBtn').addEventListener('click', resetGame);
+
+        resetGame();
+
+        window.addEventListener('blur', () => {
+            keys = {
+                ArrowLeft: false,
+                ArrowRight: false,
+                ArrowUp: false,
+                ArrowDown: false,
+                a: false,
+                d: false,
+                w: false,
+                s: false
+            };
+        });
+
+        canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Mobilní nápověda
+        if ('ontouchstart' in window) {
+            statusMsg.textContent = '🖐️ Použij tlačítka pod hrou!';
+        }
+    })();
+</script>
+</body>
+</html>
