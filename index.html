@@ -22,13 +22,14 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #f5f3ff 100%);
             color: #1e293b;
             line-height: 1.7;
             padding-top: 80px;
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
             font-size: 18px;
+            min-height: 100vh;
         }
 
         /* ===== MENU ===== */
@@ -148,7 +149,7 @@
 
         /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1a2a4a 50%, #0f172a 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
             color: #f8fafc;
             border-bottom: 6px solid #fbbf24;
             text-align: center;
@@ -306,8 +307,21 @@
         /* ===== SEKCE "VESNICE NENÍ NUDA" ===== */
         .vesnice-section {
             padding: 5rem 0;
-            background: #f8fafc;
-            border-bottom: 3px solid #e2e8f0;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 30%, #eff6ff 70%, #dbeafe 100%);
+            border-bottom: 3px solid rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vesnice-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .vesnice-section .container {
@@ -315,6 +329,8 @@
             padding: 0 1.5rem;
             width: 100%;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .vesnice-section .section-tag {
@@ -340,7 +356,7 @@
 
         .vesnice-section .vesnice-subtitle {
             font-size: 1.2rem;
-            color: #64748b;
+            color: #475569;
             max-width: 600px;
             margin-bottom: 3rem;
         }
@@ -394,12 +410,14 @@
         }
 
         .timeline-osa-item .osa-content {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 2rem;
             padding: 2rem 2.5rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid rgba(226, 232, 240, 0.5);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
         .timeline-osa-item .osa-content:hover {
@@ -484,7 +502,7 @@
         }
 
         .program-banner.p2 {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: #f8fafc;
             border-top: 3px solid #fbbf24;
             border-bottom: 3px solid #fbbf24;
@@ -525,7 +543,9 @@
         }
 
         .section-alt {
-            background: #f1f5f9;
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 50%, #fffbeb 100%);
+            border-top: 3px solid rgba(251, 191, 36, 0.2);
+            border-bottom: 3px solid rgba(251, 191, 36, 0.2);
         }
 
         .section .container {
@@ -571,12 +591,14 @@
         }
 
         .why-card {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 2.5rem;
             padding: 2.5rem 2rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid rgba(226, 232, 240, 0.6);
             transition: all 0.35s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
             position: relative;
             overflow: hidden;
             touch-action: manipulation;
@@ -696,13 +718,15 @@
         .slider-item {
             flex: 0 0 260px;
             scroll-snap-align: start;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 2.5rem;
             padding: 2rem 1.5rem;
             text-align: center;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(226, 232, 240, 0.5);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
             touch-action: manipulation;
             min-height: 220px;
         }
@@ -814,15 +838,18 @@
         }
 
         .project-card {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 1.8rem;
             padding: 2.5rem 2rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(226, 232, 240, 0.5);
             text-align: center;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             touch-action: manipulation;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
         .project-card:active {
@@ -888,15 +915,22 @@
             margin: 0 auto;
         }
 
+        .candidates-list .candidate-profile:nth-child(odd) {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+        }
+
+        .candidates-list .candidate-profile:nth-child(even) {
+            background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+        }
+
         .candidate-profile {
             display: flex;
             gap: 2.5rem;
-            background: #ffffff;
             border-radius: 2rem;
             padding: 2.5rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid rgba(226, 232, 240, 0.5);
             transition: all 0.35s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
             align-items: center;
             touch-action: manipulation;
             position: relative;
@@ -1216,7 +1250,7 @@
         }
 
         .candidate-priorities .priority {
-            background: #f1f5f9;
+            background: rgba(241, 245, 249, 0.7);
             padding: 0.2rem 1.2rem;
             border-radius: 9999px;
             font-size: 0.85rem;
@@ -1254,7 +1288,7 @@
             font-weight: 500;
             padding: 0.3rem 1.2rem;
             border-radius: 9999px;
-            background: #f1f5f9;
+            background: rgba(241, 245, 249, 0.7);
             transition: all 0.25s ease;
             border: 1px solid transparent;
             touch-action: manipulation;
@@ -1266,7 +1300,7 @@
 
         /* ===== PATIČKA ===== */
         .footer {
-            background: #0f172a;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #94a3b8;
             padding: 2rem 0;
             text-align: center;
@@ -1395,6 +1429,10 @@
                 font-size: 0.85rem;
             }
 
+            .vesnice-section {
+                background: linear-gradient(135deg, #ecfdf5 0%, #eff6ff 100%);
+            }
+
             .vesnice-section h2 {
                 font-size: 2.2rem;
             }
@@ -1419,6 +1457,7 @@
             .timeline-osa-item .osa-content {
                 padding: 1.5rem;
                 border-radius: 1.5rem;
+                background: rgba(255, 255, 255, 0.95);
             }
 
             .timeline-osa-item .osa-content h3 {
@@ -1429,6 +1468,10 @@
                 font-size: 0.95rem;
             }
 
+            .section-alt {
+                background: linear-gradient(135deg, #fefce8 0%, #fffbeb 100%);
+            }
+
             .why-grid {
                 grid-template-columns: 1fr;
                 gap: 1.2rem;
@@ -1437,6 +1480,7 @@
             .why-card {
                 padding: 1.8rem 1.5rem;
                 border-radius: 2rem;
+                background: rgba(255, 255, 255, 0.9);
             }
 
             .why-card .card-icon {
@@ -1459,6 +1503,7 @@
                 flex: 0 0 220px;
                 padding: 1.5rem 1.2rem;
                 border-radius: 2rem;
+                background: rgba(255, 255, 255, 0.9);
             }
 
             .slider-item .slide-icon {
@@ -1481,6 +1526,7 @@
             .project-card {
                 padding: 1.8rem 1.5rem;
                 border-radius: 1.5rem;
+                background: rgba(255, 255, 255, 0.9);
             }
 
             .project-card i {
@@ -1590,6 +1636,10 @@
 
             .vesnice-section h2 {
                 font-size: 1.8rem;
+            }
+
+            .vesnice-section {
+                background: linear-gradient(135deg, #ecfdf5 0%, #dbeafe 100%);
             }
 
             .timeline-osa {
