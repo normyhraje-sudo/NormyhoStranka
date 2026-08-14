@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Naše Vesnice – společný směr</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,10 +25,11 @@
             background-color: #f8fafc;
             color: #1e293b;
             line-height: 1.6;
-            padding-top: 80px;
+            padding-top: 70px;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* ===== HLAVNÍ MENU ===== */
+        /* ===== HLAVNÍ MENU - MOBIL OPTIMALIZACE ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -38,7 +39,7 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
-            padding: 0.6rem 0;
+            padding: 0.5rem 0;
             border-bottom: 3px solid #fbbf24;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
@@ -50,16 +51,16 @@
             flex-wrap: wrap;
             width: 100%;
             max-width: 100%;
-            padding: 0 2rem;
+            padding: 0 1rem;
         }
 
         .navbar .logo {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 900;
             color: #f8fafc;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .navbar .logo span {
@@ -68,12 +69,12 @@
 
         .navbar .logo i {
             color: #fbbf24;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 0.3rem;
+            gap: 0.2rem;
             flex-wrap: wrap;
             list-style: none;
         }
@@ -82,13 +83,14 @@
             color: #cbd5e1;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
-            padding: 0.6rem 1.2rem;
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 9999px;
             transition: all 0.25s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
+            touch-action: manipulation;
         }
 
         .nav-links a:hover,
@@ -99,7 +101,7 @@
         }
 
         .nav-links a i {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         /* ===== HERO - CELÁ STRÁNKA ===== */
@@ -108,8 +110,9 @@
             color: #f8fafc;
             border-bottom: 6px solid #fbbf24;
             text-align: center;
-            margin-top: -80px;
-            padding-top: calc(5rem + 80px);
+            margin-top: -70px;
+            padding-top: calc(4rem + 70px);
+            padding-bottom: 4rem;
             position: relative;
             overflow: hidden;
             min-height: 100vh;
@@ -132,17 +135,17 @@
 
         .hero .hero-content {
             max-width: 900px;
-            padding: 0 2rem;
+            padding: 0 1.2rem;
             position: relative;
             z-index: 2;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 2.8rem;
             font-weight: 900;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            margin: 0 auto 1.2rem auto;
+            margin: 0 auto 1rem auto;
         }
 
         .hero .highlight {
@@ -153,20 +156,20 @@
         .hero .highlight::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -3px;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: #fbbf24;
             border-radius: 9999px;
             opacity: 0.5;
         }
 
         .hero p {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: #cbd5e1;
             max-width: 700px;
-            margin: 0 auto 2.5rem auto;
+            margin: 0 auto 2rem auto;
         }
 
         .hero .badge {
@@ -174,9 +177,9 @@
             background-color: #fbbf24;
             color: #0f172a;
             font-weight: 700;
-            padding: 0.6rem 2rem;
+            padding: 0.4rem 1.5rem;
             border-radius: 9999px;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
@@ -185,8 +188,8 @@
         .bubble-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
+            gap: 1rem;
+            margin-top: 2.5rem;
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
@@ -197,29 +200,27 @@
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 2rem;
-            padding: 1.8rem 1.5rem;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1rem;
             text-align: center;
             transition: all 0.3s ease;
             color: #f8fafc;
+            touch-action: manipulation;
         }
 
-        .bubble:hover {
-            transform: translateY(-8px) scale(1.02);
-            background: rgba(251, 191, 36, 0.15);
-            border-color: #fbbf24;
-            box-shadow: 0 20px 40px -12px rgba(251, 191, 36, 0.2);
+        .bubble:active {
+            transform: scale(0.95);
         }
 
         .bubble .bubble-icon {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: #fbbf24;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
             display: block;
         }
 
         .bubble .bubble-number {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 900;
             color: #fbbf24;
             display: block;
@@ -227,7 +228,7 @@
         }
 
         .bubble .bubble-label {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             opacity: 0.9;
             margin-top: 0.2rem;
@@ -235,110 +236,81 @@
         }
 
         .bubble .bubble-desc {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             opacity: 0.7;
-            margin-top: 0.3rem;
+            margin-top: 0.2rem;
             display: block;
         }
 
-        /* ===== VIZE - BANNERY (1/4 STRÁNKY) ===== */
-        .vision-banner {
-            padding: 3rem 0;
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: #0f172a;
+        /* ===== PROGRAM - JEN NADPISY (BANNERY 1/4) ===== */
+        .program-banner {
+            padding: 2rem 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-top: 4px solid #0f172a;
-            border-bottom: 4px solid #0f172a;
-            min-height: 25vh;
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
+            min-height: 15vh;
         }
 
-        .vision-banner::before {
-            content: '✦';
-            position: absolute;
-            font-size: 15rem;
-            color: rgba(15, 23, 42, 0.05);
-            top: -3rem;
-            right: -3rem;
-            transform: rotate(15deg);
-        }
-
-        .vision-banner .container {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            padding: 0 2rem;
+        .program-banner .container {
+            padding: 0 1.2rem;
             width: 100%;
         }
 
-        .vision-banner h2 {
-            font-size: 2.8rem;
+        .program-banner h2 {
+            font-size: 2.2rem;
             font-weight: 900;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.3rem;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.1rem;
         }
 
-        .vision-banner .vision-number {
-            font-size: 1rem;
+        .program-banner .program-number {
+            font-size: 0.85rem;
             font-weight: 700;
-            background: rgba(15, 23, 42, 0.15);
             display: inline-block;
-            padding: 0.2rem 1.5rem;
+            padding: 0.15rem 1.2rem;
             border-radius: 9999px;
-            margin-bottom: 0.6rem;
-            backdrop-filter: blur(4px);
+            margin-bottom: 0.2rem;
         }
 
-        .vision-banner p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0.3rem auto 0 auto;
-            font-weight: 500;
-            opacity: 0.9;
+        .program-banner.p1 {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #0f172a;
+            border-top: 3px solid #0f172a;
+            border-bottom: 3px solid #0f172a;
         }
 
-        .vision-banner .vision-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            display: block;
-            color: rgba(15, 23, 42, 0.5);
+        .program-banner.p1 .program-number {
+            background: rgba(15, 23, 42, 0.15);
         }
 
-        .vision-banner.vision-2 {
+        .program-banner.p2 {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #f8fafc;
-            border-top-color: #fbbf24;
-            border-bottom-color: #fbbf24;
+            border-top: 3px solid #fbbf24;
+            border-bottom: 3px solid #fbbf24;
         }
 
-        .vision-banner.vision-2 .vision-icon {
-            color: rgba(251, 191, 36, 0.4);
-        }
-
-        .vision-banner.vision-2 .vision-number {
+        .program-banner.p2 .program-number {
             background: rgba(251, 191, 36, 0.2);
             color: #fbbf24;
         }
 
-        .vision-banner.vision-3 {
+        .program-banner.p3 {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: #0f172a;
-            border-top-color: #0f172a;
-            border-bottom-color: #0f172a;
+            border-top: 3px solid #0f172a;
+            border-bottom: 3px solid #0f172a;
         }
 
-        /* ===== SEKCE - CELÁ STRÁNKA ===== */
+        .program-banner.p3 .program-number {
+            background: rgba(15, 23, 42, 0.15);
+        }
+
+        /* ===== PROČ - MODERNÍ BUBLINY ===== */
         .section {
-            padding: 6rem 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 4rem 0;
             width: 100%;
         }
 
@@ -346,32 +318,24 @@
             background: #f1f5f9;
         }
 
-        .section-dark {
-            background: #0f172a;
-            color: #f8fafc;
-        }
-
-        .section-dark .section-title {
-            color: #f8fafc;
-        }
-
         .section .container {
             max-width: 1280px;
-            padding: 0 2rem;
+            padding: 0 1.2rem;
             width: 100%;
+            margin: 0 auto;
         }
 
         .section-title {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 800;
             text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 2.5rem;
             color: #0f172a;
             letter-spacing: -0.02em;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 0.6rem;
             flex-wrap: wrap;
         }
 
@@ -381,118 +345,143 @@
 
         .section-subtitle {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #64748b;
-            max-width: 700px;
-            margin: -2.5rem auto 3rem auto;
+            max-width: 650px;
+            margin: -1.8rem auto 2.5rem auto;
         }
 
-        .section-dark .section-subtitle {
-            color: #94a3b8;
-        }
-
-        /* ===== GRIDY ===== */
-        .grid-3 {
+        /* ===== MODERNÍ BUBLINY PRO "PROČ" ===== */
+        .why-bubbles {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        /* ===== INFO BUBLINY V SEKCI ===== */
-        .info-bubbles {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
-            margin-top: 2rem;
         }
 
-        .info-bubble {
+        .why-bubble {
             background: #ffffff;
             border-radius: 2rem;
-            padding: 2rem 1.5rem;
+            padding: 2rem 1.8rem;
             text-align: center;
             border: 1px solid #e2e8f0;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            touch-action: manipulation;
         }
 
-        .info-bubble:hover {
-            transform: translateY(-8px);
+        .why-bubble:active {
+            transform: scale(0.96);
+        }
+
+        .why-bubble:hover {
+            transform: translateY(-6px);
             border-color: #fbbf24;
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
         }
 
-        .info-bubble .bubble-icon {
-            font-size: 2.5rem;
+        .why-bubble .bubble-icon {
+            font-size: 2.8rem;
             color: #fbbf24;
             margin-bottom: 0.8rem;
             display: block;
         }
 
-        .info-bubble h4 {
-            font-size: 1.1rem;
+        .why-bubble h3 {
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .why-bubble p {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .why-bubble .bubble-tag {
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 0.2rem 1rem;
+            border-radius: 9999px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== INFO BUBLINY ===== */
+        .info-bubbles {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .info-bubble {
+            background: #ffffff;
+            border-radius: 1.8rem;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            touch-action: manipulation;
+        }
+
+        .info-bubble:active {
+            transform: scale(0.96);
+        }
+
+        .info-bubble:hover {
+            transform: translateY(-6px);
+            border-color: #fbbf24;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+        }
+
+        .info-bubble .bubble-icon {
+            font-size: 2.2rem;
+            color: #fbbf24;
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .info-bubble h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
             color: #0f172a;
         }
 
         .info-bubble p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #64748b;
             line-height: 1.5;
         }
 
-        /* ===== KARTY ===== */
-        .card {
-            background: #ffffff;
-            padding: 2.5rem 2rem;
-            border-radius: 1.5rem;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-            border-color: #fbbf24;
-        }
-
-        .card .icon {
-            font-size: 2.8rem;
-            color: #fbbf24;
-            margin-bottom: 1.2rem;
-            display: inline-block;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            color: #0f172a;
-        }
-
-        .card p {
-            color: #475569;
-            font-size: 1rem;
-        }
-
         /* ===== PROJEKTY ===== */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
         .project-card {
             background: #ffffff;
             border-radius: 1.5rem;
-            padding: 2.5rem 2rem;
+            padding: 2rem 1.5rem;
             border: 1px solid #e2e8f0;
             text-align: center;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .project-card:active {
+            transform: scale(0.96);
         }
 
         .project-card::before {
@@ -518,27 +507,28 @@
         }
 
         .project-card i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #fbbf24;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .project-card h4 {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
         }
 
         .project-card p {
             color: #475569;
+            font-size: 0.9rem;
         }
 
         .project-card .status {
             display: inline-block;
-            margin-top: 1rem;
-            font-size: 0.75rem;
+            margin-top: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            padding: 0.2rem 1.2rem;
+            padding: 0.15rem 1rem;
             border-radius: 9999px;
             background: #dcfce7;
             color: #166534;
@@ -548,33 +538,38 @@
         .candidates-list {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 1.5rem;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .candidate-profile {
             display: flex;
-            gap: 2.5rem;
+            gap: 1.8rem;
             background: #ffffff;
-            border-radius: 1.8rem;
-            padding: 2.5rem;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
             border: 1px solid #e2e8f0;
             transition: all 0.35s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
             align-items: flex-start;
+            touch-action: manipulation;
+        }
+
+        .candidate-profile:active {
+            transform: scale(0.98);
         }
 
         .candidate-profile:hover {
             border-color: #fbbf24;
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-            transform: translateX(6px);
+            transform: translateX(4px);
         }
 
         .candidate-photo {
             flex-shrink: 0;
-            width: 140px;
-            height: 140px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
             border: 4px solid #fbbf24;
@@ -586,30 +581,24 @@
             transition: all 0.3s ease;
         }
 
-        .candidate-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .candidate-photo .photo-placeholder {
             color: #94a3b8;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             text-align: center;
-            padding: 0.5rem;
+            padding: 0.3rem;
             line-height: 1.2;
         }
 
         .candidate-photo .photo-placeholder i {
-            font-size: 2.5rem;
+            font-size: 2rem;
             display: block;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.1rem;
             color: #cbd5e1;
         }
 
         .candidate-profile:hover .candidate-photo {
             border-color: #f59e0b;
-            box-shadow: 0 0 0 8px rgba(251, 191, 36, 0.15);
+            box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.15);
         }
 
         .candidate-info {
@@ -619,74 +608,74 @@
 
         .candidate-info .candidate-number {
             display: inline-block;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 800;
             color: #0f172a;
             background: #fef9e7;
-            padding: 0.2rem 1rem;
+            padding: 0.15rem 0.8rem;
             border-radius: 9999px;
             border: 1px solid #fbbf24;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.2rem;
             letter-spacing: 0.3px;
         }
 
         .candidate-info .candidate-tag {
             display: inline-block;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 700;
             color: #fbbf24;
             background: rgba(251, 191, 36, 0.12);
-            padding: 0.2rem 1rem;
+            padding: 0.15rem 0.8rem;
             border-radius: 9999px;
-            margin-left: 0.5rem;
+            margin-left: 0.3rem;
             text-transform: uppercase;
         }
 
         .candidate-info h3 {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: #0f172a;
-            margin: 0.2rem 0 0.2rem 0;
+            margin: 0.1rem 0 0.1rem 0;
         }
 
         .candidate-info .position {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #fbbf24;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
         }
 
         .candidate-info .bio {
             color: #475569;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            line-height: 1.7;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
         }
 
         .candidate-priorities {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem 1rem;
-            margin-bottom: 1rem;
+            gap: 0.3rem 0.6rem;
+            margin-bottom: 0.8rem;
         }
 
         .candidate-priorities .priority {
             background: #f1f5f9;
-            padding: 0.2rem 1.2rem;
+            padding: 0.15rem 0.8rem;
             border-radius: 9999px;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 500;
             color: #1e293b;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
             border: 1px solid transparent;
             transition: all 0.2s ease;
         }
 
         .candidate-priorities .priority i {
             color: #fbbf24;
-            font-size: 0.5rem;
+            font-size: 0.4rem;
         }
 
         .candidate-profile:hover .priority {
@@ -696,23 +685,28 @@
 
         .candidate-social {
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .candidate-social a {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
             color: #64748b;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            padding: 0.3rem 1rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 9999px;
             background: #f1f5f9;
             transition: all 0.25s ease;
             border: 1px solid transparent;
+            touch-action: manipulation;
+        }
+
+        .candidate-social a:active {
+            transform: scale(0.95);
         }
 
         .candidate-social a:hover {
@@ -723,43 +717,49 @@
         }
 
         .candidate-social a i {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
 
         /* ===== PATIČKA ===== */
         .footer {
             background: #0f172a;
             color: #94a3b8;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             text-align: center;
             border-top: 2px solid #fbbf24;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             width: 100%;
         }
 
-        /* ===== RESPO ===== */
+        /* ===== RESPONZIVITA - MOBIL ===== */
         @media (max-width: 1024px) {
             .grid-3,
-            .grid-2,
-            .bubble-grid,
+            .why-bubbles {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .info-bubbles {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bubble-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
             body {
-                padding-top: 110px;
+                padding-top: 65px;
             }
 
             .navbar .container {
                 flex-direction: column;
-                gap: 0.4rem;
-                padding: 0 1rem;
+                gap: 0.3rem;
+                padding: 0 0.8rem;
             }
 
             .navbar .logo {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
 
             .nav-links {
@@ -768,71 +768,124 @@
             }
 
             .nav-links a {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.7rem;
+                font-size: 0.65rem;
+                padding: 0.25rem 0.6rem;
+            }
+
+            .nav-links a i {
+                font-size: 0.6rem;
             }
 
             .hero {
-                padding-top: calc(4rem + 110px);
-                padding-bottom: 4rem;
+                padding-top: calc(3rem + 65px);
+                padding-bottom: 3rem;
                 min-height: 90vh;
             }
 
             .hero h1 {
-                font-size: 2.4rem;
+                font-size: 2rem;
             }
 
             .hero p {
-                font-size: 1rem;
+                font-size: 0.95rem;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 1.8rem;
             }
 
-            .vision-banner h2 {
-                font-size: 2rem;
+            .section-subtitle {
+                font-size: 0.95rem;
+                margin: -1.2rem auto 1.8rem auto;
             }
 
-            .vision-banner p {
-                font-size: 1rem;
+            .program-banner {
+                min-height: 12vh;
+                padding: 1.2rem 0;
             }
 
-            .vision-banner {
-                min-height: 20vh;
-                padding: 2rem 0;
-            }
-
-            .section {
-                min-height: auto;
-                padding: 4rem 0;
+            .program-banner h2 {
+                font-size: 1.6rem;
             }
 
             .grid-3,
-            .grid-2,
-            .bubble-grid,
+            .why-bubbles,
             .info-bubbles {
                 grid-template-columns: 1fr;
-            }
-
-            .bubble-grid {
                 gap: 1rem;
             }
 
+            .bubble-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
             .bubble {
+                padding: 1rem 0.8rem;
+                border-radius: 1.2rem;
+            }
+
+            .bubble .bubble-number {
+                font-size: 1.3rem;
+            }
+
+            .bubble .bubble-icon {
+                font-size: 1.5rem;
+            }
+
+            .why-bubble {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .why-bubble .bubble-icon {
+                font-size: 2.2rem;
+            }
+
+            .why-bubble h3 {
+                font-size: 1.1rem;
+            }
+
+            .info-bubble {
                 padding: 1.2rem 1rem;
             }
 
+            .info-bubble .bubble-icon {
+                font-size: 1.8rem;
+            }
+
+            .project-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .project-card i {
+                font-size: 2rem;
+            }
+
+            .project-card h4 {
+                font-size: 1rem;
+            }
+
+            /* ===== KANDIDÁTI MOBIL ===== */
             .candidate-profile {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
-                padding: 2rem 1.5rem;
+                padding: 1.5rem 1.2rem;
+                gap: 1rem;
             }
 
             .candidate-photo {
-                width: 120px;
-                height: 120px;
+                width: 90px;
+                height: 90px;
+            }
+
+            .candidate-photo .photo-placeholder i {
+                font-size: 1.8rem;
+            }
+
+            .candidate-info h3 {
+                font-size: 1.2rem;
             }
 
             .candidate-priorities {
@@ -842,24 +895,90 @@
             .candidate-social {
                 justify-content: center;
             }
+
+            .candidate-info .bio {
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
-            .nav-links a {
-                font-size: 0.6rem;
-                padding: 0.2rem 0.5rem;
-            }
-
             .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .vision-banner h2 {
                 font-size: 1.6rem;
             }
 
+            .hero .badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 1rem;
+            }
+
+            .bubble-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+
+            .bubble {
+                padding: 0.8rem 0.5rem;
+                border-radius: 1rem;
+            }
+
+            .bubble .bubble-number {
+                font-size: 1.1rem;
+            }
+
+            .bubble .bubble-label {
+                font-size: 0.65rem;
+            }
+
+            .bubble .bubble-desc {
+                font-size: 0.55rem;
+            }
+
+            .program-banner h2 {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+
+            .candidate-photo {
+                width: 75px;
+                height: 75px;
+            }
+
             .candidate-info h3 {
-                font-size: 1.4rem;
+                font-size: 1rem;
+            }
+
+            .candidate-priorities .priority {
+                font-size: 0.65rem;
+                padding: 0.1rem 0.6rem;
+            }
+        }
+
+        /* ===== DOTYKOVÉ OPTIMALIZACE ===== */
+        @media (hover: none) {
+            .why-bubble:hover,
+            .info-bubble:hover,
+            .project-card:hover,
+            .candidate-profile:hover {
+                transform: none !important;
+            }
+
+            .why-bubble:active,
+            .info-bubble:active,
+            .project-card:active,
+            .candidate-profile:active {
+                transform: scale(0.97) !important;
+            }
+
+            .bubble:active {
+                transform: scale(0.95) !important;
             }
         }
     </style>
@@ -875,10 +994,10 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#program"><i class="fas fa-bolt"></i> Program</a></li>
-                <li><a href="#proč"><i class="fas fa-question-circle"></i> Proč</a></li>
+                <li><a href="#proc"><i class="fas fa-question-circle"></i> Proč</a></li>
                 <li><a href="#co-chystame"><i class="fas fa-calendar-alt"></i> Co chystáme</a></li>
                 <li><a href="#projekty"><i class="fas fa-seedling"></i> Projekty</a></li>
-                <li><a href="#kandidáti"><i class="fas fa-user-check"></i> Kandidáti</a></li>
+                <li><a href="#kandidati"><i class="fas fa-user-check"></i> Kandidáti</a></li>
             </ul>
         </div>
     </nav>
@@ -920,65 +1039,63 @@
         </div>
     </header>
 
-    <!-- ===== PROGRAM - 3 BANNERY (1/4 STRÁNKY) ===== -->
+    <!-- ===== PROGRAM - JEN NADPISY ===== -->
     <section id="program">
-        <!-- SMĚR 1 -->
-        <div class="vision-banner">
+        <!-- PROGRAM 1 -->
+        <div class="program-banner p1">
             <div class="container">
-                <span class="vision-icon"><i class="fas fa-handshake"></i></span>
-                <span class="vision-number">✦ PROGRAM 1</span>
-                <h2>Společný <br />život v obci</h2>
-                <p>Otevřená komunikace, sousedská setkání a podpora místních spolků a tradic.</p>
+                <span class="program-number">✦ PROGRAM 1</span>
+                <h2>Společný život v obci</h2>
             </div>
         </div>
 
-        <!-- SMĚR 2 -->
-        <div class="vision-banner vision-2">
+        <!-- PROGRAM 2 -->
+        <div class="program-banner p2">
             <div class="container">
-                <span class="vision-icon"><i class="fas fa-recycle"></i></span>
-                <span class="vision-number">✦ PROGRAM 2</span>
-                <h2>Obec s <br />rozmyslem</h2>
-                <p>Zodpovědný rozpočet, opravy cest, zeleň, chodníky a investice do budoucnosti.</p>
+                <span class="program-number">✦ PROGRAM 2</span>
+                <h2>Obec s rozmyslem</h2>
             </div>
         </div>
 
-        <!-- SMĚR 3 -->
-        <div class="vision-banner vision-3">
+        <!-- PROGRAM 3 -->
+        <div class="program-banner p3">
             <div class="container">
-                <span class="vision-icon"><i class="fas fa-rocket"></i></span>
-                <span class="vision-number">✦ PROGRAM 3</span>
-                <h2>Život pro <br />každou generaci</h2>
-                <p>Místo pro rodiny, seniory, mládež i nové sousedy – obec, kde to žije.</p>
+                <span class="program-number">✦ PROGRAM 3</span>
+                <h2>Život pro každou generaci</h2>
             </div>
         </div>
     </section>
 
-    <!-- ===== PROČ - CELÁ STRÁNKA ===== -->
-    <section class="section section-alt" id="proč">
+    <!-- ===== PROČ - MODERNÍ BUBLINY ===== -->
+    <section class="section section-alt" id="proc">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-compass"></i> Proč jdeme do toho</h2>
             <p class="section-subtitle">Víme, že obec posouvají lidé, kteří mají chuť se zapojit a dívat se dopředu.</p>
-            <div class="grid-3">
-                <div class="card">
-                    <span class="icon"><i class="fas fa-people-arrows"></i></span>
+
+            <div class="why-bubbles">
+                <div class="why-bubble">
+                    <span class="bubble-icon"><i class="fas fa-people-arrows"></i></span>
                     <h3>Lidé na prvním místě</h3>
                     <p>Důležitá rozhodnutí a plány obce mají vycházet z potřeb těch, kteří v ní žijí.</p>
+                    <span class="bubble-tag">Nasloucháme</span>
                 </div>
-                <div class="card">
-                    <span class="icon"><i class="fas fa-code-branch"></i></span>
+                <div class="why-bubble">
+                    <span class="bubble-icon"><i class="fas fa-code-branch"></i></span>
                     <h3>Různorodý tým</h3>
                     <p>Společně jsme silnější. V týmu máme lidi různých profesí, věku i životních zkušeností.</p>
+                    <span class="bubble-tag">Spolupráce</span>
                 </div>
-                <div class="card">
-                    <span class="icon"><i class="fas fa-gavel"></i></span>
+                <div class="why-bubble">
+                    <span class="bubble-icon"><i class="fas fa-gavel"></i></span>
                     <h3>Férová a jasná pravidla</h3>
                     <p>Bez zbytečných složitostí, bez tajemství. Obyvatelé mají vědět, proč a jak se rozhoduje.</p>
+                    <span class="bubble-tag">Transparentnost</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== CO CHYSTÁME - NOVÁ SEKCE S BUBLINAMI ===== -->
+    <!-- ===== CO CHYSTÁME - INFO BUBLINY ===== -->
     <section class="section" id="co-chystame">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Co chystáme pro naši vesnici</h2>
@@ -1029,7 +1146,7 @@
         </div>
     </section>
 
-    <!-- ===== PROJEKTY - CELÁ STRÁNKA ===== -->
+    <!-- ===== PROJEKTY ===== -->
     <section class="section section-alt" id="projekty">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-tasks"></i> Na co se zaměříme</h2>
@@ -1075,8 +1192,8 @@
         </div>
     </section>
 
-    <!-- ===== KANDIDÁTI - CELÁ STRÁNKA ===== -->
-    <section class="section" id="kandidáti">
+    <!-- ===== KANDIDÁTI ===== -->
+    <section class="section" id="kandidati">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-user-check"></i> Kdo jsme</h2>
             <p class="section-subtitle">Jsme vaši sousedé a známé tváře z obce. Spojuje nás chuť pracovat pro místo, kde žijeme.</p>
@@ -1098,7 +1215,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Žiji v obci přes 15 let a za tu dobu jsem měl možnost poznat její život i proměny. Baví mě mluvit s lidmi osobně, poslouchat různé názory a hledat věcná řešení. Chci, aby se v naší vesnici znovu více potkávali lidé napříč generacemi.</p>
+                        <p class="bio">Žiji v obci přes 15 let a za tu dobu jsem měl možnost poznat její život i proměny. Baví mě mluvit s lidmi osobně, poslouchat různé názory a hledat věcná řešení.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Otevřená komunikace</span>
                             <span class="priority"><i class="fas fa-circle"></i> Podpora sousedství</span>
@@ -1125,7 +1242,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Do týmu přináším praktickou zkušenost s rozvojem a fungováním veřejné správy. Věřím, že úřad je tu především pro občany – má jim umět naslouchat a srozumitelně komunikovat. Chci přispět k tomu, aby se důležité věci řešily s rozvahou a respektem.</p>
+                        <p class="bio">Do týmu přináším praktickou zkušenost s rozvojem a fungováním veřejné správy. Věřím, že úřad je tu především pro občany – má jim umět naslouchat.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Transparentnost</span>
                             <span class="priority"><i class="fas fa-circle"></i> Služby občanům</span>
@@ -1152,7 +1269,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Práce s lidmi mě naučila trpělivosti, empatii a umění naslouchat. Přála bych si, aby byla naše vesnice místem, kde se dobře žije dětem, rodinám, mladým lidem i seniorům. Ráda podporuji kulturní a sportovní život a společná setkávání.</p>
+                        <p class="bio">Práce s lidmi mě naučila trpělivosti, empatii a umění naslouchat. Přála bych si, aby byla naše vesnice místem, kde se dobře žije dětem, rodinám i seniorům.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Rodiny a děti</span>
                             <span class="priority"><i class="fas fa-circle"></i> Kultura a sport</span>
@@ -1179,7 +1296,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">V obci žiji s rodinou a záleží mi na tom, jak se tu bude žít nám i našim dětem. Vidím zde mnoho míst, která lze zlepšit i s relativně malým úsilím. Občané i naše obec si změnu zaslouží a chci být součástí změn, které budou opravdu vidět.</p>
+                        <p class="bio">V obci žiji s rodinou a záleží mi na tom, jak se tu bude žít nám i našim dětem. Vidím zde mnoho míst, která lze zlepšit i s relativně malým úsilím.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Prostředí pro život</span>
                             <span class="priority"><i class="fas fa-circle"></i> Místní podněty</span>
@@ -1206,7 +1323,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Mám k naší obci hluboký vztah, žiji zde už mnoho let. Baví mě přicházet s novými nápady a nebojím se přiložit ruku k dílu. Ráda se podílím na akcích, při kterých se lidé potkávají, poznávají a vytvářejí společné vzpomínky.</p>
+                        <p class="bio">Mám k naší obci hluboký vztah, žiji zde už mnoho let. Baví mě přicházet s novými nápady a nebojím se přiložit ruku k dílu.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Komunitní akce</span>
                             <span class="priority"><i class="fas fa-circle"></i> Spolupráce</span>
@@ -1233,7 +1350,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Jsem přesvědčen, že bez otevřené komunikace a včasných informací se dobrá rozhodnutí dělají těžko. Stejně by podle mě měla fungovat i obec – lidé mají vědět, co se chystá, a dostat prostor říct svůj názor dřív, než je rozhodnuto.</p>
+                        <p class="bio">Jsem přesvědčen, že bez otevřené komunikace a včasných informací se dobrá rozhodnutí dělají těžko. Lidé mají vědět, co se chystá.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Informovanost</span>
                             <span class="priority"><i class="fas fa-circle"></i> Zapojení občanů</span>
@@ -1260,7 +1377,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Pocházím z rodiny, která v obci žije už po generace, a proto mám k ní silný vztah. Chci přispět k tomu, aby naše vesnice zůstala příjemným místem pro život a zároveň se dokázala přizpůsobit potřebám dnešní doby.</p>
+                        <p class="bio">Pocházím z rodiny, která v obci žije už po generace, a proto mám k ní silný vztah. Chci přispět k tomu, aby naše vesnice zůstala příjemným místem.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Zachování rázu obce</span>
                             <span class="priority"><i class="fas fa-circle"></i> Moderní přístup</span>
@@ -1287,7 +1404,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Zajímá mě ochrana přírody a kvalita života v obci. Prosazuji praktická řešení, která pomáhají lidem i prostředí kolem nás. Chci, aby naše vesnice byla připravená na výzvy budoucnosti.</p>
+                        <p class="bio">Zajímá mě ochrana přírody a kvalita života v obci. Prosazuji praktická řešení, která pomáhají lidem i prostředí kolem nás.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Životní prostředí</span>
                             <span class="priority"><i class="fas fa-circle"></i> Udržitelnost</span>
@@ -1314,7 +1431,7 @@
                         </div>
                         <h3>Jméno Příjmení</h3>
                         <div class="position">Povolání / zkušenost</div>
-                        <p class="bio">Mám zkušenosti s plánováním a rozvojem. Chci, aby se obec rozvíjela promyšleně, s ohledem na potřeby obyvatel a dlouhodobou udržitelnost. Podporuji inovace a moderní přístupy.</p>
+                        <p class="bio">Mám zkušenosti s plánováním a rozvojem. Chci, aby se obec rozvíjela promyšleně, s ohledem na potřeby obyvatel a dlouhodobou udržitelnost.</p>
                         <div class="candidate-priorities">
                             <span class="priority"><i class="fas fa-circle"></i> Rozvoj obce</span>
                             <span class="priority"><i class="fas fa-circle"></i> Inovace</span>
