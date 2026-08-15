@@ -487,7 +487,7 @@
             color: var(--text-light);
         }
 
-        /* ===== PROGRAMOVÉ BANNERY ===== */
+        /* ===== PROGRAMOVÉ BANNERY - VÝRAZNÉ BARVY + ODKAZY ===== */
         .program-banner {
             padding: 2.5rem 0;
             text-align: center;
@@ -496,6 +496,8 @@
             justify-content: center;
             width: 100%;
             min-height: 14vh;
+            scroll-margin-top: 80px;
+            transition: background 0.4s ease;
         }
         .program-banner .container {
             padding: 0 1.5rem;
@@ -505,6 +507,15 @@
             font-size: 3rem;
             font-weight: 900;
             letter-spacing: -0.02em;
+            transition: transform 0.3s ease;
+        }
+        .program-banner a {
+            text-decoration: none;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .program-banner a:hover h2 {
+            transform: scale(1.02);
         }
         .program-banner .program-number {
             font-size: 1rem;
@@ -516,64 +527,64 @@
             letter-spacing: 1px;
         }
 
-        /* BANNER 1 - JEMNĚ ZLATÁ (PROČ) */
+        /* BANNER 1 - VÝRAZNĚ ZLATÁ (PROČ) */
         .program-banner.p1 {
-            background: linear-gradient(145deg, var(--gold-bg) 0%, #FDEBD0 50%, var(--gold-bg) 100%);
-            color: var(--text-dark);
-            border-top: 3px solid var(--gold);
-            border-bottom: 3px solid var(--gold);
+            background: linear-gradient(145deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+            color: #0F172A;
+            border-top: 4px solid #B45309;
+            border-bottom: 4px solid #B45309;
         }
         .program-banner.p1 .program-number {
-            background: rgba(212, 160, 43, 0.15);
-            color: var(--gold-dark);
+            background: rgba(180, 83, 9, 0.2);
+            color: #78350F;
         }
         .program-banner.p1 h2 {
-            color: var(--text-dark);
+            color: #0F172A;
         }
 
-        /* BANNER 2 - JEMNĚ TYRKYSOVÁ (CO CHYSTÁME) */
+        /* BANNER 2 - VÝRAZNĚ TYRKYSOVÁ (CO CHYSTÁME) */
         .program-banner.p2 {
-            background: linear-gradient(145deg, var(--teal-bg) 0%, #A7F3D0 50%, var(--teal-bg) 100%);
-            color: var(--text-dark);
-            border-top: 3px solid #0D9488;
-            border-bottom: 3px solid #0D9488;
+            background: linear-gradient(145deg, #5EEAD4 0%, #14B8A6 50%, #0F766E 100%);
+            color: #0F172A;
+            border-top: 4px solid #0D9488;
+            border-bottom: 4px solid #0D9488;
         }
         .program-banner.p2 .program-number {
-            background: rgba(13, 148, 136, 0.15);
-            color: #0F766E;
+            background: rgba(13, 148, 136, 0.25);
+            color: #064E3B;
         }
         .program-banner.p2 h2 {
-            color: var(--text-dark);
+            color: #0F172A;
         }
 
-        /* BANNER 3 - JEMNĚ LEVANDULOVÁ (PROJEKTY) */
+        /* BANNER 3 - VÝRAZNĚ LEVANDULOVÁ (PROJEKTY) */
         .program-banner.p3 {
-            background: linear-gradient(145deg, var(--plum-bg) 0%, #DDD6FE 50%, var(--plum-bg) 100%);
-            color: var(--text-dark);
-            border-top: 3px solid #7C3AED;
-            border-bottom: 3px solid #7C3AED;
+            background: linear-gradient(145deg, #DDD6FE 0%, #8B5CF6 50%, #7C3AED 100%);
+            color: #0F172A;
+            border-top: 4px solid #6D28D9;
+            border-bottom: 4px solid #6D28D9;
         }
         .program-banner.p3 .program-number {
-            background: rgba(124, 58, 237, 0.15);
-            color: #6D28D9;
+            background: rgba(109, 40, 217, 0.2);
+            color: #4C1D95;
         }
         .program-banner.p3 h2 {
-            color: var(--text-dark);
+            color: #0F172A;
         }
 
-        /* BANNER 4 - JEMNĚ MODRÁ (KDO JSME) */
+        /* BANNER 4 - VÝRAZNĚ MODRÁ (KDO JSME) */
         .program-banner.p4 {
-            background: linear-gradient(145deg, var(--ocean-bg) 0%, #BFDBFE 50%, var(--ocean-bg) 100%);
-            color: var(--text-dark);
-            border-top: 3px solid #1E40AF;
-            border-bottom: 3px solid #1E40AF;
+            background: linear-gradient(145deg, #93C5FD 0%, #2563EB 50%, #1E40AF 100%);
+            color: #0F172A;
+            border-top: 4px solid #1E3A8A;
+            border-bottom: 4px solid #1E3A8A;
         }
         .program-banner.p4 .program-number {
-            background: rgba(30, 64, 175, 0.15);
-            color: #1E3A8A;
+            background: rgba(30, 58, 138, 0.2);
+            color: #172554;
         }
         .program-banner.p4 h2 {
-            color: var(--text-dark);
+            color: #0F172A;
         }
 
         /* ===== SEKCE ===== */
@@ -974,7 +985,7 @@
             font-size: 3.2rem;
             margin-bottom: 0.5rem;
             display: block;
-            transition: all 0.4s ease;
+            transition: transform 0.4s ease;
         }
         .volby-card:hover .volby-icon {
             transform: scale(1.15) rotate(-8deg);
@@ -1912,11 +1923,13 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 1 + SEKCE PROČ - JEMNĚ ZLATÁ ===== -->
+    <!-- ===== BANNER 1 + SEKCE PROČ - VÝRAZNĚ ZLATÁ ===== -->
     <div class="program-banner p1" id="proc-banner">
         <div class="container">
-            <span class="program-number">✦ 01</span>
-            <h2>Společný život v obci</h2>
+            <a href="#proc" style="text-decoration:none; display:block;">
+                <span class="program-number">✦ 01</span>
+                <h2>Společný život v obci</h2>
+            </a>
         </div>
     </div>
 
@@ -1958,11 +1971,13 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 2 + SEKCE CO CHYSTÁME - JEMNĚ TYRKYSOVÁ ===== -->
+    <!-- ===== BANNER 2 + SEKCE CO CHYSTÁME - VÝRAZNĚ TYRKYSOVÁ ===== -->
     <div class="program-banner p2" id="co-banner">
         <div class="container">
-            <span class="program-number">✦ 02</span>
-            <h2>Obec s rozmyslem</h2>
+            <a href="#co-chystame" style="text-decoration:none; display:block;">
+                <span class="program-number">✦ 02</span>
+                <h2>Obec s rozmyslem</h2>
+            </a>
         </div>
     </div>
 
@@ -2075,11 +2090,13 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 3 + SEKCE PROJEKTY - JEMNĚ LEVANDULOVÁ ===== -->
+    <!-- ===== BANNER 3 + SEKCE PROJEKTY - VÝRAZNĚ LEVANDULOVÁ ===== -->
     <div class="program-banner p3" id="projekty-banner">
         <div class="container">
-            <span class="program-number">✦ 03</span>
-            <h2>Život pro každou generaci</h2>
+            <a href="#projekty" style="text-decoration:none; display:block;">
+                <span class="program-number">✦ 03</span>
+                <h2>Život pro každou generaci</h2>
+            </a>
         </div>
     </div>
 
@@ -2204,11 +2221,13 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 4 + SEKCE KDO JSME - JEMNĚ MODRÁ ===== -->
+    <!-- ===== BANNER 4 + SEKCE KDO JSME - VÝRAZNĚ MODRÁ ===== -->
     <div class="program-banner p4" id="kdo-banner">
         <div class="container">
-            <span class="program-number">✦ 04</span>
-            <h2>Lidé, kteří za tím stojí</h2>
+            <a href="#kdo-jsme" style="text-decoration:none; display:block;">
+                <span class="program-number">✦ 04</span>
+                <h2>Lidé, kteří za tím stojí</h2>
+            </a>
         </div>
     </div>
 
