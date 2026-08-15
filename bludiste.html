@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Bludiště</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding: 0.5rem;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .game-wrapper {
+            background: #1e2a3a;
+            padding: 1.2rem 1.5rem 1.5rem;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #f0e9d8;
+            font-weight: 500;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-shadow: 0 3px 0 #0b0f1a;
+            margin-bottom: 0.3rem;
+        }
+        h1 span {
+            color: #facc15;
+        }
+
+        .stats {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            padding: 0.2rem 0.3rem 0.5rem;
+            border-bottom: 1px solid #3a4a5e;
+            margin-bottom: 0.8rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stats > div {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #0f1a2a;
+            padding: 0.1rem 0.8rem 0.1rem 0.5rem;
+            border-radius: 40px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats .icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+        .stats .value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #facc15;
+            min-width: 2rem;
+            text-align: center;
+        }
+        .stats .value.moves {
+            color: #60a5fa;
+        }
+
+        canvas {
+            display: block;
+            background: #0b1622;
+            border-radius: 1.5rem;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 2px #334155;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            max-width: 450px;
+            touch-action: none;
+            cursor: pointer;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button {
+            background: #facc15;
+            border: none;
+            color: #0b0f1a;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.35rem 1.2rem;
+            border-radius: 60px;
+            box-shadow: 0 6px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.07s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            touch-action: manipulation;
+        }
+        button:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #a07c0e;
+        }
+
+        .back-button {
+            background: #64748b;
+            box-shadow: 0 6px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            color: #0b0f1a;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.35rem 1rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.07s ease;
+            border: none;
+        }
+        .back-button:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #475569;
+        }
+        .back-button:hover {
+            background: #94a3b8;
+        }
+
+        .status {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            min-height: 1.5rem;
+            font-weight: 300;
+            text-align: center;
+            margin-top: 0.3rem;
+            width: 100%;
+        }
+
+        .hint {
+            color: #64748b;
+            font-size: 0.65rem;
+            text-align: center;
+            margin-top: 0.1rem;
+        }
+
+        .hint kbd {
+            background: #0b1622;
+            padding: 0.05rem 0.5rem;
+            border-radius: 6px;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            font-size: 0.6rem;
+        }
+
+        /* Na mobilu schovat hint s klávesami */
+        @media (hover: none) and (pointer: coarse) {
+            .hint {
+                display: none;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .game-wrapper {
+                padding: 1rem;
+                border-radius: 2rem;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+            .stats {
+                font-size: 0.8rem;
+            }
+            .stats .value {
+                font-size: 1rem;
+                min-width: 1.5rem;
+            }
+            button {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.9rem;
+            }
+            .back-button {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-wrapper">
+    <h1>🌀 <span>BLUDIŠTĚ</span></h1>
+
+    <div class="stats">
+        <div><span class="icon">⭐</span><span class="value" id="levelDisplay">1</span></div>
+        <div><span class="icon">👣</span><span class="value moves" id="movesDisplay">0</span></div>
+        <div><span class="icon">⏱️</span><span class="value" id="timeDisplay">0</span></div>
+    </div>
+
+    <canvas id="gameCanvas" width="500" height="500"></canvas>
+
+    <div class="controls">
+        <button id="restartBtn">🔄 Nová</button>
+        <button id="newLevelBtn">📈 Další level</button>
+        <a href="hry.html" class="back-button">⬅ Zpět</a>
+    </div>
+    <div class="status" id="statusMsg">Použij šipky ← → ↑ ↓ nebo WASD</div>
+    <div class="hint">
+        <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> pohyb &nbsp;·&nbsp; <kbd>R</kbd> restart
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ----- DOM -----
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const levelDisplay = document.getElementById('levelDisplay');
+        const movesDisplay = document.getElementById('movesDisplay');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const statusMsg = document.getElementById('statusMsg');
+        const restartBtn = document.getElementById('restartBtn');
+        const newLevelBtn = document.getElementById('newLevelBtn');
+
+        // ----- Konstanty -----
+        const SIZE = 500;
+        const CELL_SIZE = 25;
+        const COLS = 20;
+        const ROWS = 20;
+        const PLAYER_SIZE = 18;
+
+        // ----- Herní stav -----
+        let maze = [];
+        let player = { x: 1, y: 1 };
+        let exit = { x: COLS - 2, y: ROWS - 2 };
+        let level = 1;
+        let moves = 0;
+        let seconds = 0;
+        let gameOver = false;
+        let won = false;
+        let timerInterval = null;
+        let frameId = null;
+
+        // Ovládání
+        let keys = {
+            ArrowLeft: false,
+            ArrowRight: false,
+            ArrowUp: false,
+            ArrowDown: false,
+            a: false,
+            d: false,
+            w: false,
+            s: false
+        };
+
+        // ----- Generování bludiště (DFS) -----
+        function generateMaze(cols, rows) {
+            const grid = [];
+            for (let r = 0; r < rows; r++) {
+                grid.push([]);
+                for (let c = 0; c < cols; c++) {
+                    grid[r].push({ wall: true, visited: false });
+                }
+            }
+
+            function carve(x, y) {
+                grid[y][x].wall = false;
+                grid[y][x].visited = true;
+
+                const dirs = [
+                    [0, -1],
+                    [1, 0],
+                    [0, 1],
+                    [-1, 0]
+                ];
+                for (let i = dirs.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [dirs[i], dirs[j]] = [dirs[j], dirs[i]];
+                }
+
+                for (const [dx, dy] of dirs) {
+                    const nx = x + dx * 2;
+                    const ny = y + dy * 2;
+                    if (nx > 0 && nx < cols && ny > 0 && ny < rows && !grid[ny][nx].visited) {
+                        grid[y + dy][x + dx].wall = false;
+                        carve(nx, ny);
+                    }
+                }
+            }
+
+            carve(1, 1);
+
+            const mazeMatrix = [];
+            for (let r = 0; r < rows; r++) {
+                mazeMatrix.push([]);
+                for (let c = 0; c < cols; c++) {
+                    mazeMatrix[r].push(grid[r][c].wall);
+                }
+            }
+
+            mazeMatrix[1][1] = false;
+            mazeMatrix[rows - 2][cols - 2] = false;
+
+            return mazeMatrix;
+        }
+
+        // ----- Nová hra -----
+        function newGame(newLevel = null) {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+
+            if (newLevel !== null) {
+                level = newLevel;
+            }
+
+            const size = Math.min(COLS, 10 + level * 2);
+            const cols = Math.min(COLS, size);
+            const rows = Math.min(ROWS, size);
+
+            maze = generateMaze(cols, rows);
+
+            player.x = 1;
+            player.y = 1;
+            exit.x = cols - 2;
+            exit.y = rows - 2;
+
+            moves = 0;
+            seconds = 0;
+            gameOver = false;
+            won = false;
+
+            levelDisplay.textContent = level;
+            movesDisplay.textContent = '0';
+            timeDisplay.textContent = '0';
+            statusMsg.textContent = `🗺️ Level ${level} - Najdi cestu k cíli!`;
+            document.getElementById('restartBtn').disabled = false;
+
+            timerInterval = setInterval(() => {
+                if (!gameOver && !won) {
+                    seconds++;
+                    timeDisplay.textContent = seconds;
+                }
+            }, 1000);
+
+            draw();
+        }
+
+        // ----- Pohyb -----
+        function movePlayer(dx, dy) {
+            if (gameOver || won) return;
+
+            const newX = player.x + dx;
+            const newY = player.y + dy;
+
+            if (newY < 0 || newY >= maze.length || newX < 0 || newX >= maze[0].length) {
+                return;
+            }
+
+            if (maze[newY][newX]) {
+                return;
+            }
+
+            player.x = newX;
+            player.y = newY;
+            moves++;
+            movesDisplay.textContent = moves;
+
+            if (player.x === exit.x && player.y === exit.y) {
+                won = true;
+                statusMsg.textContent = `🎉 VYHRÁL JSI! Level ${level} dokončen za ${moves} kroků!`;
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                setTimeout(() => {
+                    if (!gameOver) {
+                        level++;
+                        newGame(level);
+                    }
+                }, 2000);
+            }
+
+            draw();
+        }
+
+        // ----- Vykreslení -----
+        function draw() {
+            const canvasSize = canvas.width;
+            const cellSize = canvasSize / Math.max(maze.length, maze[0] ? maze[0].length : 1);
+
+            ctx.clearRect(0, 0, canvasSize, canvasSize);
+
+            // Bludiště
+            for (let r = 0; r < maze.length; r++) {
+                for (let c = 0; c < maze[0].length; c++) {
+                    const x = c * cellSize;
+                    const y = r * cellSize;
+
+                    if (maze[r][c]) {
+                        ctx.fillStyle = '#2a3a5a';
+                        ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                        ctx.shadowBlur = 3;
+                        ctx.fillRect(x, y, cellSize, cellSize);
+                        ctx.shadowBlur = 0;
+
+                        ctx.fillStyle = 'rgba(255,255,255,0.05)';
+                        ctx.fillRect(x + 2, y + 2, cellSize - 4, 2);
+                        ctx.fillRect(x + 2, y + 2, 2, cellSize - 4);
+                        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+                        ctx.fillRect(x + cellSize - 3, y + 2, 2, cellSize - 4);
+                        ctx.fillRect(x + 2, y + cellSize - 3, cellSize - 4, 2);
+                    } else {
+                        ctx.fillStyle = '#0f1a2a';
+                        ctx.fillRect(x, y, cellSize, cellSize);
+                        ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+                        ctx.lineWidth = 0.5;
+                        ctx.strokeRect(x, y, cellSize, cellSize);
+                    }
+                }
+            }
+
+            // Cíl
+            const exitX = exit.x * cellSize;
+            const exitY = exit.y * cellSize;
+            const pulse = Math.sin(Date.now() / 300) * 0.2 + 0.8;
+
+            const gradExit = ctx.createRadialGradient(
+                exitX + cellSize / 2, exitY + cellSize / 2, 2,
+                exitX + cellSize / 2, exitY + cellSize / 2, cellSize
+            );
+            gradExit.addColorStop(0, `rgba(239, 68, 68, ${0.3 * pulse})`);
+            gradExit.addColorStop(1, 'rgba(239, 68, 68, 0)');
+            ctx.fillStyle = gradExit;
+            ctx.fillRect(exitX - cellSize / 2, exitY - cellSize / 2, cellSize * 2, cellSize * 2);
+
+            ctx.fillStyle = '#ef4444';
+            ctx.shadowColor = '#ef4444';
+            ctx.shadowBlur = 15;
+            ctx.beginPath();
+            ctx.roundRect(exitX + 3, exitY + 3, cellSize - 6, cellSize - 6, 4);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            ctx.fillStyle = 'white';
+            ctx.font = `${cellSize * 0.5}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🏁', exitX + cellSize / 2, exitY + cellSize / 2 + 1);
+
+            // Hráč
+            const px = player.x * cellSize + cellSize / 2;
+            const py = player.y * cellSize + cellSize / 2;
+            const radius = cellSize * 0.35;
+
+            const gradPlayer = ctx.createRadialGradient(px, py, 2, px, py, radius * 2);
+            gradPlayer.addColorStop(0, 'rgba(59, 130, 246, 0.2)');
+            gradPlayer.addColorStop(1, 'rgba(59, 130, 246, 0)');
+            ctx.fillStyle = gradPlayer;
+            ctx.beginPath();
+            ctx.arc(px, py, radius * 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            const gradBody = ctx.createRadialGradient(
+                px - radius * 0.3, py - radius * 0.3, 2,
+                px, py, radius
+            );
+            gradBody.addColorStop(0, '#60a5fa');
+            gradBody.addColorStop(0.6, '#2563eb');
+            gradBody.addColorStop(1, '#1e3a8a');
+            ctx.shadowColor = '#3b82f6';
+            ctx.shadowBlur = 20;
+            ctx.fillStyle = gradBody;
+            ctx.beginPath();
+            ctx.arc(px, py, radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            const eyeSize = radius * 0.2;
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(px - radius * 0.3, py - radius * 0.2, eyeSize, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(px + radius * 0.3, py - radius * 0.2, eyeSize, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#0f172a';
+            ctx.beginPath();
+            ctx.arc(px - radius * 0.25, py - radius * 0.15, eyeSize * 0.6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(px + radius * 0.35, py - radius * 0.15, eyeSize * 0.6, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Herní stav
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.fillRect(0, 0, canvasSize, canvasSize);
+                ctx.fillStyle = '#fca5a5';
+                ctx.font = 'bold 46px "Segoe UI", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('💀 GAME OVER', canvasSize / 2, canvasSize / 2 - 10);
+                ctx.font = '20px sans-serif';
+                ctx.fillStyle = '#e2e8f0';
+                ctx.fillText('Klikni "Nová"', canvasSize / 2, canvasSize / 2 + 50);
+            }
+
+            if (won) {
+                ctx.fillStyle = 'rgba(0,0,0,0.4)';
+                ctx.fillRect(0, 0, canvasSize, canvasSize);
+                ctx.fillStyle = '#fde047';
+                ctx.font = 'bold 46px "Segoe UI", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('🎉 VÝHRA!', canvasSize / 2, canvasSize / 2 - 10);
+                ctx.font = '20px sans-serif';
+                ctx.fillStyle = '#f1f5f9';
+                ctx.fillText(`Další level za moment...`, canvasSize / 2, canvasSize / 2 + 50);
+            }
+        }
+
+        // ----- Animace -----
+        function gameLoop() {
+            draw();
+            frameId = requestAnimationFrame(gameLoop);
+        }
+
+        // ----- Ovládání kláves -----
+        function handleKeyDown(e) {
+            const key = e.key;
+            if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'a', 'd', 'w', 's'].includes(key)) {
+                e.preventDefault();
+                keys[key] = true;
+                handleMovement();
+            }
+            if (key === 'r' || key === 'R') {
+                e.preventDefault();
+                newGame(level);
+            }
+        }
+
+        function handleKeyUp(e) {
+            const key = e.key;
+            if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'a', 'd', 'w', 's'].includes(key)) {
+                e.preventDefault();
+                keys[key] = false;
+            }
+        }
+
+        function handleMovement() {
+            if (keys.ArrowLeft || keys.a) movePlayer(-1, 0);
+            if (keys.ArrowRight || keys.d) movePlayer(1, 0);
+            if (keys.ArrowUp || keys.w) movePlayer(0, -1);
+            if (keys.ArrowDown || keys.s) movePlayer(0, 1);
+        }
+
+        // ----- Dotykové ovládání (přetahování) -----
+        let touchStartX = null;
+        let touchStartY = null;
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            touchStartX = (touch.clientX - rect.left) * scaleX;
+            touchStartY = (touch.clientY - rect.top) * scaleY;
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (touchStartX === null || touchStartY === null) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const currentX = (touch.clientX - rect.left) * scaleX;
+            const currentY = (touch.clientY - rect.top) * scaleY;
+
+            const dx = currentX - touchStartX;
+            const dy = currentY - touchStartY;
+
+            const threshold = 15;
+            if (Math.abs(dx) > threshold || Math.abs(dy) > threshold) {
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    movePlayer(dx > 0 ? 1 : -1, 0);
+                } else {
+                    movePlayer(0, dy > 0 ? 1 : -1);
+                }
+                touchStartX = currentX;
+                touchStartY = currentY;
+            }
+        }, { passive: false });
+
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            touchStartX = null;
+            touchStartY = null;
+        }, { passive: false });
+
+        // ----- Inicializace -----
+        function init() {
+            window.addEventListener('keydown', handleKeyDown);
+            window.addEventListener('keyup', handleKeyUp);
+
+            restartBtn.addEventListener('click', () => newGame(level));
+            newLevelBtn.addEventListener('click', () => {
+                level++;
+                newGame(level);
+            });
+
+            canvas.addEventListener('click', () => {
+                if (gameOver) {
+                    newGame(level);
+                }
+            });
+
+            newGame(1);
+            gameLoop();
+
+            window.addEventListener('blur', () => {
+                keys = { ArrowLeft: false, ArrowRight: false, ArrowUp: false, ArrowDown: false, a: false, d: false,
+                    w: false, s: false };
+            });
+        }
+
+        // ----- roundRect polyfill -----
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                if (r > w / 2) r = w / 2;
+                if (r > h / 2) r = h / 2;
+                this.moveTo(x + r, y);
+                this.arcTo(x + w, y, x + w, y + h, r);
+                this.arcTo(x + w, y + h, x, y + h, r);
+                this.arcTo(x, y + h, x, y, r);
+                this.arcTo(x, y, x + w, y, r);
+                return this;
+            };
+        }
+
+        init();
+    })();
+</script>
+</body>
+</html>
