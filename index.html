@@ -21,19 +21,18 @@
             --wine-dark: #3A0C0C;
             --wine-light: #6B1A1A;
             --gold: #D4A02B;
-            --gold-dark: #A87D1F;
-            --teal: #0D9488;
-            --teal-dark: #0F766E;
-            --plum: #7C3AED;
-            --plum-dark: #6D28D9;
-            --ocean: #1E40AF;
-            --ocean-dark: #1E3A8A;
+            --gold-light: #F5E6C8;
+            --gold-bg: #FEF9E7;
+            --teal-bg: #D1FAE5;
+            --plum-bg: #EDE9FE;
+            --ocean-bg: #DBEAFE;
             --bg-dark: #0D0D0D;
             --bg-card: #1A1A1A;
             --text-light: #F5E6C8;
             --text-muted: #B8A99A;
             --text-dark: #0D0D0D;
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.08);
             --radius: 2rem;
         }
 
@@ -517,52 +516,64 @@
             letter-spacing: 1px;
         }
 
-        /* BANNER 1 - ZLATÁ (PROČ) */
+        /* BANNER 1 - JEMNĚ ZLATÁ (PROČ) */
         .program-banner.p1 {
-            background: linear-gradient(145deg, #2A1A0A 0%, var(--gold-dark) 50%, #1A0A00 100%);
-            color: var(--text-light);
+            background: linear-gradient(145deg, var(--gold-bg) 0%, #FDEBD0 50%, var(--gold-bg) 100%);
+            color: var(--text-dark);
             border-top: 3px solid var(--gold);
             border-bottom: 3px solid var(--gold);
         }
         .program-banner.p1 .program-number {
             background: rgba(212, 160, 43, 0.15);
-            color: var(--gold);
+            color: var(--gold-dark);
+        }
+        .program-banner.p1 h2 {
+            color: var(--text-dark);
         }
 
-        /* BANNER 2 - TYRKYSOVÁ (CO CHYSTÁME) */
+        /* BANNER 2 - JEMNĚ TYRKYSOVÁ (CO CHYSTÁME) */
         .program-banner.p2 {
-            background: linear-gradient(145deg, #0A1A1A 0%, var(--teal-dark) 50%, #0A1A1A 100%);
-            color: var(--text-light);
-            border-top: 3px solid var(--teal);
-            border-bottom: 3px solid var(--teal);
+            background: linear-gradient(145deg, var(--teal-bg) 0%, #A7F3D0 50%, var(--teal-bg) 100%);
+            color: var(--text-dark);
+            border-top: 3px solid #0D9488;
+            border-bottom: 3px solid #0D9488;
         }
         .program-banner.p2 .program-number {
             background: rgba(13, 148, 136, 0.15);
-            color: var(--teal);
+            color: #0F766E;
+        }
+        .program-banner.p2 h2 {
+            color: var(--text-dark);
         }
 
-        /* BANNER 3 - ŠVESTKOVÁ (PROJEKTY) */
+        /* BANNER 3 - JEMNĚ LEVANDULOVÁ (PROJEKTY) */
         .program-banner.p3 {
-            background: linear-gradient(145deg, #1A0A2A 0%, var(--plum-dark) 50%, #1A0A2A 100%);
-            color: var(--text-light);
-            border-top: 3px solid var(--plum);
-            border-bottom: 3px solid var(--plum);
+            background: linear-gradient(145deg, var(--plum-bg) 0%, #DDD6FE 50%, var(--plum-bg) 100%);
+            color: var(--text-dark);
+            border-top: 3px solid #7C3AED;
+            border-bottom: 3px solid #7C3AED;
         }
         .program-banner.p3 .program-number {
             background: rgba(124, 58, 237, 0.15);
-            color: var(--plum);
+            color: #6D28D9;
+        }
+        .program-banner.p3 h2 {
+            color: var(--text-dark);
         }
 
-        /* BANNER 4 - OCEÁNSKÁ MODRÁ (KDO JSME) */
+        /* BANNER 4 - JEMNĚ MODRÁ (KDO JSME) */
         .program-banner.p4 {
-            background: linear-gradient(145deg, #0A0A2A 0%, var(--ocean-dark) 50%, #0A0A2A 100%);
-            color: var(--text-light);
-            border-top: 3px solid var(--ocean);
-            border-bottom: 3px solid var(--ocean);
+            background: linear-gradient(145deg, var(--ocean-bg) 0%, #BFDBFE 50%, var(--ocean-bg) 100%);
+            color: var(--text-dark);
+            border-top: 3px solid #1E40AF;
+            border-bottom: 3px solid #1E40AF;
         }
         .program-banner.p4 .program-number {
             background: rgba(30, 64, 175, 0.15);
-            color: var(--ocean);
+            color: #1E3A8A;
+        }
+        .program-banner.p4 h2 {
+            color: var(--text-dark);
         }
 
         /* ===== SEKCE ===== */
@@ -571,32 +582,68 @@
             width: 100%;
         }
 
-        /* SEKCE PROČ - ZLATÁ */
+        /* SEKCE PROČ - JEMNĚ ZLATÁ */
         .section-proc {
-            background: linear-gradient(145deg, #1A0A00 0%, #2A1A0A 30%, var(--gold-dark) 70%, #1A0A00 100%);
-            border-top: 3px solid rgba(212, 160, 43, 0.08);
-            border-bottom: 3px solid rgba(212, 160, 43, 0.08);
+            background: linear-gradient(145deg, #FFF8E7 0%, var(--gold-bg) 30%, #FDEBD0 70%, #FFF8E7 100%);
+            border-top: 3px solid rgba(212, 160, 43, 0.1);
+            border-bottom: 3px solid rgba(212, 160, 43, 0.1);
+        }
+        .section-proc .section-title {
+            color: var(--text-dark);
+        }
+        .section-proc .section-subtitle {
+            color: #5D4E37;
+        }
+        .section-proc .section-title i {
+            color: var(--gold-dark);
         }
 
-        /* SEKCE CO CHYSTÁME - TYRKYSOVÁ */
+        /* SEKCE CO CHYSTÁME - JEMNĚ TYRKYSOVÁ */
         .section-chystame {
-            background: linear-gradient(145deg, #0A1A1A 0%, #0A2A2A 30%, var(--teal-dark) 70%, #0A1A1A 100%);
-            border-top: 3px solid rgba(13, 148, 136, 0.08);
-            border-bottom: 3px solid rgba(13, 148, 136, 0.08);
+            background: linear-gradient(145deg, #E6FFFA 0%, var(--teal-bg) 30%, #A7F3D0 70%, #E6FFFA 100%);
+            border-top: 3px solid rgba(13, 148, 136, 0.1);
+            border-bottom: 3px solid rgba(13, 148, 136, 0.1);
+        }
+        .section-chystame .section-title {
+            color: var(--text-dark);
+        }
+        .section-chystame .section-subtitle {
+            color: #0F5C52;
+        }
+        .section-chystame .section-title i {
+            color: #0D9488;
         }
 
-        /* SEKCE PROJEKTY - ŠVESTKOVÁ */
+        /* SEKCE PROJEKTY - JEMNĚ LEVANDULOVÁ */
         .section-projekty {
-            background: linear-gradient(145deg, #1A0A2A 0%, #2A0A3A 30%, var(--plum-dark) 70%, #1A0A2A 100%);
-            border-top: 3px solid rgba(124, 58, 237, 0.08);
-            border-bottom: 3px solid rgba(124, 58, 237, 0.08);
+            background: linear-gradient(145deg, #F5F3FF 0%, var(--plum-bg) 30%, #DDD6FE 70%, #F5F3FF 100%);
+            border-top: 3px solid rgba(124, 58, 237, 0.1);
+            border-bottom: 3px solid rgba(124, 58, 237, 0.1);
+        }
+        .section-projekty .section-title {
+            color: var(--text-dark);
+        }
+        .section-projekty .section-subtitle {
+            color: #5B21B6;
+        }
+        .section-projekty .section-title i {
+            color: #7C3AED;
         }
 
-        /* SEKCE KDO JSME - OCEÁNSKÁ MODRÁ */
+        /* SEKCE KDO JSME - JEMNĚ MODRÁ */
         .section-kdo {
-            background: linear-gradient(145deg, #0A0A2A 0%, #0A1A3A 30%, var(--ocean-dark) 70%, #0A0A2A 100%);
-            border-top: 3px solid rgba(30, 64, 175, 0.08);
-            border-bottom: 3px solid rgba(30, 64, 175, 0.08);
+            background: linear-gradient(145deg, #EFF6FF 0%, var(--ocean-bg) 30%, #BFDBFE 70%, #EFF6FF 100%);
+            border-top: 3px solid rgba(30, 64, 175, 0.1);
+            border-bottom: 3px solid rgba(30, 64, 175, 0.1);
+        }
+        .section-kdo .section-title {
+            color: var(--text-dark);
+        }
+        .section-kdo .section-subtitle {
+            color: #1E3A8A;
+        }
+        .section-kdo .section-title i {
+            color: #1E40AF;
         }
 
         .section .container {
@@ -611,7 +658,6 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 3rem;
-            color: var(--text-light);
             letter-spacing: -0.02em;
             display: flex;
             align-items: center;
@@ -619,14 +665,10 @@
             gap: 0.8rem;
             flex-wrap: wrap;
         }
-        .section-title i {
-            color: var(--gold);
-        }
 
         .section-subtitle {
             text-align: center;
             font-size: 1.3rem;
-            color: var(--text-muted);
             max-width: 700px;
             margin: -2rem auto 3rem auto;
         }
@@ -641,14 +683,14 @@
         }
 
         .why-card {
-            background: rgba(26, 10, 0, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             border-radius: var(--radius);
             padding: 2.5rem 2rem;
-            border: 2px solid rgba(255, 255, 255, 0.04);
+            border: 2px solid rgba(212, 160, 43, 0.15);
             transition: all 0.35s ease;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-light);
             position: relative;
             overflow: hidden;
             touch-action: manipulation;
@@ -673,13 +715,13 @@
         .why-card:hover {
             transform: translateY(-8px);
             border-color: var(--gold);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
         }
         .why-card .card-number {
             font-size: 3.2rem;
             font-weight: 900;
             color: var(--gold);
-            opacity: 0.08;
+            opacity: 0.1;
             position: absolute;
             top: 0.5rem;
             right: 1.5rem;
@@ -687,7 +729,7 @@
         }
         .why-card .card-icon {
             font-size: 3.2rem;
-            color: var(--gold);
+            color: var(--gold-dark);
             margin-bottom: 0.8rem;
             display: block;
         }
@@ -695,10 +737,10 @@
             font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            color: var(--text-light);
+            color: var(--text-dark);
         }
         .why-card p {
-            color: var(--text-muted);
+            color: #4A3B2A;
             font-size: 1.05rem;
             line-height: 1.7;
             margin-bottom: 0.8rem;
@@ -708,8 +750,8 @@
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--gold);
-            background: rgba(212, 160, 43, 0.1);
+            color: var(--gold-dark);
+            background: rgba(212, 160, 43, 0.12);
             padding: 0.25rem 1.2rem;
             border-radius: 9999px;
             letter-spacing: 0.5px;
@@ -725,13 +767,13 @@
         }
 
         .chystame-card {
-            background: rgba(10, 26, 26, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 1.5rem;
             padding: 2rem 1.5rem;
             text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.04);
+            border: 2px solid rgba(13, 148, 136, 0.15);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-light);
             position: relative;
             overflow: hidden;
         }
@@ -743,7 +785,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+            background: linear-gradient(90deg, #0D9488, #0F766E);
             transform: scaleX(0);
             transition: transform 0.4s ease;
             transform-origin: left;
@@ -751,8 +793,8 @@
 
         .chystame-card:hover {
             transform: translateY(-8px);
-            border-color: var(--teal);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+            border-color: #0D9488;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
         }
 
         .chystame-card:hover::before {
@@ -761,7 +803,7 @@
 
         .chystame-card .ch-icon {
             font-size: 2.8rem;
-            color: var(--teal);
+            color: #0D9488;
             margin-bottom: 0.8rem;
             display: block;
             transition: transform 0.4s ease;
@@ -774,12 +816,12 @@
         .chystame-card h4 {
             font-size: 1.2rem;
             font-weight: 800;
-            color: var(--text-light);
+            color: var(--text-dark);
             margin-bottom: 0.4rem;
         }
 
         .chystame-card p {
-            color: var(--text-muted);
+            color: #4A5A55;
             font-size: 0.95rem;
             line-height: 1.5;
             margin-bottom: 1rem;
@@ -790,7 +832,7 @@
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--teal);
+            color: #0F766E;
             background: rgba(13, 148, 136, 0.1);
             padding: 0.3rem 1.2rem;
             border-radius: 9999px;
@@ -806,7 +848,7 @@
             padding: 0.5rem 0.5rem 1.5rem 0.5rem;
             scroll-behavior: smooth;
             scrollbar-width: thin;
-            scrollbar-color: var(--teal) #1A1A1A;
+            scrollbar-color: #0D9488 #E6FFFA;
             max-width: 100%;
         }
 
@@ -814,11 +856,11 @@
             height: 6px;
         }
         .chystame-scroll-mobile::-webkit-scrollbar-track {
-            background: #1A1A1A;
+            background: #E6FFFA;
             border-radius: 9999px;
         }
         .chystame-scroll-mobile::-webkit-scrollbar-thumb {
-            background: var(--teal);
+            background: #0D9488;
             border-radius: 9999px;
         }
         .chystame-scroll-mobile .chystame-card {
@@ -837,14 +879,14 @@
         }
 
         .volby-card {
-            background: rgba(26, 10, 42, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             border-radius: var(--radius);
             padding: 2rem 1.8rem;
-            border: 2px solid rgba(255, 255, 255, 0.04);
+            border: 2px solid rgba(124, 58, 237, 0.12);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-light);
             touch-action: manipulation;
             position: relative;
             overflow: hidden;
@@ -866,8 +908,8 @@
         }
         .volby-card:hover {
             transform: translateY(-10px) scale(1.02);
-            border-color: var(--plum);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+            border-color: #7C3AED;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
         }
         .volby-card:active {
             transform: scale(0.96);
@@ -879,26 +921,26 @@
             color: #10b981;
         }
         .volby-card.color-green .volby-hlas {
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
         }
         .volby-card.color-green .volby-tag {
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
         }
         .volby-card.color-blue::before {
-            background: linear-gradient(90deg, var(--plum), var(--plum-dark));
+            background: linear-gradient(90deg, #7C3AED, #6D28D9);
         }
         .volby-card.color-blue .volby-icon {
-            color: var(--plum);
+            color: #7C3AED;
         }
         .volby-card.color-blue .volby-hlas {
-            background: rgba(124, 58, 237, 0.15);
-            color: var(--plum);
+            background: rgba(124, 58, 237, 0.1);
+            color: #6D28D9;
         }
         .volby-card.color-blue .volby-tag {
-            background: rgba(124, 58, 237, 0.15);
-            color: var(--plum);
+            background: rgba(124, 58, 237, 0.1);
+            color: #6D28D9;
         }
         .volby-card.color-orange::before {
             background: linear-gradient(90deg, #f97316, #ea580c);
@@ -907,12 +949,12 @@
             color: #f97316;
         }
         .volby-card.color-orange .volby-hlas {
-            background: rgba(249, 115, 22, 0.15);
-            color: #f97316;
+            background: rgba(249, 115, 22, 0.1);
+            color: #c2410c;
         }
         .volby-card.color-orange .volby-tag {
-            background: rgba(249, 115, 22, 0.15);
-            color: #f97316;
+            background: rgba(249, 115, 22, 0.1);
+            color: #c2410c;
         }
         .volby-card.color-purple::before {
             background: linear-gradient(90deg, #8b5cf6, #7c3aed);
@@ -921,12 +963,12 @@
             color: #8b5cf6;
         }
         .volby-card.color-purple .volby-hlas {
-            background: rgba(139, 92, 246, 0.15);
-            color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+            color: #7c3aed;
         }
         .volby-card.color-purple .volby-tag {
-            background: rgba(139, 92, 246, 0.15);
-            color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+            color: #7c3aed;
         }
         .volby-card .volby-icon {
             font-size: 3.2rem;
@@ -940,12 +982,12 @@
         .volby-card .volby-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: var(--text-light);
+            color: var(--text-dark);
             margin-bottom: 0.3rem;
             line-height: 1.2;
         }
         .volby-card .volby-desc {
-            color: var(--text-muted);
+            color: #4A3B5A;
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1rem;
@@ -990,7 +1032,7 @@
             padding: 0.5rem 0.5rem 1.5rem 0.5rem;
             scroll-behavior: smooth;
             scrollbar-width: thin;
-            scrollbar-color: var(--plum) #1A1A1A;
+            scrollbar-color: #7C3AED #F5F3FF;
             max-width: 100%;
         }
 
@@ -998,11 +1040,11 @@
             height: 6px;
         }
         .volby-scroll-mobile::-webkit-scrollbar-track {
-            background: #1A1A1A;
+            background: #F5F3FF;
             border-radius: 9999px;
         }
         .volby-scroll-mobile::-webkit-scrollbar-thumb {
-            background: var(--plum);
+            background: #7C3AED;
             border-radius: 9999px;
         }
         .volby-scroll-mobile .volby-card {
@@ -1011,7 +1053,7 @@
             min-height: 240px;
         }
 
-        /* ===== KANDIDÁTI - OCEÁNSKÁ MODRÁ ===== */
+        /* ===== KANDIDÁTI - JEMNĚ MODRÁ ===== */
         .candidates-list {
             display: flex;
             flex-direction: column;
@@ -1021,10 +1063,10 @@
         }
 
         .candidates-list .candidate-profile:nth-child(odd) {
-            background: linear-gradient(145deg, #0A0A2A 0%, #0A1A3A 100%);
+            background: linear-gradient(145deg, #ffffff 0%, #EFF6FF 100%);
         }
         .candidates-list .candidate-profile:nth-child(even) {
-            background: linear-gradient(145deg, #0A0A3A 0%, #0A1A2A 100%);
+            background: linear-gradient(145deg, #ffffff 0%, #DBEAFE 100%);
         }
 
         .candidate-profile {
@@ -1032,9 +1074,9 @@
             gap: 2.5rem;
             border-radius: var(--radius);
             padding: 2.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.04);
+            border: 2px solid rgba(30, 64, 175, 0.1);
             transition: all 0.35s ease;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-light);
             align-items: center;
             touch-action: manipulation;
             position: relative;
@@ -1057,7 +1099,7 @@
             transform: scale(0.98);
         }
         .candidate-profile:hover {
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
             transform: translateX(6px);
         }
 
@@ -1068,11 +1110,11 @@
             border-color: var(--gold);
         }
         .candidate-profile.color-gold .candidate-tag {
-            color: var(--gold);
+            color: var(--gold-dark);
             background: rgba(212, 160, 43, 0.15);
         }
         .candidate-profile.color-gold .position {
-            color: var(--gold);
+            color: var(--gold-dark);
         }
         .candidate-profile.color-gold .priority i {
             color: var(--gold);
@@ -1089,7 +1131,7 @@
             border-color: #10b981;
         }
         .candidate-profile.color-green .candidate-tag {
-            color: #10b981;
+            color: #059669;
             background: rgba(16, 185, 129, 0.15);
         }
         .candidate-profile.color-green .position {
@@ -1104,24 +1146,24 @@
         }
 
         .candidate-profile.color-blue::before {
-            background: linear-gradient(90deg, var(--ocean), var(--ocean-dark));
+            background: linear-gradient(90deg, #1E40AF, #1E3A8A);
         }
         .candidate-profile.color-blue .candidate-photo {
-            border-color: var(--ocean);
+            border-color: #1E40AF;
         }
         .candidate-profile.color-blue .candidate-tag {
-            color: var(--ocean);
+            color: #1E3A8A;
             background: rgba(30, 64, 175, 0.15);
         }
         .candidate-profile.color-blue .position {
-            color: var(--ocean);
+            color: #1E40AF;
         }
         .candidate-profile.color-blue .priority i {
-            color: var(--ocean);
+            color: #1E40AF;
         }
         .candidate-profile.color-blue .candidate-social a:hover {
-            background: var(--ocean);
-            color: var(--text-dark);
+            background: #1E40AF;
+            color: #ffffff;
         }
 
         .candidate-profile.color-red::before {
@@ -1132,7 +1174,7 @@
         }
         .candidate-profile.color-red .candidate-tag {
             color: var(--wine-light);
-            background: rgba(79, 16, 16, 0.3);
+            background: rgba(79, 16, 16, 0.15);
         }
         .candidate-profile.color-red .position {
             color: var(--wine-light);
@@ -1142,7 +1184,7 @@
         }
         .candidate-profile.color-red .candidate-social a:hover {
             background: var(--wine-light);
-            color: var(--text-dark);
+            color: #ffffff;
         }
 
         .candidate-profile.color-purple::before {
@@ -1152,7 +1194,7 @@
             border-color: #8b5cf6;
         }
         .candidate-profile.color-purple .candidate-tag {
-            color: #8b5cf6;
+            color: #7c3aed;
             background: rgba(139, 92, 246, 0.15);
         }
         .candidate-profile.color-purple .position {
@@ -1163,49 +1205,49 @@
         }
         .candidate-profile.color-purple .candidate-social a:hover {
             background: #8b5cf6;
-            color: var(--text-dark);
+            color: #ffffff;
         }
 
         .candidate-profile.color-indigo::before {
-            background: linear-gradient(90deg, var(--ocean), var(--ocean-dark));
+            background: linear-gradient(90deg, #1E40AF, #1E3A8A);
         }
         .candidate-profile.color-indigo .candidate-photo {
-            border-color: var(--ocean);
+            border-color: #1E40AF;
         }
         .candidate-profile.color-indigo .candidate-tag {
-            color: var(--ocean);
+            color: #1E3A8A;
             background: rgba(30, 64, 175, 0.15);
         }
         .candidate-profile.color-indigo .position {
-            color: var(--ocean);
+            color: #1E40AF;
         }
         .candidate-profile.color-indigo .priority i {
-            color: var(--ocean);
+            color: #1E40AF;
         }
         .candidate-profile.color-indigo .candidate-social a:hover {
-            background: var(--ocean);
-            color: var(--text-dark);
+            background: #1E40AF;
+            color: #ffffff;
         }
 
         .candidate-profile.color-teal::before {
-            background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+            background: linear-gradient(90deg, #0D9488, #0F766E);
         }
         .candidate-profile.color-teal .candidate-photo {
-            border-color: var(--teal);
+            border-color: #0D9488;
         }
         .candidate-profile.color-teal .candidate-tag {
-            color: var(--teal);
+            color: #0F766E;
             background: rgba(13, 148, 136, 0.15);
         }
         .candidate-profile.color-teal .position {
-            color: var(--teal);
+            color: #0D9488;
         }
         .candidate-profile.color-teal .priority i {
-            color: var(--teal);
+            color: #0D9488;
         }
         .candidate-profile.color-teal .candidate-social a:hover {
-            background: var(--teal);
-            color: var(--text-dark);
+            background: #0D9488;
+            color: #ffffff;
         }
 
         .candidate-profile.color-orange::before {
@@ -1215,7 +1257,7 @@
             border-color: #f97316;
         }
         .candidate-profile.color-orange .candidate-tag {
-            color: #f97316;
+            color: #c2410c;
             background: rgba(249, 115, 22, 0.15);
         }
         .candidate-profile.color-orange .position {
@@ -1226,7 +1268,7 @@
         }
         .candidate-profile.color-orange .candidate-social a:hover {
             background: #f97316;
-            color: var(--text-dark);
+            color: #ffffff;
         }
 
         .candidate-profile.color-pink::before {
@@ -1236,7 +1278,7 @@
             border-color: #ec4899;
         }
         .candidate-profile.color-pink .candidate-tag {
-            color: #ec4899;
+            color: #be185d;
             background: rgba(236, 72, 153, 0.15);
         }
         .candidate-profile.color-pink .position {
@@ -1247,7 +1289,7 @@
         }
         .candidate-profile.color-pink .candidate-social a:hover {
             background: #ec4899;
-            color: var(--text-dark);
+            color: #ffffff;
         }
 
         .candidate-photo {
@@ -1255,8 +1297,8 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: linear-gradient(145deg, #1A1A3A 0%, #0A0A1A 100%);
-            border: 5px solid var(--ocean);
+            background: linear-gradient(145deg, #E2E8F0 0%, #F1F5F9 100%);
+            border: 5px solid #1E40AF;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1270,7 +1312,7 @@
             object-fit: cover;
         }
         .candidate-photo .photo-placeholder {
-            color: #8A9AB8;
+            color: #94A3B8;
             font-size: 0.8rem;
             text-align: center;
             padding: 0.5rem;
@@ -1280,7 +1322,7 @@
             font-size: 3.2rem;
             display: block;
             margin-bottom: 0.2rem;
-            color: var(--ocean);
+            color: #1E40AF;
         }
         .candidate-profile:hover .candidate-photo {
             box-shadow: 0 0 0 10px rgba(30, 64, 175, 0.10);
@@ -1295,7 +1337,7 @@
             font-size: 0.75rem;
             font-weight: 800;
             color: var(--text-dark);
-            background: var(--gold);
+            background: var(--gold-bg);
             padding: 0.2rem 1rem;
             border-radius: 9999px;
             border: 1px solid var(--gold);
@@ -1314,7 +1356,7 @@
         .candidate-info h3 {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--text-light);
+            color: var(--text-dark);
             margin: 0.2rem 0 0.1rem 0;
         }
         .candidate-info h3 .candidate-emoji {
@@ -1327,7 +1369,7 @@
             margin-bottom: 0.6rem;
         }
         .candidate-info .bio {
-            color: var(--text-muted);
+            color: #475569;
             font-size: 1rem;
             margin-bottom: 0.8rem;
             line-height: 1.7;
@@ -1339,12 +1381,12 @@
             margin-bottom: 0.8rem;
         }
         .candidate-priorities .priority {
-            background: rgba(26, 26, 58, 0.6);
+            background: rgba(241, 245, 249, 0.7);
             padding: 0.2rem 1.2rem;
             border-radius: 9999px;
             font-size: 0.85rem;
             font-weight: 500;
-            color: var(--text-light);
+            color: var(--text-dark);
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
@@ -1355,8 +1397,8 @@
             font-size: 0.5rem;
         }
         .candidate-profile:hover .priority {
-            border-color: rgba(30, 64, 175, 0.2);
-            background: rgba(26, 26, 58, 0.8);
+            border-color: #E2E8F0;
+            background: #F8FAFC;
         }
         .candidate-social {
             display: flex;
@@ -1367,13 +1409,13 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            color: var(--text-muted);
+            color: #475569;
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
             padding: 0.3rem 1.2rem;
             border-radius: 9999px;
-            background: rgba(26, 26, 58, 0.6);
+            background: rgba(241, 245, 249, 0.7);
             transition: all 0.25s ease;
             border: 1px solid transparent;
             touch-action: manipulation;
@@ -1558,16 +1600,16 @@
                 font-size: 0.95rem;
             }
             .section-proc {
-                background: linear-gradient(145deg, #1A0A00 0%, #2A1A0A 100%);
+                background: linear-gradient(145deg, #FFF8E7 0%, #FDEBD0 100%);
             }
             .section-chystame {
-                background: linear-gradient(145deg, #0A1A1A 0%, #0A2A2A 100%);
+                background: linear-gradient(145deg, #E6FFFA 0%, #A7F3D0 100%);
             }
             .section-projekty {
-                background: linear-gradient(145deg, #1A0A2A 0%, #2A0A3A 100%);
+                background: linear-gradient(145deg, #F5F3FF 0%, #DDD6FE 100%);
             }
             .section-kdo {
-                background: linear-gradient(145deg, #0A0A2A 0%, #0A1A3A 100%);
+                background: linear-gradient(145deg, #EFF6FF 0%, #BFDBFE 100%);
             }
             .why-grid {
                 grid-template-columns: 1fr;
@@ -1576,7 +1618,7 @@
             .why-card {
                 padding: 1.8rem 1.5rem;
                 border-radius: 1.8rem;
-                background: rgba(26, 10, 0, 0.9);
+                background: rgba(255, 255, 255, 0.95);
             }
             .why-card .card-icon {
                 font-size: 2.6rem;
@@ -1870,7 +1912,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 1 + SEKCE PROČ - ZLATÁ ===== -->
+    <!-- ===== BANNER 1 + SEKCE PROČ - JEMNĚ ZLATÁ ===== -->
     <div class="program-banner p1" id="proc-banner">
         <div class="container">
             <span class="program-number">✦ 01</span>
@@ -1916,7 +1958,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 2 + SEKCE CO CHYSTÁME - TYRKYSOVÁ ===== -->
+    <!-- ===== BANNER 2 + SEKCE CO CHYSTÁME - JEMNĚ TYRKYSOVÁ ===== -->
     <div class="program-banner p2" id="co-banner">
         <div class="container">
             <span class="program-number">✦ 02</span>
@@ -2033,7 +2075,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 3 + SEKCE PROJEKTY - ŠVESTKOVÁ ===== -->
+    <!-- ===== BANNER 3 + SEKCE PROJEKTY - JEMNĚ LEVANDULOVÁ ===== -->
     <div class="program-banner p3" id="projekty-banner">
         <div class="container">
             <span class="program-number">✦ 03</span>
@@ -2162,7 +2204,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 4 + SEKCE KDO JSME - OCEÁNSKÁ MODRÁ ===== -->
+    <!-- ===== BANNER 4 + SEKCE KDO JSME - JEMNĚ MODRÁ ===== -->
     <div class="program-banner p4" id="kdo-banner">
         <div class="container">
             <span class="program-number">✦ 04</span>
