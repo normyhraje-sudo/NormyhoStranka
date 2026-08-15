@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Flappy Bird</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding: 0.5rem;
+            overflow: hidden;
+        }
+
+        .game-wrapper {
+            background: #1e2a3a;
+            padding: 1.2rem 1.5rem 1.5rem;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 420px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #f0e9d8;
+            font-weight: 500;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-shadow: 0 3px 0 #0b0f1a;
+            margin-bottom: 0.3rem;
+        }
+        h1 span {
+            color: #facc15;
+        }
+
+        .stats {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #cbd5e1;
+            font-size: 1rem;
+            padding: 0.2rem 0.3rem 0.5rem;
+            border-bottom: 1px solid #3a4a5e;
+            margin-bottom: 0.8rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stats > div {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #0f1a2a;
+            padding: 0.1rem 0.8rem 0.1rem 0.5rem;
+            border-radius: 40px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats .icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+        .stats .value {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #facc15;
+            min-width: 2rem;
+            text-align: center;
+        }
+
+        canvas {
+            display: block;
+            background: #87CEEB;
+            border-radius: 1.5rem;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3), 0 0 0 2px #334155;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 400 / 600;
+            max-width: 400px;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button {
+            background: #facc15;
+            border: none;
+            color: #0b0f1a;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.35rem 1.2rem;
+            border-radius: 60px;
+            box-shadow: 0 6px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.07s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        button:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #a07c0e;
+        }
+
+        .back-button {
+            background: #64748b;
+            box-shadow: 0 6px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            color: #0b0f1a;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.35rem 1rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.07s ease;
+            border: none;
+        }
+        .back-button:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0 #475569;
+        }
+        .back-button:hover {
+            background: #94a3b8;
+        }
+
+        .status {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            min-height: 1.5rem;
+            font-weight: 300;
+            text-align: center;
+            margin-top: 0.3rem;
+            width: 100%;
+        }
+
+        .hint {
+            color: #64748b;
+            font-size: 0.65rem;
+            text-align: center;
+            margin-top: 0.1rem;
+        }
+
+        .hint kbd {
+            background: #0b1622;
+            padding: 0.05rem 0.5rem;
+            border-radius: 6px;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            font-size: 0.6rem;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .hint {
+                display: none;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .game-wrapper {
+                padding: 1rem;
+                border-radius: 2rem;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+            .stats {
+                font-size: 0.85rem;
+            }
+            .stats .value {
+                font-size: 1.1rem;
+                min-width: 1.5rem;
+            }
+            button {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.9rem;
+            }
+            .back-button {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-wrapper">
+    <h1>🐦 <span>FLAPPY</span></h1>
+
+    <div class="stats">
+        <div><span class="icon">⭐</span><span class="value" id="scoreDisplay">0</span></div>
+        <div><span class="icon">🏆</span><span class="value" id="bestDisplay">0</span></div>
+    </div>
+
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+    <div class="controls">
+        <button id="restartBtn">🔄 Nová</button>
+        <a href="hra.html" class="back-button">⬅ Zpět</a>
+    </div>
+    <div class="status" id="statusMsg">Klikni / ťukni pro skok!</div>
+    <div class="hint">
+        <kbd>␣</kbd> skok &nbsp;·&nbsp; <kbd>R</kbd> restart
+    </div>
+</div>
+
+<script>
+    // =====================================================
+    // JEDNODUCHÝ FLAPPY BIRD - BEZ KOMPLIKOVANÝCH POLYFILLŮ
+    // =====================================================
+    
+    (function() {
+        "use strict";
+
+        // ----- Získání elementů -----
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const bestDisplay = document.getElementById('bestDisplay');
+        const statusMsg = document.getElementById('statusMsg');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // ----- Ověření, že canvas existuje -----
+        if (!canvas) {
+            alert('Chyba: Canvas nebyl nalezen!');
+            return;
+        }
+
+        // ----- Konstanty -----
+        const W = 400;
+        const H = 600;
+        const GRAVITY = 0.45;
+        const JUMP_FORCE = -7.5;
+        const PIPE_WIDTH = 55;
+        const PIPE_GAP = 150;
+        const PIPE_SPEED = 2.5;
+        const PIPE_SPAWN_INTERVAL = 95;
+        const BIRD_SIZE = 28;
+
+        // ----- Herní stav -----
+        let bird = { x: 70, y: H / 2, vy: 0 };
+        let pipes = [];
+        let score = 0;
+        let bestScore = 0;
+        let gameOver = false;
+        let started = false;
+        let frameId = null;
+        let pipeCounter = 0;
+
+        // ----- Načtení rekordu -----
+        try {
+            bestScore = parseInt(localStorage.getItem('flappyBest')) || 0;
+        } catch(e) {
+            bestScore = 0;
+        }
+        bestDisplay.textContent = bestScore;
+
+        // ----- Inicializace -----
+        function init() {
+            bird.y = H / 2;
+            bird.vy = 0;
+            pipes = [];
+            score = 0;
+            gameOver = false;
+            started = false;
+            pipeCounter = 0;
+            scoreDisplay.textContent = '0';
+            statusMsg.textContent = '🖐️ Klikni / ťukni pro start!';
+            draw();
+        }
+
+        // ----- Skok -----
+        function jump() {
+            if (gameOver) {
+                resetGame();
+                return;
+            }
+            if (!started) {
+                started = true;
+                statusMsg.textContent = '🕊️ Letíš!';
+            }
+            bird.vy = JUMP_FORCE;
+        }
+
+        // ----- Update (fyzika + logika) -----
+        function update() {
+            if (!started || gameOver) return;
+
+            // Gravitace
+            bird.vy += GRAVITY;
+            bird.y += bird.vy;
+
+            // Kolize se stropem
+            if (bird.y - BIRD_SIZE / 2 < 0) {
+                bird.y = BIRD_SIZE / 2;
+                bird.vy = 0;
+            }
+
+            // Kolize se zemí
+            if (bird.y + BIRD_SIZE / 2 > H) {
+                bird.y = H - BIRD_SIZE / 2;
+                gameOver = true;
+                checkBestScore();
+                return;
+            }
+
+            // Spawn trubic
+            pipeCounter++;
+            if (pipeCounter >= PIPE_SPAWN_INTERVAL) {
+                pipeCounter = 0;
+                const minY = 60;
+                const maxY = H - PIPE_GAP - 60;
+                const topHeight = Math.random() * (maxY - minY) + minY;
+                pipes.push({
+                    x: W + 20,
+                    topHeight: topHeight,
+                    scored: false
+                });
+            }
+
+            // Pohyb a kolize trubic
+            for (let i = pipes.length - 1; i >= 0; i--) {
+                const p = pipes[i];
+                p.x -= PIPE_SPEED;
+
+                // Odstranění mimo obrazovku
+                if (p.x + PIPE_WIDTH < 0) {
+                    pipes.splice(i, 1);
+                    continue;
+                }
+
+                // Kolize
+                const bx = bird.x;
+                const by = bird.y;
+                const s = BIRD_SIZE / 2;
+                const px = p.x;
+                const pw = PIPE_WIDTH;
+                const th = p.topHeight;
+                const bh = th + PIPE_GAP;
+
+                if (bx + s > px && bx - s < px + pw) {
+                    if (by - s < th || by + s > bh) {
+                        gameOver = true;
+                        checkBestScore();
+                        return;
+                    }
+                }
+
+                // Skóre
+                if (!p.scored && px + pw < bird.x) {
+                    p.scored = true;
+                    score++;
+                    scoreDisplay.textContent = score;
+                    statusMsg.textContent = '⭐ ' + score;
+                }
+            }
+
+            draw();
+        }
+
+        // ----- Nejlepší skóre -----
+        function checkBestScore() {
+            if (score > bestScore) {
+                bestScore = score;
+                try {
+                    localStorage.setItem('flappyBest', bestScore);
+                } catch(e) {}
+                bestDisplay.textContent = bestScore;
+                statusMsg.textContent = '🎉 NOVÝ REKORD! ' + bestScore;
+            } else {
+                statusMsg.textContent = '💀 KONEC! Klikni / ťukni pro restart.';
+            }
+        }
+
+        // ----- Vykreslení (POUZE ZÁKLADNÍ FUNKCE) -----
+        function draw() {
+            // Vyčištění
+            ctx.clearRect(0, 0, W, H);
+
+            // ----- Nebe -----
+            const grad = ctx.createLinearGradient(0, 0, 0, H);
+            grad.addColorStop(0, '#4a90d9');
+            grad.addColorStop(0.6, '#87CEEB');
+            grad.addColorStop(1, '#e8f4f8');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, W, H);
+
+            // ----- Mraky (dekorace) -----
+            ctx.fillStyle = 'rgba(255,255,255,0.25)';
+            const cloudOffset = (Date.now() / 5000) % 200;
+            for (let i = 0; i < 4; i++) {
+                const cx = (i * 150 + 50 - cloudOffset) % 500 - 50;
+                const cy = 30 + i * 40;
+                ctx.beginPath();
+                ctx.arc(cx, cy, 22, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(cx + 18, cy - 8, 26, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(cx + 36, cy, 22, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // ----- Trubice -----
+            for (const p of pipes) {
+                const x = p.x;
+                const topH = p.topHeight;
+                const bottomY = topH + PIPE_GAP;
+
+                // Horní trubice
+                ctx.fillStyle = '#4CAF50';
+                ctx.shadowColor = 'rgba(0,0,0,0.2)';
+                ctx.shadowBlur = 8;
+                ctx.fillRect(x, 0, PIPE_WIDTH, topH);
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#2d7d2d';
+                ctx.fillRect(x - 5, topH - 18, PIPE_WIDTH + 10, 18);
+                ctx.fillStyle = '#388E3C';
+                ctx.fillRect(x - 2, topH - 14, PIPE_WIDTH + 4, 10);
+
+                // Dolní trubice
+                ctx.fillStyle = '#4CAF50';
+                ctx.shadowColor = 'rgba(0,0,0,0.2)';
+                ctx.shadowBlur = 8;
+                ctx.fillRect(x, bottomY, PIPE_WIDTH, H - bottomY);
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#2d7d2d';
+                ctx.fillRect(x - 5, bottomY, PIPE_WIDTH + 10, 18);
+                ctx.fillStyle = '#388E3C';
+                ctx.fillRect(x - 2, bottomY + 4, PIPE_WIDTH + 4, 10);
+            }
+
+            // ----- Pták -----
+            ctx.save();
+            ctx.translate(bird.x, bird.y);
+
+            // Tělo
+            ctx.shadowColor = 'rgba(0,0,0,0.2)';
+            ctx.shadowBlur = 12;
+            ctx.fillStyle = '#facc15';
+            ctx.beginPath();
+            ctx.ellipse(0, 0, BIRD_SIZE / 2 + 2, BIRD_SIZE / 2, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Křídlo
+            ctx.fillStyle = '#eab308';
+            ctx.beginPath();
+            ctx.ellipse(-6, -4, 12, 8, -0.3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Oko
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(8, -6, 7, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#0f172a';
+            ctx.beginPath();
+            ctx.arc(10, -6, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(11, -8, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Zobák
+            ctx.fillStyle = '#f97316';
+            ctx.beginPath();
+            ctx.moveTo(16, 0);
+            ctx.lineTo(26, 2);
+            ctx.lineTo(16, 6);
+            ctx.fill();
+
+            // Ocas
+            ctx.fillStyle = '#b45309';
+            ctx.beginPath();
+            ctx.moveTo(-16, 2);
+            ctx.lineTo(-24, -4);
+            ctx.lineTo(-20, 6);
+            ctx.fill();
+
+            ctx.restore();
+
+            // ----- Startovací zpráva (PŘES VŠECHNO) -----
+            if (!started && !gameOver) {
+                ctx.fillStyle = 'rgba(0,0,0,0.3)';
+                ctx.fillRect(0, 0, W, H);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 34px "Segoe UI", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                ctx.shadowBlur = 12;
+                ctx.fillText('🖐️ Klikni', W / 2, H / 2 - 20);
+                ctx.font = '20px sans-serif';
+                ctx.fillText('pro skok', W / 2, H / 2 + 35);
+                ctx.shadowBlur = 0;
+            }
+
+            // ----- Game Over (PŘES VŠECHNO) -----
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                ctx.fillRect(0, 0, W, H);
+                ctx.fillStyle = '#fca5a5';
+                ctx.font = 'bold 44px "Segoe UI", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                ctx.shadowBlur = 12;
+                ctx.fillText('💀 GAME OVER', W / 2, H / 2 - 30);
+                ctx.font = '24px sans-serif';
+                ctx.fillStyle = '#e2e8f0';
+                ctx.fillText('Skóre: ' + score, W / 2, H / 2 + 35);
+                ctx.fillStyle = '#facc15';
+                ctx.fillText('🏆 Rekord: ' + bestScore, W / 2, H / 2 + 75);
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        // ----- Herní smyčka -----
+        function gameLoop() {
+            update();
+            frameId = requestAnimationFrame(gameLoop);
+        }
+
+        // ----- Reset / Nová hra -----
+        function resetGame() {
+            if (frameId) {
+                cancelAnimationFrame(frameId);
+                frameId = null;
+            }
+            init();
+            gameLoop();
+        }
+
+        // ----- Ovládání -----
+        function handleKeyDown(e) {
+            if (e.key === ' ' || e.key === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+            if (e.key === 'r' || e.key === 'R') {
+                e.preventDefault();
+                resetGame();
+            }
+        }
+
+        function handleClick(e) {
+            e.preventDefault();
+            jump();
+        }
+
+        // ----- Inicializace hry -----
+        function initGame() {
+            // Klávesnice
+            window.addEventListener('keydown', handleKeyDown);
+
+            // Myš / dotyk
+            canvas.addEventListener('click', handleClick);
+            canvas.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                jump();
+            }, { passive: false });
+
+            // Tlačítko restart
+            restartBtn.addEventListener('click', resetGame);
+
+            // Start
+            init();
+            gameLoop();
+        }
+
+        // ----- SPUŠTĚNÍ -----
+        // Kontrola, zda je canvas připraven
+        if (canvas && ctx) {
+            initGame();
+        } else {
+            document.getElementById('statusMsg').textContent = '❌ Chyba: Canvas se nepodařilo načíst!';
+        }
+
+    })();
+</script>
+</body>
+</html>
