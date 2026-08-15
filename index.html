@@ -14,6 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* ===== BARVY Z ERBU ===== */
+        :root {
+            --erb-red: #d50000;
+            --erb-yellow: #fff200;
+            --erb-blue: #0088cc;
+            --erb-white: #ffffff;
+        }
+
         /* ===== RESET + OPTIMALIZACE ===== */
         * {
             margin: 0;
@@ -23,9 +31,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -41,24 +47,6 @@
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'%3E%3C/path%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'%3E%3C/path%3E%3Cpath d='M2 2l7.586 7.586'%3E%3C/path%3E%3Ccircle cx='11' cy='11' r='2'%3E%3C/circle%3E%3C/svg%3E") 4 4, auto;
         }
 
-        /* ===== GPU AKCELERACE PRO ANIMACE ===== */
-        .why-card,
-        .volby-card,
-        .slider-item,
-        .candidate-profile,
-        .timeline-osa-item .osa-content,
-        .exp-card {
-            will-change: transform;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            contain: layout style paint;
-        }
-
-        /* ===== KURZOR PRO ODKAZY ===== */
-        a, button, .candidate-profile, .why-card, .volby-card, .slider-item, .exp-card, .timeline-osa-item .osa-content {
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'%3E%3C/path%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'%3E%3C/path%3E%3Cpath d='M2 2l7.586 7.586'%3E%3C/path%3E%3Ccircle cx='11' cy='11' r='2'%3E%3C/circle%3E%3C/svg%3E") 4 4, pointer;
-        }
-
         /* ===== MENU ===== */
         .navbar {
             position: fixed;
@@ -70,7 +58,7 @@
             -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
             padding: 0.6rem 0;
-            border-bottom: 3px solid #fbbf24;
+            border-bottom: 3px solid var(--erb-yellow);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
@@ -96,1883 +84,492 @@
             transition: opacity 0.2s;
         }
 
-        .navbar .logo:hover {
-            opacity: 0.8;
-        }
-
+        .navbar .logo:hover { opacity: 0.8; }
         .navbar .logo .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: #0f172a;
-            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--erb-yellow);
             flex-shrink: 0;
         }
+        .navbar .logo span { color: var(--erb-yellow); }
+        .navbar .logo .logo-text { color: #f8fafc; }
 
-        .navbar .logo span {
-            color: #fbbf24;
-        }
+        .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.3rem; background: none; border: none; touch-action: manipulation; }
+        .burger span { display: block; width: 28px; height: 3px; background: #f8fafc; border-radius: 9999px; transition: all 0.3s ease; }
+        .burger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .burger.active span:nth-child(2) { opacity: 0; }
+        .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        .navbar .logo .logo-text {
-            color: #f8fafc;
-        }
-
-        .burger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 0.3rem;
-            background: none;
-            border: none;
-            touch-action: manipulation;
-        }
-
-        .burger span {
-            display: block;
-            width: 28px;
-            height: 3px;
-            background: #f8fafc;
-            border-radius: 9999px;
-            transition: all 0.3s ease;
-        }
-
-        .burger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .burger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .burger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 0.3rem;
-            flex-wrap: wrap;
-            list-style: none;
-            transition: all 0.3s ease;
-        }
-
+        .nav-links { display: flex; gap: 0.3rem; flex-wrap: wrap; list-style: none; transition: all 0.3s ease; }
         .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            transition: all 0.25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            touch-action: manipulation;
+            color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            padding: 0.5rem 1rem; border-radius: 9999px; transition: all 0.25s ease;
+            display: inline-flex; align-items: center; gap: 0.4rem; touch-action: manipulation;
         }
-
-        .nav-links a:hover,
-        .nav-links a:focus {
-            background-color: #fbbf24;
-            color: #0f172a;
-            transform: scale(1.02);
-        }
-
-        .nav-links a i {
-            font-size: 0.8rem;
-        }
+        .nav-links a:hover, .nav-links a:focus { background-color: var(--erb-yellow); color: #0f172a; transform: scale(1.02); }
 
         /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+            background: linear-gradient(135deg, var(--erb-red) 0%, #b00000 40%, #0f172a 100%);
             color: #f8fafc;
-            border-bottom: 6px solid #fbbf24;
+            border-bottom: 6px solid var(--erb-yellow);
             text-align: center;
             margin-top: -80px;
-            padding-top: calc(5rem + 80px);
-            padding-bottom: 5rem;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
+            padding-top: calc(5rem + 80px); padding-bottom: 5rem;
+            position: relative; overflow: hidden;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; width: 100%;
         }
-
         .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, transparent 70%);
+            content: ''; position: absolute; top: -50%; right: -20%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255, 242, 0, 0.15) 0%, transparent 70%);
             border-radius: 50%;
         }
-
-        .hero .hero-content {
-            max-width: 900px;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.6rem;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin: 0 auto 1.2rem auto;
-        }
-
-        .hero .highlight {
-            color: #fbbf24;
-            position: relative;
-        }
-
+        .hero .hero-content { max-width: 900px; padding: 0 1.5rem; position: relative; z-index: 2; }
+        .hero h1 { font-size: 3.6rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; margin: 0 auto 1.2rem auto; }
+        .hero .highlight { color: var(--erb-yellow); position: relative; }
         .hero .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #fbbf24;
-            border-radius: 9999px;
-            opacity: 0.5;
+            content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+            height: 4px; background: var(--erb-yellow); border-radius: 9999px; opacity: 0.5;
         }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: #cbd5e1;
-            max-width: 700px;
-            margin: 0 auto 2.5rem auto;
-        }
-
+        .hero p { font-size: 1.3rem; color: #cbd5e1; max-width: 700px; margin: 0 auto 2.5rem auto; }
         .hero .badge {
-            display: inline-block;
-            background-color: #fbbf24;
-            color: #0f172a;
-            font-weight: 700;
-            padding: 0.5rem 2rem;
-            border-radius: 9999px;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            display: inline-block; background-color: var(--erb-yellow); color: #0f172a;
+            font-weight: 700; padding: 0.5rem 2rem; border-radius: 9999px; font-size: 0.95rem; letter-spacing: 0.5px; text-transform: uppercase;
         }
 
         /* ===== EXPERIMENTÁLNÍ KARTY ===== */
-        .exp-grid {
+        .exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto; }
+        .exp-card {
+            background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 1.8rem; padding: 1.8rem 1.2rem; text-align: center;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); color: #f8fafc; touch-action: manipulation; position: relative; overflow: hidden;
+        }
+        .exp-card::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--erb-yellow), #f59e0b); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left;
+        }
+        .exp-card:hover::after { transform: scaleX(1); }
+        .exp-card:active { transform: scale(0.95); }
+        .exp-card .exp-emoji { font-size: 2.4rem; display: block; margin-bottom: 0.3rem; }
+        .exp-card .exp-number { font-size: 2.4rem; font-weight: 900; color: var(--erb-yellow); display: block; line-height: 1.1; letter-spacing: -0.02em; }
+        .exp-card .exp-label { font-size: 1rem; font-weight: 700; opacity: 0.95; margin-top: 0.2rem; display: block; }
+        .exp-card .exp-desc { font-size: 0.8rem; opacity: 0.6; margin-top: 0.2rem; display: block; }
+
+        /* ===== SEKCE "VESNICE NENÍ NUDA" ===== */
+        .vesnice-section { padding: 5rem 0; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 30%, #eff6ff 70%, #dbeafe 100%); border-bottom: 3px solid rgba(251, 191, 36, 0.3); position: relative; overflow: hidden; }
+        .vesnice-section::before { content: ''; position: absolute; top: -30%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, transparent 70%); border-radius: 50%; }
+        .vesnice-section .container { max-width: 1280px; padding: 0 1.5rem; width: 100%; margin: 0 auto; position: relative; z-index: 2; }
+        .vesnice-section .section-tag { display: inline-block; background: rgba(251, 191, 36, 0.15); color: #fbbf24; font-weight: 700; padding: 0.3rem 1.5rem; border-radius: 9999px; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .vesnice-section h2 { font-size: 3rem; font-weight: 900; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 0.8rem; }
+        .vesnice-section .vesnice-subtitle { font-size: 1.2rem; color: #475569; max-width: 600px; margin-bottom: 3rem; }
+
+        /* ===== ČASOVÁ OSA ===== */
+        .timeline-osa { position: relative; padding: 2rem 0 2rem 3rem; max-width: 800px; margin: 0 auto; }
+        .timeline-osa::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #cbd5e1 0%, #cbd5e1 100%); border-radius: 9999px; transition: background 0.6s ease; }
+        .timeline-osa.active-1::before { background: linear-gradient(180deg, #fbbf24 0%, #cbd5e1 100%); }
+        .timeline-osa.active-2::before { background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 50%, #cbd5e1 100%); }
+        .timeline-osa.active-3::before { background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 70%, #cbd5e1 100%); }
+        .timeline-osa.active-4::before { background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 100%); }
+        .timeline-osa-item { position: relative; margin-bottom: 3.5rem; padding-left: 2rem; transition: all 0.4s ease; }
+        .timeline-osa-item:last-child { margin-bottom: 0; }
+        .timeline-osa-item .osa-dot { position: absolute; left: -2.3rem; top: 8px; width: 28px; height: 28px; background: #cbd5e1; border-radius: 50%; border: 4px solid #f8fafc; box-shadow: 0 0 0 4px rgba(203, 213, 225, 0.3); z-index: 2; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #64748b; font-weight: 900; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .timeline-osa-item.active .osa-dot { background: #fbbf24; box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.4); transform: scale(1.25); color: #0f172a; }
+        .timeline-osa-item .osa-content { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 2rem; padding: 2rem 2.5rem; border: 2px solid rgba(226, 232, 240, 0.5); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); position: relative; }
+        .timeline-osa-item.active .osa-content { border-color: #fbbf24; box-shadow: 0 8px 32px rgba(251, 191, 36, 0.15); transform: translateX(6px) scale(1.01); background: rgba(255, 255, 255, 0.98); }
+        .timeline-osa-item .osa-year { display: inline-block; font-size: 0.85rem; font-weight: 800; color: #94a3b8; background: rgba(148, 163, 184, 0.12); padding: 0.2rem 1.2rem; border-radius: 9999px; letter-spacing: 0.5px; margin-bottom: 0.3rem; transition: all 0.4s ease; }
+        .timeline-osa-item.active .osa-year { color: #fbbf24; background: rgba(251, 191, 36, 0.15); }
+        .timeline-osa-item .osa-icon { font-size: 2.4rem; display: block; margin-bottom: 0.3rem; transition: all 0.4s ease; }
+        .timeline-osa-item.active .osa-icon { transform: scale(1.15) rotate(-5deg); }
+        .timeline-osa-item .osa-content h3 { font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 0.3rem; transition: all 0.4s ease; }
+        .timeline-osa-item.active .osa-content h3 { color: #f59e0b; font-size: 1.8rem; }
+        .timeline-osa-item .osa-content p { color: #475569; font-size: 1rem; line-height: 1.7; margin-bottom: 0; transition: all 0.4s ease; }
+        .timeline-osa-item.active .osa-content p { color: #1e293b; }
+
+        /* ===== PROGRAMOVÉ BANNERY ===== */
+        .program-banner { padding: 2.5rem 0; text-align: center; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 14vh; }
+        .program-banner .container { padding: 0 1.5rem; width: 100%; }
+        .program-banner h2 { font-size: 3rem; font-weight: 900; letter-spacing: -0.02em; }
+        .program-banner .program-number { font-size: 1rem; font-weight: 700; display: inline-block; padding: 0.2rem 1.5rem; border-radius: 9999px; margin-bottom: 0.3rem; letter-spacing: 1px; }
+        
+        .program-banner.p1 { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); color: #0f172a; border-top: 3px solid #0f172a; border-bottom: 3px solid #0f172a; }
+        .program-banner.p1 .program-number { background: rgba(15, 23, 42, 0.15); }
+        .program-banner.p2 { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f8fafc; border-top: 3px solid #fbbf24; border-bottom: 3px solid #fbbf24; }
+        .program-banner.p2 .program-number { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .program-banner.p3 { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #0f172a; border-top: 3px solid #0f172a; border-bottom: 3px solid #0f172a; }
+        .program-banner.p3 .program-number { background: rgba(15, 23, 42, 0.15); }
+        .program-banner.p4 { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); color: #f8fafc; border-top: 3px solid #fbbf24; border-bottom: 3px solid #fbbf24; }
+        .program-banner.p4 .program-number { background: rgba(251, 191, 36, 0.25); color: #fbbf24; }
+
+        /* ===== SEKCE ===== */
+        .section { padding: 5rem 0; width: 100%; }
+        .section-alt { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 50%, #fffbeb 100%); border-top: 3px solid rgba(251, 191, 36, 0.2); border-bottom: 3px solid rgba(251, 191, 36, 0.2); }
+        .section .container { max-width: 1280px; padding: 0 1.5rem; width: 100%; margin: 0 auto; }
+        .section-title { font-size: 2.8rem; font-weight: 800; text-align: center; margin-bottom: 3rem; color: #0f172a; letter-spacing: -0.02em; display: flex; align-items: center; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
+        .section-title i { color: #fbbf24; }
+        .section-subtitle { text-align: center; font-size: 1.3rem; color: #64748b; max-width: 700px; margin: -2rem auto 3rem auto; }
+
+        /* ===== INOVATIVNÍ "PROČ" ===== */
+        .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
+        .why-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 2.5rem; padding: 2.5rem 2rem; border: 2px solid rgba(226, 232, 240, 0.6); transition: all 0.35s ease; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04); position: relative; overflow: hidden; touch-action: manipulation; }
+        .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #fbbf24, #f59e0b); opacity: 0; transition: opacity 0.3s ease; }
+        .why-card:hover::before { opacity: 1; }
+        .why-card:active { transform: scale(0.97); }
+        .why-card:hover { transform: translateY(-8px); border-color: #fbbf24; box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12); }
+        .why-card .card-number { font-size: 3.2rem; font-weight: 900; color: #fbbf24; opacity: 0.2; position: absolute; top: 0.5rem; right: 1.5rem; line-height: 1; }
+        .why-card .card-icon { font-size: 3.2rem; color: #fbbf24; margin-bottom: 0.8rem; display: block; }
+        .why-card h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; color: #0f172a; }
+        .why-card p { color: #475569; font-size: 1.05rem; line-height: 1.7; margin-bottom: 0.8rem; }
+        .why-card .card-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #fbbf24; background: rgba(251, 191, 36, 0.1); padding: 0.25rem 1.2rem; border-radius: 9999px; letter-spacing: 0.5px; }
+
+        /* ===== NOVÉ NEPOSUVNÉ MENU "CO CHYSTÁME" ===== */
+        .chystame-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
-            margin-top: 3rem;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .exp-card {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.8rem;
-            padding: 1.8rem 1.2rem;
+        .chystame-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
+            border: 2px solid rgba(226, 232, 240, 0.5);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            color: #f8fafc;
-            touch-action: manipulation;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
             position: relative;
             overflow: hidden;
         }
 
-        .exp-card::after {
+        .chystame-card::before {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            height: 5px;
+            background: linear-gradient(90deg, var(--erb-blue), var(--erb-yellow));
             transform: scaleX(0);
             transition: transform 0.4s ease;
             transform-origin: left;
         }
 
-        .exp-card:hover::after {
+        .chystame-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--erb-blue);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+        }
+
+        .chystame-card:hover::before {
             transform: scaleX(1);
         }
 
-        .exp-card:active {
-            transform: scale(0.95);
-        }
-
-        .exp-card .exp-emoji {
-            font-size: 2.4rem;
-            display: block;
-            margin-bottom: 0.3rem;
-        }
-
-        .exp-card .exp-number {
-            font-size: 2.4rem;
-            font-weight: 900;
-            color: #fbbf24;
-            display: block;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .exp-card .exp-label {
-            font-size: 1rem;
-            font-weight: 700;
-            opacity: 0.95;
-            margin-top: 0.2rem;
-            display: block;
-        }
-
-        .exp-card .exp-desc {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            margin-top: 0.2rem;
-            display: block;
-        }
-
-        /* ===== SEKCE "VESNICE NENÍ NUDA" ===== */
-        .vesnice-section {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 30%, #eff6ff 70%, #dbeafe 100%);
-            border-bottom: 3px solid rgba(251, 191, 36, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .vesnice-section::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .vesnice-section .container {
-            max-width: 1280px;
-            padding: 0 1.5rem;
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .vesnice-section .section-tag {
-            display: inline-block;
-            background: rgba(251, 191, 36, 0.15);
-            color: #fbbf24;
-            font-weight: 700;
-            padding: 0.3rem 1.5rem;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .vesnice-section h2 {
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            color: #0f172a;
-            margin-bottom: 0.8rem;
-        }
-
-        .vesnice-section .vesnice-subtitle {
-            font-size: 1.2rem;
-            color: #475569;
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-
-        /* ===== ČASOVÁ OSA (4 BODY) ===== */
-        .timeline-osa {
-            position: relative;
-            padding: 2rem 0 2rem 3rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline-osa::before {
-            content: '';
-            position: absolute;
-            left: 12px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, #cbd5e1 0%, #cbd5e1 100%);
-            border-radius: 9999px;
-            transition: background 0.6s ease;
-        }
-
-        .timeline-osa.active-1::before {
-            background: linear-gradient(180deg, #fbbf24 0%, #cbd5e1 100%);
-        }
-        .timeline-osa.active-2::before {
-            background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 50%, #cbd5e1 100%);
-        }
-        .timeline-osa.active-3::before {
-            background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 70%, #cbd5e1 100%);
-        }
-        .timeline-osa.active-4::before {
-            background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 100%);
-        }
-
-        .timeline-osa-item {
-            position: relative;
-            margin-bottom: 3.5rem;
-            padding-left: 2rem;
-            transition: all 0.4s ease;
-        }
-
-        .timeline-osa-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-osa-item .osa-dot {
-            position: absolute;
-            left: -2.3rem;
-            top: 8px;
-            width: 28px;
-            height: 28px;
-            background: #cbd5e1;
-            border-radius: 50%;
-            border: 4px solid #f8fafc;
-            box-shadow: 0 0 0 4px rgba(203, 213, 225, 0.3);
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            color: #64748b;
-            font-weight: 900;
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .timeline-osa-item.active .osa-dot {
-            background: #fbbf24;
-            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.4);
-            transform: scale(1.25);
-            color: #0f172a;
-        }
-
-        .timeline-osa-item .osa-content {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border-radius: 2rem;
-            padding: 2rem 2.5rem;
-            border: 2px solid rgba(226, 232, 240, 0.5);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            position: relative;
-        }
-
-        .timeline-osa-item.active .osa-content {
-            border-color: #fbbf24;
-            box-shadow: 0 8px 32px rgba(251, 191, 36, 0.15);
-            transform: translateX(6px) scale(1.01);
-            background: rgba(255, 255, 255, 0.98);
-        }
-
-        .timeline-osa-item .osa-year {
-            display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: #94a3b8;
-            background: rgba(148, 163, 184, 0.12);
-            padding: 0.2rem 1.2rem;
-            border-radius: 9999px;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.3rem;
-            transition: all 0.4s ease;
-        }
-
-        .timeline-osa-item.active .osa-year {
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.15);
-        }
-
-        .timeline-osa-item .osa-icon {
-            font-size: 2.4rem;
-            display: block;
-            margin-bottom: 0.3rem;
-            transition: all 0.4s ease;
-        }
-
-        .timeline-osa-item.active .osa-icon {
-            transform: scale(1.15) rotate(-5deg);
-        }
-
-        .timeline-osa-item .osa-content h3 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 0.3rem;
-            transition: all 0.4s ease;
-        }
-
-        .timeline-osa-item.active .osa-content h3 {
-            color: #f59e0b;
-            font-size: 1.8rem;
-        }
-
-        .timeline-osa-item .osa-content p {
-            color: #475569;
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 0;
-            transition: all 0.4s ease;
-        }
-
-        .timeline-osa-item.active .osa-content p {
-            color: #1e293b;
-        }
-
-        /* ===== PROGRAMOVÉ BANNERY ===== */
-        .program-banner {
-            padding: 2.5rem 0;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 14vh;
-        }
-
-        .program-banner .container {
-            padding: 0 1.5rem;
-            width: 100%;
-        }
-
-        .program-banner h2 {
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-        }
-
-        .program-banner .program-number {
-            font-size: 1rem;
-            font-weight: 700;
-            display: inline-block;
-            padding: 0.2rem 1.5rem;
-            border-radius: 9999px;
-            margin-bottom: 0.3rem;
-            letter-spacing: 1px;
-        }
-
-        .program-banner.p1 {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: #0f172a;
-            border-top: 3px solid #0f172a;
-            border-bottom: 3px solid #0f172a;
-        }
-
-        .program-banner.p1 .program-number {
-            background: rgba(15, 23, 42, 0.15);
-        }
-
-        .program-banner.p2 {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: #f8fafc;
-            border-top: 3px solid #fbbf24;
-            border-bottom: 3px solid #fbbf24;
-        }
-
-        .program-banner.p2 .program-number {
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-        }
-
-        .program-banner.p3 {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #0f172a;
-            border-top: 3px solid #0f172a;
-            border-bottom: 3px solid #0f172a;
-        }
-
-        .program-banner.p3 .program-number {
-            background: rgba(15, 23, 42, 0.15);
-        }
-
-        .program-banner.p4 {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-            color: #f8fafc;
-            border-top: 3px solid #fbbf24;
-            border-bottom: 3px solid #fbbf24;
-        }
-
-        .program-banner.p4 .program-number {
-            background: rgba(251, 191, 36, 0.25);
-            color: #fbbf24;
-        }
-
-        /* ===== SEKCE ===== */
-        .section {
-            padding: 5rem 0;
-            width: 100%;
-        }
-
-        .section-alt {
-            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 50%, #fffbeb 100%);
-            border-top: 3px solid rgba(251, 191, 36, 0.2);
-            border-bottom: 3px solid rgba(251, 191, 36, 0.2);
-        }
-
-        .section .container {
-            max-width: 1280px;
-            padding: 0 1.5rem;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .section-title {
+        .chystame-card .ch-icon {
             font-size: 2.8rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #0f172a;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .section-title i {
-            color: #fbbf24;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.3rem;
-            color: #64748b;
-            max-width: 700px;
-            margin: -2rem auto 3rem auto;
-        }
-
-        /* ===== INOVATIVNÍ "PROČ" ===== */
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .why-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border-radius: 2.5rem;
-            padding: 2.5rem 2rem;
-            border: 2px solid rgba(226, 232, 240, 0.6);
-            transition: all 0.35s ease;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-            position: relative;
-            overflow: hidden;
-            touch-action: manipulation;
-        }
-
-        .why-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .why-card:hover::before {
-            opacity: 1;
-        }
-
-        .why-card:active {
-            transform: scale(0.97);
-        }
-
-        .why-card:hover {
-            transform: translateY(-8px);
-            border-color: #fbbf24;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-        }
-
-        .why-card .card-number {
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: #fbbf24;
-            opacity: 0.2;
-            position: absolute;
-            top: 0.5rem;
-            right: 1.5rem;
-            line-height: 1;
-        }
-
-        .why-card .card-icon {
-            font-size: 3.2rem;
-            color: #fbbf24;
+            color: var(--erb-blue);
             margin-bottom: 0.8rem;
             display: block;
+            transition: transform 0.4s ease;
         }
 
-        .why-card h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #0f172a;
-        }
-
-        .why-card p {
-            color: #475569;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 0.8rem;
-        }
-
-        .why-card .card-tag {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.1);
-            padding: 0.25rem 1.2rem;
-            border-radius: 9999px;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== SLIDER ===== */
-        .slider-wrapper {
-            position: relative;
-            overflow: hidden;
-            padding: 0.5rem 0 1.5rem 0;
-        }
-
-        .slider-track {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding: 0.5rem 0.5rem 1.5rem 0.5rem;
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: #fbbf24 #e2e8f0;
-            cursor: grab;
-            user-select: none;
-            touch-action: pan-y;
-        }
-
-        .slider-track.dragging {
-            cursor: grabbing;
-            scroll-snap-type: none;
-        }
-
-        .slider-track::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .slider-track::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 9999px;
-        }
-
-        .slider-track::-webkit-scrollbar-thumb {
-            background: #fbbf24;
-            border-radius: 9999px;
-        }
-
-        .slider-item {
-            flex: 0 0 260px;
-            scroll-snap-align: start;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border-radius: 2.5rem;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            border: 1px solid rgba(226, 232, 240, 0.5);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            touch-action: manipulation;
-            min-height: 220px;
-        }
-
-        .slider-item:active {
-            transform: scale(0.96);
-        }
-
-        .slider-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: #fbbf24;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-        }
-
-        .slider-item .slide-icon {
-            font-size: 3rem;
-            color: #fbbf24;
-            margin-bottom: 0.8rem;
-            display: block;
-        }
-
-        .slider-item h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            color: #0f172a;
-        }
-
-        .slider-item p {
-            font-size: 0.95rem;
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        .slider-item .slide-tag {
-            display: inline-block;
-            margin-top: 0.8rem;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.1);
-            padding: 0.2rem 1rem;
-            border-radius: 9999px;
-            letter-spacing: 0.3px;
-        }
-
-        .slider-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            margin-top: 0.5rem;
-        }
-
-        .slider-btn {
-            background: #fbbf24;
-            color: #0f172a;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            touch-action: manipulation;
-            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
-        }
-
-        .slider-btn:hover {
-            transform: scale(1.08);
-            background: #f59e0b;
-        }
-
-        .slider-btn:active {
-            transform: scale(0.92);
-        }
-
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.6rem;
-            margin-top: 1rem;
-        }
-
-        .slider-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #cbd5e1;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .slider-dot.active {
-            background: #fbbf24;
-            transform: scale(1.3);
-        }
-
-        /* ===== VOLBY KARTY ===== */
-        .volby-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .volby-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border-radius: 2.5rem;
-            padding: 2rem 1.8rem;
-            border: 2px solid rgba(226, 232, 240, 0.5);
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .volby-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .volby-card:hover::before {
-            opacity: 1;
-        }
-
-        .volby-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #fbbf24;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
-        }
-
-        .volby-card:active {
-            transform: scale(0.96);
-        }
-
-        .volby-card.color-green::before {
-            background: linear-gradient(90deg, #10b981, #059669);
-        }
-        .volby-card.color-green .volby-icon {
-            color: #10b981;
-        }
-        .volby-card.color-green .volby-hlas {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-        }
-        .volby-card.color-green .volby-tag {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-        }
-
-        .volby-card.color-blue::before {
-            background: linear-gradient(90deg, #3b82f6, #2563eb);
-        }
-        .volby-card.color-blue .volby-icon {
-            color: #3b82f6;
-        }
-        .volby-card.color-blue .volby-hlas {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-        .volby-card.color-blue .volby-tag {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
-
-        .volby-card.color-orange::before {
-            background: linear-gradient(90deg, #f97316, #ea580c);
-        }
-        .volby-card.color-orange .volby-icon {
-            color: #f97316;
-        }
-        .volby-card.color-orange .volby-hlas {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-        .volby-card.color-orange .volby-tag {
-            background: rgba(249, 115, 22, 0.1);
-            color: #f97316;
-        }
-
-        .volby-card.color-purple::before {
-            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
-        }
-        .volby-card.color-purple .volby-icon {
-            color: #8b5cf6;
-        }
-        .volby-card.color-purple .volby-hlas {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
-        }
-        .volby-card.color-purple .volby-tag {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
-        }
-
-        .volby-card .volby-icon {
-            font-size: 3.2rem;
-            margin-bottom: 0.5rem;
-            display: block;
-            transition: all 0.4s ease;
-        }
-
-        .volby-card:hover .volby-icon {
+        .chystame-card:hover .ch-icon {
             transform: scale(1.15) rotate(-8deg);
         }
 
-        .volby-card .volby-title {
-            font-size: 1.3rem;
+        .chystame-card h4 {
+            font-size: 1.2rem;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 0.3rem;
-            line-height: 1.2;
+            margin-bottom: 0.4rem;
         }
 
-        .volby-card .volby-desc {
+        .chystame-card p {
             color: #475569;
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.5;
             margin-bottom: 1rem;
-            flex: 1;
         }
 
-        .volby-card .volby-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
-
-        .volby-card .volby-tag {
+        .chystame-card .ch-tag {
             display: inline-block;
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            padding: 0.2rem 1rem;
+            color: var(--erb-yellow);
+            background: rgba(213, 0, 0, 0.1); /* Světle červená/žlutá z erbu */
+            padding: 0.2rem 1.2rem;
             border-radius: 9999px;
             letter-spacing: 0.5px;
         }
 
-        .volby-card .volby-hlas {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            padding: 0.2rem 1rem;
-            border-radius: 9999px;
-        }
-
-        .volby-card .volby-hlas i {
-            font-size: 0.8rem;
-        }
-
-        /* ===== MOBIL - HORIZONTÁLNÍ SCROLL ===== */
-        .volby-scroll-mobile {
-            display: none;
-            gap: 1.2rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding: 0.5rem 0.5rem 1.5rem 0.5rem;
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: #fbbf24 #e2e8f0;
-            max-width: 100%;
-        }
-
-        .volby-scroll-mobile::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .volby-scroll-mobile::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 9999px;
-        }
-
-        .volby-scroll-mobile::-webkit-scrollbar-thumb {
-            background: #fbbf24;
-            border-radius: 9999px;
-        }
-
-        .volby-scroll-mobile .volby-card {
-            flex: 0 0 280px;
-            scroll-snap-align: start;
-            min-height: 240px;
-        }
+        /* ===== VOLBY KARTY ===== */
+        .volby-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+        .volby-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 2.5rem; padding: 2rem 1.8rem; border: 2px solid rgba(226, 232, 240, 0.5); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); touch-action: manipulation; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .volby-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; opacity: 0; transition: opacity 0.4s ease; }
+        .volby-card:hover::before { opacity: 1; }
+        .volby-card:hover { transform: translateY(-10px) scale(1.02); border-color: #fbbf24; box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15); }
+        .volby-card:active { transform: scale(0.96); }
+        .volby-card.color-green::before { background: linear-gradient(90deg, #10b981, #059669); }
+        .volby-card.color-green .volby-icon { color: #10b981; }
+        .volby-card.color-green .volby-hlas { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .volby-card.color-green .volby-tag { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .volby-card.color-blue::before { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+        .volby-card.color-blue .volby-icon { color: #3b82f6; }
+        .volby-card.color-blue .volby-hlas { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .volby-card.color-blue .volby-tag { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .volby-card.color-orange::before { background: linear-gradient(90deg, #f97316, #ea580c); }
+        .volby-card.color-orange .volby-icon { color: #f97316; }
+        .volby-card.color-orange .volby-hlas { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+        .volby-card.color-orange .volby-tag { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+        .volby-card.color-purple::before { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+        .volby-card.color-purple .volby-icon { color: #8b5cf6; }
+        .volby-card.color-purple .volby-hlas { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .volby-card.color-purple .volby-tag { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .volby-card .volby-icon { font-size: 3.2rem; margin-bottom: 0.5rem; display: block; transition: all 0.4s ease; }
+        .volby-card:hover .volby-icon { transform: scale(1.15) rotate(-8deg); }
+        .volby-card .volby-title { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 0.3rem; line-height: 1.2; }
+        .volby-card .volby-desc { color: #475569; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; flex: 1; }
+        .volby-card .volby-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+        .volby-card .volby-tag { display: inline-block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; padding: 0.2rem 1rem; border-radius: 9999px; letter-spacing: 0.5px; }
+        .volby-card .volby-hlas { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; padding: 0.2rem 1rem; border-radius: 9999px; }
+        .volby-card .volby-hlas i { font-size: 0.8rem; }
+        .volby-scroll-mobile { display: none; gap: 1.2rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.5rem 0.5rem 1.5rem 0.5rem; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #fbbf24 #e2e8f0; max-width: 100%; }
+        .volby-scroll-mobile::-webkit-scrollbar { height: 6px; }
+        .volby-scroll-mobile::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 9999px; }
+        .volby-scroll-mobile::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 9999px; }
+        .volby-scroll-mobile .volby-card { flex: 0 0 280px; scroll-snap-align: start; min-height: 240px; }
 
         /* ===== KANDIDÁTI ===== */
-        .candidates-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+        .candidates-list { display: flex; flex-direction: column; gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .candidates-list .candidate-profile:nth-child(odd) { background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%); }
+        .candidates-list .candidate-profile:nth-child(even) { background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%); }
+        .candidate-profile { display: flex; gap: 2.5rem; border-radius: 2rem; padding: 2.5rem; border: 2px solid rgba(226, 232, 240, 0.5); transition: all 0.35s ease; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); align-items: center; touch-action: manipulation; position: relative; overflow: hidden; }
+        .candidate-profile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; transition: opacity 0.3s ease; opacity: 0; }
+        .candidate-profile:hover::before { opacity: 1; }
+        .candidate-profile:active { transform: scale(0.98); }
+        .candidate-profile:hover { box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12); transform: translateX(6px); }
+        .candidate-profile.color-gold::before { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        .candidate-profile.color-gold .candidate-photo { border-color: #fbbf24; }
+        .candidate-profile.color-gold .candidate-tag { color: #fbbf24; background: rgba(251, 191, 36, 0.15); }
+        .candidate-profile.color-gold .position { color: #fbbf24; }
+        .candidate-profile.color-gold .priority i { color: #fbbf24; }
+        .candidate-profile.color-gold .candidate-social a:hover { background: #fbbf24; color: #0f172a; }
+        .candidate-profile.color-green::before { background: linear-gradient(90deg, #10b981, #059669); }
+        .candidate-profile.color-green .candidate-photo { border-color: #10b981; }
+        .candidate-profile.color-green .candidate-tag { color: #10b981; background: rgba(16, 185, 129, 0.15); }
+        .candidate-profile.color-green .position { color: #10b981; }
+        .candidate-profile.color-green .priority i { color: #10b981; }
+        .candidate-profile.color-green .candidate-social a:hover { background: #10b981; color: #0f172a; }
+        .candidate-profile.color-blue::before { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+        .candidate-profile.color-blue .candidate-photo { border-color: #3b82f6; }
+        .candidate-profile.color-blue .candidate-tag { color: #3b82f6; background: rgba(59, 130, 246, 0.15); }
+        .candidate-profile.color-blue .position { color: #3b82f6; }
+        .candidate-profile.color-blue .priority i { color: #3b82f6; }
+        .candidate-profile.color-blue .candidate-social a:hover { background: #3b82f6; color: #0f172a; }
+        .candidate-profile.color-red::before { background: linear-gradient(90deg, #ef4444, #dc2626); }
+        .candidate-profile.color-red .candidate-photo { border-color: #ef4444; }
+        .candidate-profile.color-red .candidate-tag { color: #ef4444; background: rgba(239, 68, 68, 0.15); }
+        .candidate-profile.color-red .position { color: #ef4444; }
+        .candidate-profile.color-red .priority i { color: #ef4444; }
+        .candidate-profile.color-red .candidate-social a:hover { background: #ef4444; color: #0f172a; }
+        .candidate-profile.color-purple::before { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+        .candidate-profile.color-purple .candidate-photo { border-color: #8b5cf6; }
+        .candidate-profile.color-purple .candidate-tag { color: #8b5cf6; background: rgba(139, 92, 246, 0.15); }
+        .candidate-profile.color-purple .position { color: #8b5cf6; }
+        .candidate-profile.color-purple .priority i { color: #8b5cf6; }
+        .candidate-profile.color-purple .candidate-social a:hover { background: #8b5cf6; color: #0f172a; }
+        .candidate-profile.color-indigo::before { background: linear-gradient(90deg, #4f46e5, #4338ca); }
+        .candidate-profile.color-indigo .candidate-photo { border-color: #4f46e5; }
+        .candidate-profile.color-indigo .candidate-tag { color: #4f46e5; background: rgba(79, 70, 229, 0.15); }
+        .candidate-profile.color-indigo .position { color: #4f46e5; }
+        .candidate-profile.color-indigo .priority i { color: #4f46e5; }
+        .candidate-profile.color-indigo .candidate-social a:hover { background: #4f46e5; color: #0f172a; }
+        .candidate-profile.color-teal::before { background: linear-gradient(90deg, #14b8a6, #0d9488); }
+        .candidate-profile.color-teal .candidate-photo { border-color: #14b8a6; }
+        .candidate-profile.color-teal .candidate-tag { color: #14b8a6; background: rgba(20, 184, 166, 0.15); }
+        .candidate-profile.color-teal .position { color: #14b8a6; }
+        .candidate-profile.color-teal .priority i { color: #14b8a6; }
+        .candidate-profile.color-teal .candidate-social a:hover { background: #14b8a6; color: #0f172a; }
+        .candidate-profile.color-orange::before { background: linear-gradient(90deg, #f97316, #ea580c); }
+        .candidate-profile.color-orange .candidate-photo { border-color: #f97316; }
+        .candidate-profile.color-orange .candidate-tag { color: #f97316; background: rgba(249, 115, 22, 0.15); }
+        .candidate-profile.color-orange .position { color: #f97316; }
+        .candidate-profile.color-orange .priority i { color: #f97316; }
+        .candidate-profile.color-orange .candidate-social a:hover { background: #f97316; color: #0f172a; }
+        .candidate-profile.color-pink::before { background: linear-gradient(90deg, #ec4899, #db2777); }
+        .candidate-profile.color-pink .candidate-photo { border-color: #ec4899; }
+        .candidate-profile.color-pink .candidate-tag { color: #ec4899; background: rgba(236, 72, 153, 0.15); }
+        .candidate-profile.color-pink .position { color: #ec4899; }
+        .candidate-profile.color-pink .priority i { color: #ec4899; }
+        .candidate-profile.color-pink .candidate-social a:hover { background: #ec4899; color: #0f172a; }
+        .candidate-photo { flex-shrink: 0; width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%); border: 5px solid #fbbf24; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; transition: all 0.3s ease; }
+        .candidate-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .candidate-photo .photo-placeholder { color: #94a3b8; font-size: 0.8rem; text-align: center; padding: 0.5rem; line-height: 1.3; }
+        .candidate-photo .photo-placeholder i { font-size: 3.2rem; display: block; margin-bottom: 0.2rem; }
+        .candidate-profile:hover .candidate-photo { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0.15); }
+        .candidate-info { flex: 1; min-width: 0; }
+        .candidate-info .candidate-number { display: inline-block; font-size: 0.75rem; font-weight: 800; color: #0f172a; background: #fef9e7; padding: 0.2rem 1rem; border-radius: 9999px; border: 1px solid #fbbf24; margin-bottom: 0.3rem; letter-spacing: 0.3px; }
+        .candidate-info .candidate-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 1rem; border-radius: 9999px; margin-left: 0.5rem; text-transform: uppercase; }
+        .candidate-info h3 { font-size: 2rem; font-weight: 800; color: #0f172a; margin: 0.2rem 0 0.1rem 0; }
+        .candidate-info h3 .candidate-emoji { font-size: 1.6rem; margin-right: 0.3rem; }
+        .candidate-info .position { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; }
+        .candidate-info .bio { color: #475569; font-size: 1rem; margin-bottom: 0.8rem; line-height: 1.7; }
+        .candidate-priorities { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin-bottom: 0.8rem; }
+        .candidate-priorities .priority { background: rgba(241, 245, 249, 0.7); padding: 0.2rem 1.2rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500; color: #1e293b; display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid transparent; transition: all 0.2s ease; }
+        .candidate-priorities .priority i { font-size: 0.5rem; }
+        .candidate-profile:hover .priority { border-color: #e2e8f0; background: #f8fafc; }
+        .candidate-social { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+        .candidate-social a { display: inline-flex; align-items: center; gap: 0.4rem; color: #64748b; text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.3rem 1.2rem; border-radius: 9999px; background: rgba(241, 245, 249, 0.7); transition: all 0.25s ease; border: 1px solid transparent; touch-action: manipulation; }
+        .candidate-social a:active { transform: scale(0.95); }
 
-        .candidates-list .candidate-profile:nth-child(odd) {
-            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
-        }
-
-        .candidates-list .candidate-profile:nth-child(even) {
-            background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
-        }
-
-        .candidate-profile {
-            display: flex;
-            gap: 2.5rem;
-            border-radius: 2rem;
-            padding: 2.5rem;
-            border: 2px solid rgba(226, 232, 240, 0.5);
-            transition: all 0.35s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            align-items: center;
-            touch-action: manipulation;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .candidate-profile::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .candidate-profile:hover::before {
-            opacity: 1;
-        }
-
-        .candidate-profile:active {
-            transform: scale(0.98);
-        }
-
-        .candidate-profile:hover {
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-            transform: translateX(6px);
-        }
-
-        .candidate-profile.color-gold::before {
-            background: linear-gradient(90deg, #fbbf24, #f59e0b);
-        }
-        .candidate-profile.color-gold .candidate-photo {
-            border-color: #fbbf24;
-        }
-        .candidate-profile.color-gold .candidate-tag {
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.15);
-        }
-        .candidate-profile.color-gold .position {
-            color: #fbbf24;
-        }
-        .candidate-profile.color-gold .priority i {
-            color: #fbbf24;
-        }
-        .candidate-profile.color-gold .candidate-social a:hover {
-            background: #fbbf24;
-            color: #0f172a;
-        }
-
-        .candidate-profile.color-green::before {
-            background: linear-gradient(90deg, #10b981, #059669);
-        }
-        .candidate-profile.color-green .candidate-photo {
-            border-color: #10b981;
-        }
-        .candidate-profile.color-green .candidate-tag {
-            color: #10b981;
-            background: rgba(16, 185, 129, 0.15);
-        }
-        .candidate-profile.color-green .position {
-            color: #10b981;
-        }
-        .candidate-profile.color-green .priority i {
-            color: #10b981;
-        }
-        .candidate-profile.color-green .candidate-social a:hover {
-            background: #10b981;
-            color: #0f172a;
-        }
-
-        .candidate-profile.color-blue::before {
-            background: linear-gradient(90deg, #3b82f6, #2563eb);
-        }
-        .candidate-profile.color-blue .candidate-photo {
-            border-color: #3b82f6;
-        }
-        .candidate-profile.color-blue .candidate-tag {
-            color: #3b82f6;
-            background: rgba(59, 130, 246, 0.15);
-        }
-        .candidate-profile.color-blue .position {
-            color: #3b82f6;
-        }
-        .candidate-profile.color-blue .priority i {
-            color: #3b82f6;
-        }
-        .candidate-profile.color-blue .candidate-social a:hover {
-            background: #3b82f6;
-            color: #0f172a;
-        }
-
-        .candidate-profile.color-red::before {
-            background: linear-gradient(90deg, #ef4444, #dc2626);
-        }
-        .candidate-profile.color-red .candidate-photo {
-            border-color: #ef4444;
-        }
-        .candidate-profile.color-red .candidate-tag {
-            color: #ef4444;
-            background: rgba(239, 68, 68, 0.15);
-        }
-        .candidate-profile.color-red .position {
-            color: #ef4444;
-        }
-        .candidate-profile.color-red .priority i {
-            color: #ef4444;
-        }
-        .candidate-profile.color-red .candidate-social a:hover {
-            background: #ef4444;
-            color: #0f172a;
-        }
-
-        .candidate-profile.color-purple::before {
-            background: linear-gradient(90deg, #8b5cf6, #7c3aed);
-        }
-        .candidate-profile.color-purple .candidate-photo {
-            border-color: #8b5cf6;
-        }
-        .candidate-profile.color-purple .candidate-tag {
-            color: #8b5cf6;
-            background: rgba(139, 92, 246, 0.15);
-        }
-        .candidate-profile.color-purple .position {
-            color: #8b5cf6;
-        }
-        .candidate-profile.color-purple .priority i {
-            color: #8b5cf6;
-        }
-        .candidate-profile.color-purple .candidate-social a:hover {
-            background: #8b5cf6;
-            color: #0f172a;
-        }
-
-        .candidate-profile.color-indigo::before {
-            background: linear-gradient(90deg, #4f46e5, #4338ca);
-        }
-        .candidate-profile.color-indigo .candidate-photo {
-            border-color: #4f46e5;
-        }
-        .candidate-profile.color-indigo .candidate-tag {
-            color: #4f46e5;
-            background: rgba(79, 70, 229, 0.15);
-        }
-        .candidate-profile.color-indigo .position {
-            color: #4f46e5;
-        }
-        .candidate-profile.color-indigo .priority i {
-            color: #4f46e5;
-        }
-        .candidate-profile.color-indigo .candidate-social a:hover {
-            background: #4f46e5;
-            color: #0f172a;
-        }
-
-        .candidate-profile.color-teal::before {
-            background: linear-gradient(90deg, #14b8a6, #0d9488);
-        }
-        .candidate-profile.color-teal .candidate-photo {
-            border-color: #14b8a6;
-        }
-        .candidate-profile.color-teal .candidate-tag {
-            color: #14b8a6;
-            background: rgba(20, 184, 166, 0.15);
-        }
-        .candidate-profile.color-teal .position {
-            color: #14b8a6;
-        }
-        .candidate-profile.color-teal .priority i {
-            color: #14b8a6;
-        }
-        .candidate-profile.color-teal .candidate-social a:hover {
-            background: #14b8a6;
-            color: #0f172a;
-        }
-
-        .candidate-profile.color-orange::before {
-            background: linear-gradient(90deg, #f97316, #ea580c);
-        }
-        .candidate-profile.color-orange .candidate-photo {
-            border-color: #f97316;
-        }
-        .candidate-profile.color-orange .candidate-tag {
-            color: #f97316;
-            background: rgba(249, 115, 22, 0.15);
-        }
-        .candidate-profile.color-orange .position {
-            color: #f97316;
-        }
-        .candidate-profile.color-orange .priority i {
-            color: #f97316;
-        }
-        .candidate-profile.color-orange .candidate-social a:hover {
-            background: #f97316;
-            color: #0f172a;
-        }
-
-        .candidate-profile.color-pink::before {
-            background: linear-gradient(90deg, #ec4899, #db2777);
-        }
-        .candidate-profile.color-pink .candidate-photo {
-            border-color: #ec4899;
-        }
-        .candidate-profile.color-pink .candidate-tag {
-            color: #ec4899;
-            background: rgba(236, 72, 153, 0.15);
-        }
-        .candidate-profile.color-pink .position {
-            color: #ec4899;
-        }
-        .candidate-profile.color-pink .priority i {
-            color: #ec4899;
-        }
-        .candidate-profile.color-pink .candidate-social a:hover {
-            background: #ec4899;
-            color: #0f172a;
-        }
-
-        .candidate-photo {
-            flex-shrink: 0;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
-            border: 5px solid #fbbf24;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .candidate-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .candidate-photo .photo-placeholder {
-            color: #94a3b8;
-            font-size: 0.8rem;
-            text-align: center;
-            padding: 0.5rem;
-            line-height: 1.3;
-        }
-
-        .candidate-photo .photo-placeholder i {
-            font-size: 3.2rem;
-            display: block;
-            margin-bottom: 0.2rem;
-        }
-
-        .candidate-profile:hover .candidate-photo {
-            box-shadow: 0 0 0 10px rgba(251, 191, 36, 0.15);
-        }
-
-        .candidate-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .candidate-info .candidate-number {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #0f172a;
-            background: #fef9e7;
-            padding: 0.2rem 1rem;
-            border-radius: 9999px;
-            border: 1px solid #fbbf24;
-            margin-bottom: 0.3rem;
-            letter-spacing: 0.3px;
-        }
-
-        .candidate-info .candidate-tag {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.2rem 1rem;
-            border-radius: 9999px;
-            margin-left: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .candidate-info h3 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin: 0.2rem 0 0.1rem 0;
-        }
-
-        .candidate-info h3 .candidate-emoji {
-            font-size: 1.6rem;
-            margin-right: 0.3rem;
-        }
-
-        .candidate-info .position {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.6rem;
-        }
-
-        .candidate-info .bio {
-            color: #475569;
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-            line-height: 1.7;
-        }
-
-        .candidate-priorities {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem 0.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .candidate-priorities .priority {
-            background: rgba(241, 245, 249, 0.7);
-            padding: 0.2rem 1.2rem;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #1e293b;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            border: 1px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .candidate-priorities .priority i {
-            font-size: 0.5rem;
-        }
-
-        .candidate-profile:hover .priority {
-            border-color: #e2e8f0;
-            background: #f8fafc;
-        }
-
-        .candidate-social {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .candidate-social a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: #64748b;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 0.3rem 1.2rem;
-            border-radius: 9999px;
-            background: rgba(241, 245, 249, 0.7);
-            transition: all 0.25s ease;
-            border: 1px solid transparent;
-            touch-action: manipulation;
-        }
-
-        .candidate-social a:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== PATIČKA ===== */
+        /* ===== PATIČKA A TLAČÍTKO HRY ===== */
         .footer {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #94a3b8;
-            padding: 2rem 0;
+            background: linear-gradient(135deg, var(--erb-red) 0%, #8b0000 50%, #0f172a 100%);
+            color: #cbd5e1;
+            padding: 2.5rem 0;
             text-align: center;
-            border-top: 2px solid #fbbf24;
+            border-top: 2px solid var(--erb-yellow);
             font-size: 0.95rem;
             width: 100%;
         }
 
+        /* Nové velké tlačítko na hru */
+        .game-button-wrapper {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .game-btn {
+            display: inline-block;
+            background: var(--erb-yellow);
+            color: #0f172a;
+            font-weight: 900;
+            font-size: 1.2rem;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(255, 242, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 3px solid transparent;
+        }
+
+        .game-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: var(--erb-white);
+            border-color: var(--erb-yellow);
+            color: var(--erb-red);
+            box-shadow: 0 10px 30px rgba(255, 242, 0, 0.6);
+        }
+
+        .game-btn:active {
+            transform: scale(0.95);
+        }
+
+        .game-btn i {
+            margin-right: 0.6rem;
+        }
+
         /* ===== RESPONZIVITA ===== */
-        @media (max-width: 1024px) {
-            .volby-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 1024px) { 
+            .volby-grid { grid-template-columns: repeat(2, 1fr); } 
+            .chystame-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            body {
-                padding-top: 70px;
-                font-size: 16px;
-            }
-
-            .navbar .container {
-                flex-direction: row;
-                padding: 0 1rem;
-            }
-
-            .navbar .logo {
-                font-size: 1.2rem;
-            }
+            body { padding-top: 70px; font-size: 16px; }
+            .navbar .container { flex-direction: row; padding: 0 1rem; }
+            .navbar .logo { font-size: 1.2rem; }
+            .burger { display: flex; }
+            .nav-links { display: none; flex-direction: column; width: 100%; padding: 0.5rem 0; gap: 0.1rem; background: rgba(15, 23, 42, 0.98); border-radius: 0 0 1.5rem 1.5rem; position: absolute; top: 100%; left: 0; right: 0; border-bottom: 2px solid #fbbf24; }
+            .nav-links.open { display: flex; }
+            .nav-links a { font-size: 1rem; padding: 0.7rem 1.5rem; justify-content: center; border-radius: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+            .nav-links a:last-child { border-bottom: none; }
+            .hero { padding-top: calc(4rem + 70px); padding-bottom: 3.5rem; min-height: 90vh; }
+            .hero h1 { font-size: 2.4rem; }
+            .hero p { font-size: 1.05rem; }
+            .section-title { font-size: 2.2rem; margin-bottom: 2rem; }
+            .section-subtitle { font-size: 1.05rem; margin: -1.5rem auto 2rem auto; }
+            .program-banner { min-height: 11vh; padding: 1.5rem 0; }
+            .program-banner h2 { font-size: 2.2rem; }
+            .exp-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .exp-card { padding: 1.2rem 0.8rem; border-radius: 1.5rem; }
+            .exp-card .exp-number { font-size: 1.8rem; }
+            .exp-card .exp-emoji { font-size: 1.8rem; }
+            .exp-card .exp-label { font-size: 0.85rem; }
+            .vesnice-section { background: linear-gradient(135deg, #ecfdf5 0%, #eff6ff 100%); }
+            .vesnice-section h2 { font-size: 2.2rem; }
+            .vesnice-section .vesnice-subtitle { font-size: 1.05rem; }
+            .timeline-osa { padding: 1rem 0 1rem 2rem; }
+            .timeline-osa-item { padding-left: 1.5rem; margin-bottom: 2.5rem; }
+            .timeline-osa-item .osa-dot { width: 22px; height: 22px; left: -1.8rem; top: 6px; font-size: 0.6rem; }
+            .timeline-osa-item .osa-content { padding: 1.5rem; border-radius: 1.5rem; background: rgba(255, 255, 255, 0.95); }
+            .timeline-osa-item.active .osa-content h3 { font-size: 1.5rem; }
+            .timeline-osa-item .osa-content h3 { font-size: 1.3rem; }
+            .timeline-osa-item .osa-content p { font-size: 0.95rem; }
+            .section-alt { background: linear-gradient(135deg, #fefce8 0%, #fffbeb 100%); }
+            .why-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+            .why-card { padding: 1.8rem 1.5rem; border-radius: 2rem; background: rgba(255, 255, 255, 0.9); }
+            .why-card .card-icon { font-size: 2.6rem; }
+            .why-card h3 { font-size: 1.4rem; }
+            .why-card p { font-size: 0.95rem; }
+            .why-card .card-number { font-size: 2.6rem; }
+            .volby-grid { display: none; }
+            .volby-scroll-mobile { display: flex; }
+            .candidate-profile { flex-direction: column; align-items: center; text-align: center; padding: 2rem 1.5rem; gap: 1.5rem; border-radius: 1.8rem; }
+            .candidate-photo { width: 130px; height: 130px; }
+            .candidate-photo .photo-placeholder i { font-size: 2.8rem; }
+            .candidate-info h3 { font-size: 1.6rem; }
+            .candidate-priorities { justify-content: center; }
+            .candidate-social { justify-content: center; }
+            .candidate-info .bio { font-size: 0.95rem; }
             
-            .navbar .logo .logo-icon {
-                width: 28px;
-                height: 28px;
-                font-size: 0.85rem;
-            }
-
-            .burger {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                padding: 0.5rem 0;
-                gap: 0.1rem;
-                background: rgba(15, 23, 42, 0.98);
-                border-radius: 0 0 1.5rem 1.5rem;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                border-bottom: 2px solid #fbbf24;
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links a {
-                font-size: 1rem;
-                padding: 0.7rem 1.5rem;
-                justify-content: center;
-                border-radius: 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-
-            .hero {
-                padding-top: calc(4rem + 70px);
-                padding-bottom: 3.5rem;
-                min-height: 90vh;
-            }
-
-            .hero h1 {
-                font-size: 2.4rem;
-            }
-
-            .hero p {
-                font-size: 1.05rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-                margin-bottom: 2rem;
-            }
-
-            .section-subtitle {
-                font-size: 1.05rem;
-                margin: -1.5rem auto 2rem auto;
-            }
-
-            .program-banner {
-                min-height: 11vh;
-                padding: 1.5rem 0;
-            }
-
-            .program-banner h2 {
-                font-size: 2.2rem;
-            }
-
-            .exp-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.8rem;
-            }
-
-            .exp-card {
-                padding: 1.2rem 0.8rem;
-                border-radius: 1.5rem;
-            }
-
-            .exp-card .exp-number {
-                font-size: 1.8rem;
-            }
-
-            .exp-card .exp-emoji {
-                font-size: 1.8rem;
-            }
-
-            .exp-card .exp-label {
-                font-size: 0.85rem;
-            }
-
-            .vesnice-section {
-                background: linear-gradient(135deg, #ecfdf5 0%, #eff6ff 100%);
-            }
-
-            .vesnice-section h2 {
-                font-size: 2.2rem;
-            }
-
-            .vesnice-section .vesnice-subtitle {
-                font-size: 1.05rem;
-            }
-
-            .timeline-osa {
-                padding: 1rem 0 1rem 2rem;
-            }
-
-            .timeline-osa-item {
-                padding-left: 1.5rem;
-                margin-bottom: 2.5rem;
-            }
-
-            .timeline-osa-item .osa-dot {
-                width: 22px;
-                height: 22px;
-                left: -1.8rem;
-                top: 6px;
-                font-size: 0.6rem;
-            }
-
-            .timeline-osa-item .osa-content {
-                padding: 1.5rem;
-                border-radius: 1.5rem;
-                background: rgba(255, 255, 255, 0.95);
-            }
-
-            .timeline-osa-item.active .osa-content h3 {
-                font-size: 1.5rem;
-            }
-
-            .timeline-osa-item .osa-content h3 {
-                font-size: 1.3rem;
-            }
-
-            .timeline-osa-item .osa-content p {
-                font-size: 0.95rem;
-            }
-
-            .section-alt {
-                background: linear-gradient(135deg, #fefce8 0%, #fffbeb 100%);
-            }
-
-            .why-grid {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-            }
-
-            .why-card {
-                padding: 1.8rem 1.5rem;
-                border-radius: 2rem;
-                background: rgba(255, 255, 255, 0.9);
-            }
-
-            .why-card .card-icon {
-                font-size: 2.6rem;
-            }
-
-            .why-card h3 {
-                font-size: 1.4rem;
-            }
-
-            .why-card p {
-                font-size: 0.95rem;
-            }
-
-            .why-card .card-number {
-                font-size: 2.6rem;
-            }
-
-            /* ===== VOLBY - MOBIL ===== */
-            .volby-grid {
-                display: none;
-            }
-
-            .volby-scroll-mobile {
-                display: flex;
-            }
-
-            .slider-item {
-                flex: 0 0 220px;
-                padding: 1.5rem 1.2rem;
-                border-radius: 2rem;
-                background: rgba(255, 255, 255, 0.9);
-            }
-
-            .slider-item .slide-icon {
-                font-size: 2.4rem;
-            }
-
-            .slider-item h4 {
-                font-size: 1.1rem;
-            }
-
-            .slider-item p {
-                font-size: 0.85rem;
-            }
-
-            .candidate-profile {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                padding: 2rem 1.5rem;
-                gap: 1.5rem;
-                border-radius: 1.8rem;
-            }
-
-            .candidate-photo {
-                width: 130px;
-                height: 130px;
-            }
-
-            .candidate-photo .photo-placeholder i {
-                font-size: 2.8rem;
-            }
-
-            .candidate-info h3 {
-                font-size: 1.6rem;
-            }
-
-            .candidate-priorities {
-                justify-content: center;
-            }
-
-            .candidate-social {
-                justify-content: center;
-            }
-
-            .candidate-info .bio {
-                font-size: 0.95rem;
-            }
-
-            .slider-controls {
-                gap: 0.8rem;
-            }
-
-            .slider-btn {
-                width: 44px;
-                height: 44px;
-                font-size: 1.2rem;
-            }
+            .chystame-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
         }
 
         @media (max-width: 480px) {
-            body {
-                font-size: 15px;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero .badge {
-                font-size: 0.75rem;
-                padding: 0.3rem 1.2rem;
-            }
-
-            .hero p {
-                font-size: 0.95rem;
-            }
-
-            .exp-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.5rem;
-            }
-
-            .exp-card {
-                padding: 1rem 0.6rem;
-                border-radius: 1.2rem;
-            }
-
-            .exp-card .exp-number {
-                font-size: 1.5rem;
-            }
-
-            .exp-card .exp-label {
-                font-size: 0.75rem;
-            }
-
-            .exp-card .exp-desc {
-                font-size: 0.65rem;
-            }
-
-            .exp-card .exp-emoji {
-                font-size: 1.5rem;
-            }
-
-            .program-banner h2 {
-                font-size: 1.8rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .vesnice-section h2 {
-                font-size: 1.8rem;
-            }
-
-            .vesnice-section {
-                background: linear-gradient(135deg, #ecfdf5 0%, #dbeafe 100%);
-            }
-
-            .vesnice-section .vesnice-subtitle {
-                font-size: 0.95rem;
-            }
-
-            .timeline-osa {
-                padding: 0.5rem 0 0.5rem 1.5rem;
-            }
-
-            .timeline-osa-item {
-                padding-left: 1rem;
-                margin-bottom: 2rem;
-            }
-
-            .timeline-osa-item .osa-dot {
-                width: 18px;
-                height: 18px;
-                left: -1.4rem;
-                top: 4px;
-                font-size: 0.5rem;
-                border-width: 3px;
-            }
-
-            .timeline-osa-item .osa-content {
-                padding: 1.2rem;
-                border-radius: 1.2rem;
-            }
-
-            .timeline-osa-item.active .osa-content h3 {
-                font-size: 1.3rem;
-            }
-
-            .timeline-osa-item .osa-content h3 {
-                font-size: 1.1rem;
-            }
-
-            .timeline-osa-item .osa-content p {
-                font-size: 0.85rem;
-            }
-
-            .timeline-osa-item .osa-icon {
-                font-size: 1.8rem;
-            }
-
-            .volby-scroll-mobile .volby-card {
-                flex: 0 0 250px;
-                padding: 1.5rem 1.2rem;
-                border-radius: 1.8rem;
-                min-height: 200px;
-            }
-
-            .volby-scroll-mobile .volby-card .volby-icon {
-                font-size: 2.4rem;
-            }
-
-            .volby-scroll-mobile .volby-card .volby-title {
-                font-size: 1.1rem;
-            }
-
-            .volby-scroll-mobile .volby-card .volby-desc {
-                font-size: 0.85rem;
-            }
-
-            .slider-item {
-                flex: 0 0 170px;
-                padding: 1.2rem 0.8rem;
-                border-radius: 1.5rem;
-            }
-
-            .slider-item .slide-icon {
-                font-size: 1.8rem;
-            }
-
-            .slider-item h4 {
-                font-size: 0.95rem;
-            }
-
-            .slider-item p {
-                font-size: 0.75rem;
-            }
-
-            .candidate-photo {
-                width: 110px;
-                height: 110px;
-            }
-
-            .candidate-info h3 {
-                font-size: 1.3rem;
-            }
-
-            .candidate-priorities .priority {
-                font-size: 0.75rem;
-                padding: 0.15rem 0.8rem;
-            }
-
-            .slider-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
+            body { font-size: 15px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero .badge { font-size: 0.75rem; padding: 0.3rem 1.2rem; }
+            .hero p { font-size: 0.95rem; }
+            .exp-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+            .exp-card { padding: 1rem 0.6rem; border-radius: 1.2rem; }
+            .exp-card .exp-number { font-size: 1.5rem; }
+            .exp-card .exp-label { font-size: 0.75rem; }
+            .exp-card .exp-desc { font-size: 0.65rem; }
+            .exp-card .exp-emoji { font-size: 1.5rem; }
+            .program-banner h2 { font-size: 1.8rem; }
+            .section-title { font-size: 1.8rem; }
+            .vesnice-section h2 { font-size: 1.8rem; }
+            .vesnice-section { background: linear-gradient(135deg, #ecfdf5 0%, #dbeafe 100%); }
+            .vesnice-section .vesnice-subtitle { font-size: 0.95rem; }
+            .timeline-osa { padding: 0.5rem 0 0.5rem 1.5rem; }
+            .timeline-osa-item { padding-left: 1rem; margin-bottom: 2rem; }
+            .timeline-osa-item .osa-dot { width: 18px; height: 18px; left: -1.4rem; top: 4px; font-size: 0.5rem; border-width: 3px; }
+            .timeline-osa-item .osa-content { padding: 1.2rem; border-radius: 1.2rem; }
+            .timeline-osa-item.active .osa-content h3 { font-size: 1.3rem; }
+            .timeline-osa-item .osa-content h3 { font-size: 1.1rem; }
+            .timeline-osa-item .osa-content p { font-size: 0.85rem; }
+            .timeline-osa-item .osa-icon { font-size: 1.8rem; }
+            .volby-scroll-mobile .volby-card { flex: 0 0 250px; padding: 1.5rem 1.2rem; border-radius: 1.8rem; min-height: 200px; }
+            .volby-scroll-mobile .volby-card .volby-icon { font-size: 2.4rem; }
+            .volby-scroll-mobile .volby-card .volby-title { font-size: 1.1rem; }
+            .volby-scroll-mobile .volby-card .volby-desc { font-size: 0.85rem; }
+            .candidate-photo { width: 110px; height: 110px; }
+            .candidate-info h3 { font-size: 1.3rem; }
+            .candidate-priorities .priority { font-size: 0.75rem; padding: 0.15rem 0.8rem; }
+            .chystame-grid { grid-template-columns: 1fr; gap: 1rem; }
+            
+            .game-btn { font-size: 1rem; padding: 0.8rem 2rem; }
         }
 
-        /* ===== DOTYKOVÉ OPTIMALIZACE ===== */
         @media (hover: none) {
-            .why-card:hover,
-            .volby-card:hover,
-            .slider-item:hover,
-            .candidate-profile:hover,
-            .timeline-osa-item .osa-content:hover {
-                transform: none !important;
-            }
-
-            .why-card:active,
-            .volby-card:active,
-            .slider-item:active,
-            .candidate-profile:active,
-            .timeline-osa-item .osa-content:active {
-                transform: scale(0.97) !important;
-            }
-
-            .exp-card:active {
-                transform: scale(0.95) !important;
-            }
+            .why-card:hover, .volby-card:hover, .candidate-profile:hover, .timeline-osa-item .osa-content:hover, .chystame-card:hover { transform: none !important; }
+            .why-card:active, .volby-card:active, .candidate-profile:active, .timeline-osa-item .osa-content:active, .chystame-card:active { transform: scale(0.97) !important; }
+            .exp-card:active { transform: scale(0.95) !important; }
         }
     </style>
 </head>
@@ -1982,7 +579,7 @@
     <nav class="navbar" id="navbar">
         <div class="container">
             <a href="#" class="logo" id="logoLink">
-                <span class="logo-icon">N</span>
+                <span class="logo-icon">🌿</span> <!-- Změněno z N na emoji -->
                 <span class="logo-text">Naše</span> <span>Vesnice</span>
             </a>
             <button class="burger" id="burger" aria-label="Menu">
@@ -2046,8 +643,6 @@
 
             <!-- ===== ČASOVÁ OSA ===== -->
             <div class="timeline-osa active-1" id="timelineOsa">
-
-                <!-- BOD 1 -->
                 <div class="timeline-osa-item active" data-index="0">
                     <div class="osa-dot">1</div>
                     <div class="osa-content">
@@ -2057,8 +652,6 @@
                         <p>Vysadit stromy podél cest, zvelebit náves a vytvořit místa, kde si lidé rádi sednou a poklábosí. Zeleň dělá vesnici živější a příjemnější pro všechny.</p>
                     </div>
                 </div>
-
-                <!-- BOD 2 -->
                 <div class="timeline-osa-item" data-index="1">
                     <div class="osa-dot">2</div>
                     <div class="osa-content">
@@ -2068,8 +661,6 @@
                         <p>Chodníky, přechody, osvětlené trasy pro pěší i cyklisty. Ať se každý cítí bezpečně – děti cestou do školy, senioři na procházce i rodiny na výletě.</p>
                     </div>
                 </div>
-
-                <!-- BOD 3 -->
                 <div class="timeline-osa-item" data-index="2">
                     <div class="osa-dot">3</div>
                     <div class="osa-content">
@@ -2079,8 +670,6 @@
                         <p>Dětská hřiště, programy pro nejmladší, setkávání pro seniory a sousedské akce pro všechny. Místo, kde se potkávají generace.</p>
                     </div>
                 </div>
-
-                <!-- BOD 4 -->
                 <div class="timeline-osa-item" data-index="3">
                     <div class="osa-dot">4</div>
                     <div class="osa-content">
@@ -2090,7 +679,6 @@
                         <p>Rychlý internet, digitální úřad, informace online. Aby byla vesnice připravená na 21. století a mladí tu měli důvod zůstat.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -2141,7 +729,7 @@
         </div>
     </section>
 
-    <!-- ===== PROGRAM 2 + CO CHYSTÁME (SLIDER) ===== -->
+    <!-- ===== PROGRAM 2 + CO CHYSTÁME (NOVÉ NEPOSUVNÉ MENU) ===== -->
     <div class="program-banner p2" id="co-banner">
         <div class="container">
             <span class="program-number">✦ 02</span>
@@ -2152,64 +740,58 @@
     <section class="section" id="co-chystame">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Co chystáme pro naši vesnici</h2>
-            <p class="section-subtitle">Projíždějte plány a objevte, co chystáme.</p>
+            <p class="section-subtitle">Přehled plánů, které postupně rozjíždíme pro lepší život v obci.</p>
 
-            <div class="slider-wrapper">
-                <div class="slider-track" id="sliderTrack">
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-tree"></i></span>
-                        <h4>Revitalizace návsi</h4>
-                        <p>Nové lavičky, zeleň a posezení pro všechny.</p>
-                        <span class="slide-tag">Připravujeme</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-futbol"></i></span>
-                        <h4>Multifunkční hřiště</h4>
-                        <p>Fotbal, basket, workout pro mladé i dospělé.</p>
-                        <span class="slide-tag">Plánujeme</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-walking"></i></span>
-                        <h4>Bezpečné cesty</h4>
-                        <p>Chodníky a osvětlené stezky po celé obci.</p>
-                        <span class="slide-tag">V přípravě</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-beer"></i></span>
-                        <h4>Zázemí pro setkávání</h4>
-                        <p>Grilování, sousedské akce a komunitní večery.</p>
-                        <span class="slide-tag">Chystáme</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-bicycle"></i></span>
-                        <h4>Cyklostezky</h4>
-                        <p>Propojení s okolím a bezpečné trasy.</p>
-                        <span class="slide-tag">Jednáme</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-music"></i></span>
-                        <h4>Kulturní akce</h4>
-                        <p>Koncerty, trhy, slavnosti a filmové večery.</p>
-                        <span class="slide-tag">Plánujeme</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-seedling"></i></span>
-                        <h4>Komunitní zahrada</h4>
-                        <p>Společné pěstování a místo pro odpočinek.</p>
-                        <span class="slide-tag">Rozjíždíme</span>
-                    </div>
-                    <div class="slider-item">
-                        <span class="slide-icon"><i class="fas fa-wifi"></i></span>
-                        <h4>Digitální služby</h4>
-                        <p>Wi-Fi na návsi a digitální úřad online.</p>
-                        <span class="slide-tag">Spouštíme</span>
-                    </div>
+            <!-- NOVÁ MŘÍŽKA -->
+            <div class="chystame-grid">
+                <div class="chystame-card">
+                    <span class="ch-icon"><i class="fas fa-tree"></i></span>
+                    <h4>Revitalizace návsi</h4>
+                    <p>Nové lavičky, zeleň a posezení pro všechny generace.</p>
+                    <span class="ch-tag">Připravujeme</span>
                 </div>
-                <div class="slider-controls">
-                    <button class="slider-btn" id="sliderPrev" aria-label="Předchozí"><i class="fas fa-chevron-left"></i></button>
-                    <button class="slider-btn" id="sliderNext" aria-label="Další"><i class="fas fa-chevron-right"></i></button>
+                <div class="chystame-card">
+                    <span class="ch-icon"><i class="fas fa-futbol"></i></span>
+                    <h4>Multifunkční hřiště</h4>
+                    <p>Fotbal, basket, workout pro mladé i dospělé.</p>
+                    <span class="ch-tag">Plánujeme</span>
                 </div>
-                <div class="slider-dots" id="sliderDots"></div>
+                <div class="chystame-card">
+                    <span class="ch-icon"><i class="fas fa-walking"></i></span>
+                    <h4>Bezpečné cesty</h4>
+                    <p>Chodníky a osvětlené stezky po celé obci.</p>
+                    <span class="ch-tag">V přípravě</span>
+                </div>
+                <div class="chystame-card">
+                    <span class="ch-icon"><i class="fas fa-beer"></i></span>
+                    <h4>Zázemí pro setkávání</h4>
+                    <p>Grilování, sousedské akce a komunitní večery.</p>
+                    <span class="ch-tag">Chystáme</span>
+                </div>
+                <div class="chystame-card">
+                    <span class="ch-icon"><i class="fas fa-bicycle"></i></span>
+                    <h4>Cyklostezky</h4>
+                    <p>Propojení s okolím a bezpečné trasy pro cyklisty.</p>
+                    <span class="ch-tag">Jednáme</span>
+                </div>
+                <div class="chystame-card">
+                    <span class="ch-icon"><i class="fas fa-music"></i></span>
+                    <h4>Kulturní akce</h4>
+                    <p>Koncerty, trhy, slavnosti a filmové večery pod širým nebem.</p>
+                    <span class="ch-tag">Plánujeme</span>
+                </div>
+                <div class="chystame-card">
+                    <span class="ch-icon"><i class="fas fa-seedling"></i></span>
+                    <h4>Komunitní zahrada</h4>
+                    <p>Společné pěstování a místo pro odpočinek v srdci obce.</p>
+                    <span class="ch-tag">Rozjíždíme</span>
+                </div>
+                <div class="chystame-card">
+                    <span class="ch-icon"><i class="fas fa-wifi"></i></span>
+                    <h4>Digitální služby</h4>
+                    <p>Wi-Fi na návsi a přehledný digitální úřad online.</p>
+                    <span class="ch-tag">Spouštíme</span>
+                </div>
             </div>
         </div>
     </section>
@@ -2227,10 +809,7 @@
             <h2 class="section-title"><i class="fas fa-bullseye"></i> Na co se zaměříme</h2>
             <p class="section-subtitle">Konkrétní kroky, které pomohou posunout naši vesnici kupředu.</p>
 
-            <!-- ===== DESKTOP: VOLBY KARTY ===== -->
             <div class="volby-grid">
-                
-                <!-- Karta 1 - zelená -->
                 <div class="volby-card color-green">
                     <span class="volby-icon">🌳</span>
                     <h3 class="volby-title">Veřejná zeleň</h3>
@@ -2240,8 +819,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 92 %</span>
                     </div>
                 </div>
-
-                <!-- Karta 2 - oranžová -->
                 <div class="volby-card color-orange">
                     <span class="volby-icon">👨‍👩‍👧‍👦</span>
                     <h3 class="volby-title">Zázemí pro rodiny</h3>
@@ -2251,8 +828,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 78 %</span>
                     </div>
                 </div>
-
-                <!-- Karta 3 - modrá -->
                 <div class="volby-card color-blue">
                     <span class="volby-icon">🚶</span>
                     <h3 class="volby-title">Bezpečné cesty</h3>
@@ -2262,8 +837,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 85 %</span>
                     </div>
                 </div>
-
-                <!-- Karta 4 - fialová -->
                 <div class="volby-card color-purple">
                     <span class="volby-icon">🚴</span>
                     <h3 class="volby-title">Propojení s okolím</h3>
@@ -2273,8 +846,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 71 %</span>
                     </div>
                 </div>
-
-                <!-- Karta 5 - modrá -->
                 <div class="volby-card color-blue">
                     <span class="volby-icon">💻</span>
                     <h3 class="volby-title">Moderní obecní služby</h3>
@@ -2284,8 +855,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 88 %</span>
                     </div>
                 </div>
-
-                <!-- Karta 6 - fialová -->
                 <div class="volby-card color-purple">
                     <span class="volby-icon">🎭</span>
                     <h3 class="volby-title">Kultura a spolky</h3>
@@ -2295,12 +864,9 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 76 %</span>
                     </div>
                 </div>
-
             </div>
 
-            <!-- ===== MOBIL: HORIZONTÁLNÍ SCROLL ===== -->
             <div class="volby-scroll-mobile">
-                
                 <div class="volby-card color-green">
                     <span class="volby-icon">🌳</span>
                     <h3 class="volby-title">Veřejná zeleň</h3>
@@ -2310,7 +876,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 92 %</span>
                     </div>
                 </div>
-
                 <div class="volby-card color-orange">
                     <span class="volby-icon">👨‍👩‍👧‍👦</span>
                     <h3 class="volby-title">Zázemí pro rodiny</h3>
@@ -2320,7 +885,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 78 %</span>
                     </div>
                 </div>
-
                 <div class="volby-card color-blue">
                     <span class="volby-icon">🚶</span>
                     <h3 class="volby-title">Bezpečné cesty</h3>
@@ -2330,7 +894,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 85 %</span>
                     </div>
                 </div>
-
                 <div class="volby-card color-purple">
                     <span class="volby-icon">🚴</span>
                     <h3 class="volby-title">Propojení s okolím</h3>
@@ -2340,7 +903,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 71 %</span>
                     </div>
                 </div>
-
                 <div class="volby-card color-blue">
                     <span class="volby-icon">💻</span>
                     <h3 class="volby-title">Moderní služby</h3>
@@ -2350,7 +912,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 88 %</span>
                     </div>
                 </div>
-
                 <div class="volby-card color-purple">
                     <span class="volby-icon">🎭</span>
                     <h3 class="volby-title">Kultura a spolky</h3>
@@ -2360,7 +921,6 @@
                         <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 76 %</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -2379,7 +939,6 @@
             <p class="section-subtitle">Jsme vaši sousedé a známé tváře z obce. Spojuje nás chuť pracovat pro místo, kde žijeme.</p>
 
             <div class="candidates-list">
-                <!-- 1. ZEMĚDĚLEC -->
                 <div class="candidate-profile color-gold">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2405,8 +964,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 2. VČELAŘ -->
                 <div class="candidate-profile color-orange">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2432,8 +989,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 3. ARCHITEKTKA -->
                 <div class="candidate-profile color-blue">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2459,8 +1014,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 4. UČITEL -->
                 <div class="candidate-profile color-red">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2486,8 +1039,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 5. KREATIVEC -->
                 <div class="candidate-profile color-purple">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2513,8 +1064,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 6. PRÁVNIČKA -->
                 <div class="candidate-profile color-indigo">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2540,8 +1089,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 7. ZAHRADNICE -->
                 <div class="candidate-profile color-green">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2567,8 +1114,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 8. SPORTOVEC -->
                 <div class="candidate-profile color-teal">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2594,8 +1139,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 9. HUDEBNÍK -->
                 <div class="candidate-profile color-pink">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2628,23 +1171,14 @@
     <!-- ===== PATIČKA ===== -->
     <footer class="footer">
         <div class="container">
-            <p><i class="fas fa-flag" style="color:#fbbf24;"></i> Naše Vesnice – společný směr &copy; 2026</p>
+            <p><i class="fas fa-flag" style="color:var(--erb-yellow);"></i> Naše Vesnice – společný směr &copy; 2026</p>
             
-            <button onclick="window.location.href='hra.html'" class="play-button" style="
-    background: transparent;
-    border: none;
-    color: rgba(255,255,255,0.08);
-    font-size: 0.5rem;
-    padding: 0.1rem 0.4rem;
-    cursor: pointer;
-    position: fixed;
-    bottom: 5px;
-    right: 5px;
-    z-index: 999;
-    transition: color 0.3s ease;
-    letter-spacing: 1px;
-">▶ hra</button>
-            
+            <!-- NOVÉ VIDITELNÉ TLAČÍTKO HRY -->
+            <div class="game-button-wrapper">
+                <a href="hra.html" class="game-btn">
+                    <i class="fas fa-gamepad"></i> Zahrát si hru
+                </a>
+            </div>
         </div>
     </footer>
 
@@ -2672,163 +1206,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // ===== SLIDER =====
-        const track = document.getElementById('sliderTrack');
-        const prevBtn = document.getElementById('sliderPrev');
-        const nextBtn = document.getElementById('sliderNext');
-        const dotsContainer = document.getElementById('sliderDots');
-
-        let isDragging = false;
-        let startX = 0;
-        let scrollLeft = 0;
-        let autoScrollInterval = null;
-        let isHovering = false;
-
-        const items = track.querySelectorAll('.slider-item');
-        const totalItems = items.length;
-
-        items.forEach((_, index) => {
-            const dot = document.createElement('button');
-            dot.classList.add('slider-dot');
-            if (index === 0) dot.classList.add('active');
-            dot.dataset.index = index;
-            dot.addEventListener('click', () => {
-                const item = items[index];
-                item.scrollIntoView({ behavior: 'smooth', inline: 'start' });
-            });
-            dotsContainer.appendChild(dot);
-        });
-
-        const dots = dotsContainer.querySelectorAll('.slider-dot');
-
-        function updateDots() {
-            const scrollPos = track.scrollLeft;
-            const itemWidth = items[0].offsetWidth + 24;
-            const currentIndex = Math.round(scrollPos / itemWidth);
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
-        }
-
-        // Drag & Drop
-        track.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            track.classList.add('dragging');
-            startX = e.pageX - track.offsetLeft;
-            scrollLeft = track.scrollLeft;
-            stopAutoScroll();
-        });
-
-        track.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - track.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            track.scrollLeft = scrollLeft - walk;
-        });
-
-        track.addEventListener('mouseup', () => {
-            isDragging = false;
-            track.classList.remove('dragging');
-            updateDots();
-            startAutoScroll();
-        });
-
-        track.addEventListener('mouseleave', () => {
-            if (isDragging) {
-                isDragging = false;
-                track.classList.remove('dragging');
-                updateDots();
-                startAutoScroll();
-            }
-        });
-
-        // Touch events pro mobil
-        let touchStartX = 0;
-        let touchScrollLeft = 0;
-
-        track.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            touchStartX = e.touches[0].pageX - track.offsetLeft;
-            touchScrollLeft = track.scrollLeft;
-            stopAutoScroll();
-        }, { passive: true });
-
-        track.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            const x = e.touches[0].pageX - track.offsetLeft;
-            const walk = (x - touchStartX) * 1.2;
-            track.scrollLeft = touchScrollLeft - walk;
-            updateDots();
-        }, { passive: true });
-
-        track.addEventListener('touchend', () => {
-            isDragging = false;
-            updateDots();
-            startAutoScroll();
-        }, { passive: true });
-
-        // Kolečko myši
-        track.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            track.scrollLeft += e.deltaY * 0.8;
-            updateDots();
-        }, { passive: false });
-
-        // Šipky
-        const scrollAmount = 300;
-
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            setTimeout(updateDots, 300);
-            stopAutoScroll();
-            setTimeout(startAutoScroll, 3000);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            setTimeout(updateDots, 300);
-            stopAutoScroll();
-            setTimeout(startAutoScroll, 3000);
-        });
-
-        // Automatické přehrávání
-        function startAutoScroll() {
-            if (isHovering) return;
-            stopAutoScroll();
-            autoScrollInterval = setInterval(() => {
-                const maxScroll = track.scrollWidth - track.clientWidth;
-                if (track.scrollLeft >= maxScroll - 10) {
-                    track.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    track.scrollBy({ left: 280, behavior: 'smooth' });
-                }
-                setTimeout(updateDots, 300);
-            }, 4000);
-        }
-
-        function stopAutoScroll() {
-            if (autoScrollInterval) {
-                clearInterval(autoScrollInterval);
-                autoScrollInterval = null;
-            }
-        }
-
-        track.addEventListener('mouseenter', () => {
-            isHovering = true;
-            stopAutoScroll();
-        });
-
-        track.addEventListener('mouseleave', () => {
-            isHovering = false;
-            startAutoScroll();
-        });
-
-        track.addEventListener('scroll', updateDots);
-        setTimeout(startAutoScroll, 2000);
-        window.addEventListener('resize', updateDots);
-
-        // ===== AKTIVACE BODŮ PŘI SCROLLOVÁNÍ (OPTIMALIZOVANÉ) =====
+        // ===== AKTIVACE BODŮ PŘI SCROLLOVÁNÍ (ČASOVÁ OSA) =====
         const timelineItems = document.querySelectorAll('.timeline-osa-item');
         const timelineOsa = document.getElementById('timelineOsa');
 
@@ -2836,12 +1214,10 @@
         let lastScrollY = 0;
 
         function updateActiveTimelineItem() {
-            // Rychlá kontrola, jestli se scrollování zastavilo
             const currentScrollY = window.scrollY;
             if (Math.abs(currentScrollY - lastScrollY) < 5) return;
             lastScrollY = currentScrollY;
 
-            // Použití requestAnimationFrame pro plynulost
             requestAnimationFrame(() => {
                 let activeIndex = 0;
                 const windowCenter = window.scrollY + window.innerHeight / 2;
@@ -2855,15 +1231,11 @@
                     }
                 });
 
-                // Odebrat active ze všech
                 timelineItems.forEach(item => item.classList.remove('active'));
-
-                // Přidat active na správný index
                 if (timelineItems[activeIndex]) {
                     timelineItems[activeIndex].classList.add('active');
                 }
 
-                // Aktualizovat třídu na timeline
                 timelineOsa.className = 'timeline-osa';
                 const activeNumber = activeIndex + 1;
                 if (activeNumber >= 1 && activeNumber <= 4) {
@@ -2872,7 +1244,6 @@
             });
         }
 
-        // ===== SCROLL S DEBOUNCE =====
         window.addEventListener('scroll', () => {
             if (scrollTimeout) {
                 cancelAnimationFrame(scrollTimeout);
@@ -2880,14 +1251,12 @@
             scrollTimeout = requestAnimationFrame(updateActiveTimelineItem);
         }, { passive: true });
 
-        // ===== RESIZE S DEBOUNCE =====
         let resizeTimeout = null;
         window.addEventListener('resize', () => {
             if (resizeTimeout) clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(updateActiveTimelineItem, 100);
         }, { passive: true });
 
-        // Inicializace
         setTimeout(updateActiveTimelineItem, 200);
     </script>
 </body>
