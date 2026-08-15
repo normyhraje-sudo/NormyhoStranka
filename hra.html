@@ -71,7 +71,7 @@
 
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 1.2rem;
             margin-bottom: 2rem;
         }
@@ -114,15 +114,16 @@
         }
 
         .game-card .desc {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #94a3b8;
             font-weight: 300;
+            text-align: center;
         }
 
         .game-card .badge {
             background: #facc15;
             color: #0b0f1a;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 700;
             padding: 0.15rem 0.8rem;
             border-radius: 20px;
@@ -130,6 +131,7 @@
             letter-spacing: 0.5px;
         }
 
+        /* Barevná zvýraznění při najetí */
         .game-card.behacka:hover {
             border-color: #3b82f6;
             box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.4);
@@ -141,6 +143,14 @@
         .game-card.zavodni:hover {
             border-color: #ef4444;
             box-shadow: 0 12px 30px rgba(239, 68, 68, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+        .game-card.flappy:hover {
+            border-color: #facc15;
+            box-shadow: 0 12px 30px rgba(250, 204, 21, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+        .game-card.bludiste:hover {
+            border-color: #22c55e;
+            box-shadow: 0 12px 30px rgba(34, 197, 94, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.4);
         }
 
         /* ----- TLAČÍTKO ZPÁTKY NA HLAVNÍ STRÁNKU ----- */
@@ -224,7 +234,7 @@
                 font-size: 0.95rem;
             }
             .game-card .desc {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
             }
             .home-button {
                 font-size: 0.85rem;
@@ -284,12 +294,29 @@
                 <span class="desc">Vyhýbej se autům a získej skóre</span>
                 <span class="badge">⚡ akční</span>
             </a>
+
+            <!-- FLAPPY BIRD -->
+            <a href="flappy.html" class="game-card flappy">
+                <span class="icon">🐦</span>
+                <span class="name">Flappy Bird</span>
+                <span class="desc">Prolétej trubicemi a sbírej skóre</span>
+                <span class="badge">🎮 návyková</span>
+            </a>
+
+            <!-- BLUDIŠTĚ -->
+            <a href="bludiste.html" class="game-card bludiste">
+                <span class="icon">🌀</span>
+                <span class="name">Bludiště</span>
+                <span class="desc">Najdi cestu z bludiště</span>
+                <span class="badge">🧭 logická</span>
+            </a>
         </div>
 
         <div class="footer">
             <span>🏃 <kbd>← →</kbd> pohyb</span>
             <span>🧩 <kbd>↑</kbd> otáčet</span>
             <span>🏎️ <kbd>← →</kbd> řízení</span>
+            <span>🌀 <kbd>← → ↑ ↓</kbd> chůze</span>
         </div>
     </div>
 
