@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tetris - mobilní verze</title>
+    <title>Tetris - lepší viditelnost</title>
     <style>
         * {
             margin: 0;
@@ -23,207 +23,182 @@
             padding: 0.5rem;
             overflow: hidden;
             touch-action: none;
-            margin: 0;
         }
 
         .game-wrapper {
             background: #1e2a3a;
-            padding: 0.8rem;
-            border-radius: 2rem;
+            padding: 1.2rem 1.5rem 1.5rem;
+            border-radius: 2.5rem;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 650px;
+            width: 100%;
+        }
+
+        .main-area {
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 100%;
-            width: 100%;
-            max-width: 420px;
         }
 
         h1 {
             color: #f0e9d8;
             font-weight: 500;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             letter-spacing: 3px;
             text-shadow: 0 3px 0 #0b0f1a;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
         h1 span {
             color: #facc15;
         }
 
-        /* ----- HLAVNÍ HERNÍ PLOCHA + PANEL VEDLE ----- */
-        .game-row {
-            display: flex;
-            gap: 0.8rem;
-            align-items: stretch;
-            width: 100%;
-            justify-content: center;
-        }
-
         canvas#gameCanvas {
             display: block;
             background: #0b1622;
-            border-radius: 1.2rem;
+            border-radius: 1.5rem;
             box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 2px #334155;
             width: 100%;
-            max-width: 240px;
+            max-width: 280px;
             height: auto;
             aspect-ratio: 10 / 20;
             image-rendering: pixelated;
             touch-action: none;
-            flex-shrink: 0;
         }
 
         .side-panel {
             background: #0f1a2a;
-            border-radius: 1.2rem;
-            padding: 0.6rem 0.8rem;
+            border-radius: 1.8rem;
+            padding: 1.2rem 1.5rem;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 0 1px #2a3a4e;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.4rem;
-            flex: 1;
-            min-width: 80px;
-            justify-content: center;
+            gap: 0.8rem;
+            min-width: 120px;
+            flex-shrink: 0;
         }
 
         .side-panel .label {
             color: #94a3b8;
-            font-size: 0.55rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             font-weight: 300;
         }
 
         .side-panel .value {
             color: #facc15;
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             font-weight: 700;
             background: #0b1622;
-            padding: 0.05rem 0.6rem;
-            border-radius: 30px;
-            min-width: 40px;
+            padding: 0.1rem 1rem;
+            border-radius: 40px;
+            min-width: 60px;
             text-align: center;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
-        }
-
-        .side-panel .value.lives {
-            color: #ef4444;
         }
 
         canvas#previewCanvas {
             display: block;
             background: #0b1622;
-            border-radius: 0.8rem;
+            border-radius: 1rem;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 0 0 1px #2a3a4e;
             width: 100%;
-            max-width: 70px;
+            max-width: 100px;
             height: auto;
             aspect-ratio: 1 / 1;
             image-rendering: pixelated;
         }
 
-        /* ----- SKVĚLÁ DOTYKOVÁ TLAČÍTKA (mobil) ----- */
+        /* ----- DOTYKOVÁ TLAČÍTKA (mobil) ----- */
         .touch-controls {
             display: none;
-            gap: 0.4rem;
-            margin-top: 0.6rem;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
             flex-wrap: wrap;
             justify-content: center;
             width: 100%;
+            max-width: 280px;
         }
 
         .touch-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            font-size: 1.8rem;
-            padding: 0.6rem 0;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #cbd5e1;
+            font-size: 1.6rem;
+            padding: 0.6rem 0.8rem;
             border-radius: 1rem;
-            min-width: 50px;
+            min-width: 55px;
             min-height: 55px;
             cursor: pointer;
             touch-action: manipulation;
-            transition: all 0.08s ease;
+            transition: all 0.1s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             flex: 1;
-            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
         }
 
         .touch-btn:active {
             transform: translateY(4px);
-            box-shadow: 0 0px 0 rgba(0, 0, 0, 0.4);
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        .touch-btn.left-btn {
-            background: rgba(59, 130, 246, 0.3);
-            border-color: rgba(59, 130, 246, 0.4);
-        }
-        .touch-btn.left-btn:active {
-            background: rgba(59, 130, 246, 0.6);
-        }
-
-        .touch-btn.right-btn {
-            background: rgba(59, 130, 246, 0.3);
-            border-color: rgba(59, 130, 246, 0.4);
-        }
-        .touch-btn.right-btn:active {
-            background: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 0px 0 rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .touch-btn.rotate-btn {
-            background: rgba(168, 85, 247, 0.3);
-            border-color: rgba(168, 85, 247, 0.4);
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.3);
             flex: 1.5;
-            font-size: 2rem;
         }
+
         .touch-btn.rotate-btn:active {
-            background: rgba(168, 85, 247, 0.6);
+            background: rgba(168, 85, 247, 0.4);
         }
 
         .touch-btn.drop-btn {
-            background: rgba(239, 68, 68, 0.3);
-            border-color: rgba(239, 68, 68, 0.4);
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.3);
             flex: 1.5;
-            font-size: 1.4rem;
         }
+
         .touch-btn.drop-btn:active {
-            background: rgba(239, 68, 68, 0.6);
+            background: rgba(239, 68, 68, 0.4);
         }
 
-        .touch-btn.down-btn {
-            background: rgba(34, 197, 94, 0.25);
-            border-color: rgba(34, 197, 94, 0.35);
-        }
-        .touch-btn.down-btn:active {
-            background: rgba(34, 197, 94, 0.5);
-        }
-
-        /* Zobrazit tlačítka POUZE na mobilu */
         @media (hover: none) and (pointer: coarse) {
             .touch-controls {
                 display: flex;
             }
         }
 
-        /* Řada tlačítek - 3 sloupce */
-        .touch-row {
-            display: flex;
-            gap: 0.4rem;
-            width: 100%;
+        @media (max-width: 550px) {
+            .touch-btn {
+                font-size: 1.3rem;
+                min-width: 45px;
+                min-height: 45px;
+                padding: 0.4rem 0.6rem;
+            }
         }
 
-        /* Tlačítka menu */
+        @media (max-width: 400px) {
+            .touch-btn {
+                font-size: 1rem;
+                min-width: 35px;
+                min-height: 35px;
+                padding: 0.2rem 0.4rem;
+            }
+        }
+
         .controls {
             display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
             flex-wrap: wrap;
             justify-content: center;
             width: 100%;
@@ -234,150 +209,127 @@
             border: none;
             color: #0b0f1a;
             font-weight: 700;
-            font-size: 0.8rem;
-            padding: 0.3rem 1rem;
+            font-size: 0.9rem;
+            padding: 0.35rem 1.2rem;
             border-radius: 60px;
-            box-shadow: 0 5px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             transition: all 0.07s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.4rem;
             touch-action: manipulation;
         }
         button:active {
-            transform: translateY(4px);
+            transform: translateY(5px);
             box-shadow: 0 1px 0 #a07c0e;
         }
 
         .back-button {
             background: #64748b;
-            box-shadow: 0 5px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
             text-decoration: none;
             color: #0b0f1a;
             font-weight: 700;
-            font-size: 0.75rem;
-            padding: 0.3rem 0.9rem;
+            font-size: 0.85rem;
+            padding: 0.35rem 1rem;
             border-radius: 60px;
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.4rem;
             transition: all 0.07s ease;
             border: none;
         }
         .back-button:active {
-            transform: translateY(4px);
+            transform: translateY(5px);
             box-shadow: 0 1px 0 #475569;
+        }
+        .back-button:hover {
+            background: #94a3b8;
         }
 
         .status {
             color: #94a3b8;
-            font-size: 0.7rem;
-            min-height: 1.2rem;
+            font-size: 0.8rem;
+            min-height: 1.5rem;
             font-weight: 300;
             text-align: center;
             margin-top: 0.2rem;
             width: 100%;
         }
 
-        /* Skrýt hint na mobilu */
-        @media (hover: none) and (pointer: coarse) {
-            .hint {
-                display: none;
-            }
-        }
-
         .hint {
             color: #64748b;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             text-align: center;
             margin-top: 0.1rem;
         }
 
         .hint kbd {
             background: #0b1622;
-            padding: 0.05rem 0.4rem;
+            padding: 0.05rem 0.5rem;
             border-radius: 6px;
             color: #cbd5e1;
             border: 1px solid #334155;
-            font-size: 0.55rem;
+            font-size: 0.6rem;
         }
 
-        /* Responzivita */
-        @media (max-width: 450px) {
+        @media (max-width: 600px) {
             .game-wrapper {
-                padding: 0.5rem;
-                border-radius: 1.5rem;
+                padding: 1rem;
+                border-radius: 2rem;
+                gap: 1rem;
             }
             h1 {
-                font-size: 1.1rem;
-            }
-            canvas#gameCanvas {
-                max-width: 180px;
+                font-size: 1.3rem;
             }
             .side-panel {
-                padding: 0.4rem 0.5rem;
+                padding: 0.8rem 1rem;
+                min-width: 80px;
+            }
+            .side-panel .value {
+                font-size: 1.2rem;
+                min-width: 40px;
+            }
+            canvas#gameCanvas {
+                max-width: 200px;
+            }
+            canvas#previewCanvas {
+                max-width: 70px;
+            }
+            button {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.9rem;
+            }
+            .back-button {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .game-wrapper {
+                padding: 0.6rem;
+                border-radius: 1.5rem;
+                gap: 0.6rem;
+            }
+            canvas#gameCanvas {
+                max-width: 160px;
+            }
+            .side-panel {
+                padding: 0.5rem 0.6rem;
                 min-width: 60px;
             }
             .side-panel .value {
                 font-size: 1rem;
                 min-width: 30px;
-                padding: 0.05rem 0.4rem;
+                padding: 0.05rem 0.5rem;
             }
             .side-panel .label {
-                font-size: 0.45rem;
+                font-size: 0.55rem;
             }
-            canvas#previewCanvas {
-                max-width: 50px;
-            }
-            .touch-btn {
-                font-size: 1.4rem;
-                min-width: 35px;
-                min-height: 40px;
-                padding: 0.4rem 0;
-            }
-            .touch-btn.rotate-btn {
-                font-size: 1.5rem;
-            }
-            .touch-btn.drop-btn {
-                font-size: 1.1rem;
-            }
-            button {
-                font-size: 0.65rem;
-                padding: 0.2rem 0.7rem;
-            }
-            .back-button {
-                font-size: 0.6rem;
-                padding: 0.2rem 0.7rem;
-            }
-            .game-row {
-                gap: 0.5rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            canvas#gameCanvas {
-                max-width: 140px;
-            }
-            .side-panel {
-                padding: 0.3rem 0.4rem;
-                min-width: 50px;
-            }
-            .side-panel .value {
-                font-size: 0.8rem;
-                min-width: 25px;
-            }
-            canvas#previewCanvas {
-                max-width: 40px;
-            }
-            .touch-btn {
-                font-size: 1.1rem;
-                min-width: 28px;
-                min-height: 32px;
-                padding: 0.3rem 0;
-            }
-            .touch-btn.rotate-btn {
-                font-size: 1.2rem;
+            h1 {
+                font-size: 1rem;
             }
         }
 
@@ -391,52 +343,46 @@
 <body>
 
 <div class="game-wrapper">
-    <h1>🧩 <span>TETRIS</span></h1>
-
-    <div class="game-row">
+    <div class="main-area">
+        <h1>🧩 <span>TETRIS</span></h1>
         <canvas id="gameCanvas" width="300" height="600"></canvas>
 
-        <div class="side-panel">
-            <div>
-                <div class="label">🎯 Skóre</div>
-                <div class="value" id="scoreDisplay">0</div>
-            </div>
-            <div>
-                <div class="label">📊 Level</div>
-                <div class="value" id="levelDisplay">1</div>
-            </div>
-            <div>
-                <div class="label">🧹 Řádky</div>
-                <div class="value" id="linesDisplay">0</div>
-            </div>
-            <div>
-                <div class="label">🔮 Další</div>
-                <canvas id="previewCanvas" width="120" height="120"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- DOTYKOVÁ TLAČÍTKA (mobil) -->
-    <div class="touch-controls" id="touchControls">
-        <div class="touch-row">
-            <button class="touch-btn left-btn" id="touchLeft">◀</button>
+        <!-- DOTYKOVÁ TLAČÍTKA (mobil) -->
+        <div class="touch-controls" id="touchControls">
+            <button class="touch-btn" id="touchLeft">◀</button>
             <button class="touch-btn rotate-btn" id="touchRotate">🔄</button>
-            <button class="touch-btn right-btn" id="touchRight">▶</button>
-        </div>
-        <div class="touch-row">
-            <button class="touch-btn down-btn" id="touchDown">▼</button>
+            <button class="touch-btn" id="touchRight">▶</button>
             <button class="touch-btn drop-btn" id="touchDrop">⬇⬇</button>
         </div>
+
+        <div class="controls">
+            <button id="restartBtn">🔄 Nová</button>
+            <button id="pauseBtn">⏸ Pauza</button>
+            <a href="hry.html" class="back-button">⬅ Zpět</a>
+        </div>
+        <div class="status" id="statusMsg">Použij šipky pro pohyb</div>
+        <div class="hint">
+            <kbd>←</kbd> <kbd>→</kbd> pohyb &nbsp;·&nbsp; <kbd>↑</kbd> otoč &nbsp;·&nbsp; <kbd>↓</kbd> zrychli &nbsp;·&nbsp; <kbd>P</kbd> pauza &nbsp;·&nbsp; <kbd>␣</kbd> drop
+        </div>
     </div>
 
-    <div class="controls">
-        <button id="restartBtn">🔄 Nová</button>
-        <button id="pauseBtn">⏸ Pauza</button>
-        <a href="hra.html" class="back-button">⬅ Zpět</a>
-    </div>
-    <div class="status" id="statusMsg">Použij šipky pro pohyb</div>
-    <div class="hint">
-        <kbd>←</kbd> <kbd>→</kbd> pohyb &nbsp;·&nbsp; <kbd>↑</kbd> otoč &nbsp;·&nbsp; <kbd>↓</kbd> zrychli &nbsp;·&nbsp; <kbd>P</kbd> pauza
+    <div class="side-panel">
+        <div>
+            <div class="label">🎯 Skóre</div>
+            <div class="value" id="scoreDisplay">0</div>
+        </div>
+        <div>
+            <div class="label">📊 Level</div>
+            <div class="value" id="levelDisplay">1</div>
+        </div>
+        <div>
+            <div class="label">🧹 Řádky</div>
+            <div class="value" id="linesDisplay">0</div>
+        </div>
+        <div>
+            <div class="label">🔮 Další</div>
+            <canvas id="previewCanvas" width="120" height="120"></canvas>
+        </div>
     </div>
 </div>
 
@@ -456,10 +402,9 @@
         const restartBtn = document.getElementById('restartBtn');
         const pauseBtn = document.getElementById('pauseBtn');
 
-        // Dotyková tlačítka
+        // ----- Dotyková tlačítka -----
         const touchLeft = document.getElementById('touchLeft');
         const touchRight = document.getElementById('touchRight');
-        const touchDown = document.getElementById('touchDown');
         const touchRotate = document.getElementById('touchRotate');
         const touchDrop = document.getElementById('touchDrop');
 
@@ -467,8 +412,6 @@
         const COLS = 10;
         const ROWS = 20;
         const BLOCK_SIZE = 30;
-        const W = 300;
-        const H = 600;
 
         // ----- Tvary -----
         const SHAPES = {
@@ -674,39 +617,59 @@
             draw();
         }
 
-        // ----- Vykreslení -----
+        // ----- VYLEPŠENÉ VYKRESLENÍ (s viditelnými čarami) -----
         function draw() {
-            ctx.clearRect(0, 0, W, H);
-            // Mřížka
-            ctx.strokeStyle = 'rgba(60,90,120,0.12)';
-            ctx.lineWidth = 0.5;
+            ctx.clearRect(0, 0, 300, 600);
+
+            // ----- VIDITELNÁ MŘÍŽKA (silnější čáry) -----
+            ctx.strokeStyle = 'rgba(100, 140, 180, 0.3)';
+            ctx.lineWidth = 1.5;
             for (let r = 0; r <= ROWS; r++) {
                 ctx.beginPath();
                 ctx.moveTo(0, r * BLOCK_SIZE);
-                ctx.lineTo(W, r * BLOCK_SIZE);
+                ctx.lineTo(300, r * BLOCK_SIZE);
                 ctx.stroke();
             }
             for (let c = 0; c <= COLS; c++) {
                 ctx.beginPath();
                 ctx.moveTo(c * BLOCK_SIZE, 0);
-                ctx.lineTo(c * BLOCK_SIZE, H);
+                ctx.lineTo(c * BLOCK_SIZE, 600);
                 ctx.stroke();
             }
-            // Board
+
+            // ----- Board (dlaždice s 3D efektem) -----
             for (let r = 0; r < ROWS; r++) {
                 for (let c = 0; c < COLS; c++) {
                     if (board[r][c] !== 0) {
+                        const x = c * BLOCK_SIZE;
+                        const y = r * BLOCK_SIZE;
+                        
+                        // Hlavní barva
                         ctx.fillStyle = board[r][c];
                         ctx.shadowColor = board[r][c];
-                        ctx.shadowBlur = 6;
-                        ctx.fillRect(c * BLOCK_SIZE + 1, r * BLOCK_SIZE + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+                        ctx.shadowBlur = 8;
+                        ctx.fillRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
                         ctx.shadowBlur = 0;
-                        ctx.fillStyle = 'rgba(255,255,255,0.1)';
-                        ctx.fillRect(c * BLOCK_SIZE + 2, r * BLOCK_SIZE + 2, BLOCK_SIZE - 8, 3);
+                        
+                        // 3D lesk (horní a levý okraj)
+                        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+                        ctx.fillRect(x + 2, y + 2, BLOCK_SIZE - 8, 3);
+                        ctx.fillRect(x + 2, y + 2, 3, BLOCK_SIZE - 8);
+                        
+                        // 3D stín (pravý a dolní okraj)
+                        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+                        ctx.fillRect(x + BLOCK_SIZE - 4, y + 3, 2, BLOCK_SIZE - 6);
+                        ctx.fillRect(x + 3, y + BLOCK_SIZE - 4, BLOCK_SIZE - 6, 2);
+                        
+                        // Ohraničení dlaždice (aby byla vidět)
+                        ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+                        ctx.lineWidth = 0.5;
+                        ctx.strokeRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
                     }
                 }
             }
-            // Aktuální kus
+
+            // ----- Aktuální kus (s 3D efektem) -----
             if (currentPiece && !gameOver) {
                 const blocks = currentPiece.blocks;
                 for (let r = 0; r < blocks.length; r++) {
@@ -714,42 +677,53 @@
                         if (blocks[r][c] !== 0) {
                             const x = (currentPiece.x + c) * BLOCK_SIZE;
                             const y = (currentPiece.y + r) * BLOCK_SIZE;
+                            
                             ctx.fillStyle = currentPiece.color;
                             ctx.shadowColor = currentPiece.color;
-                            ctx.shadowBlur = 10;
+                            ctx.shadowBlur = 12;
                             ctx.fillRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
                             ctx.shadowBlur = 0;
-                            ctx.fillStyle = 'rgba(255,255,255,0.2)';
+                            
+                            // 3D lesk
+                            ctx.fillStyle = 'rgba(255,255,255,0.25)';
                             ctx.fillRect(x + 2, y + 2, BLOCK_SIZE - 8, 3);
+                            ctx.fillRect(x + 2, y + 2, 3, BLOCK_SIZE - 8);
+                            
+                            // 3D stín
+                            ctx.fillStyle = 'rgba(0,0,0,0.2)';
+                            ctx.fillRect(x + BLOCK_SIZE - 4, y + 3, 2, BLOCK_SIZE - 6);
+                            ctx.fillRect(x + 3, y + BLOCK_SIZE - 4, BLOCK_SIZE - 6, 2);
                         }
                     }
                 }
             }
-            // Game Over
+
+            // ----- Game Over overlay -----
             if (gameOver) {
                 ctx.fillStyle = 'rgba(0,0,0,0.7)';
-                ctx.fillRect(0, 0, W, H);
+                ctx.fillRect(0, 0, 300, 600);
                 ctx.fillStyle = '#fca5a5';
-                ctx.font = 'bold 34px "Segoe UI", sans-serif';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText('GAME OVER', 150, 270);
-                ctx.font = '16px sans-serif';
-                ctx.fillStyle = '#e2e8f0';
-                ctx.fillText('Klikni "Nová"', 150, 320);
-            }
-            // Pauza
-            if (paused && !gameOver) {
-                ctx.fillStyle = 'rgba(0,0,0,0.5)';
-                ctx.fillRect(0, 0, W, H);
-                ctx.fillStyle = '#fde047';
                 ctx.font = 'bold 36px "Segoe UI", sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fillText('⏸', 150, 280);
-                ctx.font = '16px sans-serif';
+                ctx.fillText('GAME OVER', 150, 270);
+                ctx.font = '18px sans-serif';
                 ctx.fillStyle = '#e2e8f0';
-                ctx.fillText('PAUZA', 150, 330);
+                ctx.fillText('Klikni "Nová"', 150, 330);
+            }
+
+            // ----- Pauza -----
+            if (paused && !gameOver) {
+                ctx.fillStyle = 'rgba(0,0,0,0.5)';
+                ctx.fillRect(0, 0, 300, 600);
+                ctx.fillStyle = '#fde047';
+                ctx.font = 'bold 40px "Segoe UI", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('⏸', 150, 280);
+                ctx.font = '18px sans-serif';
+                ctx.fillStyle = '#e2e8f0';
+                ctx.fillText('PAUZA', 150, 340);
             }
         }
 
@@ -757,7 +731,7 @@
             previewCtx.clearRect(0, 0, 120, 120);
             if (!nextPiece) return;
             const blocks = nextPiece.blocks;
-            const bs = 22;
+            const bs = 25;
             const cols = blocks[0].length,
                 rows = blocks.length;
             const ox = (120 - cols * bs) / 2,
@@ -857,7 +831,7 @@
             }
         }
 
-        // ----- DOTYKOVÁ TLAČÍTKA (funkční) -----
+        // ----- DOTYKOVÁ TLAČÍTKA -----
         function setupTouchButton(btn, action, repeatable = false) {
             let intervalId = null;
             let timeoutId = null;
@@ -882,23 +856,17 @@
                     intervalId = null; }
             }
 
-            // Dotyk
             btn.addEventListener('touchstart', startAction, { passive: false });
             btn.addEventListener('touchend', stopAction, { passive: false });
             btn.addEventListener('touchcancel', stopAction, { passive: false });
-
-            // Myš (pro testování)
             btn.addEventListener('mousedown', startAction);
             btn.addEventListener('mouseup', stopAction);
             btn.addEventListener('mouseleave', stopAction);
         }
 
-        // Nastavení tlačítek (opakovatelné = pohyb)
         setupTouchButton(touchLeft, moveLeft, true);
         setupTouchButton(touchRight, moveRight, true);
-        setupTouchButton(touchDown, moveDown, true);
 
-        // Rotace a drop - bez opakování
         touchRotate.addEventListener('click', (e) => { e.preventDefault();
             rotatePiece(); });
         touchRotate.addEventListener('touchstart', (e) => { e.preventDefault();
@@ -914,7 +882,6 @@
         restartBtn.addEventListener('click', startNewGame);
         pauseBtn.addEventListener('click', togglePause);
 
-        // Zákaz scrollování na tlačítkách
         document.querySelectorAll('.touch-btn').forEach(btn => {
             btn.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
         });
@@ -923,20 +890,6 @@
         gameLoop();
 
         window.addEventListener('blur', () => {});
-
-        // Polyfill
-        if (!CanvasRenderingContext2D.prototype.roundRect) {
-            CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
-                if (r > w / 2) r = w / 2;
-                if (r > h / 2) r = h / 2;
-                this.moveTo(x + r, y);
-                this.arcTo(x + w, y, x + w, y + h, r);
-                this.arcTo(x + w, y + h, x, y + h, r);
-                this.arcTo(x, y + h, x, y, r);
-                this.arcTo(x, y, x + w, y, r);
-                return this;
-            };
-        }
     })();
 </script>
 </body>
