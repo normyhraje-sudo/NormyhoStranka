@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tetris - lepší viditelnost</title>
+    <title>Tetris - mobilní verze</title>
     <style>
         * {
             margin: 0;
@@ -20,155 +20,207 @@
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', system-ui, sans-serif;
-            padding: 0.5rem;
+            padding: 0.3rem;
             overflow: hidden;
             touch-action: none;
         }
 
         .game-wrapper {
             background: #1e2a3a;
-            padding: 1.2rem 1.5rem 1.5rem;
-            border-radius: 2.5rem;
+            padding: 0.6rem 0.8rem 0.8rem;
+            border-radius: 2rem;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 650px;
-            width: 100%;
-        }
-
-        .main-area {
             display: flex;
             flex-direction: column;
             align-items: center;
+            max-width: 400px;
+            width: 100%;
         }
 
         h1 {
             color: #f0e9d8;
             font-weight: 500;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             letter-spacing: 3px;
             text-shadow: 0 3px 0 #0b0f1a;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
         h1 span {
             color: #facc15;
         }
 
+        /* ----- HLAVNÍ PLOCHA (pouze canvas + náhled) ----- */
+        .game-row {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
         canvas#gameCanvas {
             display: block;
             background: #0b1622;
-            border-radius: 1.5rem;
+            border-radius: 1.2rem;
             box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 2px #334155;
             width: 100%;
-            max-width: 280px;
+            max-width: 240px;
             height: auto;
             aspect-ratio: 10 / 20;
             image-rendering: pixelated;
             touch-action: none;
+            flex-shrink: 0;
         }
 
-        .side-panel {
+        /* ----- NÁHLED VEDLE ----- */
+        .preview-box {
             background: #0f1a2a;
-            border-radius: 1.8rem;
-            padding: 1.2rem 1.5rem;
+            border-radius: 1.2rem;
+            padding: 0.4rem 0.5rem;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 0 1px #2a3a4e;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
-            min-width: 120px;
-            flex-shrink: 0;
+            gap: 0.2rem;
+            min-width: 55px;
         }
 
-        .side-panel .label {
+        .preview-box .label {
             color: #94a3b8;
-            font-size: 0.7rem;
+            font-size: 0.45rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-weight: 300;
-        }
-
-        .side-panel .value {
-            color: #facc15;
-            font-size: 1.6rem;
-            font-weight: 700;
-            background: #0b1622;
-            padding: 0.1rem 1rem;
-            border-radius: 40px;
-            min-width: 60px;
-            text-align: center;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
         }
 
         canvas#previewCanvas {
             display: block;
             background: #0b1622;
-            border-radius: 1rem;
+            border-radius: 0.8rem;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6), 0 0 0 1px #2a3a4e;
             width: 100%;
-            max-width: 100px;
+            max-width: 55px;
             height: auto;
             aspect-ratio: 1 / 1;
             image-rendering: pixelated;
         }
 
-        /* ----- DOTYKOVÁ TLAČÍTKA (mobil) ----- */
+        /* ----- STATISTIKY POD PLOCHOU (v řadě) ----- */
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin-top: 0.5rem;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #0f1a2a;
+            padding: 0.15rem 0.6rem 0.15rem 0.4rem;
+            border-radius: 40px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+            flex: 1;
+            min-width: 60px;
+            justify-content: center;
+        }
+
+        .stat-item .icon {
+            font-size: 0.9rem;
+            line-height: 1;
+        }
+
+        .stat-item .value {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #facc15;
+            min-width: 1.5rem;
+            text-align: center;
+        }
+
+        /* ----- DOTYKOVÁ TLAČÍTKA ----- */
         .touch-controls {
             display: none;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
             flex-wrap: wrap;
             justify-content: center;
             width: 100%;
-            max-width: 280px;
         }
 
         .touch-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
             font-size: 1.6rem;
-            padding: 0.6rem 0.8rem;
+            padding: 0.5rem 0;
             border-radius: 1rem;
-            min-width: 55px;
-            min-height: 55px;
+            min-width: 45px;
+            min-height: 50px;
             cursor: pointer;
             touch-action: manipulation;
-            transition: all 0.1s ease;
+            transition: all 0.08s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             flex: 1;
-            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .touch-btn:active {
             transform: translateY(4px);
-            box-shadow: 0 0px 0 rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0px 0 rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .touch-btn.left-btn {
+            background: rgba(59, 130, 246, 0.35);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .touch-btn.left-btn:active {
+            background: rgba(59, 130, 246, 0.6);
+        }
+
+        .touch-btn.right-btn {
+            background: rgba(59, 130, 246, 0.35);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .touch-btn.right-btn:active {
+            background: rgba(59, 130, 246, 0.6);
         }
 
         .touch-btn.rotate-btn {
-            background: rgba(168, 85, 247, 0.2);
-            border-color: rgba(168, 85, 247, 0.3);
+            background: rgba(168, 85, 247, 0.35);
+            border-color: rgba(168, 85, 247, 0.5);
             flex: 1.5;
+            font-size: 1.8rem;
         }
-
         .touch-btn.rotate-btn:active {
-            background: rgba(168, 85, 247, 0.4);
+            background: rgba(168, 85, 247, 0.6);
         }
 
         .touch-btn.drop-btn {
-            background: rgba(239, 68, 68, 0.2);
-            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.35);
+            border-color: rgba(239, 68, 68, 0.5);
             flex: 1.5;
+            font-size: 1.3rem;
+        }
+        .touch-btn.drop-btn:active {
+            background: rgba(239, 68, 68, 0.6);
         }
 
-        .touch-btn.drop-btn:active {
-            background: rgba(239, 68, 68, 0.4);
+        .touch-btn.down-btn {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+        .touch-btn.down-btn:active {
+            background: rgba(34, 197, 94, 0.5);
         }
 
         @media (hover: none) and (pointer: coarse) {
@@ -177,28 +229,16 @@
             }
         }
 
-        @media (max-width: 550px) {
-            .touch-btn {
-                font-size: 1.3rem;
-                min-width: 45px;
-                min-height: 45px;
-                padding: 0.4rem 0.6rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .touch-btn {
-                font-size: 1rem;
-                min-width: 35px;
-                min-height: 35px;
-                padding: 0.2rem 0.4rem;
-            }
+        .touch-row {
+            display: flex;
+            gap: 0.4rem;
+            width: 100%;
         }
 
         .controls {
             display: flex;
-            gap: 0.6rem;
-            margin-top: 0.6rem;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
             flex-wrap: wrap;
             justify-content: center;
             width: 100%;
@@ -209,127 +249,166 @@
             border: none;
             color: #0b0f1a;
             font-weight: 700;
-            font-size: 0.9rem;
-            padding: 0.35rem 1.2rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.9rem;
             border-radius: 60px;
-            box-shadow: 0 6px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 0 #a07c0e, 0 6px 18px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             transition: all 0.07s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
             touch-action: manipulation;
         }
         button:active {
-            transform: translateY(5px);
+            transform: translateY(4px);
             box-shadow: 0 1px 0 #a07c0e;
         }
 
         .back-button {
             background: #64748b;
-            box-shadow: 0 6px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 0 #475569, 0 6px 18px rgba(0, 0, 0, 0.5);
             text-decoration: none;
             color: #0b0f1a;
             font-weight: 700;
-            font-size: 0.85rem;
-            padding: 0.35rem 1rem;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.8rem;
             border-radius: 60px;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
             transition: all 0.07s ease;
             border: none;
         }
         .back-button:active {
-            transform: translateY(5px);
+            transform: translateY(4px);
             box-shadow: 0 1px 0 #475569;
-        }
-        .back-button:hover {
-            background: #94a3b8;
         }
 
         .status {
             color: #94a3b8;
-            font-size: 0.8rem;
-            min-height: 1.5rem;
+            font-size: 0.65rem;
+            min-height: 1.2rem;
             font-weight: 300;
             text-align: center;
             margin-top: 0.2rem;
             width: 100%;
         }
 
+        @media (hover: none) and (pointer: coarse) {
+            .hint {
+                display: none;
+            }
+        }
+
         .hint {
             color: #64748b;
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             text-align: center;
             margin-top: 0.1rem;
         }
 
         .hint kbd {
             background: #0b1622;
-            padding: 0.05rem 0.5rem;
+            padding: 0.05rem 0.4rem;
             border-radius: 6px;
             color: #cbd5e1;
             border: 1px solid #334155;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
         }
 
-        @media (max-width: 600px) {
+        /* ----- RESPONZIVITA ----- */
+        @media (max-width: 420px) {
             .game-wrapper {
-                padding: 1rem;
-                border-radius: 2rem;
-                gap: 1rem;
+                padding: 0.4rem 0.5rem 0.6rem;
+                border-radius: 1.5rem;
             }
             h1 {
-                font-size: 1.3rem;
-            }
-            .side-panel {
-                padding: 0.8rem 1rem;
-                min-width: 80px;
-            }
-            .side-panel .value {
-                font-size: 1.2rem;
-                min-width: 40px;
+                font-size: 1rem;
             }
             canvas#gameCanvas {
-                max-width: 200px;
+                max-width: 170px;
+            }
+            .preview-box {
+                min-width: 45px;
+                padding: 0.3rem 0.4rem;
             }
             canvas#previewCanvas {
-                max-width: 70px;
+                max-width: 40px;
+            }
+            .stat-item {
+                min-width: 45px;
+                padding: 0.1rem 0.4rem;
+            }
+            .stat-item .icon {
+                font-size: 0.7rem;
+            }
+            .stat-item .value {
+                font-size: 0.8rem;
+                min-width: 1.2rem;
+            }
+            .touch-btn {
+                font-size: 1.2rem;
+                min-width: 35px;
+                min-height: 40px;
+                padding: 0.3rem 0;
+            }
+            .touch-btn.rotate-btn {
+                font-size: 1.4rem;
+            }
+            .touch-btn.drop-btn {
+                font-size: 1rem;
             }
             button {
-                font-size: 0.75rem;
-                padding: 0.25rem 0.9rem;
+                font-size: 0.6rem;
+                padding: 0.2rem 0.6rem;
             }
             .back-button {
-                font-size: 0.7rem;
-                padding: 0.25rem 0.8rem;
+                font-size: 0.55rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .game-row {
+                gap: 0.4rem;
+            }
+            .status {
+                font-size: 0.55rem;
+                min-height: 1rem;
+            }
+            .stats-row {
+                gap: 0.2rem;
             }
         }
 
-        @media (max-width: 430px) {
-            .game-wrapper {
-                padding: 0.6rem;
-                border-radius: 1.5rem;
-                gap: 0.6rem;
-            }
+        @media (max-width: 360px) {
             canvas#gameCanvas {
-                max-width: 160px;
+                max-width: 140px;
             }
-            .side-panel {
-                padding: 0.5rem 0.6rem;
-                min-width: 60px;
+            .preview-box {
+                min-width: 38px;
+                padding: 0.2rem 0.3rem;
             }
-            .side-panel .value {
+            canvas#previewCanvas {
+                max-width: 32px;
+            }
+            .stat-item {
+                min-width: 38px;
+                padding: 0.05rem 0.3rem;
+            }
+            .stat-item .value {
+                font-size: 0.7rem;
+                min-width: 1rem;
+            }
+            .touch-btn {
                 font-size: 1rem;
-                min-width: 30px;
-                padding: 0.05rem 0.5rem;
+                min-width: 28px;
+                min-height: 32px;
+                padding: 0.2rem 0;
             }
-            .side-panel .label {
-                font-size: 0.55rem;
+            .touch-btn.rotate-btn {
+                font-size: 1.1rem;
             }
-            h1 {
-                font-size: 1rem;
+            .touch-row {
+                gap: 0.3rem;
             }
         }
 
@@ -343,46 +422,55 @@
 <body>
 
 <div class="game-wrapper">
-    <div class="main-area">
-        <h1>🧩 <span>TETRIS</span></h1>
+    <h1>🧩 <span>TETRIS</span></h1>
+
+    <!-- HERNÍ PLOCHA + NÁHLED VEDLE -->
+    <div class="game-row">
         <canvas id="gameCanvas" width="300" height="600"></canvas>
 
-        <!-- DOTYKOVÁ TLAČÍTKA (mobil) -->
-        <div class="touch-controls" id="touchControls">
-            <button class="touch-btn" id="touchLeft">◀</button>
-            <button class="touch-btn rotate-btn" id="touchRotate">🔄</button>
-            <button class="touch-btn" id="touchRight">▶</button>
-            <button class="touch-btn drop-btn" id="touchDrop">⬇⬇</button>
-        </div>
-
-        <div class="controls">
-            <button id="restartBtn">🔄 Nová</button>
-            <button id="pauseBtn">⏸ Pauza</button>
-            <a href="hra.html" class="back-button">⬅ Zpět</a>
-        </div>
-        <div class="status" id="statusMsg">Použij šipky pro pohyb</div>
-        <div class="hint">
-            <kbd>←</kbd> <kbd>→</kbd> pohyb &nbsp;·&nbsp; <kbd>↑</kbd> otoč &nbsp;·&nbsp; <kbd>↓</kbd> zrychli &nbsp;·&nbsp; <kbd>P</kbd> pauza &nbsp;·&nbsp; <kbd>␣</kbd> drop
-        </div>
-    </div>
-
-    <div class="side-panel">
-        <div>
-            <div class="label">🎯 Skóre</div>
-            <div class="value" id="scoreDisplay">0</div>
-        </div>
-        <div>
-            <div class="label">📊 Level</div>
-            <div class="value" id="levelDisplay">1</div>
-        </div>
-        <div>
-            <div class="label">🧹 Řádky</div>
-            <div class="value" id="linesDisplay">0</div>
-        </div>
-        <div>
+        <div class="preview-box">
             <div class="label">🔮 Další</div>
             <canvas id="previewCanvas" width="120" height="120"></canvas>
         </div>
+    </div>
+
+    <!-- STATISTIKY POD PLOCHOU (v řadě) -->
+    <div class="stats-row">
+        <div class="stat-item">
+            <span class="icon">🎯</span>
+            <span class="value" id="scoreDisplay">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="icon">📊</span>
+            <span class="value" id="levelDisplay">1</span>
+        </div>
+        <div class="stat-item">
+            <span class="icon">🧹</span>
+            <span class="value" id="linesDisplay">0</span>
+        </div>
+    </div>
+
+    <!-- DOTYKOVÁ TLAČÍTKA (mobil) -->
+    <div class="touch-controls">
+        <div class="touch-row">
+            <button class="touch-btn left-btn" id="touchLeft">◀</button>
+            <button class="touch-btn rotate-btn" id="touchRotate">🔄</button>
+            <button class="touch-btn right-btn" id="touchRight">▶</button>
+        </div>
+        <div class="touch-row">
+            <button class="touch-btn down-btn" id="touchDown">▼</button>
+            <button class="touch-btn drop-btn" id="touchDrop">⬇⬇</button>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="restartBtn">🔄 Nová</button>
+        <button id="pauseBtn">⏸ Pauza</button>
+        <a href="hra.html" class="back-button">⬅ Zpět</a>
+    </div>
+    <div class="status" id="statusMsg">Použij šipky pro pohyb</div>
+    <div class="hint">
+        <kbd>←</kbd> <kbd>→</kbd> pohyb &nbsp;·&nbsp; <kbd>↑</kbd> otoč &nbsp;·&nbsp; <kbd>↓</kbd> zrychli &nbsp;·&nbsp; <kbd>P</kbd> pauza
     </div>
 </div>
 
@@ -402,9 +490,10 @@
         const restartBtn = document.getElementById('restartBtn');
         const pauseBtn = document.getElementById('pauseBtn');
 
-        // ----- Dotyková tlačítka -----
+        // Dotyková tlačítka
         const touchLeft = document.getElementById('touchLeft');
         const touchRight = document.getElementById('touchRight');
+        const touchDown = document.getElementById('touchDown');
         const touchRotate = document.getElementById('touchRotate');
         const touchDrop = document.getElementById('touchDrop');
 
@@ -412,6 +501,8 @@
         const COLS = 10;
         const ROWS = 20;
         const BLOCK_SIZE = 30;
+        const W = 300;
+        const H = 600;
 
         // ----- Tvary -----
         const SHAPES = {
@@ -617,59 +708,54 @@
             draw();
         }
 
-        // ----- VYLEPŠENÉ VYKRESLENÍ (s viditelnými čarami) -----
+        // ----- VYLEPŠENÉ VYKRESLENÍ -----
         function draw() {
-            ctx.clearRect(0, 0, 300, 600);
+            ctx.clearRect(0, 0, W, H);
 
-            // ----- VIDITELNÁ MŘÍŽKA (silnější čáry) -----
-            ctx.strokeStyle = 'rgba(100, 140, 180, 0.3)';
+            // Mřížka
+            ctx.strokeStyle = 'rgba(150, 190, 230, 0.2)';
             ctx.lineWidth = 1.5;
             for (let r = 0; r <= ROWS; r++) {
                 ctx.beginPath();
                 ctx.moveTo(0, r * BLOCK_SIZE);
-                ctx.lineTo(300, r * BLOCK_SIZE);
+                ctx.lineTo(W, r * BLOCK_SIZE);
                 ctx.stroke();
             }
             for (let c = 0; c <= COLS; c++) {
                 ctx.beginPath();
                 ctx.moveTo(c * BLOCK_SIZE, 0);
-                ctx.lineTo(c * BLOCK_SIZE, 600);
+                ctx.lineTo(c * BLOCK_SIZE, H);
                 ctx.stroke();
             }
 
-            // ----- Board (dlaždice s 3D efektem) -----
+            // Board
             for (let r = 0; r < ROWS; r++) {
                 for (let c = 0; c < COLS; c++) {
                     if (board[r][c] !== 0) {
-                        const x = c * BLOCK_SIZE;
-                        const y = r * BLOCK_SIZE;
-                        
-                        // Hlavní barva
+                        const x = c * BLOCK_SIZE,
+                            y = r * BLOCK_SIZE;
                         ctx.fillStyle = board[r][c];
                         ctx.shadowColor = board[r][c];
-                        ctx.shadowBlur = 8;
+                        ctx.shadowBlur = 6;
                         ctx.fillRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
                         ctx.shadowBlur = 0;
-                        
-                        // 3D lesk (horní a levý okraj)
-                        ctx.fillStyle = 'rgba(255,255,255,0.2)';
-                        ctx.fillRect(x + 2, y + 2, BLOCK_SIZE - 8, 3);
-                        ctx.fillRect(x + 2, y + 2, 3, BLOCK_SIZE - 8);
-                        
-                        // 3D stín (pravý a dolní okraj)
-                        ctx.fillStyle = 'rgba(0,0,0,0.2)';
-                        ctx.fillRect(x + BLOCK_SIZE - 4, y + 3, 2, BLOCK_SIZE - 6);
-                        ctx.fillRect(x + 3, y + BLOCK_SIZE - 4, BLOCK_SIZE - 6, 2);
-                        
-                        // Ohraničení dlaždice (aby byla vidět)
-                        ctx.strokeStyle = 'rgba(255,255,255,0.08)';
-                        ctx.lineWidth = 0.5;
+
+                        ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+                        ctx.lineWidth = 1.5;
                         ctx.strokeRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+
+                        ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                        ctx.lineWidth = 1;
+                        ctx.strokeRect(x + 3, y + 3, BLOCK_SIZE - 6, BLOCK_SIZE - 6);
+
+                        ctx.fillStyle = 'rgba(255,255,255,0.12)';
+                        ctx.fillRect(x + 2, y + 2, BLOCK_SIZE - 8, 2);
+                        ctx.fillRect(x + 2, y + 2, 2, BLOCK_SIZE - 8);
                     }
                 }
             }
 
-            // ----- Aktuální kus (s 3D efektem) -----
+            // Aktuální kus
             if (currentPiece && !gameOver) {
                 const blocks = currentPiece.blocks;
                 for (let r = 0; r < blocks.length; r++) {
@@ -677,53 +763,55 @@
                         if (blocks[r][c] !== 0) {
                             const x = (currentPiece.x + c) * BLOCK_SIZE;
                             const y = (currentPiece.y + r) * BLOCK_SIZE;
-                            
+
                             ctx.fillStyle = currentPiece.color;
                             ctx.shadowColor = currentPiece.color;
-                            ctx.shadowBlur = 12;
+                            ctx.shadowBlur = 10;
                             ctx.fillRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
                             ctx.shadowBlur = 0;
-                            
-                            // 3D lesk
-                            ctx.fillStyle = 'rgba(255,255,255,0.25)';
-                            ctx.fillRect(x + 2, y + 2, BLOCK_SIZE - 8, 3);
-                            ctx.fillRect(x + 2, y + 2, 3, BLOCK_SIZE - 8);
-                            
-                            // 3D stín
-                            ctx.fillStyle = 'rgba(0,0,0,0.2)';
-                            ctx.fillRect(x + BLOCK_SIZE - 4, y + 3, 2, BLOCK_SIZE - 6);
-                            ctx.fillRect(x + 3, y + BLOCK_SIZE - 4, BLOCK_SIZE - 6, 2);
+
+                            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+                            ctx.lineWidth = 1.5;
+                            ctx.strokeRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+
+                            ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+                            ctx.lineWidth = 1;
+                            ctx.strokeRect(x + 3, y + 3, BLOCK_SIZE - 6, BLOCK_SIZE - 6);
+
+                            ctx.fillStyle = 'rgba(255,255,255,0.2)';
+                            ctx.fillRect(x + 2, y + 2, BLOCK_SIZE - 8, 2);
+                            ctx.fillRect(x + 2, y + 2, 2, BLOCK_SIZE - 8);
                         }
                     }
                 }
             }
 
-            // ----- Game Over overlay -----
+            // Game Over
             if (gameOver) {
                 ctx.fillStyle = 'rgba(0,0,0,0.7)';
-                ctx.fillRect(0, 0, 300, 600);
+                ctx.fillRect(0, 0, W, H);
                 ctx.fillStyle = '#fca5a5';
-                ctx.font = 'bold 36px "Segoe UI", sans-serif';
+                ctx.font = 'bold 34px "Segoe UI", sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText('GAME OVER', 150, 270);
-                ctx.font = '18px sans-serif';
+                ctx.font = '16px sans-serif';
                 ctx.fillStyle = '#e2e8f0';
-                ctx.fillText('Klikni "Nová"', 150, 330);
+                ctx.fillText('Klikni "Nová"', 150, 320);
             }
 
-            // ----- Pauza -----
+            // Pauza
             if (paused && !gameOver) {
                 ctx.fillStyle = 'rgba(0,0,0,0.5)';
-                ctx.fillRect(0, 0, 300, 600);
+                ctx.fillRect(0, 0, W, H);
                 ctx.fillStyle = '#fde047';
-                ctx.font = 'bold 40px "Segoe UI", sans-serif';
+                ctx.font = 'bold 36px "Segoe UI", sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText('⏸', 150, 280);
-                ctx.font = '18px sans-serif';
+                ctx.font = '16px sans-serif';
                 ctx.fillStyle = '#e2e8f0';
-                ctx.fillText('PAUZA', 150, 340);
+                ctx.fillText('PAUZA', 150, 330);
             }
         }
 
@@ -731,7 +819,7 @@
             previewCtx.clearRect(0, 0, 120, 120);
             if (!nextPiece) return;
             const blocks = nextPiece.blocks;
-            const bs = 25;
+            const bs = 22;
             const cols = blocks[0].length,
                 rows = blocks.length;
             const ox = (120 - cols * bs) / 2,
@@ -748,6 +836,9 @@
                         previewCtx.shadowBlur = 0;
                         previewCtx.fillStyle = 'rgba(255,255,255,0.15)';
                         previewCtx.fillRect(x + 2, y + 2, bs - 8, 3);
+                        previewCtx.strokeStyle = 'rgba(255,255,255,0.15)';
+                        previewCtx.lineWidth = 1;
+                        previewCtx.strokeRect(x + 1, y + 1, bs - 2, bs - 2);
                     }
                 }
             }
@@ -866,6 +957,7 @@
 
         setupTouchButton(touchLeft, moveLeft, true);
         setupTouchButton(touchRight, moveRight, true);
+        setupTouchButton(touchDown, moveDown, true);
 
         touchRotate.addEventListener('click', (e) => { e.preventDefault();
             rotatePiece(); });
