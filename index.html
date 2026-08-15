@@ -62,19 +62,19 @@
         }
 
         /* ===== MENU ===== */
-            .navbar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background: linear-gradient(145deg, #1E3A5F 0%, #0F2440 100%);
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
-                z-index: 1000;
-                padding: 0.6rem 0;
-                border-bottom: 3px solid var(--gold);
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-            }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(145deg, #1E3A5F 0%, #0F2440 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            padding: 0.6rem 0;
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
 
         .navbar .container {
             display: flex;
@@ -226,8 +226,9 @@
             font-size: 1.3rem;
             color: #C4B5A6;
             max-width: 700px;
-            margin: 0 auto 2.5rem auto;
+            margin: 0 auto 2rem auto;
         }
+
         .hero .badge {
             display: inline-block;
             background-color: var(--gold);
@@ -238,6 +239,57 @@
             font-size: 0.95rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+        }
+
+        /* ===== TLAČÍTKA V HERO ===== */
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid transparent;
+        }
+
+        .hero-btn-primary {
+            background: var(--gold);
+            color: var(--text-dark);
+            border-color: var(--gold);
+        }
+        .hero-btn-primary:hover {
+            background: #ffffff;
+            border-color: var(--gold);
+            color: var(--wine);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 10px 30px rgba(212, 160, 43, 0.4);
+        }
+
+        .hero-btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border-color: var(--gold);
+        }
+        .hero-btn-secondary:hover {
+            background: var(--gold);
+            color: var(--text-dark);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 10px 30px rgba(212, 160, 43, 0.3);
+        }
+
+        .hero-btn i {
+            font-size: 0.95rem;
         }
 
         /* ===== EXPERIMENTÁLNÍ KARTY ===== */
@@ -527,15 +579,15 @@
             letter-spacing: 1px;
         }
 
-        /* BANNER 1 - VÝRAZNĚ ZLATÁ (PROČ) */
+        /* BANNER 1 - ZTLUMENÁ ZLATÁ (PROČ) */
         .program-banner.p1 {
-            background: linear-gradient(145deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+            background: linear-gradient(145deg, #FEF3C7 0%, #FDE68A 50%, #FCD34D 100%);
             color: #0F172A;
-            border-top: 4px solid #B45309;
-            border-bottom: 4px solid #B45309;
+            border-top: 4px solid #D4A02B;
+            border-bottom: 4px solid #D4A02B;
         }
         .program-banner.p1 .program-number {
-            background: rgba(180, 83, 9, 0.2);
+            background: rgba(212, 160, 43, 0.2);
             color: #78350F;
         }
         .program-banner.p1 h2 {
@@ -1541,6 +1593,16 @@
             .hero p {
                 font-size: 1.05rem;
             }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+            }
+            .hero-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
             .section-title {
                 font-size: 2.2rem;
                 margin-bottom: 2rem;
@@ -1846,6 +1908,16 @@
             <h1>Rozumná změna. <br /><span class="highlight">Společný směr.</span> Živá Vesnice.</h1>
             <p>Chceme obec, která drží pohromadě, umí naslouchat a hledá řešení, která dávají smysl.</p>
 
+            <!-- ===== NOVÁ TLAČÍTKA ===== -->
+            <div class="hero-buttons">
+                <a href="#kdo-jsme" class="hero-btn hero-btn-primary">
+                    <i class="fas fa-user-check"></i> Kdo jsme
+                </a>
+                <a href="#co-chystame" class="hero-btn hero-btn-secondary">
+                    <i class="fas fa-calendar-alt"></i> Co chystáme
+                </a>
+            </div>
+
             <div class="exp-grid">
                 <div class="exp-card">
                     <span class="exp-emoji">👥</span>
@@ -1923,7 +1995,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 1 + SEKCE PROČ - VÝRAZNĚ ZLATÁ ===== -->
+    <!-- ===== BANNER 1 + SEKCE PROČ - ZTLUMENÁ ZLATÁ ===== -->
     <div class="program-banner p1" id="proc-banner">
         <div class="container">
             <a href="#proc" style="text-decoration:none; display:block;">
@@ -2237,6 +2309,7 @@
             <p class="section-subtitle">Jsme vaši sousedé a známé tváře z obce. Spojuje nás chuť pracovat pro místo, kde žijeme.</p>
 
             <div class="candidates-list">
+                <!-- Kandidáti zůstávají stejní -->
                 <div class="candidate-profile color-gold">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
