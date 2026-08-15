@@ -4,51 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Ta naše vesnička</title>
-
+    
     <!-- ===== FAVICON ===== -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%237c3aed'/%3E%3Cpath d='M50 20 L70 45 L60 45 L70 65 L30 65 L40 45 L30 45 Z' fill='%23fbbf24'/%3E%3Ccircle cx='50' cy='50' r='15' fill='%23fbbf24' opacity='0.3'/%3E%3C/svg%3E" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%237c3aed'/%3E%3Cpath d='M50 20 L70 45 L60 45 L70 65 L30 65 L40 45 L30 45 Z' fill='%23fbbf24'/%3E%3Ccircle cx='50' cy='50' r='15' fill='%23fbbf24' opacity='0.3'/%3E%3C/svg%3E" />
-
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a'/%3E%3Cpath d='M50 20 L70 45 L60 45 L70 65 L30 65 L40 45 L30 45 Z' fill='%23fbbf24'/%3E%3Ccircle cx='50' cy='50' r='15' fill='%23fbbf24' opacity='0.3'/%3E%3C/svg%3E" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a'/%3E%3Cpath d='M50 20 L70 45 L60 45 L70 65 L30 65 L40 45 L30 45 Z' fill='%23fbbf24'/%3E%3Ccircle cx='50' cy='50' r='15' fill='%23fbbf24' opacity='0.3'/%3E%3C/svg%3E" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== RESET ===== */
+        /* ===== BARVY Z ERBU ===== */
+        :root {
+            --erb-red: #d50000;
+            --erb-yellow: #fff200;
+            --erb-blue: #0088cc;
+            --erb-white: #ffffff;
+        }
+
+        /* ===== RESET + OPTIMALIZACE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f5f3ff;
-            color: #0f172a;
-            line-height: 1.7;
-            padding-top: 80px;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-text-size-adjust: 100%;
-            overflow-x: hidden;
-            font-size: 18px;
-            min-height: 100vh;
+            background: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #f5f3ff 100%);
+            color: #1e293b; line-height: 1.7; padding-top: 80px;
+            -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%;
+            overflow-x: hidden; font-size: 18px; min-height: 100vh;
         }
 
         /* ===== MENU ===== */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(15, 23, 42, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1000;
-            padding: 0.6rem 0;
-            border-bottom: 3px solid #7c3aed;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); z-index: 1000; padding: 0.6rem 0;
+            border-bottom: 3px solid var(--erb-yellow); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
         .navbar .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; width: 100%; max-width: 100%; padding: 0 1.5rem; }
 
         .navbar .logo { font-size: 1.4rem; font-weight: 900; color: #f8fafc; display: flex; align-items: center; gap: 0.6rem; text-decoration: none; cursor: pointer; transition: opacity 0.2s; }
         .navbar .logo:hover { opacity: 0.8; }
-        .navbar .logo .logo-icon { font-size: 1.8rem; color: #fbbf24; flex-shrink: 0; }
-        .navbar .logo span { color: #fbbf24; }
+        .navbar .logo .logo-icon { font-size: 1.8rem; color: var(--erb-yellow); flex-shrink: 0; }
+        .navbar .logo span { color: var(--erb-yellow); }
         .navbar .logo .logo-text { color: #f8fafc; }
 
         .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.3rem; background: none; border: none; touch-action: manipulation; }
@@ -59,172 +58,103 @@
 
         .nav-links { display: flex; gap: 0.3rem; flex-wrap: wrap; list-style: none; transition: all 0.3s ease; }
         .nav-links a { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 9999px; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 0.4rem; touch-action: manipulation; }
-        .nav-links a:hover, .nav-links a:focus { background-color: #7c3aed; color: #ffffff; transform: scale(1.02); }
+        .nav-links a:hover, .nav-links a:focus { background-color: var(--erb-yellow); color: #0f172a; transform: scale(1.02); }
 
-        /* ===== HERO - FIALOVÁ ===== */
+        /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(145deg, #7c3aed 0%, #6d28d9 40%, #4c1d95 100%);
-            color: #f8fafc;
-            border-bottom: 6px solid #fbbf24;
-            text-align: center;
-            margin-top: -80px;
-            padding-top: calc(5rem + 80px);
-            padding-bottom: 5rem;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
+            background: linear-gradient(135deg, var(--erb-red) 0%, #b00000 40%, #0f172a 100%);
+            color: #f8fafc; border-bottom: 6px solid var(--erb-yellow);
+            text-align: center; margin-top: -80px;
+            padding-top: calc(5rem + 80px); padding-bottom: 5rem;
+            position: relative; overflow: hidden;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; width: 100%;
         }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(251, 191, 36, 0.10) 0%, transparent 70%); border-radius: 50%; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 242, 0, 0.15) 0%, transparent 70%); border-radius: 50%; }
         .hero .hero-content { max-width: 900px; padding: 0 1.5rem; position: relative; z-index: 2; }
         .hero h1 { font-size: 3.6rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; margin: 0 auto 1.2rem auto; }
-        .hero .highlight { color: #fbbf24; position: relative; }
-        .hero .highlight::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 4px; background: #fbbf24; border-radius: 9999px; opacity: 0.6; }
+        .hero .highlight { color: var(--erb-yellow); position: relative; }
+        .hero .highlight::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 4px; background: var(--erb-yellow); border-radius: 9999px; opacity: 0.5; }
         .hero p { font-size: 1.3rem; color: #cbd5e1; max-width: 700px; margin: 0 auto 2.5rem auto; }
-        .hero .badge { display: inline-block; background-color: #fbbf24; color: #0f172a; font-weight: 700; padding: 0.5rem 2rem; border-radius: 9999px; font-size: 0.95rem; letter-spacing: 0.5px; text-transform: uppercase; }
+        .hero .badge { display: inline-block; background-color: var(--erb-yellow); color: #0f172a; font-weight: 700; padding: 0.5rem 2rem; border-radius: 9999px; font-size: 0.95rem; letter-spacing: 0.5px; text-transform: uppercase; }
 
         /* ===== EXPERIMENTÁLNÍ KARTY ===== */
         .exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto; }
         .exp-card { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 1.8rem; padding: 1.8rem 1.2rem; text-align: center; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); color: #f8fafc; touch-action: manipulation; position: relative; overflow: hidden; }
-        .exp-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #fbbf24, #f59e0b); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left; }
+        .exp-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--erb-yellow), #f59e0b); transform: scaleX(0); transition: transform 0.4s ease; transform-origin: left; }
         .exp-card:hover::after { transform: scaleX(1); }
         .exp-card:active { transform: scale(0.95); }
         .exp-card .exp-emoji { font-size: 2.4rem; display: block; margin-bottom: 0.3rem; }
-        .exp-card .exp-number { font-size: 2.4rem; font-weight: 900; color: #fbbf24; display: block; line-height: 1.1; letter-spacing: -0.02em; }
+        .exp-card .exp-number { font-size: 2.4rem; font-weight: 900; color: var(--erb-yellow); display: block; line-height: 1.1; letter-spacing: -0.02em; }
         .exp-card .exp-label { font-size: 1rem; font-weight: 700; opacity: 0.95; margin-top: 0.2rem; display: block; }
         .exp-card .exp-desc { font-size: 0.8rem; opacity: 0.6; margin-top: 0.2rem; display: block; }
 
-        /* ===== SEKCE 1: VESNICE NENÍ NUDA - LEVANDULOVÁ → MÁTOVÁ ===== */
-        .vesnice-section { 
-            padding: 5rem 0; 
-            background: linear-gradient(145deg, #f5f3ff 0%, #ede9fe 30%, #d1fae5 70%, #a7f3d0 100%);
-            border-bottom: 3px solid rgba(16, 185, 129, 0.2);
-            position: relative; 
-            overflow: hidden; 
-        }
-        .vesnice-section::before { content: ''; position: absolute; top: -30%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%); border-radius: 50%; }
+        /* ===== SEKCE "VESNICE NENÍ NUDA" ===== */
+        .vesnice-section { padding: 5rem 0; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 30%, #eff6ff 70%, #dbeafe 100%); border-bottom: 3px solid rgba(251, 191, 36, 0.3); position: relative; overflow: hidden; }
+        .vesnice-section::before { content: ''; position: absolute; top: -30%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, transparent 70%); border-radius: 50%; }
         .vesnice-section .container { max-width: 1280px; padding: 0 1.5rem; width: 100%; margin: 0 auto; position: relative; z-index: 2; }
-        .vesnice-section .section-tag { display: inline-block; background: rgba(16, 185, 129, 0.12); color: #065f46; font-weight: 700; padding: 0.3rem 1.5rem; border-radius: 9999px; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .vesnice-section .section-tag { display: inline-block; background: rgba(251, 191, 36, 0.15); color: #fbbf24; font-weight: 700; padding: 0.3rem 1.5rem; border-radius: 9999px; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; }
         .vesnice-section h2 { font-size: 3rem; font-weight: 900; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 0.8rem; }
         .vesnice-section .vesnice-subtitle { font-size: 1.2rem; color: #475569; max-width: 600px; margin-bottom: 3rem; }
 
         /* ===== ČASOVÁ OSA ===== */
         .timeline-osa { position: relative; padding: 2rem 0 2rem 3rem; max-width: 800px; margin: 0 auto; }
         .timeline-osa::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #cbd5e1 0%, #cbd5e1 100%); border-radius: 9999px; transition: background 0.6s ease; }
-        .timeline-osa.active-1::before { background: linear-gradient(180deg, #10b981 0%, #cbd5e1 100%); }
-        .timeline-osa.active-2::before { background: linear-gradient(180deg, #10b981 0%, #10b981 50%, #cbd5e1 100%); }
-        .timeline-osa.active-3::before { background: linear-gradient(180deg, #10b981 0%, #10b981 70%, #cbd5e1 100%); }
-        .timeline-osa.active-4::before { background: linear-gradient(180deg, #10b981 0%, #10b981 100%); }
+        .timeline-osa.active-1::before { background: linear-gradient(180deg, #fbbf24 0%, #cbd5e1 100%); }
+        .timeline-osa.active-2::before { background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 50%, #cbd5e1 100%); }
+        .timeline-osa.active-3::before { background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 70%, #cbd5e1 100%); }
+        .timeline-osa.active-4::before { background: linear-gradient(180deg, #fbbf24 0%, #fbbf24 100%); }
         .timeline-osa-item { position: relative; margin-bottom: 3.5rem; padding-left: 2rem; transition: all 0.4s ease; }
         .timeline-osa-item:last-child { margin-bottom: 0; }
         .timeline-osa-item .osa-dot { position: absolute; left: -2.3rem; top: 8px; width: 28px; height: 28px; background: #cbd5e1; border-radius: 50%; border: 4px solid #f8fafc; box-shadow: 0 0 0 4px rgba(203, 213, 225, 0.3); z-index: 2; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #64748b; font-weight: 900; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .timeline-osa-item.active .osa-dot { background: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.4); transform: scale(1.25); color: #ffffff; }
-        .timeline-osa-item .osa-content { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 2rem; padding: 2rem 2.5rem; border: 2px solid rgba(226, 232, 240, 0.5); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); position: relative; }
-        .timeline-osa-item.active .osa-content { border-color: #10b981; box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15); transform: translateX(6px) scale(1.01); background: rgba(255, 255, 255, 0.98); }
+        .timeline-osa-item.active .osa-dot { background: #fbbf24; box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.4); transform: scale(1.25); color: #0f172a; }
+        .timeline-osa-item .osa-content { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 2rem; padding: 2rem 2.5rem; border: 2px solid rgba(226, 232, 240, 0.5); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); position: relative; }
+        .timeline-osa-item.active .osa-content { border-color: #fbbf24; box-shadow: 0 8px 32px rgba(251, 191, 36, 0.15); transform: translateX(6px) scale(1.01); background: rgba(255, 255, 255, 0.98); }
         .timeline-osa-item .osa-year { display: inline-block; font-size: 0.85rem; font-weight: 800; color: #94a3b8; background: rgba(148, 163, 184, 0.12); padding: 0.2rem 1.2rem; border-radius: 9999px; letter-spacing: 0.5px; margin-bottom: 0.3rem; transition: all 0.4s ease; }
-        .timeline-osa-item.active .osa-year { color: #065f46; background: rgba(16, 185, 129, 0.15); }
+        .timeline-osa-item.active .osa-year { color: #fbbf24; background: rgba(251, 191, 36, 0.15); }
         .timeline-osa-item .osa-icon { font-size: 2.4rem; display: block; margin-bottom: 0.3rem; transition: all 0.4s ease; }
         .timeline-osa-item.active .osa-icon { transform: scale(1.15) rotate(-5deg); }
         .timeline-osa-item .osa-content h3 { font-size: 1.6rem; font-weight: 800; color: #0f172a; margin-bottom: 0.3rem; transition: all 0.4s ease; }
-        .timeline-osa-item.active .osa-content h3 { color: #065f46; }
+        .timeline-osa-item.active .osa-content h3 { color: #f59e0b; font-size: 1.8rem; }
         .timeline-osa-item .osa-content p { color: #475569; font-size: 1rem; line-height: 1.7; margin-bottom: 0; transition: all 0.4s ease; }
-        .timeline-osa-item.active .osa-content p { color: #0f172a; }
+        .timeline-osa-item.active .osa-content p { color: #1e293b; }
 
         /* ===== PROGRAMOVÉ BANNERY ===== */
         .program-banner { padding: 2.5rem 0; text-align: center; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 14vh; }
         .program-banner .container { padding: 0 1.5rem; width: 100%; }
         .program-banner h2 { font-size: 3rem; font-weight: 900; letter-spacing: -0.02em; }
         .program-banner .program-number { font-size: 1rem; font-weight: 700; display: inline-block; padding: 0.2rem 1.5rem; border-radius: 9999px; margin-bottom: 0.3rem; letter-spacing: 1px; }
-
-        /* BANNER 1 - ZLATÁ/BROSKVOVÁ */
-        .program-banner.p1 { 
-            background: linear-gradient(145deg, #fffbeb 0%, #fde68a 50%, #fdba74 100%);
-            color: #0f172a; 
-            border-top: 3px solid #fbbf24; 
-            border-bottom: 3px solid #fbbf24; 
-        }
-        .program-banner.p1 .program-number { background: rgba(251, 191, 36, 0.25); color: #b45309; }
-
-        /* BANNER 2 - TYRKYSOVÁ */
-        .program-banner.p2 { 
-            background: linear-gradient(145deg, #ccfbf1 0%, #99f6e4 50%, #5eead4 100%);
-            color: #0f172a; 
-            border-top: 3px solid #14b8a6; 
-            border-bottom: 3px solid #14b8a6; 
-        }
-        .program-banner.p2 .program-number { background: rgba(20, 184, 166, 0.2); color: #0f766e; }
-
-        /* BANNER 3 - RŮŽOVÁ/LILA */
-        .program-banner.p3 { 
-            background: linear-gradient(145deg, #fdf2f8 0%, #fbcfe8 50%, #f3e8ff 100%);
-            color: #0f172a; 
-            border-top: 3px solid #ec4899; 
-            border-bottom: 3px solid #ec4899; 
-        }
-        .program-banner.p3 .program-number { background: rgba(236, 72, 153, 0.15); color: #be185d; }
-
-        /* BANNER 4 - INDIGO/MODRÁ */
-        .program-banner.p4 { 
-            background: linear-gradient(145deg, #eef2ff 0%, #c7d2fe 50%, #bfdbfe 100%);
-            color: #0f172a; 
-            border-top: 3px solid #4f46e5; 
-            border-bottom: 3px solid #4f46e5; 
-        }
-        .program-banner.p4 .program-number { background: rgba(79, 70, 229, 0.15); color: #3730a3; }
+        
+        .program-banner.p1 { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); color: #0f172a; border-top: 3px solid #0f172a; border-bottom: 3px solid #0f172a; }
+        .program-banner.p1 .program-number { background: rgba(15, 23, 42, 0.15); }
+        .program-banner.p2 { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f8fafc; border-top: 3px solid #fbbf24; border-bottom: 3px solid #fbbf24; }
+        .program-banner.p2 .program-number { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .program-banner.p3 { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #0f172a; border-top: 3px solid #0f172a; border-bottom: 3px solid #0f172a; }
+        .program-banner.p3 .program-number { background: rgba(15, 23, 42, 0.15); }
+        .program-banner.p4 { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); color: #f8fafc; border-top: 3px solid #fbbf24; border-bottom: 3px solid #fbbf24; }
+        .program-banner.p4 .program-number { background: rgba(251, 191, 36, 0.25); color: #fbbf24; }
 
         /* ===== SEKCE ===== */
         .section { padding: 5rem 0; width: 100%; }
-
-        /* SEKCE PROČ - KRÉMOVÁ → BROSKVOVÁ */
-        .section-proc { 
-            background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 30%, #fed7aa 70%, #fdba74 100%);
-            border-top: 3px solid rgba(251, 191, 36, 0.15); 
-            border-bottom: 3px solid rgba(251, 191, 36, 0.15); 
-        }
-
-        /* SEKCE CO CHYSTÁME - MÁTOVÁ → TYRKYSOVÁ */
-        .section-chystame { 
-            background: linear-gradient(145deg, #ccfbf1 0%, #99f6e4 30%, #5eead4 70%, #2dd4bf 100%);
-            border-top: 3px solid rgba(20, 184, 166, 0.12); 
-            border-bottom: 3px solid rgba(20, 184, 166, 0.12); 
-        }
-
-        /* SEKCE PROJEKTY - RŮŽOVÁ → LILA */
-        .section-projekty { 
-            background: linear-gradient(145deg, #fdf2f8 0%, #fce7f3 30%, #f3e8ff 70%, #e9d5ff 100%);
-            border-top: 3px solid rgba(236, 72, 153, 0.12); 
-            border-bottom: 3px solid rgba(236, 72, 153, 0.12); 
-        }
-
-        /* SEKCE KDO JSME - INDIGO → MODRÁ */
-        .section-kdo { 
-            background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 30%, #bfdbfe 70%, #93c5fd 100%);
-            border-top: 3px solid rgba(79, 70, 229, 0.10); 
-            border-bottom: 3px solid rgba(79, 70, 229, 0.10); 
-        }
-
+        .section-alt { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 50%, #fffbeb 100%); border-top: 3px solid rgba(251, 191, 36, 0.2); border-bottom: 3px solid rgba(251, 191, 36, 0.2); }
         .section .container { max-width: 1280px; padding: 0 1.5rem; width: 100%; margin: 0 auto; }
         .section-title { font-size: 2.8rem; font-weight: 800; text-align: center; margin-bottom: 3rem; color: #0f172a; letter-spacing: -0.02em; display: flex; align-items: center; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
-        .section-title i { color: #7c3aed; }
-        .section-subtitle { text-align: center; font-size: 1.3rem; color: #475569; max-width: 700px; margin: -2rem auto 3rem auto; }
+        .section-title i { color: #fbbf24; }
+        .section-subtitle { text-align: center; font-size: 1.3rem; color: #64748b; max-width: 700px; margin: -2rem auto 3rem auto; }
 
-        /* ===== "PROČ" KARTY ===== */
+        /* ===== INOVATIVNÍ "PROČ" ===== */
         .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
-        .why-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 2.5rem; padding: 2.5rem 2rem; border: 2px solid rgba(226, 232, 240, 0.5); transition: all 0.35s ease; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04); position: relative; overflow: hidden; touch-action: manipulation; }
-        .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #fbbf24, #fb923c); opacity: 0; transition: opacity 0.3s ease; }
+        .why-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 2.5rem; padding: 2.5rem 2rem; border: 2px solid rgba(226, 232, 240, 0.6); transition: all 0.35s ease; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04); position: relative; overflow: hidden; touch-action: manipulation; }
+        .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #fbbf24, #f59e0b); opacity: 0; transition: opacity 0.3s ease; }
         .why-card:hover::before { opacity: 1; }
         .why-card:active { transform: scale(0.97); }
-        .why-card:hover { transform: translateY(-8px); border-color: #fbbf24; box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1); }
-        .why-card .card-number { font-size: 3.2rem; font-weight: 900; color: #fbbf24; opacity: 0.15; position: absolute; top: 0.5rem; right: 1.5rem; line-height: 1; }
-        .why-card .card-icon { font-size: 3.2rem; color: #fb923c; margin-bottom: 0.8rem; display: block; }
+        .why-card:hover { transform: translateY(-8px); border-color: #fbbf24; box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12); }
+        .why-card .card-number { font-size: 3.2rem; font-weight: 900; color: #fbbf24; opacity: 0.2; position: absolute; top: 0.5rem; right: 1.5rem; line-height: 1; }
+        .why-card .card-icon { font-size: 3.2rem; color: #fbbf24; margin-bottom: 0.8rem; display: block; }
         .why-card h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; color: #0f172a; }
         .why-card p { color: #475569; font-size: 1.05rem; line-height: 1.7; margin-bottom: 0.8rem; }
-        .why-card .card-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #b45309; background: rgba(251, 191, 36, 0.15); padding: 0.25rem 1.2rem; border-radius: 9999px; letter-spacing: 0.5px; }
+        .why-card .card-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #fbbf24; background: rgba(251, 191, 36, 0.1); padding: 0.25rem 1.2rem; border-radius: 9999px; letter-spacing: 0.5px; }
 
-        /* ===== CO CHYSTÁME KARTY ===== */
+        /* ===== NEPOSUVNÉ MENU "CO CHYSTÁME" (POUZE PRO PC) ===== */
         .chystame-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -234,11 +164,11 @@
         }
 
         .chystame-card {
-            background: rgba(255, 255, 255, 0.85);
+            background: #ffffff;
             border-radius: 1.5rem;
             padding: 2rem 1.5rem;
             text-align: center;
-            border: 2px solid rgba(20, 184, 166, 0.15);
+            border: 2px solid #e2e8f0;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
             position: relative;
@@ -252,7 +182,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #14b8a6, #0d9488);
+            background: linear-gradient(90deg, var(--erb-blue), var(--erb-yellow));
             transform: scaleX(0);
             transition: transform 0.4s ease;
             transform-origin: left;
@@ -260,8 +190,8 @@
 
         .chystame-card:hover {
             transform: translateY(-8px);
-            border-color: #14b8a6;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+            border-color: var(--erb-blue);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
         }
 
         .chystame-card:hover::before {
@@ -270,7 +200,7 @@
 
         .chystame-card .ch-icon {
             font-size: 2.8rem;
-            color: #14b8a6;
+            color: var(--erb-blue);
             margin-bottom: 0.8rem;
             display: block;
             transition: transform 0.4s ease;
@@ -299,13 +229,14 @@
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            color: #0f766e;
-            background: rgba(20, 184, 166, 0.10);
+            color: var(--erb-blue);
+            background: rgba(0, 136, 204, 0.12);
             padding: 0.3rem 1.2rem;
             border-radius: 9999px;
             letter-spacing: 0.5px;
         }
 
+        /* ===== POSUVNÉ MENU "CO CHYSTÁME" (POUZE PRO MOBIL) ===== */
         .chystame-scroll-mobile {
             display: none;
             gap: 1.2rem;
@@ -315,38 +246,53 @@
             padding: 0.5rem 0.5rem 1.5rem 0.5rem;
             scroll-behavior: smooth;
             scrollbar-width: thin;
-            scrollbar-color: #14b8a6 #e2e8f0;
+            scrollbar-color: var(--erb-blue) #e2e8f0;
             max-width: 100%;
         }
 
-        .chystame-scroll-mobile::-webkit-scrollbar { height: 6px; }
-        .chystame-scroll-mobile::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 9999px; }
-        .chystame-scroll-mobile::-webkit-scrollbar-thumb { background: #14b8a6; border-radius: 9999px; }
-        .chystame-scroll-mobile .chystame-card { flex: 0 0 280px; scroll-snap-align: start; min-height: 240px; }
+        .chystame-scroll-mobile::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .chystame-scroll-mobile::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 9999px;
+        }
+
+        .chystame-scroll-mobile::-webkit-scrollbar-thumb {
+            background: var(--erb-blue);
+            border-radius: 9999px;
+        }
+
+        .chystame-scroll-mobile .chystame-card {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            min-height: 240px;
+        }
 
         /* ===== VOLBY KARTY ===== */
         .volby-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1100px; margin: 0 auto; }
         .volby-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: 2.5rem; padding: 2rem 1.8rem; border: 2px solid rgba(226, 232, 240, 0.5); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); touch-action: manipulation; position: relative; overflow: hidden; display: flex; flex-direction: column; }
         .volby-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; opacity: 0; transition: opacity 0.4s ease; }
         .volby-card:hover::before { opacity: 1; }
-        .volby-card:hover { transform: translateY(-10px) scale(1.02); border-color: #ec4899; box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1); }
+        .volby-card:hover { transform: translateY(-10px) scale(1.02); border-color: #fbbf24; box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15); }
         .volby-card:active { transform: scale(0.96); }
-        .volby-card.color-green::before { background: linear-gradient(90deg, #84cc16, #65a30d); }
-        .volby-card.color-green .volby-icon { color: #84cc16; }
-        .volby-card.color-green .volby-hlas { background: rgba(132, 204, 22, 0.1); color: #4d7c0f; }
-        .volby-card.color-green .volby-tag { background: rgba(132, 204, 22, 0.1); color: #4d7c0f; }
-        .volby-card.color-blue::before { background: linear-gradient(90deg, #7c3aed, #6d28d9); }
-        .volby-card.color-blue .volby-icon { color: #7c3aed; }
-        .volby-card.color-blue .volby-hlas { background: rgba(124, 58, 237, 0.1); color: #5b21b6; }
-        .volby-card.color-blue .volby-tag { background: rgba(124, 58, 237, 0.1); color: #5b21b6; }
-        .volby-card.color-orange::before { background: linear-gradient(90deg, #fb923c, #f97316); }
-        .volby-card.color-orange .volby-icon { color: #fb923c; }
-        .volby-card.color-orange .volby-hlas { background: rgba(251, 146, 60, 0.1); color: #c2410c; }
-        .volby-card.color-orange .volby-tag { background: rgba(251, 146, 60, 0.1); color: #c2410c; }
-        .volby-card.color-purple::before { background: linear-gradient(90deg, #ec4899, #db2777); }
-        .volby-card.color-purple .volby-icon { color: #ec4899; }
-        .volby-card.color-purple .volby-hlas { background: rgba(236, 72, 153, 0.1); color: #be185d; }
-        .volby-card.color-purple .volby-tag { background: rgba(236, 72, 153, 0.1); color: #be185d; }
+        .volby-card.color-green::before { background: linear-gradient(90deg, #10b981, #059669); }
+        .volby-card.color-green .volby-icon { color: #10b981; }
+        .volby-card.color-green .volby-hlas { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .volby-card.color-green .volby-tag { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .volby-card.color-blue::before { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+        .volby-card.color-blue .volby-icon { color: #3b82f6; }
+        .volby-card.color-blue .volby-hlas { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .volby-card.color-blue .volby-tag { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .volby-card.color-orange::before { background: linear-gradient(90deg, #f97316, #ea580c); }
+        .volby-card.color-orange .volby-icon { color: #f97316; }
+        .volby-card.color-orange .volby-hlas { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+        .volby-card.color-orange .volby-tag { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+        .volby-card.color-purple::before { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+        .volby-card.color-purple .volby-icon { color: #8b5cf6; }
+        .volby-card.color-purple .volby-hlas { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .volby-card.color-purple .volby-tag { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
         .volby-card .volby-icon { font-size: 3.2rem; margin-bottom: 0.5rem; display: block; transition: all 0.4s ease; }
         .volby-card:hover .volby-icon { transform: scale(1.15) rotate(-8deg); }
         .volby-card .volby-title { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 0.3rem; line-height: 1.2; }
@@ -355,81 +301,80 @@
         .volby-card .volby-tag { display: inline-block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; padding: 0.2rem 1rem; border-radius: 9999px; letter-spacing: 0.5px; }
         .volby-card .volby-hlas { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; padding: 0.2rem 1rem; border-radius: 9999px; }
         .volby-card .volby-hlas i { font-size: 0.8rem; }
-        .volby-scroll-mobile { display: none; gap: 1.2rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.5rem 0.5rem 1.5rem 0.5rem; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #ec4899 #e2e8f0; max-width: 100%; }
+        .volby-scroll-mobile { display: none; gap: 1.2rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.5rem 0.5rem 1.5rem 0.5rem; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #fbbf24 #e2e8f0; max-width: 100%; }
         .volby-scroll-mobile::-webkit-scrollbar { height: 6px; }
         .volby-scroll-mobile::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 9999px; }
-        .volby-scroll-mobile::-webkit-scrollbar-thumb { background: #ec4899; border-radius: 9999px; }
+        .volby-scroll-mobile::-webkit-scrollbar-thumb { background: #fbbf24; border-radius: 9999px; }
         .volby-scroll-mobile .volby-card { flex: 0 0 280px; scroll-snap-align: start; min-height: 240px; }
 
         /* ===== KANDIDÁTI ===== */
         .candidates-list { display: flex; flex-direction: column; gap: 2rem; max-width: 1000px; margin: 0 auto; }
-        .candidates-list .candidate-profile:nth-child(odd) { background: linear-gradient(145deg, #ffffff 0%, #eef2ff 100%); }
-        .candidates-list .candidate-profile:nth-child(even) { background: linear-gradient(145deg, #ffffff 0%, #e0e7ff 100%); }
-        .candidate-profile { display: flex; gap: 2.5rem; border-radius: 2rem; padding: 2.5rem; border: 2px solid rgba(79, 70, 229, 0.10); transition: all 0.35s ease; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); align-items: center; touch-action: manipulation; position: relative; overflow: hidden; }
+        .candidates-list .candidate-profile:nth-child(odd) { background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%); }
+        .candidates-list .candidate-profile:nth-child(even) { background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%); }
+        .candidate-profile { display: flex; gap: 2.5rem; border-radius: 2rem; padding: 2.5rem; border: 2px solid rgba(226, 232, 240, 0.5); transition: all 0.35s ease; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); align-items: center; touch-action: manipulation; position: relative; overflow: hidden; }
         .candidate-profile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; transition: opacity 0.3s ease; opacity: 0; }
         .candidate-profile:hover::before { opacity: 1; }
         .candidate-profile:active { transform: scale(0.98); }
-        .candidate-profile:hover { box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1); transform: translateX(6px); }
+        .candidate-profile:hover { box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12); transform: translateX(6px); }
         .candidate-profile.color-gold::before { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
         .candidate-profile.color-gold .candidate-photo { border-color: #fbbf24; }
-        .candidate-profile.color-gold .candidate-tag { color: #b45309; background: rgba(251, 191, 36, 0.15); }
+        .candidate-profile.color-gold .candidate-tag { color: #fbbf24; background: rgba(251, 191, 36, 0.15); }
         .candidate-profile.color-gold .position { color: #fbbf24; }
         .candidate-profile.color-gold .priority i { color: #fbbf24; }
         .candidate-profile.color-gold .candidate-social a:hover { background: #fbbf24; color: #0f172a; }
-        .candidate-profile.color-green::before { background: linear-gradient(90deg, #84cc16, #65a30d); }
-        .candidate-profile.color-green .candidate-photo { border-color: #84cc16; }
-        .candidate-profile.color-green .candidate-tag { color: #4d7c0f; background: rgba(132, 204, 22, 0.15); }
-        .candidate-profile.color-green .position { color: #84cc16; }
-        .candidate-profile.color-green .priority i { color: #84cc16; }
-        .candidate-profile.color-green .candidate-social a:hover { background: #84cc16; color: #0f172a; }
-        .candidate-profile.color-blue::before { background: linear-gradient(90deg, #4f46e5, #4338ca); }
-        .candidate-profile.color-blue .candidate-photo { border-color: #4f46e5; }
-        .candidate-profile.color-blue .candidate-tag { color: #4338ca; background: rgba(79, 70, 229, 0.15); }
-        .candidate-profile.color-blue .position { color: #4f46e5; }
-        .candidate-profile.color-blue .priority i { color: #4f46e5; }
-        .candidate-profile.color-blue .candidate-social a:hover { background: #4f46e5; color: #ffffff; }
+        .candidate-profile.color-green::before { background: linear-gradient(90deg, #10b981, #059669); }
+        .candidate-profile.color-green .candidate-photo { border-color: #10b981; }
+        .candidate-profile.color-green .candidate-tag { color: #10b981; background: rgba(16, 185, 129, 0.15); }
+        .candidate-profile.color-green .position { color: #10b981; }
+        .candidate-profile.color-green .priority i { color: #10b981; }
+        .candidate-profile.color-green .candidate-social a:hover { background: #10b981; color: #0f172a; }
+        .candidate-profile.color-blue::before { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+        .candidate-profile.color-blue .candidate-photo { border-color: #3b82f6; }
+        .candidate-profile.color-blue .candidate-tag { color: #3b82f6; background: rgba(59, 130, 246, 0.15); }
+        .candidate-profile.color-blue .position { color: #3b82f6; }
+        .candidate-profile.color-blue .priority i { color: #3b82f6; }
+        .candidate-profile.color-blue .candidate-social a:hover { background: #3b82f6; color: #0f172a; }
         .candidate-profile.color-red::before { background: linear-gradient(90deg, #ef4444, #dc2626); }
         .candidate-profile.color-red .candidate-photo { border-color: #ef4444; }
-        .candidate-profile.color-red .candidate-tag { color: #dc2626; background: rgba(239, 68, 68, 0.15); }
+        .candidate-profile.color-red .candidate-tag { color: #ef4444; background: rgba(239, 68, 68, 0.15); }
         .candidate-profile.color-red .position { color: #ef4444; }
         .candidate-profile.color-red .priority i { color: #ef4444; }
-        .candidate-profile.color-red .candidate-social a:hover { background: #ef4444; color: #ffffff; }
-        .candidate-profile.color-purple::before { background: linear-gradient(90deg, #a855f7, #7c3aed); }
-        .candidate-profile.color-purple .candidate-photo { border-color: #a855f7; }
-        .candidate-profile.color-purple .candidate-tag { color: #7c3aed; background: rgba(168, 85, 247, 0.15); }
-        .candidate-profile.color-purple .position { color: #a855f7; }
-        .candidate-profile.color-purple .priority i { color: #a855f7; }
-        .candidate-profile.color-purple .candidate-social a:hover { background: #a855f7; color: #ffffff; }
+        .candidate-profile.color-red .candidate-social a:hover { background: #ef4444; color: #0f172a; }
+        .candidate-profile.color-purple::before { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+        .candidate-profile.color-purple .candidate-photo { border-color: #8b5cf6; }
+        .candidate-profile.color-purple .candidate-tag { color: #8b5cf6; background: rgba(139, 92, 246, 0.15); }
+        .candidate-profile.color-purple .position { color: #8b5cf6; }
+        .candidate-profile.color-purple .priority i { color: #8b5cf6; }
+        .candidate-profile.color-purple .candidate-social a:hover { background: #8b5cf6; color: #0f172a; }
         .candidate-profile.color-indigo::before { background: linear-gradient(90deg, #4f46e5, #4338ca); }
         .candidate-profile.color-indigo .candidate-photo { border-color: #4f46e5; }
-        .candidate-profile.color-indigo .candidate-tag { color: #4338ca; background: rgba(79, 70, 229, 0.15); }
+        .candidate-profile.color-indigo .candidate-tag { color: #4f46e5; background: rgba(79, 70, 229, 0.15); }
         .candidate-profile.color-indigo .position { color: #4f46e5; }
         .candidate-profile.color-indigo .priority i { color: #4f46e5; }
-        .candidate-profile.color-indigo .candidate-social a:hover { background: #4f46e5; color: #ffffff; }
+        .candidate-profile.color-indigo .candidate-social a:hover { background: #4f46e5; color: #0f172a; }
         .candidate-profile.color-teal::before { background: linear-gradient(90deg, #14b8a6, #0d9488); }
         .candidate-profile.color-teal .candidate-photo { border-color: #14b8a6; }
-        .candidate-profile.color-teal .candidate-tag { color: #0d9488; background: rgba(20, 184, 166, 0.15); }
+        .candidate-profile.color-teal .candidate-tag { color: #14b8a6; background: rgba(20, 184, 166, 0.15); }
         .candidate-profile.color-teal .position { color: #14b8a6; }
         .candidate-profile.color-teal .priority i { color: #14b8a6; }
         .candidate-profile.color-teal .candidate-social a:hover { background: #14b8a6; color: #0f172a; }
-        .candidate-profile.color-orange::before { background: linear-gradient(90deg, #fb923c, #f97316); }
-        .candidate-profile.color-orange .candidate-photo { border-color: #fb923c; }
-        .candidate-profile.color-orange .candidate-tag { color: #c2410c; background: rgba(251, 146, 60, 0.15); }
-        .candidate-profile.color-orange .position { color: #fb923c; }
-        .candidate-profile.color-orange .priority i { color: #fb923c; }
-        .candidate-profile.color-orange .candidate-social a:hover { background: #fb923c; color: #0f172a; }
-        .candidate-profile.color-pink::before { background: linear-gradient(90deg, #f472b6, #ec4899); }
-        .candidate-profile.color-pink .candidate-photo { border-color: #f472b6; }
-        .candidate-profile.color-pink .candidate-tag { color: #db2777; background: rgba(244, 114, 182, 0.15); }
-        .candidate-profile.color-pink .position { color: #f472b6; }
-        .candidate-profile.color-pink .priority i { color: #f472b6; }
-        .candidate-profile.color-pink .candidate-social a:hover { background: #f472b6; color: #ffffff; }
-
-        .candidate-photo { flex-shrink: 0; width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(145deg, #e2e8f0 0%, #f1f5f9 100%); border: 5px solid #4f46e5; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; transition: all 0.3s ease; }
+        .candidate-profile.color-orange::before { background: linear-gradient(90deg, #f97316, #ea580c); }
+        .candidate-profile.color-orange .candidate-photo { border-color: #f97316; }
+        .candidate-profile.color-orange .candidate-tag { color: #f97316; background: rgba(249, 115, 22, 0.15); }
+        .candidate-profile.color-orange .position { color: #f97316; }
+        .candidate-profile.color-orange .priority i { color: #f97316; }
+        .candidate-profile.color-orange .candidate-social a:hover { background: #f97316; color: #0f172a; }
+        .candidate-profile.color-pink::before { background: linear-gradient(90deg, #ec4899, #db2777); }
+        .candidate-profile.color-pink .candidate-photo { border-color: #ec4899; }
+        .candidate-profile.color-pink .candidate-tag { color: #ec4899; background: rgba(236, 72, 153, 0.15); }
+        .candidate-profile.color-pink .position { color: #ec4899; }
+        .candidate-profile.color-pink .priority i { color: #ec4899; }
+        .candidate-profile.color-pink .candidate-social a:hover { background: #ec4899; color: #0f172a; }
+        .candidate-photo { flex-shrink: 0; width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%); border: 5px solid #fbbf24; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; transition: all 0.3s ease; }
         .candidate-photo img { width: 100%; height: 100%; object-fit: cover; }
         .candidate-photo .photo-placeholder { color: #94a3b8; font-size: 0.8rem; text-align: center; padding: 0.5rem; line-height: 1.3; }
         .candidate-photo .photo-placeholder i { font-size: 3.2rem; display: block; margin-bottom: 0.2rem; }
-        .candidate-profile:hover .candidate-photo { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0.10); }
+        .candidate-profile:hover .candidate-photo { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0.15); }
         .candidate-info { flex: 1; min-width: 0; }
         .candidate-info .candidate-number { display: inline-block; font-size: 0.75rem; font-weight: 800; color: #0f172a; background: #fef9e7; padding: 0.2rem 1rem; border-radius: 9999px; border: 1px solid #fbbf24; margin-bottom: 0.3rem; letter-spacing: 0.3px; }
         .candidate-info .candidate-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 1rem; border-radius: 9999px; margin-left: 0.5rem; text-transform: uppercase; }
@@ -438,27 +383,19 @@
         .candidate-info .position { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; }
         .candidate-info .bio { color: #475569; font-size: 1rem; margin-bottom: 0.8rem; line-height: 1.7; }
         .candidate-priorities { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; margin-bottom: 0.8rem; }
-        .candidate-priorities .priority { background: rgba(241, 245, 249, 0.7); padding: 0.2rem 1.2rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500; color: #0f172a; display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid transparent; transition: all 0.2s ease; }
+        .candidate-priorities .priority { background: rgba(241, 245, 249, 0.7); padding: 0.2rem 1.2rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 500; color: #1e293b; display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid transparent; transition: all 0.2s ease; }
         .candidate-priorities .priority i { font-size: 0.5rem; }
         .candidate-profile:hover .priority { border-color: #e2e8f0; background: #f8fafc; }
         .candidate-social { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-        .candidate-social a { display: inline-flex; align-items: center; gap: 0.4rem; color: #475569; text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.3rem 1.2rem; border-radius: 9999px; background: rgba(241, 245, 249, 0.7); transition: all 0.25s ease; border: 1px solid transparent; touch-action: manipulation; }
+        .candidate-social a { display: inline-flex; align-items: center; gap: 0.4rem; color: #64748b; text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.3rem 1.2rem; border-radius: 9999px; background: rgba(241, 245, 249, 0.7); transition: all 0.25s ease; border: 1px solid transparent; touch-action: manipulation; }
         .candidate-social a:active { transform: scale(0.95); }
 
-        /* ===== PATIČKA ===== */
-        .footer { 
-            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-            color: #94a3b8; 
-            padding: 2.5rem 0; 
-            text-align: center; 
-            border-top: 2px solid #7c3aed; 
-            font-size: 0.95rem; 
-            width: 100%; 
-        }
+        /* ===== PATIČKA A TLAČÍTKO HRY ===== */
+        .footer { background: linear-gradient(135deg, var(--erb-red) 0%, #8b0000 50%, #0f172a 100%); color: #cbd5e1; padding: 2.5rem 0; text-align: center; border-top: 2px solid var(--erb-yellow); font-size: 0.95rem; width: 100%; }
 
         .game-button-wrapper { margin-top: 1.5rem; margin-bottom: 0.5rem; text-align: center; }
-        .game-btn { display: inline-block; background: #7c3aed; color: #ffffff; font-weight: 900; font-size: 1.2rem; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); border: 3px solid transparent; }
-        .game-btn:hover { transform: translateY(-4px) scale(1.05); background: #ffffff; border-color: #7c3aed; color: #4c1d95; box-shadow: 0 10px 30px rgba(124, 58, 237, 0.5); }
+        .game-btn { display: inline-block; background: var(--erb-yellow); color: #0f172a; font-weight: 900; font-size: 1.2rem; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 20px rgba(255, 242, 0, 0.4); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); border: 3px solid transparent; }
+        .game-btn:hover { transform: translateY(-4px) scale(1.05); background: var(--erb-white); border-color: var(--erb-yellow); color: var(--erb-red); box-shadow: 0 10px 30px rgba(255, 242, 0, 0.6); }
         .game-btn:active { transform: scale(0.95); }
         .game-btn i { margin-right: 0.6rem; }
 
@@ -473,7 +410,7 @@
             .navbar .container { flex-direction: row; padding: 0 1rem; }
             .navbar .logo { font-size: 1.2rem; }
             .burger { display: flex; }
-            .nav-links { display: none; flex-direction: column; width: 100%; padding: 0.5rem 0; gap: 0.1rem; background: rgba(15, 23, 42, 0.98); border-radius: 0 0 1.5rem 1.5rem; position: absolute; top: 100%; left: 0; right: 0; border-bottom: 2px solid #7c3aed; }
+            .nav-links { display: none; flex-direction: column; width: 100%; padding: 0.5rem 0; gap: 0.1rem; background: rgba(15, 23, 42, 0.98); border-radius: 0 0 1.5rem 1.5rem; position: absolute; top: 100%; left: 0; right: 0; border-bottom: 2px solid #fbbf24; }
             .nav-links.open { display: flex; }
             .nav-links a { font-size: 1rem; padding: 0.7rem 1.5rem; justify-content: center; border-radius: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
             .nav-links a:last-child { border-bottom: none; }
@@ -489,7 +426,7 @@
             .exp-card .exp-number { font-size: 1.8rem; }
             .exp-card .exp-emoji { font-size: 1.8rem; }
             .exp-card .exp-label { font-size: 0.85rem; }
-            .vesnice-section { background: linear-gradient(145deg, #f5f3ff 0%, #d1fae5 100%); }
+            .vesnice-section { background: linear-gradient(135deg, #ecfdf5 0%, #eff6ff 100%); }
             .vesnice-section h2 { font-size: 2.2rem; }
             .vesnice-section .vesnice-subtitle { font-size: 1.05rem; }
             .timeline-osa { padding: 1rem 0 1rem 2rem; }
@@ -499,6 +436,7 @@
             .timeline-osa-item.active .osa-content h3 { font-size: 1.5rem; }
             .timeline-osa-item .osa-content h3 { font-size: 1.3rem; }
             .timeline-osa-item .osa-content p { font-size: 0.95rem; }
+            .section-alt { background: linear-gradient(135deg, #fefce8 0%, #fffbeb 100%); }
             .why-grid { grid-template-columns: 1fr; gap: 1.2rem; }
             .why-card { padding: 1.8rem 1.5rem; border-radius: 2rem; background: rgba(255, 255, 255, 0.9); }
             .why-card .card-icon { font-size: 2.6rem; }
@@ -514,12 +452,10 @@
             .candidate-priorities { justify-content: center; }
             .candidate-social { justify-content: center; }
             .candidate-info .bio { font-size: 0.95rem; }
+            
+            /* NA MOBILU SKRYJEME PEVNOU MŘÍŽKU A ZOBRAZÍME POSUVNOU */
             .chystame-grid { display: none; }
             .chystame-scroll-mobile { display: flex; }
-            .section-proc { background: linear-gradient(145deg, #fffbeb 0%, #fdba74 100%); }
-            .section-chystame { background: linear-gradient(145deg, #ccfbf1 0%, #5eead4 100%); }
-            .section-projekty { background: linear-gradient(145deg, #fdf2f8 0%, #f3e8ff 100%); }
-            .section-kdo { background: linear-gradient(145deg, #eef2ff 0%, #bfdbfe 100%); }
         }
 
         @media (max-width: 480px) {
@@ -536,6 +472,7 @@
             .program-banner h2 { font-size: 1.8rem; }
             .section-title { font-size: 1.8rem; }
             .vesnice-section h2 { font-size: 1.8rem; }
+            .vesnice-section { background: linear-gradient(135deg, #ecfdf5 0%, #dbeafe 100%); }
             .vesnice-section .vesnice-subtitle { font-size: 0.95rem; }
             .timeline-osa { padding: 0.5rem 0 0.5rem 1.5rem; }
             .timeline-osa-item { padding-left: 1rem; margin-bottom: 2rem; }
@@ -552,6 +489,7 @@
             .candidate-photo { width: 110px; height: 110px; }
             .candidate-info h3 { font-size: 1.3rem; }
             .candidate-priorities .priority { font-size: 0.75rem; padding: 0.15rem 0.8rem; }
+            
             .game-btn { font-size: 1rem; padding: 0.8rem 2rem; }
         }
 
@@ -587,7 +525,7 @@
         </div>
     </nav>
 
-    <!-- ===== HERO - FIALOVÁ ===== -->
+    <!-- ===== HERO ===== -->
     <header class="hero" id="home">
         <div class="hero-content">
             <span class="badge"><i class="fas fa-users"></i> Společně pro obec</span>
@@ -623,13 +561,14 @@
         </div>
     </header>
 
-    <!-- ===== SEKCE 1: VESNICE NENÍ NUDA - LEVANDULOVÁ → MÁTOVÁ ===== -->
+    <!-- ===== SEKCE: VESNICE NENÍ NUDA + 4 BODY ===== -->
     <section class="vesnice-section" id="vesnice">
         <div class="container">
             <span class="section-tag"><i class="fas fa-rocket"></i> Místo, kde to žije</span>
             <h2>Vesnice není nuda 🔥</h2>
             <p class="vesnice-subtitle">Máme plány, které tě dostanou. Bydlení, kariéra, kultura, sport – všechno tady najdeš. Pojď se podívat, co bychom mohli společně rozjet.</p>
 
+            <!-- ===== ČASOVÁ OSA ===== -->
             <div class="timeline-osa active-1" id="timelineOsa">
                 <div class="timeline-osa-item active" data-index="0">
                     <div class="osa-dot">1</div>
@@ -671,7 +610,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 1: ZLATÁ/BROSKVOVÁ ===== -->
+    <!-- ===== PROGRAM 1 + PROČ ===== -->
     <div class="program-banner p1" id="proc-banner">
         <div class="container">
             <span class="program-number">✦ 01</span>
@@ -679,8 +618,7 @@
         </div>
     </div>
 
-    <!-- ===== SEKCE 2: PROČ - KRÉMOVÁ → BROSKVOVÁ ===== -->
-    <section class="section section-proc" id="proc">
+    <section class="section section-alt" id="proc">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-compass"></i> Proč jdeme do toho</h2>
             <p class="section-subtitle">Víme, že obec posouvají lidé, kteří mají chuť se zapojit a dívat se dopředu. Naše motivace je jednoduchá – chceme, aby se tu dobře žilo všem.</p>
@@ -718,7 +656,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 2: TYRKYSOVÁ ===== -->
+    <!-- ===== PROGRAM 2 + CO CHYSTÁME ===== -->
     <div class="program-banner p2" id="co-banner">
         <div class="container">
             <span class="program-number">✦ 02</span>
@@ -726,12 +664,12 @@
         </div>
     </div>
 
-    <!-- ===== SEKCE 3: CO CHYSTÁME - MÁTOVÁ → TYRKYSOVÁ ===== -->
-    <section class="section section-chystame" id="co-chystame">
+    <section class="section" id="co-chystame">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Co chystáme pro naši vesnici</h2>
             <p class="section-subtitle">Přehled plánů, které postupně rozjíždíme pro lepší život v obci.</p>
 
+            <!-- PC VERZE (PEVNÁ MŘÍŽKA) -->
             <div class="chystame-grid">
                 <div class="chystame-card">
                     <span class="ch-icon"><i class="fas fa-tree"></i></span>
@@ -783,6 +721,7 @@
                 </div>
             </div>
 
+            <!-- MOBILNÍ VERZE (HORIZONTÁLNÍ POSUVNÁ) -->
             <div class="chystame-scroll-mobile">
                 <div class="chystame-card">
                     <span class="ch-icon"><i class="fas fa-tree"></i></span>
@@ -836,7 +775,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 3: RŮŽOVÁ/LILA ===== -->
+    <!-- ===== PROGRAM 3 + NA CO SE ZAMĚŘÍME ===== -->
     <div class="program-banner p3" id="projekty-banner">
         <div class="container">
             <span class="program-number">✦ 03</span>
@@ -844,8 +783,7 @@
         </div>
     </div>
 
-    <!-- ===== SEKCE 4: PROJEKTY - RŮŽOVÁ → LILA ===== -->
-    <section class="section section-projekty" id="projekty">
+    <section class="section section-alt" id="projekty">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-bullseye"></i> Na co se zaměříme</h2>
             <p class="section-subtitle">Konkrétní kroky, které pomohou posunout naši vesnici kupředu.</p>
@@ -966,7 +904,7 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 4: INDIGO/MODRÁ ===== -->
+    <!-- ===== PROGRAM 4 + KDO JSME ===== -->
     <div class="program-banner p4" id="kdo-banner">
         <div class="container">
             <span class="program-number">✦ 04</span>
@@ -974,8 +912,7 @@
         </div>
     </div>
 
-    <!-- ===== SEKCE 5: KDO JSME - INDIGO → MODRÁ ===== -->
-    <section class="section section-kdo" id="kdo-jsme">
+    <section class="section" id="kdo-jsme">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-user-check"></i> Kdo jsme</h2>
             <p class="section-subtitle">Jsme vaši sousedé a známé tváře z obce. Spojuje nás chuť pracovat pro místo, kde žijeme.</p>
@@ -1213,7 +1150,9 @@
     <!-- ===== PATIČKA ===== -->
     <footer class="footer">
         <div class="container">
-            <p><i class="fas fa-flag" style="color: #fbbf24;"></i> Naše Vesnice – společný směr &copy; 2026</p>
+            <p><i class="fas fa-flag" style="color:var(--erb-yellow);"></i> Naše Vesnice – společný směr &copy; 2026</p>
+            
+            <!-- NOVÉ VIDITELNÉ TLAČÍTKO HRY -->
             <div class="game-button-wrapper">
                 <a href="hra.html" class="game-btn">
                     <i class="fas fa-gamepad"></i> Zahrát si hru
@@ -1224,6 +1163,7 @@
 
     <!-- ===== SCRIPTS ===== -->
     <script>
+        // ===== BURGER MENU =====
         const burger = document.getElementById('burger');
         const navLinks = document.getElementById('navLinks');
 
@@ -1239,11 +1179,13 @@
             });
         });
 
+        // ===== LOGO - SKOK NAHORU =====
         document.getElementById('logoLink').addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
+        // ===== AKTIVACE BODŮ PŘI SCROLLOVÁNÍ (ČASOVÁ OSA) =====
         const timelineItems = document.querySelectorAll('.timeline-osa-item');
         const timelineOsa = document.getElementById('timelineOsa');
 
