@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Tetris - mobilní verze</title>
+    <title>Tetris - OPTIMALIZOVANÝ</title>
     <style>
         * {
             margin: 0;
@@ -33,7 +33,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 400px;
+            max-width: 420px;
             width: 100%;
         }
 
@@ -49,7 +49,6 @@
             color: #facc15;
         }
 
-        /* ----- HLAVNÍ PLOCHA (pouze canvas + náhled) ----- */
         .game-row {
             display: flex;
             gap: 0.6rem;
@@ -72,7 +71,6 @@
             flex-shrink: 0;
         }
 
-        /* ----- NÁHLED VEDLE ----- */
         .preview-box {
             background: #0f1a2a;
             border-radius: 1.2rem;
@@ -105,7 +103,6 @@
             image-rendering: pixelated;
         }
 
-        /* ----- STATISTIKY POD PLOCHOU (v řadě) ----- */
         .stats-row {
             display: flex;
             justify-content: space-around;
@@ -125,12 +122,12 @@
             border-radius: 40px;
             box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
             flex: 1;
-            min-width: 60px;
+            min-width: 55px;
             justify-content: center;
         }
 
         .stat-item .icon {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1;
         }
 
@@ -142,7 +139,6 @@
             text-align: center;
         }
 
-        /* ----- DOTYKOVÁ TLAČÍTKA ----- */
         .touch-controls {
             display: none;
             gap: 0.4rem;
@@ -295,12 +291,6 @@
             width: 100%;
         }
 
-        @media (hover: none) and (pointer: coarse) {
-            .hint {
-                display: none;
-            }
-        }
-
         .hint {
             color: #64748b;
             font-size: 0.55rem;
@@ -317,7 +307,12 @@
             font-size: 0.5rem;
         }
 
-        /* ----- RESPONZIVITA ----- */
+        @media (hover: none) and (pointer: coarse) {
+            .hint {
+                display: none;
+            }
+        }
+
         @media (max-width: 420px) {
             .game-wrapper {
                 padding: 0.4rem 0.5rem 0.6rem;
@@ -424,33 +419,20 @@
 <div class="game-wrapper">
     <h1>🧩 <span>TETRIS</span></h1>
 
-    <!-- HERNÍ PLOCHA + NÁHLED VEDLE -->
     <div class="game-row">
         <canvas id="gameCanvas" width="300" height="600"></canvas>
-
         <div class="preview-box">
             <div class="label">🔮 Další</div>
             <canvas id="previewCanvas" width="120" height="120"></canvas>
         </div>
     </div>
 
-    <!-- STATISTIKY POD PLOCHOU (v řadě) -->
     <div class="stats-row">
-        <div class="stat-item">
-            <span class="icon">🎯</span>
-            <span class="value" id="scoreDisplay">0</span>
-        </div>
-        <div class="stat-item">
-            <span class="icon">📊</span>
-            <span class="value" id="levelDisplay">1</span>
-        </div>
-        <div class="stat-item">
-            <span class="icon">🧹</span>
-            <span class="value" id="linesDisplay">0</span>
-        </div>
+        <div class="stat-item"><span class="icon">🎯</span><span class="value" id="scoreDisplay">0</span></div>
+        <div class="stat-item"><span class="icon">📊</span><span class="value" id="levelDisplay">1</span></div>
+        <div class="stat-item"><span class="icon">🧹</span><span class="value" id="linesDisplay">0</span></div>
     </div>
 
-    <!-- DOTYKOVÁ TLAČÍTKA (mobil) -->
     <div class="touch-controls">
         <div class="touch-row">
             <button class="touch-btn left-btn" id="touchLeft">◀</button>
@@ -476,7 +458,11 @@
 
 <script>
     (function() {
-        // ----- DOM -----
+        "use strict";
+
+        // ============================================================
+        //  DOM
+        // ============================================================
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const previewCanvas = document.getElementById('previewCanvas');
@@ -486,49 +472,73 @@
         const levelDisplay = document.getElementById('levelDisplay');
         const linesDisplay = document.getElementById('linesDisplay');
         const statusMsg = document.getElementById('statusMsg');
-
         const restartBtn = document.getElementById('restartBtn');
         const pauseBtn = document.getElementById('pauseBtn');
 
-        // Dotyková tlačítka
         const touchLeft = document.getElementById('touchLeft');
         const touchRight = document.getElementById('touchRight');
         const touchDown = document.getElementById('touchDown');
         const touchRotate = document.getElementById('touchRotate');
         const touchDrop = document.getElementById('touchDrop');
 
-        // ----- Konfigurace -----
-        const COLS = 10;
-        const ROWS = 20;
-        const BLOCK_SIZE = 30;
-        const W = 300;
-        const H = 600;
+        // ============================================================
+        //  KONFIGURACE
+        // ============================================================
+        const COLS = 10,
+            ROWS = 20,
+            BS = 30,
+            W = 300,
+            H = 600;
 
-        // ----- Tvary -----
         const SHAPES = {
-            I: { blocks: [[1,1,1,1]], color: '#3b82f6' },
-            O: { blocks: [[1,1],[1,1]], color: '#facc15' },
-            T: { blocks: [[0,1,0],[1,1,1]], color: '#a855f7' },
-            S: { blocks: [[0,1,1],[1,1,0]], color: '#22c55e' },
-            Z: { blocks: [[1,1,0],[0,1,1]], color: '#ef4444' },
-            J: { blocks: [[1,0,0],[1,1,1]], color: '#3b82f6' },
-            L: { blocks: [[0,0,1],[1,1,1]], color: '#f97316' }
+            I: { blocks: [
+                    [1, 1, 1, 1]
+                ], color: '#3b82f6' },
+            O: { blocks: [
+                    [1, 1],
+                    [1, 1]
+                ], color: '#facc15' },
+            T: { blocks: [
+                    [0, 1, 0],
+                    [1, 1, 1]
+                ], color: '#a855f7' },
+            S: { blocks: [
+                    [0, 1, 1],
+                    [1, 1, 0]
+                ], color: '#22c55e' },
+            Z: { blocks: [
+                    [1, 1, 0],
+                    [0, 1, 1]
+                ], color: '#ef4444' },
+            J: { blocks: [
+                    [1, 0, 0],
+                    [1, 1, 1]
+                ], color: '#3b82f6' },
+            L: { blocks: [
+                    [0, 0, 1],
+                    [1, 1, 1]
+                ], color: '#f97316' }
         };
         const SHAPE_NAMES = ['I', 'O', 'T', 'S', 'Z', 'J', 'L'];
 
-        // ----- Stav -----
+        // ============================================================
+        //  STAV
+        // ============================================================
         let board = [];
-        let currentPiece = null;
-        let nextPiece = null;
-        let score = 0;
-        let level = 1;
-        let lines = 0;
-        let gameOver = false;
-        let paused = false;
-        let dropInterval = null;
-        let animationFrame = null;
+        let currentPiece = null,
+            nextPiece = null;
+        let score = 0,
+            level = 1,
+            lines = 0;
+        let gameOver = false,
+            paused = false,
+            started = false;
+        let dropInterval = null,
+            animationFrame = null;
 
-        // ----- Inicializace -----
+        // ============================================================
+        //  INICIALIZACE
+        // ============================================================
         function initBoard() {
             board = [];
             for (let r = 0; r < ROWS; r++) {
@@ -541,8 +551,8 @@
             const shape = SHAPES[name];
             return {
                 name: name,
-                blocks: shape.blocks.map(row => [...row]),
                 color: shape.color,
+                blocks: shape.blocks.map(row => [...row]),
                 x: Math.floor((COLS - shape.blocks[0].length) / 2),
                 y: 0
             };
@@ -552,8 +562,8 @@
             if (!nextPiece) nextPiece = randomPiece();
             currentPiece = {
                 name: nextPiece.name,
-                blocks: nextPiece.blocks.map(row => [...row]),
                 color: nextPiece.color,
+                blocks: nextPiece.blocks.map(row => [...row]),
                 x: Math.floor((COLS - nextPiece.blocks[0].length) / 2),
                 y: 0
             };
@@ -562,6 +572,7 @@
 
             if (collides(currentPiece.blocks, currentPiece.x, currentPiece.y)) {
                 gameOver = true;
+                started = false;
                 statusMsg.textContent = '💀 KONEC! Klikni "Nová".';
                 if (dropInterval) { clearInterval(dropInterval);
                     dropInterval = null; }
@@ -595,6 +606,9 @@
             return rotated;
         }
 
+        // ============================================================
+        //  LOGIKA
+        // ============================================================
         function lockPiece() {
             if (!currentPiece) return;
             for (let r = 0; r < currentPiece.blocks.length; r++) {
@@ -612,7 +626,7 @@
             const success = spawnPiece();
             if (!success) {
                 gameOver = true;
-                statusMsg.textContent = '💀 KONEC! Klikni "Nová".';
+                started = false;
                 if (dropInterval) { clearInterval(dropInterval);
                     dropInterval = null; }
             }
@@ -639,24 +653,26 @@
                 updateDropSpeed();
                 statusMsg.textContent = `🧹 +${cleared} řádky! +${addScore} b.`;
                 setTimeout(() => {
-                    if (!gameOver && !paused) statusMsg.textContent = 'Pokračuj! 🎮';
-                }, 1000);
+                    if (!gameOver && !paused && started) statusMsg.textContent = '🎮 Hraješ!';
+                }, 800);
             }
         }
 
         function updateDropSpeed() {
             if (dropInterval) { clearInterval(dropInterval);
                 dropInterval = null; }
-            if (gameOver || paused) return;
+            if (gameOver || paused || !started) return;
             const speed = Math.max(50, 600 - (level - 1) * 50);
             dropInterval = setInterval(() => {
-                if (!paused && !gameOver && currentPiece) moveDown();
+                if (!paused && !gameOver && currentPiece && started) moveDown();
             }, speed);
         }
 
-        // ----- Pohyb -----
+        // ============================================================
+        //  POHYB
+        // ============================================================
         function moveDown() {
-            if (!currentPiece || gameOver || paused) return;
+            if (!currentPiece || gameOver || paused || !started) return;
             if (!collides(currentPiece.blocks, currentPiece.x, currentPiece.y + 1)) {
                 currentPiece.y++;
                 draw();
@@ -667,7 +683,7 @@
         }
 
         function moveLeft() {
-            if (!currentPiece || gameOver || paused) return;
+            if (!currentPiece || gameOver || paused || !started) return;
             if (!collides(currentPiece.blocks, currentPiece.x - 1, currentPiece.y)) {
                 currentPiece.x--;
                 draw();
@@ -675,7 +691,7 @@
         }
 
         function moveRight() {
-            if (!currentPiece || gameOver || paused) return;
+            if (!currentPiece || gameOver || paused || !started) return;
             if (!collides(currentPiece.blocks, currentPiece.x + 1, currentPiece.y)) {
                 currentPiece.x++;
                 draw();
@@ -683,7 +699,7 @@
         }
 
         function rotatePiece() {
-            if (!currentPiece || gameOver || paused) return;
+            if (!currentPiece || gameOver || paused || !started) return;
             const rotated = rotateBlocks(currentPiece.blocks);
             if (!collides(rotated, currentPiece.x, currentPiece.y)) {
                 currentPiece.blocks = rotated;
@@ -700,7 +716,7 @@
         }
 
         function hardDrop() {
-            if (!currentPiece || gameOver || paused) return;
+            if (!currentPiece || gameOver || paused || !started) return;
             while (!collides(currentPiece.blocks, currentPiece.x, currentPiece.y + 1)) {
                 currentPiece.y++;
             }
@@ -708,85 +724,70 @@
             draw();
         }
 
-        // ----- VYLEPŠENÉ VYKRESLENÍ -----
+        // ============================================================
+        //  VYKRESLENÍ
+        // ============================================================
         function draw() {
             ctx.clearRect(0, 0, W, H);
 
-            // Mřížka
-            ctx.strokeStyle = 'rgba(150, 190, 230, 0.2)';
-            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = 'rgba(100, 150, 200, 0.15)';
+            ctx.lineWidth = 1;
             for (let r = 0; r <= ROWS; r++) {
                 ctx.beginPath();
-                ctx.moveTo(0, r * BLOCK_SIZE);
-                ctx.lineTo(W, r * BLOCK_SIZE);
+                ctx.moveTo(0, r * BS);
+                ctx.lineTo(W, r * BS);
                 ctx.stroke();
             }
             for (let c = 0; c <= COLS; c++) {
                 ctx.beginPath();
-                ctx.moveTo(c * BLOCK_SIZE, 0);
-                ctx.lineTo(c * BLOCK_SIZE, H);
+                ctx.moveTo(c * BS, 0);
+                ctx.lineTo(c * BS, H);
                 ctx.stroke();
             }
 
-            // Board
             for (let r = 0; r < ROWS; r++) {
                 for (let c = 0; c < COLS; c++) {
                     if (board[r][c] !== 0) {
-                        const x = c * BLOCK_SIZE,
-                            y = r * BLOCK_SIZE;
+                        const x = c * BS,
+                            y = r * BS;
                         ctx.fillStyle = board[r][c];
                         ctx.shadowColor = board[r][c];
                         ctx.shadowBlur = 6;
-                        ctx.fillRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+                        ctx.fillRect(x + 1, y + 1, BS - 2, BS - 2);
                         ctx.shadowBlur = 0;
-
-                        ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-                        ctx.lineWidth = 1.5;
-                        ctx.strokeRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
-
-                        ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                        ctx.strokeStyle = 'rgba(255,255,255,0.2)';
                         ctx.lineWidth = 1;
-                        ctx.strokeRect(x + 3, y + 3, BLOCK_SIZE - 6, BLOCK_SIZE - 6);
-
-                        ctx.fillStyle = 'rgba(255,255,255,0.12)';
-                        ctx.fillRect(x + 2, y + 2, BLOCK_SIZE - 8, 2);
-                        ctx.fillRect(x + 2, y + 2, 2, BLOCK_SIZE - 8);
+                        ctx.strokeRect(x + 1, y + 1, BS - 2, BS - 2);
+                        ctx.fillStyle = 'rgba(255,255,255,0.1)';
+                        ctx.fillRect(x + 2, y + 2, BS - 8, 2);
+                        ctx.fillRect(x + 2, y + 2, 2, BS - 8);
                     }
                 }
             }
 
-            // Aktuální kus
-            if (currentPiece && !gameOver) {
+            if (currentPiece && !gameOver && started) {
                 const blocks = currentPiece.blocks;
                 for (let r = 0; r < blocks.length; r++) {
                     for (let c = 0; c < blocks[0].length; c++) {
                         if (blocks[r][c] !== 0) {
-                            const x = (currentPiece.x + c) * BLOCK_SIZE;
-                            const y = (currentPiece.y + r) * BLOCK_SIZE;
-
+                            const x = (currentPiece.x + c) * BS;
+                            const y = (currentPiece.y + r) * BS;
                             ctx.fillStyle = currentPiece.color;
                             ctx.shadowColor = currentPiece.color;
                             ctx.shadowBlur = 10;
-                            ctx.fillRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+                            ctx.fillRect(x + 1, y + 1, BS - 2, BS - 2);
                             ctx.shadowBlur = 0;
-
-                            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-                            ctx.lineWidth = 1.5;
-                            ctx.strokeRect(x + 1, y + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
-
-                            ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+                            ctx.strokeStyle = 'rgba(255,255,255,0.25)';
                             ctx.lineWidth = 1;
-                            ctx.strokeRect(x + 3, y + 3, BLOCK_SIZE - 6, BLOCK_SIZE - 6);
-
-                            ctx.fillStyle = 'rgba(255,255,255,0.2)';
-                            ctx.fillRect(x + 2, y + 2, BLOCK_SIZE - 8, 2);
-                            ctx.fillRect(x + 2, y + 2, 2, BLOCK_SIZE - 8);
+                            ctx.strokeRect(x + 1, y + 1, BS - 2, BS - 2);
+                            ctx.fillStyle = 'rgba(255,255,255,0.15)';
+                            ctx.fillRect(x + 2, y + 2, BS - 8, 2);
+                            ctx.fillRect(x + 2, y + 2, 2, BS - 8);
                         }
                     }
                 }
             }
 
-            // Game Over
             if (gameOver) {
                 ctx.fillStyle = 'rgba(0,0,0,0.7)';
                 ctx.fillRect(0, 0, W, H);
@@ -794,24 +795,26 @@
                 ctx.font = 'bold 34px "Segoe UI", sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fillText('GAME OVER', 150, 270);
+                ctx.fillText('💀', 150, 250);
+                ctx.font = 'bold 26px "Segoe UI", sans-serif';
+                ctx.fillStyle = '#f0e9d8';
+                ctx.fillText('GAME OVER', 150, 300);
                 ctx.font = '16px sans-serif';
-                ctx.fillStyle = '#e2e8f0';
-                ctx.fillText('Klikni "Nová"', 150, 320);
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText('Klikni "Nová"', 150, 350);
             }
 
-            // Pauza
             if (paused && !gameOver) {
                 ctx.fillStyle = 'rgba(0,0,0,0.5)';
                 ctx.fillRect(0, 0, W, H);
                 ctx.fillStyle = '#fde047';
-                ctx.font = 'bold 36px "Segoe UI", sans-serif';
+                ctx.font = 'bold 40px "Segoe UI", sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText('⏸', 150, 280);
-                ctx.font = '16px sans-serif';
+                ctx.font = '18px sans-serif';
                 ctx.fillStyle = '#e2e8f0';
-                ctx.fillText('PAUZA', 150, 330);
+                ctx.fillText('PAUZA', 150, 335);
             }
         }
 
@@ -831,12 +834,12 @@
                             y = oy + r * bs;
                         previewCtx.fillStyle = nextPiece.color;
                         previewCtx.shadowColor = nextPiece.color;
-                        previewCtx.shadowBlur = 8;
+                        previewCtx.shadowBlur = 6;
                         previewCtx.fillRect(x + 1, y + 1, bs - 2, bs - 2);
                         previewCtx.shadowBlur = 0;
-                        previewCtx.fillStyle = 'rgba(255,255,255,0.15)';
-                        previewCtx.fillRect(x + 2, y + 2, bs - 8, 3);
-                        previewCtx.strokeStyle = 'rgba(255,255,255,0.15)';
+                        previewCtx.fillStyle = 'rgba(255,255,255,0.12)';
+                        previewCtx.fillRect(x + 2, y + 2, bs - 8, 2);
+                        previewCtx.strokeStyle = 'rgba(255,255,255,0.1)';
                         previewCtx.lineWidth = 1;
                         previewCtx.strokeRect(x + 1, y + 1, bs - 2, bs - 2);
                     }
@@ -850,9 +853,11 @@
             linesDisplay.textContent = lines;
         }
 
-        // ----- Pauza -----
+        // ============================================================
+        //  PAUZA
+        // ============================================================
         function togglePause() {
-            if (gameOver) return;
+            if (gameOver || !started) return;
             paused = !paused;
             pauseBtn.textContent = paused ? '▶ Pokračovat' : '⏸ Pauza';
             statusMsg.textContent = paused ? '⏸ PAUZA' : '▶ Hra pokračuje';
@@ -865,44 +870,61 @@
             draw();
         }
 
-        // ----- Nová hra -----
+        // ============================================================
+        //  NOVÁ HRA
+        // ============================================================
         function startNewGame() {
+            // Zastavení starých timerů
             if (dropInterval) { clearInterval(dropInterval);
                 dropInterval = null; }
             if (animationFrame) { cancelAnimationFrame(animationFrame);
                 animationFrame = null; }
 
+            // Reset stavu
             initBoard();
             score = 0;
             level = 1;
             lines = 0;
             gameOver = false;
             paused = false;
-            pauseBtn.textContent = '⏸ Pauza';
-            updateDisplay();
-            statusMsg.textContent = '🎮 Nová hra!';
+            started = true; // <-- DŮLEŽITÉ!
 
+            // Aktualizace UI
+            pauseBtn.textContent = '⏸ Pauza';
+            statusMsg.textContent = '🎮 Nová hra!';
+            updateDisplay();
+
+            // Spawn první kostky
             nextPiece = randomPiece();
             spawnPiece();
             drawPreview();
             draw();
+
+            // Spuštění padání
             updateDropSpeed();
+
+            // Spuštění herní smyčky (kreslení)
+            gameLoop();
         }
 
-        // ----- Herní smyčka -----
+        // ============================================================
+        //  HERNÍ SMYČKA
+        // ============================================================
         function gameLoop() {
             draw();
             animationFrame = requestAnimationFrame(gameLoop);
         }
 
-        // ----- Klávesy -----
+        // ============================================================
+        //  OVLÁDÁNÍ KLÁVES
+        // ============================================================
         function handleKeyDown(e) {
             const key = e.key;
             if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' ', 'p', 'P'].includes(key)) {
                 e.preventDefault();
             }
             if (key === 'p' || key === 'P') { togglePause(); return; }
-            if (gameOver || paused) return;
+            if (gameOver || paused || !started) return;
             switch (key) {
                 case 'ArrowLeft':
                     moveLeft();
@@ -922,18 +944,23 @@
             }
         }
 
-        // ----- DOTYKOVÁ TLAČÍTKA -----
+        // ============================================================
+        //  DOTYKOVÁ TLAČÍTKA
+        // ============================================================
         function setupTouchButton(btn, action, repeatable = false) {
-            let intervalId = null;
-            let timeoutId = null;
+            let intervalId = null,
+                timeoutId = null;
 
             function startAction(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                if (gameOver || paused || !started) return;
                 action();
                 if (repeatable) {
                     timeoutId = setTimeout(() => {
-                        intervalId = setInterval(action, 120);
+                        intervalId = setInterval(() => {
+                            if (!gameOver && !paused && started) action();
+                        }, 120);
                     }, 250);
                 }
             }
@@ -959,27 +986,30 @@
         setupTouchButton(touchRight, moveRight, true);
         setupTouchButton(touchDown, moveDown, true);
 
-        touchRotate.addEventListener('click', (e) => { e.preventDefault();
+        touchRotate.addEventListener('click', (e) => { e.preventDefault(); if (!gameOver && !paused && started)
             rotatePiece(); });
-        touchRotate.addEventListener('touchstart', (e) => { e.preventDefault();
+        touchRotate.addEventListener('touchstart', (e) => { e.preventDefault(); if (!gameOver && !paused && started)
             rotatePiece(); }, { passive: false });
 
-        touchDrop.addEventListener('click', (e) => { e.preventDefault();
+        touchDrop.addEventListener('click', (e) => { e.preventDefault(); if (!gameOver && !paused && started)
             hardDrop(); });
-        touchDrop.addEventListener('touchstart', (e) => { e.preventDefault();
+        touchDrop.addEventListener('touchstart', (e) => { e.preventDefault(); if (!gameOver && !paused && started)
             hardDrop(); }, { passive: false });
 
-        // ----- Inicializace -----
+        // ============================================================
+        //  INICIALIZACE
+        // ============================================================
         window.addEventListener('keydown', handleKeyDown);
         restartBtn.addEventListener('click', startNewGame);
         pauseBtn.addEventListener('click', togglePause);
 
+        // Zabránění scrollování na tlačítkách
         document.querySelectorAll('.touch-btn').forEach(btn => {
             btn.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
         });
 
+        // SPUŠTĚNÍ HRY
         startNewGame();
-        gameLoop();
 
         window.addEventListener('blur', () => {});
     })();
