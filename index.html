@@ -21,6 +21,7 @@
             --wine-dark: #3A0C0C;
             --wine-light: #6B1A1A;
             --gold: #D4A02B;
+            --gold-dark: #A87D1F;
             --gold-light: #F5E6C8;
             --gold-bg: #FEF9E7;
             --teal-bg: #D1FAE5;
@@ -184,28 +185,88 @@
             justify-content: center;
             width: 100%;
         }
+
+        /* ===== DEKORATIVNÍ PRVKY ===== */
+
+        /* 1. Obří kruh v pozadí */
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(212, 160, 43, 0.08) 0%, transparent 70%);
+            top: -30%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(212, 160, 43, 0.06) 0%, transparent 70%);
             border-radius: 50%;
+            z-index: 1;
         }
+
+        /* 2. Druhý kruh vlevo dole */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 160, 43, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* 3. Zlaté tečky */
+        .hero-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-dots .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.12;
+        }
+        .hero-dots .dot:nth-child(1) { top: 12%; left: 5%; width: 14px; height: 14px; opacity: 0.08; }
+        .hero-dots .dot:nth-child(2) { top: 35%; right: 8%; width: 8px; height: 8px; opacity: 0.15; }
+        .hero-dots .dot:nth-child(3) { bottom: 30%; left: 15%; width: 12px; height: 12px; opacity: 0.10; }
+        .hero-dots .dot:nth-child(4) { bottom: 15%; right: 20%; width: 6px; height: 6px; opacity: 0.20; }
+        .hero-dots .dot:nth-child(5) { top: 55%; left: 30%; width: 18px; height: 18px; opacity: 0.05; }
+        .hero-dots .dot:nth-child(6) { top: 20%; left: 45%; width: 8px; height: 8px; opacity: 0.10; }
+
+        /* 4. Vlnka na přechodu */
+        .hero-wave {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 2;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath d='M0,30 C300,60 600,0 900,30 C1050,45 1150,30 1200,30 L1200,60 L0,60Z' fill='%232A1A1A' opacity='0.6'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+        }
+
         .hero .hero-content {
             max-width: 900px;
             padding: 0 1.5rem;
             position: relative;
-            z-index: 2;
+            z-index: 3;
         }
+
         .hero h1 {
             font-size: 3.6rem;
             font-weight: 900;
             letter-spacing: -0.03em;
             line-height: 1.1;
             margin: 0 auto 1.2rem auto;
+            position: relative;
+            z-index: 3;
         }
         .hero .highlight {
             color: var(--gold);
@@ -227,6 +288,8 @@
             color: #C4B5A6;
             max-width: 700px;
             margin: 0 auto 2rem auto;
+            position: relative;
+            z-index: 3;
         }
 
         .hero .badge {
@@ -239,6 +302,8 @@
             font-size: 0.95rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+            position: relative;
+            z-index: 3;
         }
 
         /* ===== TLAČÍTKA V HERO ===== */
@@ -248,6 +313,8 @@
             gap: 1.2rem;
             flex-wrap: wrap;
             margin-top: 1.5rem;
+            position: relative;
+            z-index: 3;
         }
 
         .hero-btn {
@@ -301,6 +368,8 @@
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+            z-index: 3;
         }
         .exp-card {
             background: rgba(255, 255, 255, 0.05);
@@ -539,7 +608,7 @@
             color: var(--text-light);
         }
 
-        /* ===== PROGRAMOVÉ BANNERY - VÝRAZNÉ BARVY + ODKAZY ===== */
+        /* ===== PROGRAMOVÉ BANNERY - BEZ ODKAZŮ (pouze oddělovače) ===== */
         .program-banner {
             padding: 2.5rem 0;
             text-align: center;
@@ -559,15 +628,6 @@
             font-size: 3rem;
             font-weight: 900;
             letter-spacing: -0.02em;
-            transition: transform 0.3s ease;
-        }
-        .program-banner a {
-            text-decoration: none;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        .program-banner a:hover h2 {
-            transform: scale(1.02);
         }
         .program-banner .program-number {
             font-size: 1rem;
@@ -579,7 +639,7 @@
             letter-spacing: 1px;
         }
 
-        /* BANNER 1 - ZTLUMENÁ ZLATÁ (PROČ) */
+        /* BANNER 1 - ZTLUMENÁ ZLATÁ */
         .program-banner.p1 {
             background: linear-gradient(145deg, #FEF3C7 0%, #FDE68A 50%, #FCD34D 100%);
             color: #0F172A;
@@ -594,7 +654,7 @@
             color: #0F172A;
         }
 
-        /* BANNER 2 - VÝRAZNĚ TYRKYSOVÁ (CO CHYSTÁME) */
+        /* BANNER 2 - TYRKYSOVÁ */
         .program-banner.p2 {
             background: linear-gradient(145deg, #5EEAD4 0%, #14B8A6 50%, #0F766E 100%);
             color: #0F172A;
@@ -609,7 +669,7 @@
             color: #0F172A;
         }
 
-        /* BANNER 3 - VÝRAZNĚ LEVANDULOVÁ (PROJEKTY) */
+        /* BANNER 3 - LEVANDULOVÁ */
         .program-banner.p3 {
             background: linear-gradient(145deg, #DDD6FE 0%, #8B5CF6 50%, #7C3AED 100%);
             color: #0F172A;
@@ -624,16 +684,16 @@
             color: #0F172A;
         }
 
-        /* BANNER 4 - VÝRAZNĚ MODRÁ (KDO JSME) */
+        /* BANNER 4 - JEMNĚ MODRÁ (méně výrazná) */
         .program-banner.p4 {
-            background: linear-gradient(145deg, #93C5FD 0%, #2563EB 50%, #1E40AF 100%);
+            background: linear-gradient(145deg, #DBEAFE 0%, #BFDBFE 50%, #93C5FD 100%);
             color: #0F172A;
-            border-top: 4px solid #1E3A8A;
-            border-bottom: 4px solid #1E3A8A;
+            border-top: 3px solid #93C5FD;
+            border-bottom: 3px solid #93C5FD;
         }
         .program-banner.p4 .program-number {
-            background: rgba(30, 58, 138, 0.2);
-            color: #172554;
+            background: rgba(30, 64, 175, 0.1);
+            color: #1E3A8A;
         }
         .program-banner.p4 h2 {
             color: #0F172A;
@@ -645,7 +705,6 @@
             width: 100%;
         }
 
-        /* SEKCE PROČ - JEMNĚ ZLATÁ */
         .section-proc {
             background: linear-gradient(145deg, #FFF8E7 0%, var(--gold-bg) 30%, #FDEBD0 70%, #FFF8E7 100%);
             border-top: 3px solid rgba(212, 160, 43, 0.1);
@@ -661,7 +720,6 @@
             color: var(--gold-dark);
         }
 
-        /* SEKCE CO CHYSTÁME - JEMNĚ TYRKYSOVÁ */
         .section-chystame {
             background: linear-gradient(145deg, #E6FFFA 0%, var(--teal-bg) 30%, #A7F3D0 70%, #E6FFFA 100%);
             border-top: 3px solid rgba(13, 148, 136, 0.1);
@@ -677,7 +735,6 @@
             color: #0D9488;
         }
 
-        /* SEKCE PROJEKTY - JEMNĚ LEVANDULOVÁ */
         .section-projekty {
             background: linear-gradient(145deg, #F5F3FF 0%, var(--plum-bg) 30%, #DDD6FE 70%, #F5F3FF 100%);
             border-top: 3px solid rgba(124, 58, 237, 0.1);
@@ -693,7 +750,6 @@
             color: #7C3AED;
         }
 
-        /* SEKCE KDO JSME - JEMNĚ MODRÁ */
         .section-kdo {
             background: linear-gradient(145deg, #EFF6FF 0%, var(--ocean-bg) 30%, #BFDBFE 70%, #EFF6FF 100%);
             border-top: 3px solid rgba(30, 64, 175, 0.1);
@@ -707,6 +763,22 @@
         }
         .section-kdo .section-title i {
             color: #1E40AF;
+        }
+
+        /* ===== KONTAKT ===== */
+        .section-contact {
+            background: linear-gradient(145deg, #1A0A0A 0%, #2A1A1A 30%, #1A0A0A 100%);
+            border-top: 3px solid rgba(212, 160, 43, 0.1);
+            border-bottom: 3px solid rgba(212, 160, 43, 0.1);
+        }
+        .section-contact .section-title {
+            color: var(--text-light);
+        }
+        .section-contact .section-title i {
+            color: var(--gold);
+        }
+        .section-contact .section-subtitle {
+            color: var(--text-muted);
         }
 
         .section .container {
@@ -736,7 +808,7 @@
             margin: -2rem auto 3rem auto;
         }
 
-        /* ===== "PROČ" KARTY ===== */
+        /* ===== KARTY ===== */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1116,7 +1188,7 @@
             min-height: 240px;
         }
 
-        /* ===== KANDIDÁTI - JEMNĚ MODRÁ ===== */
+        /* ===== KANDIDÁTI ===== */
         .candidates-list {
             display: flex;
             flex-direction: column;
@@ -1684,6 +1756,9 @@
             .section-kdo {
                 background: linear-gradient(145deg, #EFF6FF 0%, #BFDBFE 100%);
             }
+            .section-contact {
+                background: linear-gradient(145deg, #1A0A0A 0%, #2A1A1A 100%);
+            }
             .why-grid {
                 grid-template-columns: 1fr;
                 gap: 1.2rem;
@@ -1901,14 +1976,23 @@
         </div>
     </nav>
 
-    <!-- ===== HERO - VÍNOVÁ ===== -->
+    <!-- ===== HERO ===== -->
     <header class="hero" id="home">
+        <div class="hero-dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        <div class="hero-wave"></div>
+
         <div class="hero-content">
             <span class="badge"><i class="fas fa-users"></i> Společně pro obec</span>
             <h1>Rozumná změna. <br /><span class="highlight">Společný směr.</span> Živá Vesnice.</h1>
             <p>Chceme obec, která drží pohromadě, umí naslouchat a hledá řešení, která dávají smysl.</p>
 
-            <!-- ===== NOVÁ TLAČÍTKA ===== -->
             <div class="hero-buttons">
                 <a href="#kdo-jsme" class="hero-btn hero-btn-primary">
                     <i class="fas fa-user-check"></i> Kdo jsme
@@ -1947,7 +2031,7 @@
         </div>
     </header>
 
-    <!-- ===== SEKCE 1: VESNICE NENÍ NUDA - VÍNOVÁ ===== -->
+    <!-- ===== SEKCE 1: VESNICE NENÍ NUDA ===== -->
     <section class="vesnice-section" id="vesnice">
         <div class="container">
             <span class="section-tag"><i class="fas fa-rocket"></i> Místo, kde to žije</span>
@@ -1995,16 +2079,15 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 1 + SEKCE PROČ - ZTLUMENÁ ZLATÁ ===== -->
+    <!-- ===== BANNER 1 ===== -->
     <div class="program-banner p1" id="proc-banner">
         <div class="container">
-            <a href="#proc" style="text-decoration:none; display:block;">
-                <span class="program-number">✦ 01</span>
-                <h2>Společný život v obci</h2>
-            </a>
+            <span class="program-number">✦ 01</span>
+            <h2>Společný život v obci</h2>
         </div>
     </div>
 
+    <!-- ===== SEKCE PROČ ===== -->
     <section class="section section-proc" id="proc">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-compass"></i> Proč jdeme do toho</h2>
@@ -2043,16 +2126,15 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 2 + SEKCE CO CHYSTÁME - VÝRAZNĚ TYRKYSOVÁ ===== -->
+    <!-- ===== BANNER 2 ===== -->
     <div class="program-banner p2" id="co-banner">
         <div class="container">
-            <a href="#co-chystame" style="text-decoration:none; display:block;">
-                <span class="program-number">✦ 02</span>
-                <h2>Obec s rozmyslem</h2>
-            </a>
+            <span class="program-number">✦ 02</span>
+            <h2>Obec s rozmyslem</h2>
         </div>
     </div>
 
+    <!-- ===== SEKCE CO CHYSTÁME ===== -->
     <section class="section section-chystame" id="co-chystame">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Co chystáme pro naši vesnici</h2>
@@ -2162,16 +2244,15 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 3 + SEKCE PROJEKTY - VÝRAZNĚ LEVANDULOVÁ ===== -->
+    <!-- ===== BANNER 3 ===== -->
     <div class="program-banner p3" id="projekty-banner">
         <div class="container">
-            <a href="#projekty" style="text-decoration:none; display:block;">
-                <span class="program-number">✦ 03</span>
-                <h2>Život pro každou generaci</h2>
-            </a>
+            <span class="program-number">✦ 03</span>
+            <h2>Život pro každou generaci</h2>
         </div>
     </div>
 
+    <!-- ===== SEKCE PROJEKTY ===== -->
     <section class="section section-projekty" id="projekty">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-bullseye"></i> Na co se zaměříme</h2>
@@ -2293,23 +2374,22 @@
         </div>
     </section>
 
-    <!-- ===== BANNER 4 + SEKCE KDO JSME - VÝRAZNĚ MODRÁ ===== -->
+    <!-- ===== BANNER 4 - JEMNĚ MODRÁ ===== -->
     <div class="program-banner p4" id="kdo-banner">
         <div class="container">
-            <a href="#kdo-jsme" style="text-decoration:none; display:block;">
-                <span class="program-number">✦ 04</span>
-                <h2>Lidé, kteří za tím stojí</h2>
-            </a>
+            <span class="program-number">✦ 04</span>
+            <h2>Lidé, kteří za tím stojí</h2>
         </div>
     </div>
 
+    <!-- ===== SEKCE KDO JSME ===== -->
     <section class="section section-kdo" id="kdo-jsme">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-user-check"></i> Kdo jsme</h2>
             <p class="section-subtitle">Jsme vaši sousedé a známé tváře z obce. Spojuje nás chuť pracovat pro místo, kde žijeme.</p>
 
             <div class="candidates-list">
-                <!-- Kandidáti zůstávají stejní -->
+                <!-- Kandidáti -->
                 <div class="candidate-profile color-gold">
                     <div class="candidate-photo">
                         <div class="photo-placeholder">
@@ -2534,6 +2614,29 @@
                             <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KONTAKT ===== -->
+    <section class="section section-contact" id="kontakt">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-envelope"></i> Napište nám</h2>
+            <p class="section-subtitle">Máte nápad, připomínku nebo se chcete zapojit? Ozvěte se nám!</p>
+
+            <div style="max-width: 600px; margin: 0 auto; text-align: center; background: rgba(255,255,255,0.05); padding: 2.5rem 2rem; border-radius: var(--radius); border: 2px solid rgba(212, 160, 43, 0.15);">
+                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 0.8rem;">
+                    <i class="fas fa-envelope" style="color: var(--gold); margin-right: 0.6rem;"></i>
+                    <strong>nase.vesnice@email.cz</strong>
+                </p>
+                <p style="color: var(--text-muted); font-size: 1rem;">
+                    Napište nám svůj názor, nápad nebo dotaz. Rádi si přečteme, co nás napadá.
+                </p>
+                <div style="margin-top: 1.2rem; display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap;">
+                    <a href="mailto:nase.vesnice@email.cz" class="hero-btn hero-btn-primary" style="font-size: 0.95rem; padding: 0.6rem 2rem;">
+                        <i class="fas fa-paper-plane"></i> Napsat e-mail
+                    </a>
                 </div>
             </div>
         </div>
