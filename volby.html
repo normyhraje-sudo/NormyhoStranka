@@ -441,6 +441,151 @@
             margin-bottom: 0;
         }
 
+        /* ===== SLIBY VS SKUTKY ===== */
+        .sliby-container {
+            max-width: 900px;
+            margin: 4rem auto 0 auto;
+            padding-top: 3rem;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .sliby-container h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .sliby-container .sliby-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ===== DESKTOP - Tabulka ===== */
+        .sliby-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            background: #f8fafc;
+            border-radius: 2rem;
+            padding: 0.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 0.5rem;
+        }
+
+        .sliby-grid .sliby-header {
+            padding: 0.8rem;
+        }
+
+        .sliby-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            align-items: center;
+        }
+
+        .sliby-row:last-child {
+            border-bottom: none;
+        }
+
+        .sliby-row .sliby-text {
+            font-weight: 600;
+            color: #475569;
+            text-align: left;
+        }
+
+        .sliby-row .sliby-status {
+            text-align: right;
+        }
+
+        .sliby-row .sliby-status span {
+            padding: 0.3rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .status-hotovo {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-probiha {
+            background: #fef9c3;
+            color: #a16207;
+        }
+
+        .status-pripraveno {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        /* ===== MOBIL - Hezká přehledná verze ===== */
+        .sliby-mobile {
+            display: none;
+        }
+
+        .sliby-mobile-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .sliby-mobile-title i {
+            color: #fbbf24;
+        }
+
+        .sliby-mobile-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            gap: 1rem;
+        }
+
+        .sliby-mobile-item:last-child {
+            border-bottom: none;
+        }
+
+        .sliby-mobile-item .sliby-text-mobile {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.95rem;
+            flex: 1;
+            text-align: left;
+        }
+
+        .sliby-mobile-item .sliby-status-mobile {
+            flex-shrink: 0;
+        }
+
+        .sliby-mobile-item .sliby-status-mobile span {
+            padding: 0.2rem 1.2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .sliby-mobile-container {
+            background: #f8fafc;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
         /* ===== PROGRAMOVÉ BANNERY ===== */
         .program-banner {
             padding: 2.5rem 0;
@@ -615,6 +760,27 @@
             letter-spacing: 0.5px;
         }
 
+        /* ===== PROČ KANDIDUJEME ===== */
+        .proc-kandidujeme-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #1e293b;
+        }
+
+        .proc-kandidujeme-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .proc-kandidujeme-text .divider {
+            width: 80px;
+            height: 3px;
+            background: #fbbf24;
+            margin: 1.5rem auto;
+        }
+
         /* ===== BUBLINOVÁ GRID ===== */
         .bubbles-grid {
             display: grid;
@@ -707,7 +873,7 @@
             color: #f59e0b;
         }
 
-        /* ===== VOLBY KARTY ===== */
+        /* ===== VOLBY KARTY (PRIORITY) ===== */
         .volby-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -778,6 +944,10 @@
             flex: 1;
         }
 
+        .volby-card .volby-desc strong {
+            color: #0f172a;
+        }
+
         .volby-card .volby-footer {
             display: flex;
             align-items: center;
@@ -795,18 +965,6 @@
             padding: 0.2rem 1rem;
             border-radius: 9999px;
             letter-spacing: 0.5px;
-            background: #f1f5f9;
-            color: #64748b;
-        }
-
-        .volby-card .volby-hlas {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            padding: 0.2rem 1rem;
-            border-radius: 9999px;
             background: #f1f5f9;
             color: #64748b;
         }
@@ -982,6 +1140,10 @@
             font-size: 1rem;
             margin-bottom: 0.8rem;
             line-height: 1.7;
+        }
+
+        .candidate-info .bio strong {
+            color: #0f172a;
         }
 
         .candidate-priorities {
@@ -1177,10 +1339,6 @@
                 font-size: 0.85rem;
             }
 
-            .vesnice-section {
-                background: #ffffff;
-            }
-
             .vesnice-section h2 {
                 font-size: 2.2rem;
             }
@@ -1311,6 +1469,22 @@
 
             .candidate-info .bio {
                 font-size: 0.95rem;
+            }
+
+            .proc-kandidujeme-text {
+                font-size: 1.05rem;
+            }
+
+            /* ===== SLIBY VS SKUTKY - MOBIL (schováme desktop, ukážeme mobil) ===== */
+            .sliby-grid {
+                display: none !important;
+            }
+            .sliby-row {
+                display: none !important;
+            }
+
+            .sliby-mobile {
+                display: block !important;
             }
         }
 
@@ -1467,6 +1641,28 @@
                 font-size: 0.75rem;
                 padding: 0.15rem 0.8rem;
             }
+
+            .proc-kandidujeme-text {
+                font-size: 0.95rem;
+            }
+
+            /* ===== SLIBY MOBIL - DROBNÉ DOLADĚNÍ ===== */
+            .sliby-mobile-item .sliby-text-mobile {
+                font-size: 0.85rem;
+            }
+
+            .sliby-mobile-item .sliby-status-mobile span {
+                font-size: 0.75rem;
+                padding: 0.15rem 0.8rem;
+            }
+
+            .sliby-mobile-container {
+                padding: 1rem;
+            }
+
+            .sliby-mobile-title {
+                font-size: 1.1rem;
+            }
         }
 
         /* ===== DOTYKOVÉ OPTIMALIZACE ===== */
@@ -1506,11 +1702,10 @@
             </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home"><i class="fas fa-home"></i> Domů</a></li>
-                <li><a href="#co-jsme-udelali"><i class="fas fa-check-circle"></i> Co jsme udělali</a></li>
-                <li><a href="#proc-pokracovat"><i class="fas fa-question-circle"></i> Proč pokračovat</a></li>
+                <li><a href="#co-jsme-udelali"><i class="fas fa-check-circle"></i> Co jsme dokázali</a></li>
+                <li><a href="#proc-pokracovat"><i class="fas fa-compass"></i> Proč pokračovat</a></li>
                 <li><a href="#co-chystame"><i class="fas fa-calendar-alt"></i> Co chystáme</a></li>
-                <li><a href="#projekty"><i class="fas fa-bullseye"></i> Priority</a></li>
-                <li><a href="#kdo-jsme"><i class="fas fa-user-check"></i> Náš tým</a></li>
+                <li><a href="#kdo-jsme"><i class="fas fa-user-check"></i> Kandidáti</a></li>
             </ul>
         </div>
     </nav>
@@ -1520,26 +1715,59 @@
         <div class="hero-content">
             <span class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</span>
             <h1>Máme za sebou kus práce. <br /><span class="highlight">S vámi chceme pokračovat.</span></h1>
+            
+            <p style="font-size: 1.2rem; font-weight: 600; color: #0f172a; max-width: 600px; margin: -0.5rem auto 1.5rem auto;">
+                Co jsme slíbili, to jsme začali dělat. Teď chceme dokončit, co jsme rozjeli.
+            </p>
+            
             <p>Stabilizovali jsme skalní svah, zprovoznili nový rybníček a dokončujeme kanalizaci. Čistá se mění k lepšímu. Pojďte s námi dotáhnout další projekty, které dávají smysl.</p>
+
+            <div style="margin-top: 1.5rem;">
+                <a href="#co-jsme-udelali" 
+                   style="
+                       display: inline-flex;
+                       align-items: center;
+                       gap: 0.8rem;
+                       background: #fbbf24;
+                       color: #0f172a;
+                       font-weight: 800;
+                       font-size: 1.1rem;
+                       padding: 0.8rem 2.5rem;
+                       border-radius: 9999px;
+                       text-decoration: none;
+                       box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+                       transition: all 0.3s ease;
+                       border: 2px solid transparent;
+                       touch-action: manipulation;
+                   "
+                   onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 30px rgba(251, 191, 36, 0.5)';"
+                   onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(251, 191, 36, 0.3)';"
+                   onmousedown="this.style.transform='scale(0.95)'"
+                   onmouseup="this.style.transform='scale(1.05)'"
+                >
+                    <span>CO JSME DOKÁZALI</span>
+                    <i class="fas fa-arrow-right" style="font-size: 0.9rem;"></i>
+                </a>
+            </div>
 
             <div class="exp-grid">
                 <div class="exp-card">
-                    <span class="exp-emoji">👥</span>
-                    <span class="exp-number">900</span>
-                    <span class="exp-label">obyvatel</span>
-                    <span class="exp-desc">každý hlas se počítá</span>
+                    <span class="exp-emoji">💰</span>
+                    <span class="exp-number">10+ mil.</span>
+                    <span class="exp-label">investováno do obce</span>
+                    <span class="exp-desc">z evropských dotací</span>
                 </div>
                 <div class="exp-card">
                     <span class="exp-emoji">🏗️</span>
-                    <span class="exp-number">10+</span>
-                    <span class="exp-label">milionů na projektech</span>
-                    <span class="exp-desc">dotace pro obec</span>
-                </div>
-                <div class="exp-card">
-                    <span class="exp-emoji">🌳</span>
                     <span class="exp-number">3</span>
                     <span class="exp-label">velké projekty</span>
-                    <span class="exp-desc">svah, rybník, kanalizace</span>
+                    <span class="exp-desc">které jsme posunuli</span>
+                </div>
+                <div class="exp-card">
+                    <span class="exp-emoji">⏳</span>
+                    <span class="exp-number">4 roky</span>
+                    <span class="exp-label">práce pro Čistou</span>
+                    <span class="exp-desc">s výsledky</span>
                 </div>
                 <div class="exp-card">
                     <span class="exp-emoji">🤝</span>
@@ -1548,10 +1776,15 @@
                     <span class="exp-desc">rozhodujeme s vámi</span>
                 </div>
             </div>
+            
+            <p style="margin-top: 2.5rem; font-size: 1.1rem; font-weight: 500; color: #475569; border-top: 2px solid #e2e8f0; padding-top: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                <i class="fas fa-quote-left" style="color: #fbbf24; margin-right: 0.5rem;"></i>
+                Nechceme vám říkat, co jednou uděláme. Chceme ukázat, co už jsme udělali.
+            </p>
         </div>
     </header>
 
-    <!-- ===== SEKCE: CO JSME UDĚLALI ===== -->
+    <!-- ===== SEKCE: CO JSME DOKÁZALI (včetně Sliby vs. Skutky) ===== -->
     <section class="vesnice-section" id="co-jsme-udelali">
         <div class="container">
             <span class="section-tag"><i class="fas fa-rocket"></i> Co se v Čisté povedlo</span>
@@ -1600,20 +1833,99 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ===== SLIBY VS SKUTKY ===== -->
+            <div class="sliby-container">
+                <h3><i class="fas fa-check-double" style="color: #fbbf24;"></i> Co jsme řekli, to jsme udělali</h3>
+                <p class="sliby-subtitle">Žádné prázdné sliby, jen výsledky.</p>
+
+                <!-- ===== DESKTOP - Tabulka ===== -->
+                <div class="sliby-grid">
+                    <div class="sliby-header">CO JSME SLÍBILI</div>
+                    <div class="sliby-header">CO JSME UDĚLALI</div>
+                </div>
+
+                <div class="sliby-row">
+                    <div class="sliby-text">Opravit skalní svah u domů čp. 91 a 92</div>
+                    <div class="sliby-status"><span class="status-hotovo">✅ Hotovo</span></div>
+                </div>
+
+                <div class="sliby-row">
+                    <div class="sliby-text">Vybudovat nový rybníček pro zadržování vody</div>
+                    <div class="sliby-status"><span class="status-hotovo">✅ Hotovo</span></div>
+                </div>
+
+                <div class="sliby-row">
+                    <div class="sliby-text">Modernizace kanalizace a oprava cest</div>
+                    <div class="sliby-status"><span class="status-probiha">🟡 Probíhá</span></div>
+                </div>
+
+                <div class="sliby-row">
+                    <div class="sliby-text">Vysadit novou zeleň a pečovat o veřejný prostor</div>
+                    <div class="sliby-status"><span class="status-pripraveno">🔵 Připraveno</span></div>
+                </div>
+
+                <!-- ===== MOBIL - Hezká přehledná verze ===== -->
+                <div class="sliby-mobile">
+                    <div class="sliby-mobile-container">
+                        <div class="sliby-mobile-title">
+                            <i class="fas fa-check-double"></i> ✅ Řekli jsme → udělali jsme
+                        </div>
+                        
+                        <div class="sliby-mobile-item">
+                            <span class="sliby-text-mobile">Opravit skalní svah u domů čp. 91 a 92</span>
+                            <span class="sliby-status-mobile"><span class="status-hotovo">✅ Hotovo</span></span>
+                        </div>
+
+                        <div class="sliby-mobile-item">
+                            <span class="sliby-text-mobile">Vybudovat nový rybníček pro zadržování vody</span>
+                            <span class="sliby-status-mobile"><span class="status-hotovo">✅ Hotovo</span></span>
+                        </div>
+
+                        <div class="sliby-mobile-item">
+                            <span class="sliby-text-mobile">Modernizace kanalizace a oprava cest</span>
+                            <span class="sliby-status-mobile"><span class="status-probiha">🟡 Probíhá</span></span>
+                        </div>
+
+                        <div class="sliby-mobile-item">
+                            <span class="sliby-text-mobile">Vysadit novou zeleň a pečovat o veřejný prostor</span>
+                            <span class="sliby-status-mobile"><span class="status-pripraveno">🔵 Připraveno</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ===== PROGRAM 1 ===== -->
+    <!-- ===== PROGRAM 1: PROČ POKRAČOVAT (včetně Proč kandidujeme) ===== -->
     <div class="program-banner" id="proc-banner">
         <div class="container">
             <span class="program-number">✦ 01</span>
-            <h2>Proč dál s námi</h2>
+            <h2>Proč s námi dál</h2>
         </div>
     </div>
 
     <section class="section section-alt" id="proc-pokracovat">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-compass"></i> Proč se nám v Čisté dobře žije</h2>
+            <!-- ===== PROČ KANDIDUJEME (ZKRÁCENO) ===== -->
+            <h2 class="section-title"><i class="fas fa-heart" style="color: #fbbf24;"></i> Proč kandidujeme</h2>
+            <div class="proc-kandidujeme-text">
+                <p>
+                    <strong style="color: #0f172a;">Čistá je náš domov.</strong> 
+                    Chceme, aby se tu dobře žilo všem.
+                </p>
+                <p>
+                    Neslibujeme nemožné. 
+                    <strong style="color: #fbbf24;">Chceme pokračovat v projektech, které dávají smysl.</strong>
+                </p>
+                <div class="divider"></div>
+                <p style="font-weight: 600; color: #0f172a;">
+                    Společně tvoříme budoucnost. A ta začíná tady, v Čisté.
+                </p>
+            </div>
+
+            <!-- ===== 4 DŮVODY ===== -->
+            <h2 class="section-title" style="margin-top: 4rem;"><i class="fas fa-compass"></i> Proč se nám v Čisté dobře žije</h2>
             <p class="section-subtitle">Dobrá vesnice nestojí na pár lidech, ale na všech, kteří tu bydlí. Rádi nasloucháme, hledáme řešení a hlavně – dotahujeme věci do konce.</p>
 
             <div class="why-grid">
@@ -1649,7 +1961,7 @@
         </div>
     </section>
 
-    <!-- ===== PROGRAM 2 ===== -->
+    <!-- ===== PROGRAM 2: CO CHYSTÁME (včetně PRIORIT) ===== -->
     <div class="program-banner" id="co-banner">
         <div class="container">
             <span class="program-number">✦ 02</span>
@@ -1657,9 +1969,9 @@
         </div>
     </div>
 
-    <!-- ===== CO CHYSTÁME - 8 BUBLINEK ===== -->
     <section class="section" id="co-chystame" style="background: #fafbfc;">
         <div class="container">
+            <!-- ===== 8 BUBLINEK ===== -->
             <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Na čem zrovna makáme</h2>
             <p class="section-subtitle">Přehled konkrétních akcí a projektů pro nejbližší období. Těšíme se na vaše nápady!</p>
 
@@ -1720,451 +2032,475 @@
                     <span class="bubble-tag">Modernizujeme</span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ===== PROGRAM 3 ===== -->
-    <div class="program-banner" id="projekty-banner">
-        <div class="container">
-            <span class="program-number">✦ 03</span>
-            <h2>Naše priority pro Čistou</h2>
-        </div>
-    </div>
+            <!-- ===== PRIORITY (podsekce) ===== -->
+            <div style="margin-top: 4rem; padding-top: 3rem; border-top: 2px solid #e2e8f0;">
+                <h2 class="section-title" style="margin-bottom: 0.5rem;"><i class="fas fa-bullseye"></i> Naše priority pro Čistou</h2>
+                <p class="section-subtitle" style="margin-bottom: 3rem;">Máme jasný plán na další 4 roky. Tohle jsou naše hlavní cíle.</p>
 
-    <section class="section section-alt" id="projekty">
-        <div class="container">
-            <h2 class="section-title"><i class="fas fa-bullseye"></i> Tohle jsou naše priority</h2>
-            <p class="section-subtitle">Držíme se toho, co dává smysl. Dlouhodobé cíle, které posouvají celou obec kupředu.</p>
+                <div class="volby-grid">
+                    <div class="volby-card">
+                        <span class="volby-icon">🚶</span>
+                        <h3 class="volby-title">01 — Doprava a bezpečnost</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Dokončení oprav cest po kanalizaci<br>
+                            <strong>•</strong> Oprava chodníků v celé obci<br>
+                            <strong>•</strong> Posílení veřejného osvětlení
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
+                    </div>
 
-            <!-- ===== DESKTOP ===== -->
-            <div class="volby-grid">
-                <div class="volby-card">
-                    <span class="volby-icon">🌳</span>
-                    <h3 class="volby-title">Zeleň a vzhled obce</h3>
-                    <p class="volby-desc">Vysazujeme stromy, pečujeme o veřejná prostranství a opravujeme fasády obecních budov.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Dlouhodobě</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 92 %</span>
+                    <div class="volby-card">
+                        <span class="volby-icon">🌳</span>
+                        <h3 class="volby-title">02 — Veřejný prostor a zeleň</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Péče o novou zeleň a stromy<br>
+                            <strong>•</strong> Údržba rybníčku a okolí<br>
+                            <strong>•</strong> Revitalizace návsi
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
+                    </div>
+
+                    <div class="volby-card">
+                        <span class="volby-icon">💧</span>
+                        <h3 class="volby-title">03 — Životní prostředí</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Zadržování vody v krajině<br>
+                            <strong>•</strong> Podpora ekologických projektů<br>
+                            <strong>•</strong> Spolupráce s farmáři
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
+                    </div>
+
+                    <div class="volby-card">
+                        <span class="volby-icon">💻</span>
+                        <h3 class="volby-title">04 — Obecní služby a modernizace</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Nový obecní web a aplikace<br>
+                            <strong>•</strong> Digitální komunikace s občany<br>
+                            <strong>•</strong> Moderní úřad bez zbytečné administrativy
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
+                    </div>
+
+                    <div class="volby-card">
+                        <span class="volby-icon">👨‍👩‍👧‍👦</span>
+                        <h3 class="volby-title">05 — Rodina a vzdělávání</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Podpora mateřské školy<br>
+                            <strong>•</strong> Rozšíření kroužků pro děti<br>
+                            <strong>•</strong> Aktivity pro seniory
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
+                    </div>
+
+                    <div class="volby-card">
+                        <span class="volby-icon">🎭</span>
+                        <h3 class="volby-title">06 — Kultura a spolky</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Finanční podpora místních spolků<br>
+                            <strong>•</strong> Organizace kulturních akcí<br>
+                            <strong>•</strong> Komunitní setkávání
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="volby-card">
-                    <span class="volby-icon">👨‍👩‍👧‍👦</span>
-                    <h3 class="volby-title">Rodinné zázemí</h3>
-                    <p class="volby-desc">Rozšiřujeme nabídku kroužků, podporujeme školku a vytváříme prostor pro mladé rodiny.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Rozšiřujeme</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 78 %</span>
+                <div class="volby-scroll-mobile">
+                    <div class="volby-card">
+                        <span class="volby-icon">🚶</span>
+                        <h3 class="volby-title">01 — Doprava</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Dokončení oprav cest<br>
+                            <strong>•</strong> Oprava chodníků<br>
+                            <strong>•</strong> Posílení osvětlení
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="volby-card">
-                    <span class="volby-icon">🚶</span>
-                    <h3 class="volby-title">Bezpečnost</h3>
-                    <p class="volby-desc">Opravujeme chodníky, přidáváme veřejné osvětlení a řešíme dopravu v obci.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Chystáme opravy</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 85 %</span>
+                    <div class="volby-card">
+                        <span class="volby-icon">🌳</span>
+                        <h3 class="volby-title">02 — Veřejný prostor</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Péče o zeleň<br>
+                            <strong>•</strong> Údržba rybníčku<br>
+                            <strong>•</strong> Revitalizace návsi
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="volby-card">
-                    <span class="volby-icon">🚴</span>
-                    <h3 class="volby-title">Propojení s okolím</h3>
-                    <p class="volby-desc">Budujeme stezky a zastávky, abyste se dostali kamkoli bez auta.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Spolupracujeme</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 71 %</span>
+                    <div class="volby-card">
+                        <span class="volby-icon">💧</span>
+                        <h3 class="volby-title">03 — Životní prostředí</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Zadržování vody<br>
+                            <strong>•</strong> Podpora ekologie<br>
+                            <strong>•</strong> Spolupráce s farmáři
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="volby-card">
-                    <span class="volby-icon">💻</span>
-                    <h3 class="volby-title">Služby online</h3>
-                    <p class="volby-desc">Veškeré formuláře a důležité informace najdete na jednom místě. Úřad moderně a rychle.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Spouštíme</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 88 %</span>
+                    <div class="volby-card">
+                        <span class="volby-icon">💻</span>
+                        <h3 class="volby-title">04 — Obecní služby</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Nový web a aplikace<br>
+                            <strong>•</strong> Digitální komunikace<br>
+                            <strong>•</strong> Moderní úřad
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="volby-card">
-                    <span class="volby-icon">🎭</span>
-                    <h3 class="volby-title">Kultura a spolky</h3>
-                    <p class="volby-desc">Finančně i organizačně podporujeme všechny spolky a akce, které dělají vesnici živou.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Podporujeme</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 76 %</span>
+                    <div class="volby-card">
+                        <span class="volby-icon">👨‍👩‍👧‍👦</span>
+                        <h3 class="volby-title">05 — Rodina</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Podpora školky<br>
+                            <strong>•</strong> Rozšíření kroužků<br>
+                            <strong>•</strong> Aktivity pro seniory
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
+                    </div>
+
+                    <div class="volby-card">
+                        <span class="volby-icon">🎭</span>
+                        <h3 class="volby-title">06 — Kultura</h3>
+                        <p class="volby-desc">
+                            <strong>•</strong> Podpora spolků<br>
+                            <strong>•</strong> Kulturní akce<br>
+                            <strong>•</strong> Komunitní setkávání
+                        </p>
+                        <div class="volby-footer">
+                            <span class="volby-tag">Dlouhodobá priorita</span>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- ===== MOBIL ===== -->
-            <div class="volby-scroll-mobile">
-                <div class="volby-card">
-                    <span class="volby-icon">🌳</span>
-                    <h3 class="volby-title">Zeleň a vzhled obce</h3>
-                    <p class="volby-desc">Vysazujeme stromy, pečujeme o veřejná prostranství.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Dlouhodobě</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 92 %</span>
-                    </div>
-                </div>
-
-                <div class="volby-card">
-                    <span class="volby-icon">👨‍👩‍👧‍👦</span>
-                    <h3 class="volby-title">Rodinné zázemí</h3>
-                    <p class="volby-desc">Rozšiřujeme nabídku kroužků a podporujeme školku.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Rozšiřujeme</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 78 %</span>
-                    </div>
-                </div>
-
-                <div class="volby-card">
-                    <span class="volby-icon">🚶</span>
-                    <h3 class="volby-title">Bezpečnost</h3>
-                    <p class="volby-desc">Opravujeme chodníky a přidáváme veřejné osvětlení.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Chystáme opravy</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 85 %</span>
-                    </div>
-                </div>
-
-                <div class="volby-card">
-                    <span class="volby-icon">🚴</span>
-                    <h3 class="volby-title">Propojení s okolím</h3>
-                    <p class="volby-desc">Budujeme stezky a zastávky bez nutnosti auta.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Spolupracujeme</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 71 %</span>
-                    </div>
-                </div>
-
-                <div class="volby-card">
-                    <span class="volby-icon">💻</span>
-                    <h3 class="volby-title">Služby online</h3>
-                    <p class="volby-desc">Formuláře a informace na jednom místě. Úřad moderně.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Spouštíme</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 88 %</span>
-                    </div>
-                </div>
-
-                <div class="volby-card">
-                    <span class="volby-icon">🎭</span>
-                    <h3 class="volby-title">Kultura a spolky</h3>
-                    <p class="volby-desc">Podporujeme spolky a akce, které dělají vesnici živou.</p>
-                    <div class="volby-footer">
-                        <span class="volby-tag">Podporujeme</span>
-                        <span class="volby-hlas"><i class="fas fa-thumbs-up"></i> 76 %</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- ===== PROGRAM 4 ===== -->
+    <!-- ===== PROGRAM 3: KANDIDÁTI ===== -->
     <div class="program-banner" id="kdo-banner">
         <div class="container">
-            <span class="program-number">✦ 04</span>
+            <span class="program-number">✦ 03</span>
             <h2>Lidé, kteří to tu znají</h2>
         </div>
     </div>
 
-<section class="section" id="kdo-jsme">
-    <div class="container">
-        <h2 class="section-title"><i class="fas fa-user-check"></i> Potkejte náš tým</h2>
-        <p class="section-subtitle">Nejsme žádní cizí lidé. Jsme vaši sousedé, známé tváře z ulice, hospody i fotbalového hřiště. Pojďte si s námi promluvit.</p>
+    <section class="section" id="kdo-jsme">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-user-check"></i> Potkejte náš tým</h2>
+            <p class="section-subtitle">Nejsme žádní cizí lidé. Jsme vaši sousedé, známé tváře z ulice, hospody i fotbalového hřiště. Pojďte si s námi promluvit.</p>
 
-        <div class="candidates-list">
-            
-            <!-- 1. Starosta -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user-tie"></i>
-                        Foto
+            <div class="candidates-list">
+                
+                <!-- 1. Starosta -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user-tie"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#1</span>
+                            <span class="candidate-tag">⭐ Starosta</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👨‍💼</span> Radim Zelenka</h3>
+                        <div class="position">Starosta obce Čistá</div>
+                        <p class="bio"><strong>„V Čisté žiji 28 let. Zajímá mě především rozvoj obce a udržitelné projekty. Vedeme obec s rozmyslem a pokorou. Věřím, že Čistá má obrovský potenciál a těší mě, že ho můžeme společně rozvíjet. Rád se potkávám s lidmi a naslouchám jejich nápadům.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Rozvoj obce</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Dotace</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Spolupráce</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
                     </div>
                 </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#1</span>
-                        <span class="candidate-tag">⭐ Starosta</span>
+
+                <!-- 2. Místostarosta -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user-tie"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
                     </div>
-                    <h3><span class="candidate-emoji">👨‍💼</span> Radim Zelenka</h3>
-                    <div class="position">Starosta obce Čistá</div>
-                    <p class="bio">Vedeme obec už 4 roky s rozmyslem a pokorou. Věřím, že Čistá má obrovský potenciál a těší mě, že ho můžeme společně rozvíjet. Rád se potkávám s lidmi a naslouchám jejich nápadům.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Rozvoj obce</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Dotace</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Spolupráce</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#2</span>
+                            <span class="candidate-tag">⭐ Místostarosta</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👨‍💼</span> Ondřej Klimeš</h3>
+                        <div class="position">Místostarosta obce Čistá</div>
+                        <p class="bio"><strong>„Jsem tu pro vás a pro rozvoj naší obce. Mám rád, když se věci daří dotahovat do konce a vidím výsledky. Společně s vámi chceme pokračovat v nastoleném kurzu.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Infrastruktura</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Bezpečnost</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Komunikace</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
                     </div>
                 </div>
+
+                <!-- 3. Zastupitelka - zeleň -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#3</span>
+                            <span class="candidate-tag">🌿 Zastupitelka</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👩‍💼</span> Simona Vávrová</h3>
+                        <div class="position">Zastupitelka obce</div>
+                        <p class="bio"><strong>„Zeleň a veřejný prostor jsou moje srdcová záležitost. Pečuji o to, aby byla Čistá hezká a příjemná pro všechny. Ráda se starám o kulturní akce a setkávání sousedů.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Zeleň</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Kultura</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Komunita</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Zastupitel - technika -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#4</span>
+                            <span class="candidate-tag">🏗️ Zastupitel</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👨‍💼</span> František Dvořák</h3>
+                        <div class="position">Zastupitel obce</div>
+                        <p class="bio"><strong>„Stavby a technické záležitosti jsou mi blízké. Mám radost, když vidím, jak se Čistá mění k lepšímu. Kanalizace, cesty, veřejné osvětlení – to je moje parketa.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Doprava</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Technika</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Řemeslo</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Zastupitelka - vzdělání -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#5</span>
+                            <span class="candidate-tag">📚 Zastupitelka</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👩‍🎓</span> Irena Krátká</h3>
+                        <div class="position">Zastupitelka obce</div>
+                        <p class="bio"><strong>„Vzdělávání a rodina jsou pro mě prioritou. Chci, aby se v Čisté dobře žilo všem generacím. Podporuji školku, kroužky a aktivity pro děti i seniory.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Vzdělávání</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Rodina</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Spolky</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Zastupitel - IT -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#6</span>
+                            <span class="candidate-tag">💻 Zastupitel</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👨‍💻</span> Lukáš Morávek</h3>
+                        <div class="position">Zastupitel obce</div>
+                        <p class="bio"><strong>„Moderní technologie a digitální služby jsou mou doménou. Chci, aby byla Čistá připravená na 21. století. Pracuji na novém webu a digitálním rozhlasu.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Digitální služby</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Web</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Komunikace</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Zastupitel - zemědělec -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#7</span>
+                            <span class="candidate-tag">🌾 Zastupitel</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👨‍🌾</span> Vilém Syrový</h3>
+                        <div class="position">Zastupitel obce</div>
+                        <p class="bio"><strong>„Zemědělství a péče o krajinu jsou mi blízké. Vím, jak důležité je zdravé okolí pro naši obec. Podporuji místní farmáře a ekologické projekty.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Krajina</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Zemědělství</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Ekologie</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Zastupitel - zdravotnictví -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user-md"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#8</span>
+                            <span class="candidate-tag">🏥 Zastupitel</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👨‍⚕️</span> Jakub Hanuš</h3>
+                        <div class="position">Zastupitel obce</div>
+                        <p class="bio"><strong>„Zdraví a prevence jsou základem spokojeného života. Chci podpořit dostupnost zdravotní péče, prevenci a aktivity pro seniory. Čistá by měla být bezpečná pro všechny generace.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Zdravotní péče</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Prevence</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Seniori</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. Zastupitelka - kultura -->
+                <div class="candidate-profile">
+                    <div class="candidate-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-palette"></i>
+                            <span style="display:block; font-size:0.7rem;">FOTO</span>
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <div>
+                            <span class="candidate-number">#9</span>
+                            <span class="candidate-tag">🎨 Zastupitelka</span>
+                        </div>
+                        <h3><span class="candidate-emoji">👩‍🎨</span> Žaneta Horáková</h3>
+                        <div class="position">Zastupitelka obce</div>
+                        <p class="bio"><strong>„Kultura a mládež jsou moje srdcová záležitost. Chci, aby měla Čistá živý kulturní program, místo pro mladé a prostor pro tvoření. Máme skvělé nápady a chuť je realizovat.“</strong></p>
+                        <div class="candidate-priorities">
+                            <span class="priority"><i class="fas fa-circle"></i> Kultura</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Mládež</span>
+                            <span class="priority"><i class="fas fa-circle"></i> Kreativita</span>
+                        </div>
+                        <div class="candidate-social">
+                            <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-            <!-- 2. Místostarosta -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user-tie"></i>
-                        Foto
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#2</span>
-                        <span class="candidate-tag">⭐ Místostarosta</span>
-                    </div>
-                    <h3><span class="candidate-emoji">👨‍💼</span> Ondřej Klimeš</h3>
-                    <div class="position">Místostarosta obce Čistá</div>
-                    <p class="bio">Jsem tu pro vás a pro rozvoj naší obce. Mám rád, když se věci daří dotahovat do konce a vidím výsledky. Společně s vámi chceme pokračovat v nastoleném kurzu.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Infrastruktura</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Bezpečnost</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Komunikace</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Zastupitelka - zeleň -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user"></i>
-                        Foto
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#3</span>
-                        <span class="candidate-tag">🌿 Zastupitelka</span>
-                    </div>
-                    <h3><span class="candidate-emoji">👩‍💼</span> Simona Vávrová</h3>
-                    <div class="position">Zastupitelka obce</div>
-                    <p class="bio">Zeleň a veřejný prostor jsou moje srdcová záležitost. Pečuji o to, aby byla Čistá hezká a příjemná pro všechny. Ráda se starám o kulturní akce a setkávání sousedů.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Zeleň</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Kultura</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Komunita</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Zastupitel - technika -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user"></i>
-                        Foto
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#4</span>
-                        <span class="candidate-tag">🏗️ Zastupitel</span>
-                    </div>
-                    <h3><span class="candidate-emoji">👨‍💼</span> František Dvořák</h3>
-                    <div class="position">Zastupitel obce</div>
-                    <p class="bio">Stavby a technické záležitosti jsou mi blízké. Mám radost, když vidím, jak se Čistá mění k lepšímu. Kanalizace, cesty, veřejné osvětlení – to je moje parketa.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Doprava</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Technika</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Řemeslo</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. Zastupitelka - vzdělání -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user"></i>
-                        Foto
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#5</span>
-                        <span class="candidate-tag">📚 Zastupitelka</span>
-                    </div>
-                    <h3><span class="candidate-emoji">👩‍🎓</span> Irena Krátká</h3>
-                    <div class="position">Zastupitelka obce</div>
-                    <p class="bio">Vzdělávání a rodina jsou pro mě prioritou. Chci, aby se v Čisté dobře žilo všem generacím. Podporuji školku, kroužky a aktivity pro děti i seniory.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Vzdělávání</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Rodina</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Spolky</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. Zastupitel - IT -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user"></i>
-                        Foto
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#6</span>
-                        <span class="candidate-tag">💻 Zastupitel</span>
-                    </div>
-                    <h3><span class="candidate-emoji">👨‍💻</span> Lukáš Morávek</h3>
-                    <div class="position">Zastupitel obce</div>
-                    <p class="bio">Moderní technologie a digitální služby jsou mou doménou. Chci, aby byla Čistá připravená na 21. století. Pracuji na novém webu a digitálním rozhlasu.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Digitální služby</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Web</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Komunikace</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7. Zastupitel - zemědělec -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user"></i>
-                        Foto
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#7</span>
-                        <span class="candidate-tag">🌾 Zastupitel</span>
-                    </div>
-                    <h3><span class="candidate-emoji">👨‍🌾</span> Vilém Syrový</h3>
-                    <div class="position">Zastupitel obce</div>
-                    <p class="bio">Zemědělství a péče o krajinu jsou mi blízké. Vím, jak důležité je zdravé okolí pro naši obec. Podporuji místní farmáře a ekologické projekty.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Krajina</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Zemědělství</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Ekologie</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 8. Zastupitel - zdravotnictví -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-user-md"></i>
-                        Foto
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#8</span>
-                        <span class="candidate-tag">🏥 Zastupitel</span>
-                    </div>
-                    <h3><span class="candidate-emoji">👨‍⚕️</span> Jakub Hanuš</h3>
-                    <div class="position">Zastupitel obce</div>
-                    <p class="bio">Zdraví a prevence jsou základem spokojeného života. Chci podpořit dostupnost zdravotní péče, prevenci a aktivity pro seniory. Čistá by měla být bezpečná pro všechny generace.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Zdravotní péče</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Prevence</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Seniori</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 9. Zastupitelka - kultura -->
-            <div class="candidate-profile">
-                <div class="candidate-photo">
-                    <div class="photo-placeholder">
-                        <i class="fas fa-palette"></i>
-                        Foto
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <div>
-                        <span class="candidate-number">#9</span>
-                        <span class="candidate-tag">🎨 Zastupitelka</span>
-                    </div>
-                    <h3><span class="candidate-emoji">👩‍🎨</span> Žaneta Horáková</h3>
-                    <div class="position">Zastupitelka obce</div>
-                    <p class="bio">Kultura a mládež jsou moje srdcová záležitost. Chci, aby měla Čistá živý kulturní program, místo pro mladé a prostor pro tvoření. Máme skvělé nápady a chuť je realizovat.</p>
-                    <div class="candidate-priorities">
-                        <span class="priority"><i class="fas fa-circle"></i> Kultura</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Mládež</span>
-                        <span class="priority"><i class="fas fa-circle"></i> Kreativita</span>
-                    </div>
-                    <div class="candidate-social">
-                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ===== PATIČKA ===== -->
-<footer class="footer">
-    <div class="container">
-        <!-- ===== TLAČÍTKO NA HRY ===== -->
-        <div style="margin-bottom: 1.5rem; display: flex; justify-content: center;">
-            <a href="hra.html" 
-               style="
-                   display: inline-flex;
-                   align-items: center;
-                   gap: 0.8rem;
-                   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-                   color: #0f172a;
-                   font-weight: 800;
-                   font-size: 1.1rem;
-                   padding: 0.8rem 2.5rem;
-                   border-radius: 9999px;
-                   text-decoration: none;
-                   box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
-                   transition: all 0.3s ease;
-                   border: 2px solid transparent;
-                   touch-action: manipulation;
-               "
-               onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 30px rgba(251, 191, 36, 0.5)';"
-               onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(251, 191, 36, 0.4)';"
-               onmousedown="this.style.transform='scale(0.95)'"
-               onmouseup="this.style.transform='scale(1.05)'"
-            >
-                <i class="fas fa-gamepad" style="font-size: 1.6rem;"></i>
-                <span>Zahrajte si s námi hry</span>
-                <i class="fas fa-arrow-right" style="font-size: 0.9rem;"></i>
-            </a>
+    <!-- ===== PATIČKA ===== -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div style="margin-bottom: 1.5rem; display: flex; justify-content: center;">
+                <a href="hra.html" 
+                   style="
+                       display: inline-flex;
+                       align-items: center;
+                       gap: 0.8rem;
+                       background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+                       color: #0f172a;
+                       font-weight: 800;
+                       font-size: 1.1rem;
+                       padding: 0.8rem 2.5rem;
+                       border-radius: 9999px;
+                       text-decoration: none;
+                       box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+                       transition: all 0.3s ease;
+                       border: 2px solid transparent;
+                       touch-action: manipulation;
+                   "
+                   onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 30px rgba(251, 191, 36, 0.5)';"
+                   onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(251, 191, 36, 0.4)';"
+                   onmousedown="this.style.transform='scale(0.95)'"
+                   onmouseup="this.style.transform='scale(1.05)'"
+                >
+                    <i class="fas fa-gamepad" style="font-size: 1.6rem;"></i>
+                    <span>Zahrajte si s námi hry</span>
+                    <i class="fas fa-arrow-right" style="font-size: 0.9rem;"></i>
+                </a>
+            </div>
+
+            <p><i class="fas fa-flag"></i> Naše Čistá – společně tvoříme budoucnost &copy; 2026</p>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem;">
+                <i class="fas fa-envelope"></i> obec.cista@email.cz &nbsp;|&nbsp; <i class="fas fa-phone"></i> 326 123 456
+            </p>
         </div>
-
-        <p><i class="fas fa-flag"></i> Naše Čistá – společně tvoříme budoucnost &copy; 2026</p>
-        <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem;">
-            <i class="fas fa-envelope"></i> obec.cista@email.cz &nbsp;|&nbsp; <i class="fas fa-phone"></i> 326 123 456
-        </p>
-    </div>
-</footer>
+    </footer>
 
     <!-- ===== SCRIPTS ===== -->
     <script>
