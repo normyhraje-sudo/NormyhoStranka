@@ -204,13 +204,6 @@
             position: relative;
         }
 
-        .hero p {
-            font-size: 1.3rem;
-            color: #64748b;
-            max-width: 700px;
-            margin: 0 auto 2.5rem auto;
-        }
-
         .hero .badge {
             display: inline-block;
             background-color: #fbbf24;
@@ -284,6 +277,14 @@
             opacity: 0.6;
             margin-top: 0.2rem;
             display: block;
+        }
+
+        .hero-text {
+            max-width: 800px;
+            margin: 2.5rem auto 0 auto;
+            font-size: 1.2rem;
+            color: #475569;
+            line-height: 1.8;
         }
 
         /* ===== SEKCE "CO JSME UDĚLALI" ===== */
@@ -1293,10 +1294,6 @@
                 font-size: 2.4rem;
             }
 
-            .hero p {
-                font-size: 1.05rem;
-            }
-
             .section-title {
                 font-size: 2.2rem;
                 margin-bottom: 2rem;
@@ -1475,7 +1472,7 @@
                 font-size: 1.05rem;
             }
 
-            /* ===== SLIBY VS SKUTKY - MOBIL (schováme desktop, ukážeme mobil) ===== */
+            /* ===== SLIBY VS SKUTKY - MOBIL ===== */
             .sliby-grid {
                 display: none !important;
             }
@@ -1500,36 +1497,6 @@
             .hero .badge {
                 font-size: 0.75rem;
                 padding: 0.3rem 1.2rem;
-            }
-
-            .hero p {
-                font-size: 0.95rem;
-            }
-
-            .exp-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 0.5rem;
-            }
-
-            .exp-card {
-                padding: 1rem 0.6rem;
-                border-radius: 1.2rem;
-            }
-
-            .exp-card .exp-number {
-                font-size: 1.5rem;
-            }
-
-            .exp-card .exp-label {
-                font-size: 0.75rem;
-            }
-
-            .exp-card .exp-desc {
-                font-size: 0.65rem;
-            }
-
-            .exp-card .exp-emoji {
-                font-size: 1.5rem;
             }
 
             .program-banner h2 {
@@ -1585,6 +1552,32 @@
 
             .timeline-osa-item .osa-icon {
                 font-size: 1.8rem;
+            }
+
+            .exp-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+
+            .exp-card {
+                padding: 1rem 0.6rem;
+                border-radius: 1.2rem;
+            }
+
+            .exp-card .exp-number {
+                font-size: 1.5rem;
+            }
+
+            .exp-card .exp-label {
+                font-size: 0.75rem;
+            }
+
+            .exp-card .exp-desc {
+                font-size: 0.65rem;
+            }
+
+            .exp-card .exp-emoji {
+                font-size: 1.5rem;
             }
 
             .volby-scroll-mobile .volby-card {
@@ -1646,7 +1639,6 @@
                 font-size: 0.95rem;
             }
 
-            /* ===== SLIBY MOBIL - DROBNÉ DOLADĚNÍ ===== */
             .sliby-mobile-item .sliby-text-mobile {
                 font-size: 0.85rem;
             }
@@ -1719,10 +1711,44 @@
             <p style="font-size: 1.2rem; font-weight: 600; color: #0f172a; max-width: 600px; margin: -0.5rem auto 1.5rem auto;">
                 Co jsme slíbili, to jsme začali dělat. Teď chceme dokončit, co jsme rozjeli.
             </p>
-            
-            <p>Stabilizovali jsme skalní svah, zprovoznili nový rybníček a dokončujeme kanalizaci. Čistá se mění k lepšímu. Pojďte s námi dotáhnout další projekty, které dávají smysl.</p>
 
-            <div style="margin-top: 1.5rem;">
+            <!-- ===== 4 BUBLINKY ===== -->
+            <div class="exp-grid">
+                <div class="exp-card">
+                    <span class="exp-emoji">👥</span>
+                    <span class="exp-number">900</span>
+                    <span class="exp-label">obyvatel</span>
+                    <span class="exp-desc">každý hlas se počítá</span>
+                </div>
+                <div class="exp-card">
+                    <span class="exp-emoji">🏗️</span>
+                    <span class="exp-number">10+</span>
+                    <span class="exp-label">milionů na projektech</span>
+                    <span class="exp-desc">dotace pro obec</span>
+                </div>
+                <div class="exp-card">
+                    <span class="exp-emoji">🌳</span>
+                    <span class="exp-number">3</span>
+                    <span class="exp-label">velké projekty</span>
+                    <span class="exp-desc">svah, rybník, kanalizace</span>
+                </div>
+                <div class="exp-card">
+                    <span class="exp-emoji">🤝</span>
+                    <span class="exp-number">100%</span>
+                    <span class="exp-label">transparentnost</span>
+                    <span class="exp-desc">rozhodujeme s vámi</span>
+                </div>
+            </div>
+
+            <!-- ===== TEXT ===== -->
+            <div class="hero-text">
+                Stabilizovali jsme skalní svah, zprovoznili nový rybníček a dokončujeme kanalizaci. 
+                <strong style="color: #0f172a;">Čistá se mění k lepšímu.</strong> 
+                Pojďte s námi dotáhnout další projekty, které dávají smysl.
+            </div>
+
+            <!-- ===== TLAČÍTKO ===== -->
+            <div style="margin-top: 2rem;">
                 <a href="#co-jsme-udelali" 
                    style="
                        display: inline-flex;
@@ -1749,38 +1775,6 @@
                     <i class="fas fa-arrow-right" style="font-size: 0.9rem;"></i>
                 </a>
             </div>
-
-            <div class="exp-grid">
-                <div class="exp-card">
-                    <span class="exp-emoji">💰</span>
-                    <span class="exp-number">10+ mil.</span>
-                    <span class="exp-label">investováno do obce</span>
-                    <span class="exp-desc">z evropských dotací</span>
-                </div>
-                <div class="exp-card">
-                    <span class="exp-emoji">🏗️</span>
-                    <span class="exp-number">3</span>
-                    <span class="exp-label">velké projekty</span>
-                    <span class="exp-desc">které jsme posunuli</span>
-                </div>
-                <div class="exp-card">
-                    <span class="exp-emoji">⏳</span>
-                    <span class="exp-number">4 roky</span>
-                    <span class="exp-label">práce pro Čistou</span>
-                    <span class="exp-desc">s výsledky</span>
-                </div>
-                <div class="exp-card">
-                    <span class="exp-emoji">🤝</span>
-                    <span class="exp-number">100%</span>
-                    <span class="exp-label">transparentnost</span>
-                    <span class="exp-desc">rozhodujeme s vámi</span>
-                </div>
-            </div>
-            
-            <p style="margin-top: 2.5rem; font-size: 1.1rem; font-weight: 500; color: #475569; border-top: 2px solid #e2e8f0; padding-top: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                <i class="fas fa-quote-left" style="color: #fbbf24; margin-right: 0.5rem;"></i>
-                Nechceme vám říkat, co jednou uděláme. Chceme ukázat, co už jsme udělali.
-            </p>
         </div>
     </header>
 
@@ -1897,7 +1891,7 @@
         </div>
     </section>
 
-    <!-- ===== PROGRAM 1: PROČ POKRAČOVAT (včetně Proč kandidujeme) ===== -->
+    <!-- ===== PROGRAM 1: PROČ POKRAČOVAT ===== -->
     <div class="program-banner" id="proc-banner">
         <div class="container">
             <span class="program-number">✦ 01</span>
@@ -1907,7 +1901,7 @@
 
     <section class="section section-alt" id="proc-pokracovat">
         <div class="container">
-            <!-- ===== PROČ KANDIDUJEME (ZKRÁCENO) ===== -->
+            <!-- ===== PROČ KANDIDUJEME ===== -->
             <h2 class="section-title"><i class="fas fa-heart" style="color: #fbbf24;"></i> Proč kandidujeme</h2>
             <div class="proc-kandidujeme-text">
                 <p>
@@ -1924,11 +1918,8 @@
                 </p>
             </div>
 
-            <!-- ===== 4 DŮVODY ===== -->
-            <h2 class="section-title" style="margin-top: 4rem;"><i class="fas fa-compass"></i> Proč se nám v Čisté dobře žije</h2>
-            <p class="section-subtitle">Dobrá vesnice nestojí na pár lidech, ale na všech, kteří tu bydlí. Rádi nasloucháme, hledáme řešení a hlavně – dotahujeme věci do konce.</p>
-
-            <div class="why-grid">
+            <!-- ===== 4 DŮVODY (bez nadpisu) ===== -->
+            <div class="why-grid" style="margin-top: 2rem;">
                 <div class="why-card">
                     <span class="card-number">01</span>
                     <span class="card-icon"><i class="fas fa-check-double"></i></span>
@@ -2033,7 +2024,7 @@
                 </div>
             </div>
 
-            <!-- ===== PRIORITY (podsekce) ===== -->
+            <!-- ===== PRIORITY ===== -->
             <div style="margin-top: 4rem; padding-top: 3rem; border-top: 2px solid #e2e8f0;">
                 <h2 class="section-title" style="margin-bottom: 0.5rem;"><i class="fas fa-bullseye"></i> Naše priority pro Čistou</h2>
                 <p class="section-subtitle" style="margin-bottom: 3rem;">Máme jasný plán na další 4 roky. Tohle jsou naše hlavní cíle.</p>
@@ -2466,6 +2457,7 @@
     <!-- ===== PATIČKA ===== -->
     <footer class="footer" id="footer">
         <div class="container">
+            <!-- ===== TLAČÍTKO NA HRY ===== -->
             <div style="margin-bottom: 1.5rem; display: flex; justify-content: center;">
                 <a href="hra.html" 
                    style="
