@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Čistá – společně tvoříme budoucnost</title>
-    <meta name="description" content="4 roky práce pro Čistou. Stabilizovali jsme skalní svah, postavili rybníček a dokončujeme kanalizaci. Pojďte s námi pokračovat." />
-    <meta property="og:title" content="Čistá – společně tvoříme budoucnost" />
+    <title>Volba pro zítřek – Čistá u Mladé Boleslavi</title>
+    <meta name="description" content="Společně tvoříme budoucnost obce Čistá. 4 roky práce, stabilizovaný svah, nový rybníček a dokončená kanalizace. Pojďte s námi pokračovat." />
+    <meta property="og:title" content="Volba pro zítřek – Čistá u Mladé Boleslavi" />
     <meta property="og:description" content="Máme za sebou kus práce. S vámi chceme pokračovat." />
     <meta property="og:type" content="website" />
 
@@ -26,6 +26,7 @@
             --border: #e2e8f0;
             --bg: #f8fafc;
             --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0,0,0,0.06);
         }
 
         * {
@@ -60,7 +61,6 @@
             padding: 0 1.5rem;
         }
 
-        /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -90,16 +90,16 @@
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
+            width: 38px;
+            height: 38px;
             background: var(--accent);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
             color: var(--dark);
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             transition: transform 0.2s;
         }
 
@@ -161,11 +161,10 @@
             color: var(--dark);
         }
 
-        /* ===== HERO ===== */
         .hero {
-            background: var(--bg);
+            background: linear-gradient(135deg, #ffffff 0%, #fef9c3 100%);
             text-align: center;
-            padding: 5.5rem 0 4.5rem;
+            padding: 5rem 0 4rem;
             border-bottom: 1px solid var(--border);
         }
 
@@ -188,7 +187,7 @@
             line-height: 1.15;
             letter-spacing: -0.03em;
             color: var(--dark);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .hero h1 .highlight {
@@ -196,12 +195,12 @@
             position: relative;
         }
 
-        .hero .lead {
-            font-size: 1.15rem;
+        .hero .subheadline {
+            font-size: 1.3rem;
             font-weight: 600;
             color: var(--dark);
             max-width: 560px;
-            margin: 0 auto 1.8rem;
+            margin: 0 auto 1.5rem;
         }
 
         .stats {
@@ -218,12 +217,12 @@
             border-radius: 1.5rem;
             padding: 1.4rem 1rem;
             transition: 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
         }
 
         .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
             border-color: var(--accent);
         }
 
@@ -285,7 +284,6 @@
             transform: scale(0.97);
         }
 
-        /* ===== SECTIONS ===== */
         section {
             padding: 4.5rem 0;
             border-bottom: 1px solid var(--border);
@@ -326,7 +324,6 @@
             margin-right: auto;
         }
 
-        /* ===== TIMELINE ===== */
         .timeline {
             position: relative;
             max-width: 720px;
@@ -387,12 +384,12 @@
             border-radius: 1.5rem;
             padding: 1.5rem 1.8rem;
             transition: 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
         }
 
         .timeline-item.active .content {
             border-color: var(--accent);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
 
         .timeline-item .year {
@@ -429,7 +426,6 @@
             font-size: 0.95rem;
         }
 
-        /* ===== SLIBY ===== */
         .sliby {
             max-width: 800px;
             margin: 3.5rem auto 0;
@@ -455,7 +451,7 @@
             border-radius: 1.5rem;
             border: 1px solid var(--border);
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
         }
 
         .sliby-header {
@@ -503,7 +499,6 @@
         .status-probiha { background: #fef9c3; color: #a16207; }
         .status-pripraveno { background: #dbeafe; color: #1d4ed8; }
 
-        /* ===== WHY ===== */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -519,12 +514,12 @@
             padding: 2rem 1.8rem;
             position: relative;
             transition: 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
         }
 
         .why-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
             border-color: var(--accent);
         }
 
@@ -568,7 +563,6 @@
             border-radius: 999px;
         }
 
-        /* ===== PROČ KANDIDUJEME ===== */
         .proc-kandidujeme {
             max-width: 750px;
             margin: 0 auto 3rem;
@@ -593,7 +587,6 @@
             color: var(--dark);
         }
 
-        /* ===== BUBBLES ===== */
         .bubbles {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -607,13 +600,13 @@
             padding: 1.5rem 1rem;
             text-align: center;
             transition: 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
         }
 
         .bubble:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
         }
 
         .bubble .icon {
@@ -645,7 +638,6 @@
             border-radius: 999px;
         }
 
-        /* ===== PRIORITIES ===== */
         .priorities {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -661,12 +653,12 @@
             transition: 0.3s;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
         }
 
         .priority-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
             border-color: var(--accent);
         }
 
@@ -714,7 +706,6 @@
             align-self: flex-start;
         }
 
-        /* ===== SWIPE MENU (mobilní priority) ===== */
         .priorities-scroll {
             display: none;
             gap: 1rem;
@@ -748,7 +739,6 @@
             min-height: 220px;
         }
 
-        /* ===== TEAM ===== */
         .candidates {
             display: flex;
             flex-direction: column;
@@ -766,32 +756,31 @@
             padding: 2rem;
             align-items: center;
             transition: 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
         }
 
         .candidate:hover {
-            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
             border-color: var(--accent);
         }
 
-        .candidate-photo {
+        .candidate-emoji {
             flex-shrink: 0;
-            width: 130px;
-            height: 130px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: var(--bg);
-            border: 3px solid var(--border);
+            background: var(--accent-soft);
+            border: 3px solid var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #94a3b8;
-            font-size: 2.5rem;
-            overflow: hidden;
+            font-size: 2.8rem;
             transition: 0.3s;
         }
 
-        .candidate:hover .candidate-photo {
-            border-color: var(--accent);
+        .candidate:hover .candidate-emoji {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.2);
         }
 
         .candidate-info {
@@ -804,40 +793,42 @@
         }
 
         .candidate-info .number {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 800;
             background: var(--bg);
             padding: 0.15rem 0.8rem;
             border-radius: 999px;
+            display: inline-block;
         }
 
-        .candidate-info .role {
-            font-size: 0.75rem;
+        .candidate-info .role-tag {
+            font-size: 0.8rem;
             font-weight: 700;
             background: var(--bg);
             color: var(--muted);
             padding: 0.15rem 0.8rem;
             border-radius: 999px;
             margin-left: 0.4rem;
-            text-transform: uppercase;
+            display: inline-block;
         }
 
         .candidate-info h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            margin: 0.3rem 0 0.15rem;
+            margin: 0.1rem 0 0.05rem;
         }
 
         .candidate-info .position {
             font-weight: 600;
             color: var(--accent);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
         }
 
         .candidate-info .bio {
             color: var(--muted);
             font-size: 0.95rem;
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.5rem;
         }
 
         .candidate-info .bio strong {
@@ -858,13 +849,13 @@
             font-weight: 500;
         }
 
-        /* ===== FOOTER ===== */
         footer {
             background: var(--bg);
             text-align: center;
             padding: 2.5rem 1.5rem;
             color: var(--muted);
             font-size: 0.9rem;
+            border-top: 1px solid var(--border);
         }
 
         footer p {
@@ -892,7 +883,6 @@
             box-shadow: 0 8px 28px rgba(234, 179, 8, 0.45);
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
             .stats {
                 grid-template-columns: repeat(2, 1fr);
@@ -960,9 +950,10 @@
                 gap: 1.2rem;
             }
 
-            .candidate-photo {
-                width: 110px;
-                height: 110px;
+            .candidate-emoji {
+                width: 70px;
+                height: 70px;
+                font-size: 2.2rem;
             }
 
             .tags {
@@ -1011,8 +1002,8 @@
 <nav class="navbar">
     <div class="container">
         <a href="#" class="logo" id="logoLink">
-            <span class="logo-icon">N</span>
-            Naše <span>Čistá</span>
+            <span class="logo-icon">📋</span>
+            Volba pro <span>zítřek</span>
         </a>
         <button class="burger" id="burger" aria-label="Menu">
             <span></span>
@@ -1024,7 +1015,7 @@
             <li><a href="#vysledky">Co jsme dokázali</a></li>
             <li><a href="#proc">Proč pokračovat</a></li>
             <li><a href="#chystame">Co chystáme</a></li>
-            <li><a href="#tym">Kandidáti</a></li>
+            <li><a href="#tym">Náš tým</a></li>
         </ul>
     </div>
 </nav>
@@ -1034,20 +1025,20 @@
     <div class="container">
         <span class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</span>
         <h1>Máme za sebou kus práce.<br><span class="highlight">S vámi chceme pokračovat.</span></h1>
-        <p class="lead">Co jsme slíbili, to jsme začali dělat. Teď chceme dokončit, co jsme rozjeli.</p>
+        <p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
 
         <div class="stats">
             <div class="stat-card">
-                <span class="emoji">👥</span>
-                <span class="number">900</span>
-                <span class="label">obyvatel</span>
-                <span class="desc">každý hlas se počítá</span>
+                <span class="emoji">🏡</span>
+                <span class="number">280</span>
+                <span class="label">domů</span>
+                <span class="desc">v obci, kterou známe</span>
             </div>
             <div class="stat-card">
                 <span class="emoji">🏗️</span>
                 <span class="number">10+</span>
-                <span class="label">milionů</span>
-                <span class="desc">na projektech</span>
+                <span class="label">milionů Kč</span>
+                <span class="desc">investic do obce</span>
             </div>
             <div class="stat-card">
                 <span class="emoji">🌳</span>
@@ -1154,8 +1145,6 @@
 <!-- PROČ POKRAČOVAT -->
 <section id="proc" style="background: #fafbfc;">
     <div class="container">
-
-        <!-- ===== PROČ KANDIDUJEME ===== -->
         <div class="proc-kandidujeme">
             <h2 class="section-title center"><i class="fas fa-heart" style="color: var(--accent);"></i> Proč kandidujeme</h2>
             <p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
@@ -1164,7 +1153,6 @@
             <p style="font-weight: 600; color: var(--dark);">Společně tvoříme budoucnost. A ta začíná tady, v Čisté.</p>
         </div>
 
-        <!-- ===== 4 DŮVODY ===== -->
         <div class="why-grid">
             <div class="why-card">
                 <span class="num">01</span>
@@ -1259,7 +1247,6 @@
             <h2 class="section-title center">Naše priority pro Čistou</h2>
             <p class="section-subtitle center">Máme jasný plán na další 4 roky. Tohle jsou naše hlavní cíle.</p>
 
-            <!-- ===== DESKTOP - mřížka ===== -->
             <div class="priorities">
                 <div class="priority-card">
                     <span class="icon">🚶</span>
@@ -1323,7 +1310,6 @@
                 </div>
             </div>
 
-            <!-- ===== MOBIL - horizontální swipe ===== -->
             <div class="priorities-scroll">
                 <div class="priority-card">
                     <span class="icon">🚶</span>
@@ -1397,164 +1383,173 @@
         <p class="section-subtitle center">Nejsme žádní cizí lidé. Jsme vaši sousedé, známé tváře z ulice, hospody i fotbalového hřiště. Pojďte si s námi promluvit.</p>
 
         <div class="candidates">
+            <!-- 1. Zdeněk Tyšer -->
             <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-user-tie"></i></div>
+                <div class="candidate-emoji">🏛️</div>
                 <div class="candidate-info">
                     <div class="meta">
                         <span class="number">#1</span>
-                        <span class="role">⭐ Starosta</span>
+                        <span class="role-tag">zaměstnanec veřejné správy</span>
                     </div>
-                    <h3>Radim Zelenka</h3>
-                    <div class="position">Starosta obce Čistá</div>
-                    <p class="bio"><strong>„V Čisté žiji 28 let. Zajímá mě především rozvoj obce a udržitelné projekty. Vedeme obec s rozmyslem a pokorou. Věřím, že Čistá má obrovský potenciál a těší mě, že ho můžeme společně rozvíjet. Rád se potkávám s lidmi a naslouchám jejich nápadům.“</strong></p>
+                    <h3>Zdeněk Tyšer</h3>
+                    <div class="position">64 let</div>
+                    <p class="bio"><strong>„Jsem zaměstnancem veřejné správy a v Čisté žiji přes 20 let. Jako starosta se starám o rozvoj obce, jednání s dotacemi a každodenní chod úřadu. Mým cílem je, aby se nám tu všem žilo co nejlépe.“</strong></p>
                     <div class="tags">
+                        <span>Veřejná správa</span>
                         <span>Rozvoj obce</span>
                         <span>Dotace</span>
-                        <span>Spolupráce</span>
                     </div>
                 </div>
             </div>
 
+            <!-- 2. Leoš Miler -->
             <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-user-tie"></i></div>
+                <div class="candidate-emoji">🚜</div>
                 <div class="candidate-info">
                     <div class="meta">
                         <span class="number">#2</span>
-                        <span class="role">⭐ Místostarosta</span>
+                        <span class="role-tag">OSVČ - zemědělec</span>
                     </div>
-                    <h3>Ondřej Klimeš</h3>
-                    <div class="position">Místostarosta obce Čistá</div>
-                    <p class="bio"><strong>„Jsem tu pro vás a pro rozvoj naší obce. Mám rád, když se věci daří dotahovat do konce a vidím výsledky. Společně s vámi chceme pokračovat v nastoleném kurzu.“</strong></p>
+                    <h3>Leoš Miler</h3>
+                    <div class="position">58 let</div>
+                    <p class="bio"><strong>„Jako OSVČ – zemědělec se věnuji pěstování obilovin a živočišné výrobě. V obci mám na starosti technické záležitosti a rozvoj infrastruktury. Spolu s týmem se snažíme o moderní a fungující Čistou.“</strong></p>
                     <div class="tags">
+                        <span>Zemědělství</span>
                         <span>Infrastruktura</span>
-                        <span>Bezpečnost</span>
-                        <span>Komunikace</span>
+                        <span>Modernizace</span>
                     </div>
                 </div>
             </div>
 
+            <!-- 3. Libor Bárta -->
             <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-user"></i></div>
+                <div class="candidate-emoji">⚡</div>
                 <div class="candidate-info">
                     <div class="meta">
                         <span class="number">#3</span>
-                        <span class="role">🌿 Zastupitelka</span>
+                        <span class="role-tag">OSVČ - elektrikář</span>
                     </div>
-                    <h3>Simona Vávrová</h3>
-                    <div class="position">Zastupitelka obce</div>
-                    <p class="bio"><strong>„Zeleň a veřejný prostor jsou moje srdcová záležitost. Pečuji o to, aby byla Čistá hezká a příjemná pro všechny. Ráda se starám o kulturní akce a setkávání sousedů.“</strong></p>
+                    <h3>Libor Bárta</h3>
+                    <div class="position">48 let</div>
+                    <p class="bio"><strong>„Jako OSVČ – elektrikář se starám o to, aby v Čisté svítilo a všechno elektrické zařízení fungovalo, jak má. Aktivně se podílím na rozhodování o budoucnosti obce – podporuji místní spolky a vytvářím příležitosti pro mladé rodiny.“</strong></p>
                     <div class="tags">
-                        <span>Zeleň</span>
+                        <span>Elektrikář</span>
+                        <span>Mladé rodiny</span>
+                        <span>Spolky</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Pavel Šlégr -->
+            <div class="candidate">
+                <div class="candidate-emoji">🐝</div>
+                <div class="candidate-info">
+                    <div class="meta">
+                        <span class="number">#4</span>
+                        <span class="role-tag">OSVČ - zemědělec a včelař</span>
+                    </div>
+                    <h3>Pavel Šlégr</h3>
+                    <div class="position">28 let</div>
+                    <p class="bio"><strong>„Jako nejmladší člen týmu se jako OSVČ věnuji zemědělství a včelařství. Přináším svěží pohled a nové nápady, rád se zapojuji do komunitního dění. Chci, aby Čistá byla atraktivní i pro mladou generaci.“</strong></p>
+                    <div class="tags">
+                        <span>Mladá generace</span>
+                        <span>Zemědělství</span>
+                        <span>Včelařství</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Klára Zahrádková -->
+            <div class="candidate">
+                <div class="candidate-emoji">🤝</div>
+                <div class="candidate-info">
+                    <div class="meta">
+                        <span class="number">#5</span>
+                        <span class="role-tag">obchodní zástupkyně</span>
+                    </div>
+                    <h3>Klára Zahrádková</h3>
+                    <div class="position">32 let</div>
+                    <p class="bio"><strong>„Pracuji jako obchodní zástupkyně a v zastupitelstvu se věnuji především komunikaci s občany a podpoře podnikatelského prostředí v obci. Chci, aby Čistá byla otevřená a přátelská.“</strong></p>
+                    <div class="tags">
+                        <span>Obchod</span>
+                        <span>Komunikace</span>
+                        <span>Podnikání</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Danuše Horáčková -->
+            <div class="candidate">
+                <div class="candidate-emoji">📦</div>
+                <div class="candidate-info">
+                    <div class="meta">
+                        <span class="number">#6</span>
+                        <span class="role-tag">logistička</span>
+                    </div>
+                    <h3>Danuše Horáčková</h3>
+                    <div class="position">63 let</div>
+                    <p class="bio"><strong>„Pracuji jako logistička ve společnosti VaK a.s. Mladá Boleslav a v zastupitelstvu se dlouhodobě věnuji kulturnímu dění v obci. Organizujeme akce, které spojují sousedy a přinášejí radost do každodenního života.“</strong></p>
+                    <div class="tags">
+                        <span>Logistika</span>
                         <span>Kultura</span>
                         <span>Komunita</span>
                     </div>
                 </div>
             </div>
 
+            <!-- 7. Ing. Zdeňka Doušová -->
             <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-user"></i></div>
-                <div class="candidate-info">
-                    <div class="meta">
-                        <span class="number">#4</span>
-                        <span class="role">🏗️ Zastupitel</span>
-                    </div>
-                    <h3>František Dvořák</h3>
-                    <div class="position">Zastupitel obce</div>
-                    <p class="bio"><strong>„Stavby a technické záležitosti jsou mi blízké. Mám radost, když vidím, jak se Čistá mění k lepšímu. Kanalizace, cesty, veřejné osvětlení – to je moje parketa.“</strong></p>
-                    <div class="tags">
-                        <span>Doprava</span>
-                        <span>Technika</span>
-                        <span>Řemeslo</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-user"></i></div>
-                <div class="candidate-info">
-                    <div class="meta">
-                        <span class="number">#5</span>
-                        <span class="role">📚 Zastupitelka</span>
-                    </div>
-                    <h3>Irena Krátká</h3>
-                    <div class="position">Zastupitelka obce</div>
-                    <p class="bio"><strong>„Vzdělávání a rodina jsou pro mě prioritou. Chci, aby se v Čisté dobře žilo všem generacím. Podporuji školku, kroužky a aktivity pro děti i seniory.“</strong></p>
-                    <div class="tags">
-                        <span>Vzdělávání</span>
-                        <span>Rodina</span>
-                        <span>Spolky</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-user"></i></div>
-                <div class="candidate-info">
-                    <div class="meta">
-                        <span class="number">#6</span>
-                        <span class="role">💻 Zastupitel</span>
-                    </div>
-                    <h3>Lukáš Morávek</h3>
-                    <div class="position">Zastupitel obce</div>
-                    <p class="bio"><strong>„Moderní technologie a digitální služby jsou mou doménou. Chci, aby byla Čistá připravená na 21. století. Pracuji na novém webu a digitálním rozhlasu.“</strong></p>
-                    <div class="tags">
-                        <span>Digitální služby</span>
-                        <span>Web</span>
-                        <span>Komunikace</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-user"></i></div>
+                <div class="candidate-emoji">📐</div>
                 <div class="candidate-info">
                     <div class="meta">
                         <span class="number">#7</span>
-                        <span class="role">🌾 Zastupitel</span>
+                        <span class="role-tag">OSVČ - projektantka staveb</span>
                     </div>
-                    <h3>Vilém Syrový</h3>
-                    <div class="position">Zastupitel obce</div>
-                    <p class="bio"><strong>„Zemědělství a péče o krajinu jsou mi blízké. Vím, jak důležité je zdravé okolí pro naši obec. Podporuji místní farmáře a ekologické projekty.“</strong></p>
+                    <h3>Ing. Zdeňka Doušová</h3>
+                    <div class="position">54 let</div>
+                    <p class="bio"><strong>„Jako OSVČ – projektantka staveb se věnuji tvorbě technických výkresů a stavebních projektů. V zastupitelstvu se zaměřuji na rozvoj obce a ekonomické otázky. Chci, aby Čistá prosperovala a byla moderní.“</strong></p>
                     <div class="tags">
-                        <span>Krajina</span>
-                        <span>Zemědělství</span>
-                        <span>Ekologie</span>
+                        <span>Projektování</span>
+                        <span>Stavebnictví</span>
+                        <span>Rozvoj</span>
                     </div>
                 </div>
             </div>
 
+            <!-- 8. Martina Kolářová -->
             <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-user-md"></i></div>
+                <div class="candidate-emoji">📚</div>
                 <div class="candidate-info">
                     <div class="meta">
                         <span class="number">#8</span>
-                        <span class="role">🏥 Zastupitel</span>
+                        <span class="role-tag">učitelka</span>
                     </div>
-                    <h3>Jakub Hanuš</h3>
-                    <div class="position">Zastupitel obce</div>
-                    <p class="bio"><strong>„Zdraví a prevence jsou základem spokojeného života. Chci podpořit dostupnost zdravotní péče, prevenci a aktivity pro seniory. Čistá by měla být bezpečná pro všechny generace.“</strong></p>
+                    <h3>Martina Kolářová</h3>
+                    <div class="position">53 let</div>
+                    <p class="bio"><strong>„Jako učitelka vnímám, jak důležité je vzdělávání a péče o mladou generaci. V zastupitelstvu se věnuji školství, podpoře rodin a kulturním akcím pro děti. Chci, aby se v Čisté dobře žilo všem generacím.“</strong></p>
                     <div class="tags">
-                        <span>Zdravotní péče</span>
-                        <span>Prevence</span>
-                        <span>Senioři</span>
+                        <span>Učitelka</span>
+                        <span>Vzdělávání</span>
+                        <span>Rodina</span>
                     </div>
                 </div>
             </div>
 
+            <!-- 9. Jaroslav Martinec -->
             <div class="candidate">
-                <div class="candidate-photo"><i class="fas fa-palette"></i></div>
+                <div class="candidate-emoji">🌿</div>
                 <div class="candidate-info">
                     <div class="meta">
                         <span class="number">#9</span>
-                        <span class="role">🎨 Zastupitelka</span>
+                        <span class="role-tag">důchodce</span>
                     </div>
-                    <h3>Žaneta Horáková</h3>
-                    <div class="position">Zastupitelka obce</div>
-                    <p class="bio"><strong>„Kultura a mládež jsou moje srdcová záležitost. Chci, aby měla Čistá živý kulturní program, místo pro mladé a prostor pro tvoření. Máme skvělé nápady a chuť je realizovat.“</strong></p>
+                    <h3>Jaroslav Martinec</h3>
+                    <div class="position">67 let</div>
+                    <p class="bio"><strong>„Jako důchodce mám čas a chuť se aktivně podílet na dění v obci. Sleduji, co se v Čisté děje, a rád přispívám svými zkušenostmi k rozhodování o projektech, které ovlivňují život nás všech.“</strong></p>
                     <div class="tags">
-                        <span>Kultura</span>
-                        <span>Mládež</span>
-                        <span>Kreativita</span>
+                        <span>Zkušenosti</span>
+                        <span>Kvalita života</span>
+                        <span>Komunita</span>
                     </div>
                 </div>
             </div>
@@ -1568,13 +1563,12 @@
         <a href="#" class="footer-btn">
             <i class="fas fa-gamepad"></i> Zahrajte si s námi hry <i class="fas fa-arrow-right"></i>
         </a>
-        <p><strong>Naše Čistá</strong> – společně tvoříme budoucnost</p>
+        <p><strong>Volba pro zítřek</strong> – společně tvoříme budoucnost Čisté</p>
         <p>© 2026</p>
     </div>
 </footer>
 
 <script>
-    // Burger menu
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('navLinks');
 
@@ -1590,13 +1584,11 @@
         });
     });
 
-    // Logo scroll top
     document.getElementById('logoLink').addEventListener('click', (e) => {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Timeline active on scroll
     const items = document.querySelectorAll('.timeline-item');
 
     function updateTimeline() {
