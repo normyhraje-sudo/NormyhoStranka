@@ -117,6 +117,7 @@
             border: none;
             cursor: pointer;
             padding: 6px;
+            z-index: 1001;
         }
 
         .burger span {
@@ -159,6 +160,51 @@
             color: var(--dark);
         }
 
+        /* ===== MOBILE MENU ===== */
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+                padding: 0.5rem 0;
+                width: 100%;
+                height: auto;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 0.9rem 1.5rem;
+                border-radius: 0;
+                border-bottom: 1px solid var(--border);
+                justify-content: center;
+                color: var(--text);
+                font-size: 1rem;
+            }
+
+            .nav-links a:hover {
+                background: var(--bg);
+                padding-left: 1.5rem;
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* ===== ZBYTEK STYLŮ ===== */
         .hero {
             background: linear-gradient(135deg, #ffffff 0%, #f9f5d6 100%);
             text-align: center;
@@ -663,11 +709,13 @@
             border-radius: 999px;
         }
 
+        /* ===== PRIORITY CARDS ===== */
         .priorities {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.25rem;
-            margin-top: 1rem;
+            max-width: 900px;
+            margin: 1rem auto 0;
         }
 
         .priority-card {
@@ -731,17 +779,19 @@
             align-self: flex-start;
         }
 
+        /* ===== MOBILNÍ SCROLL ===== */
         .priorities-scroll {
             display: none;
             gap: 1rem;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+            padding: 0.5rem 0.5rem 1rem 0.5rem;
             scroll-behavior: smooth;
             scrollbar-width: thin;
             scrollbar-color: var(--border) var(--bg);
             max-width: 100%;
+            margin-top: 1rem;
         }
 
         .priorities-scroll::-webkit-scrollbar {
@@ -759,9 +809,9 @@
         }
 
         .priorities-scroll .priority-card {
-            flex: 0 0 280px;
+            flex: 0 0 260px;
             scroll-snap-align: start;
-            min-height: 220px;
+            min-height: 200px;
         }
 
         .team-photo-section {
@@ -784,11 +834,13 @@
             font-size: 1.1rem;
             transition: 0.3s;
             min-height: 200px;
+            overflow: hidden;
         }
 
-        .team-photo-section .photo-placeholder i {
-            font-size: 3rem;
-            color: var(--accent);
+        .team-photo-section .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .team-photo-section .photo-placeholder:hover {
@@ -948,12 +1000,6 @@
             .bubbles {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .priorities {
-                display: none;
-            }
-            .priorities-scroll {
-                display: flex;
-            }
             .why-grid {
                 grid-template-columns: 1fr;
             }
@@ -971,34 +1017,6 @@
 
             .navbar .container {
                 height: 64px;
-            }
-
-            .burger {
-                display: flex;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 64px;
-                left: 0;
-                right: 0;
-                background: var(--white);
-                flex-direction: column;
-                border-bottom: 1px solid var(--border);
-                box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-                padding: 0.5rem 0;
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links a {
-                padding: 0.9rem 1.5rem;
-                border-radius: 0;
-                border-bottom: 1px solid var(--border);
-                justify-content: center;
             }
 
             .hero {
@@ -1137,15 +1155,39 @@
                 padding: 0.6rem 1.6rem;
             }
 
+            /* ===== "ČISTÁ, ZELENÁ A BEZPEČNÁ OBCE" - POSOUVACÍ NA MOBILU ===== */
             .priorities {
                 display: none;
             }
+
             .priorities-scroll {
                 display: flex;
             }
+
             .priorities-scroll .priority-card {
-                flex: 0 0 260px;
-                min-height: 200px;
+                flex: 0 0 250px;
+                min-height: 190px;
+                padding: 1.2rem 1rem;
+                border-radius: 1rem;
+            }
+
+            .priorities-scroll .priority-card .icon {
+                font-size: 1.6rem;
+            }
+
+            .priorities-scroll .priority-card h3 {
+                font-size: 1rem;
+            }
+
+            .priorities-scroll .priority-card li {
+                font-size: 0.8rem;
+                padding: 0.15rem 0;
+                padding-left: 0.8rem;
+            }
+
+            .priorities-scroll .priority-card .tag {
+                font-size: 0.55rem;
+                padding: 0.1rem 0.6rem;
             }
         }
 
@@ -1205,13 +1247,13 @@
             }
 
             .priorities-scroll .priority-card {
-                flex: 0 0 200px;
-                min-height: 160px;
-                padding: 0.8rem;
+                flex: 0 0 220px;
+                min-height: 170px;
+                padding: 1rem;
             }
 
             .priorities-scroll .priority-card h3 {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
             }
 
             .priorities-scroll .priority-card li {
@@ -1310,7 +1352,6 @@
         <h1>Máme za sebou kus práce.<br><span class="highlight">S vámi chceme pokračovat.</span></h1>
         <p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
 
-        <!-- STATISTIKY -->
         <div class="stats">
             <div class="stat-card">
                 <span class="emoji">⛰️</span>
@@ -1500,25 +1541,43 @@
 
         <div style="margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border);">
             <h3 class="section-title center" style="font-size: 1.8rem;">Čistá, zelená a bezpečná obec</h3>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 900px; margin: 0 auto;">
-                <div style="background: var(--bg); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--border); text-align: center;">
-                    <span style="font-size: 2rem;">♻️</span>
-                    <h4 style="font-weight: 700; margin: 0.5rem 0;">Odpadové hospodářství</h4>
-                    <p style="font-size: 0.9rem; color: var(--muted);">Čipování nádob, spravedlivější systém, motivace k odpovědnosti.</p>
+
+            <!-- desktop verze - 3 sloupce -->
+            <div class="priorities">
+                <div class="priority-card">
+                    <span class="icon">♻️</span>
+                    <h3>Odpadové hospodářství</h3>
+                    <ul>
+                        <li>Čipování nádob</li>
+                        <li>Spravedlivější systém</li>
+                        <li>Motivace k odpovědnosti</li>
+                    </ul>
+                    <span class="tag">Priorita</span>
                 </div>
-                <div style="background: var(--bg); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--border); text-align: center;">
-                    <span style="font-size: 2rem;">🌳</span>
-                    <h4 style="font-weight: 700; margin: 0.5rem 0;">Zeleň a voda</h4>
-                    <p style="font-size: 0.9rem; color: var(--muted);">Výsadba stromů, zadržování vody, revitalizace zeleně.</p>
+                <div class="priority-card">
+                    <span class="icon">🌳</span>
+                    <h3>Zeleň a voda</h3>
+                    <ul>
+                        <li>Výsadba stromů</li>
+                        <li>Zadržování vody</li>
+                        <li>Revitalizace zeleně</li>
+                    </ul>
+                    <span class="tag">Priorita</span>
                 </div>
-                <div style="background: var(--bg); border-radius: 1.5rem; padding: 1.5rem; border: 1px solid var(--border); text-align: center;">
-                    <span style="font-size: 2rem;">🛡️</span>
-                    <h4 style="font-weight: 700; margin: 0.5rem 0;">Bezpečnost</h4>
-                    <p style="font-size: 0.9rem; color: var(--muted);">Spolupráce s Policií ČR, bezpečné cesty pro děti, veřejné osvětlení.</p>
+                <div class="priority-card">
+                    <span class="icon">🛡️</span>
+                    <h3>Bezpečnost</h3>
+                    <ul>
+                        <li>Spolupráce s Policií ČR</li>
+                        <li>Bezpečné cesty pro děti</li>
+                        <li>Veřejné osvětlení</li>
+                    </ul>
+                    <span class="tag">Priorita</span>
                 </div>
             </div>
-            <!-- responzivní verze pro mobil -->
-            <div class="priorities-scroll" style="display: none; margin-top: 1rem;">
+
+            <!-- mobilní verze - posouvací -->
+            <div class="priorities-scroll">
                 <div class="priority-card">
                     <span class="icon">♻️</span>
                     <h3>Odpadové hospodářství</h3>
@@ -1602,18 +1661,15 @@
 <section id="tym" style="background: #fafbfc;">
     <div class="container">
         <h2 class="section-title center">Lidé, kteří to tu znají</h2>
-        <p class="section-subtitle center">Jsme tým, né soubor jednotlivců.</p>
+        <p class="section-subtitle center">Nejsme žádní cizí lidé. Jsme vaši sousedé, známé tváře z ulice, hospody i fotbalového hřiště. Pojďte si s námi promluvit.</p>
 
-        <!-- SPOLEČNÁ FOTKA TÝMU -->
-            <div class="team-photo-section">
-                <div class="photo-placeholder">
-                    <img src="foto.png" alt="Společná fotka týmu Volba pro zítřek">
-                </div>
+        <div class="team-photo-section">
+            <div class="photo-placeholder">
+                <img src="foto.png" alt="Společná fotka týmu Volba pro zítřek" />
             </div>
+        </div>
 
-        <!-- DETAILNÍ PROFILY KANDIDÁTŮ -->
         <div class="candidates">
-            <!-- 1. Zdeněk Tyšer -->
             <div class="candidate">
                 <div class="candidate-number">1</div>
                 <div class="candidate-info">
@@ -1632,7 +1688,6 @@
                 </div>
             </div>
 
-            <!-- 2. Leoš Miler -->
             <div class="candidate">
                 <div class="candidate-number">2</div>
                 <div class="candidate-info">
@@ -1650,7 +1705,6 @@
                 </div>
             </div>
 
-            <!-- 3. Libor Bárta -->
             <div class="candidate">
                 <div class="candidate-number">3</div>
                 <div class="candidate-info">
@@ -1668,7 +1722,6 @@
                 </div>
             </div>
 
-            <!-- 4. Pavel Šlégr -->
             <div class="candidate">
                 <div class="candidate-number">4</div>
                 <div class="candidate-info">
@@ -1687,7 +1740,6 @@
                 </div>
             </div>
 
-            <!-- 5. Klára Zahrádková -->
             <div class="candidate">
                 <div class="candidate-number">5</div>
                 <div class="candidate-info">
@@ -1705,7 +1757,6 @@
                 </div>
             </div>
 
-            <!-- 6. Danuše Horáčková -->
             <div class="candidate">
                 <div class="candidate-number">6</div>
                 <div class="candidate-info">
@@ -1723,7 +1774,6 @@
                 </div>
             </div>
 
-            <!-- 7. Ing. Zdeňka Doušová -->
             <div class="candidate">
                 <div class="candidate-number">7</div>
                 <div class="candidate-info">
@@ -1741,7 +1791,6 @@
                 </div>
             </div>
 
-            <!-- 8. Martina Kolářová -->
             <div class="candidate">
                 <div class="candidate-number">8</div>
                 <div class="candidate-info">
@@ -1759,7 +1808,6 @@
                 </div>
             </div>
 
-            <!-- 9. Jaroslav Martinec -->
             <div class="candidate">
                 <div class="candidate-number">9</div>
                 <div class="candidate-info">
@@ -1799,12 +1847,14 @@
     burger.addEventListener('click', () => {
         burger.classList.toggle('active');
         navLinks.classList.toggle('open');
+        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
 
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             burger.classList.remove('active');
             navLinks.classList.remove('open');
+            document.body.style.overflow = '';
         });
     });
 
