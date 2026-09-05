@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>Moje stránka</head>
+<body>
+
 
 <html lang="cs">
 <head>
@@ -65,5 +70,8 @@
     <div class="btn-wrapper">
         <a href="hra.html" class="play-btn">▶ Hrát</a>
     </div>
+</body>
+</html>
+
 </body>
 </html>
