@@ -1,0 +1,69 @@
+
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+
+            /* POZADÍ - LEPŠÍ VYCENTROVÁNÍ */
+            background-image: url('auto.jpg');
+            background-size: cover;
+            background-position: center 40%; /* ← POSUNUTO VÍC NA STŘED (můžeš měnit) */
+            background-repeat: no-repeat;
+            background-color: #1a1a2e;
+        }
+
+        .btn-wrapper {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px 50px;
+            border-radius: 60px;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .play-btn {
+            padding: 20px 60px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #e94560, #c23152);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.6);
+        }
+
+        .play-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="btn-wrapper">
+        <a href="hra.html" class="play-btn">▶ Hrát</a>
+    </div>
+</body>
+</html>
