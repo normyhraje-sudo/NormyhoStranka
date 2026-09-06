@@ -64,7 +64,6 @@
             padding-top: 76px;
             font-size: 17px;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
         .container {
@@ -73,7 +72,7 @@
             padding: 0 1.5rem;
         }
 
-        /* ===== ANIMACE PŘI SCROLLOVÁNÍ ===== */
+        /* ===== ANIMACE ===== */
         .fade-up {
             opacity: 0;
             transform: translateY(40px);
@@ -398,7 +397,7 @@
             }
         }
 
-        /* ===== HERO SEKCE ===== */
+        /* ===== HERO ===== */
         .hero {
             background: var(--hero-bg);
             text-align: center;
@@ -1366,7 +1365,7 @@
             transition: all 0.3s ease;
             box-shadow: var(--shadow-sm);
             overflow: hidden;
-            text-align: center; /* Texty na střed */
+            text-align: center;
         }
 
         .why-card::before {
@@ -1433,7 +1432,7 @@
             border: 1px solid var(--accent-light);
         }
 
-        /* PC (desktop): 01 a 04 = bílá, 02 a 03 = modrá */
+        /* PC: 01 a 04 = bílá, 02 a 03 = modrá */
         .why-card:nth-child(1) {
             background: var(--white);
             border-color: var(--border);
@@ -1486,7 +1485,7 @@
             border-color: var(--accent-light);
         }
 
-        /* Mobil (telefon): 01 a 03 = bílá, 02 a 04 = modrá */
+        /* Mobil: 01 a 03 = bílá, 02 a 04 = modrá */
         @media (max-width: 768px) {
             .why-card:nth-child(1) {
                 background: var(--white);
@@ -2243,25 +2242,25 @@
             <div class="col-stats fade-up fade-up-delay-2">
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <span class="emoji">🏗️</span>
+                        <span class="emoji">🚧</span>
                         <span class="number">dokončujeme</span>
                         <span class="label">splaškovou kanalizaci</span>
                         <span class="desc">za 188,58 mil. Kč s dotacemi</span>
                     </div>
                     <div class="stat-card">
-                        <span class="emoji">🚶‍♂️</span>
+                        <span class="emoji">🚶</span>
                         <span class="number">nový</span>
                         <span class="label">chodník + osvětlení</span>
                         <span class="desc">3. etapa za 10,68 mil. Kč</span>
                     </div>
                     <div class="stat-card">
-                        <span class="emoji">🏛️</span>
+                        <span class="emoji">🏫</span>
                         <span class="number">podpoříme</span>
                         <span class="label">moderní školu</span>
                         <span class="desc">aktivizační metody a individuální přístup</span>
                     </div>
                     <div class="stat-card">
-                        <span class="emoji">🌳</span>
+                        <span class="emoji">🌿</span>
                         <span class="number">obnovíme</span>
                         <span class="label">zeleň a veřejný prostor</span>
                         <span class="desc">revitalizace návsi a výsadba stromů</span>
@@ -2300,7 +2299,7 @@
                 <div class="dot">1</div>
                 <div class="content">
                     <span class="year">✔️ Dokončeno 02/2025</span>
-                    <span class="icon">🏔️</span>
+                    <span class="icon">⛰️</span>
                     <h3>Stabilizace skalního svahu</h3>
                     <p>Zajistili jsme skalní stěnu nad domy čp. 91 a 92. Celkové náklady: 4,59 mil. Kč s 80% dotací.</p>
                 </div>
@@ -2309,7 +2308,7 @@
                 <div class="dot">2</div>
                 <div class="content">
                     <span class="year">✔️ Dokončeno 02/2026</span>
-                    <span class="icon">🚶‍♂️</span>
+                    <span class="icon">🚶</span>
                     <h3>Chodník, opěrné zdi a osvětlení – 3. etapa</h3>
                     <p>Vybudovali jsme nový chodník podél místní komunikace, opěrné zdi a osvětlení. Konečná cena: 10,68 mil. Kč.</p>
                 </div>
@@ -2318,7 +2317,7 @@
                 <div class="dot">3</div>
                 <div class="content">
                     <span class="year">🔧 Dokončení 09/2026</span>
-                    <span class="icon">🏗️</span>
+                    <span class="icon">🚧</span>
                     <h3>Splašková kanalizace – hlavní projekt</h3>
                     <p>Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno. Následně bude požádáno o kolaudační rozhodnutí na tuto stavbu. Rozpočet: 188,58 mil. Kč.</p>
                 </div>
@@ -2868,7 +2867,7 @@
         }
     }, { passive: true });
 
-    // ===== SCROLL SPY PRO AKTIVNÍ ODKAZ V MENU =====
+    // ===== SCROLL SPY =====
     const sections = document.querySelectorAll('section[id], header[id]');
     const navAnchors = document.querySelectorAll('.nav-links a');
 
@@ -2895,7 +2894,7 @@
     window.addEventListener('scroll', updateActiveNavLink, { passive: true });
     updateActiveNavLink();
 
-    // ===== SCROLL-TRIGGERED ANIMACE =====
+    // ===== SCROLL ANIMACE =====
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
