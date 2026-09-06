@@ -161,11 +161,13 @@
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 60%;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--accent);
         }
 
@@ -348,15 +350,6 @@
                 background: transparent;
             }
 
-            .nav-links a i {
-                color: var(--accent);
-                font-size: 1.1rem;
-                width: 1.4rem;
-                text-align: center;
-                opacity: 0.7;
-                transition: 0.2s;
-            }
-
             .nav-links a::after {
                 display: none;
             }
@@ -366,11 +359,6 @@
                 background: var(--accent-soft);
                 border-color: var(--accent);
                 transform: translateX(4px);
-            }
-
-            .nav-links a:hover i {
-                opacity: 1;
-                transform: scale(1.1);
             }
         }
 
@@ -1437,7 +1425,6 @@
             box-shadow: 0 12px 30px rgba(0,0,0,0.1);
         }
 
-        /* Bílá karta */
         .why-card.white {
             background: var(--white);
             border: 2px solid var(--border);
@@ -1447,7 +1434,6 @@
             border-color: var(--accent);
         }
 
-        /* Modrá karta */
         .why-card.blue {
             background: var(--accent);
             border: 2px solid var(--accent);
@@ -1651,8 +1637,8 @@
             }
 
             .why-card:nth-child(3) {
-                background: var(--white);
-                border: 2px solid var(--border);
+                background: var(--white) !important;
+                border: 2px solid var(--border) !important;
             }
             .why-card:nth-child(3) .icon { color: var(--secondary); }
             .why-card:nth-child(3) h3 { color: var(--accent); }
@@ -1663,6 +1649,10 @@
                 background: var(--secondary-soft);
                 color: var(--secondary);
                 border: 1px solid var(--secondary);
+            }
+            .why-card:nth-child(3):hover {
+                border-color: var(--accent) !important;
+                background: var(--white) !important;
             }
 
             .why-card:nth-child(4) {
@@ -1678,6 +1668,11 @@
                 background: rgba(255, 255, 255, 0.15);
                 color: var(--white);
                 border: 1px solid rgba(255, 255, 255, 0.4);
+            }
+            .why-card:nth-child(4):hover {
+                background: var(--accent-hover);
+                border-color: var(--accent-hover);
+                box-shadow: 0 12px 35px var(--accent-glow);
             }
         }
 
@@ -1706,23 +1701,24 @@
             color: var(--dark);
         }
 
-        /* HIGHLIGHT BOX - zlatá barva, odlišná od modrých karet */
+        /* HIGHLIGHT BOX - bílá na PC, zlatá na mobilu */
         .highlight-box {
             max-width: 900px;
             margin: 1.8rem auto 0;
             padding: 1.6rem 2rem;
-            background: var(--gold-soft);
+            background: var(--white);
             border-radius: 1.5rem;
             text-align: center;
             color: var(--dark);
-            box-shadow: 0 8px 30px rgba(212, 168, 67, 0.2);
-            border: 2px solid var(--gold);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border: 2px solid var(--border);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .highlight-box:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(212, 168, 67, 0.3);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent);
         }
 
         .highlight-box p {
@@ -1741,6 +1737,19 @@
             font-size: 1.8rem;
             color: var(--gold);
             flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .highlight-box {
+                background: var(--gold-soft);
+                border-color: var(--gold-border);
+                box-shadow: 0 8px 30px rgba(212, 168, 67, 0.15);
+            }
+
+            .highlight-box:hover {
+                box-shadow: 0 12px 40px rgba(212, 168, 67, 0.25);
+                border-color: var(--gold);
+            }
         }
 
         /* PRIORITY */
@@ -1884,7 +1893,7 @@
             border-color: var(--accent);
         }
 
-        /* KANDIDÁTI - 3x3 mřížka */
+        /* KANDIDÁTI - 3x3 mřížka, zlaté akcenty */
         .candidates {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1902,31 +1911,15 @@
             flex-direction: column;
             gap: 0.8rem;
             transition: 0.3s;
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
             position: relative;
             overflow: hidden;
         }
 
-        .candidate::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gold);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
         .candidate:hover {
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-            border-color: var(--gold);
-            transform: translateY(-4px);
-        }
-
-        .candidate:hover::before {
-            opacity: 1;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            border-color: var(--accent-light);
+            transform: translateY(-2px);
         }
 
         .candidate-header {
@@ -1940,15 +1933,21 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--accent);
-            border: 2px solid var(--accent);
+            background: var(--gold-soft);
+            border: 2px solid var(--gold-border);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1rem;
             font-weight: 800;
+            color: #b8912f;
+            transition: 0.3s;
+        }
+
+        .candidate:hover .candidate-number {
+            background: var(--gold);
+            border-color: var(--gold);
             color: var(--white);
-            box-shadow: 0 4px 12px var(--accent-glow);
         }
 
         .candidate-info {
@@ -2017,12 +2016,10 @@
         }
 
         .candidate:hover .tags span {
-            border-color: var(--gold-border);
-            color: #b8912f;
-            background: var(--gold-soft);
+            border-color: var(--accent-light);
+            color: var(--accent);
         }
 
-        /* Responsive kandidáti */
         @media (max-width: 992px) {
             .candidates {
                 grid-template-columns: repeat(2, 1fr);
@@ -2281,7 +2278,6 @@
             cursor: default;
         }
 
-        /* RESPONSIVE RŮZNÉ */
         @media (max-width: 768px) {
             .sliby-header {
                 display: none;
@@ -2513,11 +2509,11 @@
                     <i class="fas fa-xmark"></i>
                 </button>
             </div>
-            <li><a href="#home"><i class="fas fa-home"></i> Domů</a></li>
-            <li><a href="#vysledky"><i class="fas fa-check-circle"></i> Co jsme dokázali</a></li>
-            <li><a href="#program"><i class="fas fa-bullseye"></i> Náš program</a></li>
-            <li><a href="#proc"><i class="fas fa-heart"></i> Proč pokračovat</a></li>
-            <li><a href="#tym"><i class="fas fa-users"></i> Náš tým</a></li>
+            <li><a href="#home">Domů</a></li>
+            <li><a href="#vysledky">Co jsme dokázali</a></li>
+            <li><a href="#program">Náš program</a></li>
+            <li><a href="#proc">Proč pokračovat</a></li>
+            <li><a href="#tym">Náš tým</a></li>
         </ul>
         <div class="nav-overlay" id="navOverlay"></div>
     </div>
@@ -3163,6 +3159,34 @@
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    // Aktivní sekce v menu (PC)
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+
+    function updateActiveNav() {
+        const scrollPos = window.scrollY + 100;
+        let currentSection = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                currentSection = section.id;
+            }
+        });
+
+        navAnchors.forEach(anchor => {
+            anchor.classList.remove('active');
+            const href = anchor.getAttribute('href');
+            if (href && href.substring(1) === currentSection) {
+                anchor.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
 
     // Výsledky timeline
     const timelineItems = document.querySelectorAll('.timeline-item');
