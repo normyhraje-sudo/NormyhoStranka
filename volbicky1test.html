@@ -294,8 +294,19 @@
                 letter-spacing: -0.3px;
             }
 
-            .menu-title .emoji {
-                font-size: 1.3rem;
+            .menu-title .menu-logo {
+                width: 32px;
+                height: 32px;
+                border-radius: 8px;
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+
+            .menu-title .menu-logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
             }
 
             .close-menu {
@@ -385,6 +396,11 @@
 
             .menu-title {
                 font-size: 0.9rem;
+            }
+
+            .menu-title .menu-logo {
+                width: 28px;
+                height: 28px;
             }
         }
 
@@ -1537,7 +1553,6 @@
                 gap: 1rem;
             }
 
-            /* 01 a 03: stejná barva */
             .why-card:nth-child(1) {
                 border-color: var(--card-1);
                 background: #f0f4fa;
@@ -1564,7 +1579,6 @@
                 border-color: var(--card-3);
             }
 
-            /* 02 a 04: jiná barva (světle modrá) */
             .why-card:nth-child(2) {
                 border-color: var(--card-2);
                 background: #e8f2ff;
@@ -2267,7 +2281,7 @@
     <div class="container">
         <a href="#" class="logo" id="logoLink">
             <span class="logo-icon"><img src="logo.png" alt="Logo Volba pro zítřek"></span>
-            <span class="logo-text">Volba pro</span><span class="logo-text-highlight">zítřek</span>
+            <span class="logo-text">Volba pro </span><span class="logo-text-highlight">zítřek</span>
         </a>
         <button class="burger" id="burger" aria-label="Menu">
             <span></span>
@@ -2277,7 +2291,8 @@
         <ul class="nav-links" id="navLinks">
             <div class="menu-header">
                 <div class="menu-title">
-                    <span class="emoji">🧭</span> Menu
+                    <span class="menu-logo"><img src="logo.png" alt="Logo"></span>
+                    Menu
                 </div>
                 <button class="close-menu" id="closeMenu" aria-label="Zavřít menu">
                     <i class="fas fa-xmark"></i>
