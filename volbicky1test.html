@@ -9,7 +9,7 @@
     <meta property="og:description" content="Máme za sebou kus práce. S vámi chceme pokračovat." />
     <meta property="og:type" content="website" />
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232A4A7A'/%3E%3Cpath d='M50 20 L70 45 L60 45 L70 65 L30 65 L40 45 L30 45 Z' fill='%23FFFFFF'/%3E%3C/svg%3E" type="image/svg+xml" />
+    <link rel="icon" href="logo.png" type="image/png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,6 +34,10 @@
             --shadow: 0 4px 20px rgba(0,0,0,0.06);
             --radius-lg: 24px;
             --radius-sm: 16px;
+            --card-1: #2A4A7A;
+            --card-2: #4A9EFF;
+            --card-3: #2A4A7A;
+            --card-4: #4A9EFF;
         }
 
         * {
@@ -97,15 +101,19 @@
         .logo-icon {
             width: 38px;
             height: 38px;
-            background: var(--accent);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            color: var(--white);
-            font-size: 1.1rem;
-            transition: transform 0.2s;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .logo:hover .logo-icon {
@@ -1403,6 +1411,7 @@
         .status-probiha { background: var(--secondary-soft); color: var(--secondary); border: 1px solid var(--secondary); }
         .status-pripraveno { background: #dbeafe; color: #1d4ed8; border: 1px solid #b8daff; }
 
+        /* ===== PROČ KANDIDUJEME – BAREVNÉ BUBLINKY ===== */
         .why-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -1468,6 +1477,121 @@
             border: 1px solid var(--secondary);
         }
 
+        /* Barevné varianty pro karty – na desktopu 01+03 stejné, 02+04 stejné */
+        .why-card:nth-child(1) {
+            border-color: var(--card-1);
+            background: #f0f4fa;
+        }
+        .why-card:nth-child(1) .icon {
+            color: var(--card-1);
+        }
+        .why-card:nth-child(1) .tag {
+            background: var(--card-1);
+            color: white;
+            border-color: var(--card-1);
+        }
+
+        .why-card:nth-child(2) {
+            border-color: var(--card-2);
+            background: #e8f2ff;
+        }
+        .why-card:nth-child(2) .icon {
+            color: var(--card-2);
+        }
+        .why-card:nth-child(2) .tag {
+            background: var(--card-2);
+            color: white;
+            border-color: var(--card-2);
+        }
+
+        .why-card:nth-child(3) {
+            border-color: var(--card-3);
+            background: #f0f4fa;
+        }
+        .why-card:nth-child(3) .icon {
+            color: var(--card-3);
+        }
+        .why-card:nth-child(3) .tag {
+            background: var(--card-3);
+            color: white;
+            border-color: var(--card-3);
+        }
+
+        .why-card:nth-child(4) {
+            border-color: var(--card-4);
+            background: #e8f2ff;
+        }
+        .why-card:nth-child(4) .icon {
+            color: var(--card-4);
+        }
+        .why-card:nth-child(4) .tag {
+            background: var(--card-4);
+            color: white;
+            border-color: var(--card-4);
+        }
+
+        /* ===== RESPONSIVE – MOBIL: 02 a 04 jiné barvy ===== */
+        @media (max-width: 768px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* 01 a 03: stejná barva */
+            .why-card:nth-child(1) {
+                border-color: var(--card-1);
+                background: #f0f4fa;
+            }
+            .why-card:nth-child(1) .icon {
+                color: var(--card-1);
+            }
+            .why-card:nth-child(1) .tag {
+                background: var(--card-1);
+                color: white;
+                border-color: var(--card-1);
+            }
+
+            .why-card:nth-child(3) {
+                border-color: var(--card-3);
+                background: #f0f4fa;
+            }
+            .why-card:nth-child(3) .icon {
+                color: var(--card-3);
+            }
+            .why-card:nth-child(3) .tag {
+                background: var(--card-3);
+                color: white;
+                border-color: var(--card-3);
+            }
+
+            /* 02 a 04: jiná barva (světle modrá) */
+            .why-card:nth-child(2) {
+                border-color: var(--card-2);
+                background: #e8f2ff;
+            }
+            .why-card:nth-child(2) .icon {
+                color: var(--card-2);
+            }
+            .why-card:nth-child(2) .tag {
+                background: var(--card-2);
+                color: white;
+                border-color: var(--card-2);
+            }
+
+            .why-card:nth-child(4) {
+                border-color: var(--card-4);
+                background: #e8f2ff;
+            }
+            .why-card:nth-child(4) .icon {
+                color: var(--card-4);
+            }
+            .why-card:nth-child(4) .tag {
+                background: var(--card-4);
+                color: white;
+                border-color: var(--card-4);
+            }
+        }
+
         .proc-kandidujeme {
             max-width: 750px;
             margin: 0 auto 3rem;
@@ -1492,6 +1616,7 @@
             color: var(--dark);
         }
 
+        /* ===== PRIORITY ===== */
         .priorities {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1912,9 +2037,6 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
-            .why-grid {
-                grid-template-columns: 1fr;
-            }
             .candidate {
                 padding: 1.5rem;
                 gap: 1.5rem;
@@ -2144,7 +2266,7 @@
 <nav class="navbar">
     <div class="container">
         <a href="#" class="logo" id="logoLink">
-            <span class="logo-icon">📋</span>
+            <span class="logo-icon"><img src="logo.png" alt="Logo Volba pro zítřek"></span>
             <span class="logo-text">Volba pro </span><span class="logo-text-highlight">zítřek</span>
         </a>
         <button class="burger" id="burger" aria-label="Menu">
@@ -2251,7 +2373,7 @@
     <div class="container">
         <span class="section-tag">Co se v Čisté povedlo</span>
         <h2 class="section-title">Čistá se mění k lepšímu</h2>
-        <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali spoustu dobrých věcí. A to je teprve začátek. Pojďte se podívat, co už funguje a kam se posouváme dál.</p>
+        <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali spoustu dobrých věcí. To je teprve začátek. Pojďte se podívat, co už funguje a kam se posouváme dál.</p>
 
         <div class="timeline" id="timeline">
             <div class="timeline-item active">
@@ -2298,8 +2420,8 @@
 
             <div class="sliby-table">
                 <div class="sliby-header">
-                    <div>PROJEKT</div>
-                    <div>STAV</div>
+                    <div>Projekt</div>
+                    <div>Stav</div>
                 </div>
                 <div class="sliby-row">
                     <div class="text">
@@ -2551,7 +2673,7 @@
             <p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
             <p>Neslibujeme nemožné. <strong style="color: var(--secondary);">Chceme pokračovat v projektech, které dávají smysl.</strong></p>
             <div class="divider"></div>
-            <p style="font-weight: 600; color: var(--dark);">Společně tvoříme budoucnost. A ta začíná tady, v Čisté.</p>
+            <p style="font-weight: 600; color: var(--dark);">Společně tvoříme budoucnost. Ta začíná tady, v Čisté.</p>
         </div>
 
         <div class="why-grid">
@@ -2559,7 +2681,7 @@
                 <span class="num">01</span>
                 <span class="icon"><i class="fas fa-check-double"></i></span>
                 <h3>Dotahujeme věci do konce</h3>
-                <p>Neslibujeme, co nezvládneme. Nové chodníky a parkovací stání, kanalizace – to jsou projekty, které jsme dotáhli od prvního návrhu až do zdárného konce. A to je náš styl.</p>
+                <p>Neslibujeme, co nezvládneme. Nové chodníky a parkovací stání, kanalizace – to jsou projekty, které jsme dotáhli od prvního návrhu až do zdárného konce. To je náš styl.</p>
                 <span class="tag">Spolehlivost</span>
             </div>
             <div class="why-card">
