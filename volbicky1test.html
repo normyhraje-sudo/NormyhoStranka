@@ -122,10 +122,20 @@
 
         .logo .logo-text {
             color: var(--accent);
+            white-space: nowrap;
         }
 
         .logo .logo-text-highlight {
             color: var(--secondary);
+            white-space: nowrap;
+        }
+
+        /* Oprava: žádná mezera mezi "pro" a "zítřek" v HTML, řešíme to normální mezerou */
+        .logo .logo-text-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -2281,7 +2291,10 @@
     <div class="container">
         <a href="#" class="logo" id="logoLink">
             <span class="logo-icon"><img src="logo.png" alt="Logo Volba pro zítřek"></span>
-            <span class="logo-text">Volba pro </span><span class="logo-text-highlight">zítřek</span>
+            <span class="logo-text-wrapper">
+                <span class="logo-text">Volba pro</span>
+                <span class="logo-text-highlight">zítřek</span>
+            </span>
         </a>
         <button class="burger" id="burger" aria-label="Menu">
             <span></span>
