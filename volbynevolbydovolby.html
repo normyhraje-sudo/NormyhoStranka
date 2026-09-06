@@ -486,60 +486,38 @@
             text-align: left;
         }
 
-        .hero-row {
-            display: flex;
-            gap: 2rem;
-            align-items: stretch;
-            max-width: 1100px;
-            margin: 0 0 2rem;
-        }
-
         .hero-row .col-photo {
-            flex: 1 1 48%;
-            min-width: 0;
+            flex: 1 1 58%; /* Větší podíl pro obrázek */
         }
-
+        
         .hero-row .col-stats {
-            flex: 1 1 48%;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex: 1 1 42%; /* Menší podíl pro statistiky */
         }
-
+        
         .hero-photo {
-            width: 100%;
-            height: 100%;
-            min-height: 360px;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            background: var(--white);
-            cursor: pointer;
-            position: relative;
+            min-height: 400px; /* Větší minimální výška */
+            max-height: 500px;
         }
-
-        .hero-photo::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 40%;
-            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
-            pointer-events: none;
+        
+        @media (max-width: 992px) {
+            .hero-photo {
+                min-height: 250px;
+                max-height: 400px;
+            }
         }
-
-        .hero-photo img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        
+        @media (max-width: 768px) {
+            .hero-photo {
+                min-height: 200px;
+                max-height: 300px;
+            }
         }
-
-        .hero-photo:hover img {
-            transform: scale(1.03);
+        
+        @media (max-width: 480px) {
+            .hero-photo {
+                min-height: 160px;
+                max-height: 220px;
+            }
         }
 
         .stats-grid {
