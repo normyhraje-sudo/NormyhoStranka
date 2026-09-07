@@ -22,7 +22,6 @@
             --green: #2e7d32;
             --green-light: #4caf50;
             --green-soft: #e8f5e9;
-            --accent: #f5a623;
             --bg-light: #f0f4fa;
             --white: #ffffff;
             --text-dark: #1a2a3a;
@@ -63,11 +62,13 @@
             border: none;
             cursor: pointer;
             transition: var(--transition);
-            background: var(--primary);
-            color: var(--white);
             box-shadow: 0 4px 16px rgba(26, 58, 107, 0.25);
         }
-        .btn:hover {
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 8px 32px rgba(26, 58, 107, 0.35);
             background: var(--primary-dark);
@@ -79,8 +80,10 @@
             box-shadow: none;
         }
         .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
+            background: rgba(26, 58, 107, 0.06);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px) scale(1.02);
         }
 
         /* ============================================================ */
@@ -439,26 +442,26 @@
         }
 
         /* ============================================================ */
-        /* ----- HERO (ZAROVNÁNO DOLEVA, FOTKA 21:9) ----- */
+        /* ----- HERO (ROZDĚLENÝ: ZELENÉ POZADÍ + MODRÝ TEXT) ----- */
         /* ============================================================ */
         .hero {
-            background: var(--bg-light);
             text-align: left;
-            padding: 60px 0 50px;
+            padding: 0;
             border-bottom: 3px solid var(--primary);
             position: relative;
             overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(42, 122, 216, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
+
+        /* HORNÍ POLOVINA – ZELENÉ POZADÍ, MODRÝ TEXT */
+        .hero-top {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 60px 0 40px;
+        }
+
+        /* DOLNÍ POLOVINA – MODRÁ */
+        .hero-bottom-section {
+            background: linear-gradient(135deg, #dce8f5 0%, #b8d4e8 100%);
+            padding: 20px 0 40px;
         }
 
         .hero .badge {
@@ -487,7 +490,7 @@
         }
         .hero h1 .line1 { color: var(--primary); }
         .hero h1 .line2 {
-            background: linear-gradient(135deg, var(--primary-light), var(--secondary), var(--secondary-light));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -507,7 +510,7 @@
             gap: 40px;
             align-items: stretch;
             max-width: 1100px;
-            margin: 0 auto 32px;
+            margin: 0 auto 20px;
         }
 
         .hero-row .col-photo {
@@ -547,7 +550,7 @@
         }
 
         /* ============================================================ */
-        /* ----- STATISTIKY ----- */
+        /* ----- STATISTIKY (V MODRÉ ČÁSTI) ----- */
         /* ============================================================ */
         .stats-grid {
             display: grid;
@@ -567,7 +570,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 120px;
+            min-height: 130px;
             color: var(--text-dark);
         }
         .stat-card:hover {
@@ -575,27 +578,29 @@
             border-color: var(--primary);
             box-shadow: var(--shadow-hover);
         }
-        .stat-card .number { color: var(--primary); }
-        .stat-card .label { color: var(--text-dark); }
-        .stat-card .desc { color: var(--text-muted); }
 
-        .stat-card .emoji { font-size: 28px; margin-bottom: 4px; }
         .stat-card .number {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 900;
+            color: var(--primary);
             display: block;
+            line-height: 1.2;
         }
         .stat-card .label {
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
+            color: var(--text-dark);
             display: block;
+            margin-top: 2px;
         }
         .stat-card .desc {
             font-size: 12px;
+            color: var(--text-muted);
             display: block;
+            margin-top: 4px;
         }
 
-        .hero-bottom {
+        .hero-bottom-text {
             max-width: 800px;
             margin: 0;
             text-align: left;
@@ -637,18 +642,20 @@
                 gap: 8px;
             }
             .stat-card {
-                min-height: 90px;
+                min-height: 100px;
                 padding: 12px 8px;
                 border-radius: 12px;
             }
-            .stat-card .emoji { font-size: 22px; }
-            .stat-card .number { font-size: 15px; }
-            .stat-card .label { font-size: 12px; }
-            .stat-card .desc { font-size: 10px; }
+            .stat-card .number { font-size: 18px; }
+            .stat-card .label { font-size: 13px; }
+            .stat-card .desc { font-size: 11px; }
+            .hero-top { padding: 40px 0 30px; }
+            .hero-bottom-section { padding: 20px 0 30px; }
         }
 
         @media (max-width: 768px) {
-            .hero { padding: 40px 0 32px; }
+            .hero-top { padding: 30px 0 20px; }
+            .hero-bottom-section { padding: 15px 0 25px; }
             .hero h1 { font-size: 28px; }
             .hero .subheadline { font-size: 17px; }
             .hero-photo { 
@@ -658,17 +665,21 @@
             }
             .hero-text { font-size: 15px; }
             .btn { font-size: 14px; padding: 12px 24px; }
-            .hero-bottom { max-width: 100%; }
+            .hero-bottom-text { max-width: 100%; }
+            .stat-card { min-height: 85px; padding: 10px 6px; }
+            .stat-card .number { font-size: 16px; }
+            .stat-card .label { font-size: 12px; }
+            .stat-card .desc { font-size: 10px; }
         }
 
         @media (max-width: 480px) {
-            .hero { padding: 24px 0 24px; }
+            .hero-top { padding: 20px 0 15px; }
+            .hero-bottom-section { padding: 10px 0 20px; }
             .hero h1 { font-size: 22px; }
             .hero .badge { font-size: 11px; padding: 4px 14px; }
             .hero .subheadline { font-size: 15px; }
             .stat-card { min-height: 72px; padding: 8px 4px; border-radius: 10px; }
-            .stat-card .emoji { font-size: 18px; }
-            .stat-card .number { font-size: 13px; }
+            .stat-card .number { font-size: 14px; }
             .stat-card .label { font-size: 10px; }
             .stat-card .desc { font-size: 9px; }
             .btn { font-size: 13px; padding: 10px 20px; }
@@ -709,6 +720,10 @@
             font-size: 18px;
             max-width: 620px;
             margin-bottom: 32px;
+        }
+        .section-subtitle strong,
+        .section-subtitle .highlight {
+            color: var(--green);
         }
         .section-title.center,
         .section-subtitle.center { text-align: center; margin-left: auto; margin-right: auto; }
@@ -1263,7 +1278,7 @@
         }
 
         /* ============================================================ */
-        /* ----- HIGHLIGHT BOX (MODRÁ) ----- */
+        /* ----- HIGHLIGHT BOX (MODRÁ NA PC, BÍLÁ NA MOBILU) ----- */
         /* ============================================================ */
         .highlight-box {
             max-width: 900px;
@@ -1291,9 +1306,20 @@
         .highlight-box i { font-size: 28px; color: var(--secondary); flex-shrink: 0; }
 
         @media (max-width: 768px) {
-            .highlight-box { padding: 16px 16px; }
-            .highlight-box p { font-size: 15px; gap: 8px; }
-            .highlight-box i { font-size: 22px; }
+            .highlight-box { 
+                padding: 16px 16px; 
+                background: var(--white);
+                border-color: var(--primary);
+            }
+            .highlight-box p {
+                font-size: 15px; 
+                gap: 8px;
+                color: var(--primary);
+            }
+            .highlight-box i { 
+                font-size: 22px;
+                color: var(--primary);
+            }
         }
 
         /* ============================================================ */
@@ -1458,10 +1484,10 @@
             margin: 0 auto 24px; 
         }
         
-        /* TÝMOVÁ FOTKA – POMĚR 21:9 */
+        /* TÝMOVÁ FOTKA – POMĚR 2.2:1 */
         .team-photo-section .photo-placeholder {
             width: 100%;
-            aspect-ratio: 21 / 9;
+            aspect-ratio: 2.2 / 1;
             background: var(--white);
             border: 2px solid var(--border);
             border-radius: var(--radius-lg);
@@ -1555,13 +1581,13 @@
             .team-slogan { font-size: 22px; }
             .candidate { padding: 16px; }
             .team-photo-section .photo-placeholder { 
-                aspect-ratio: 21 / 9; 
+                aspect-ratio: 2.2 / 1; 
                 border-radius: 1rem; 
             }
         }
         @media (max-width: 480px) {
             .team-photo-section .photo-placeholder { 
-                aspect-ratio: 21 / 9; 
+                aspect-ratio: 2.2 / 1; 
                 border-radius: 0.8rem; 
             }
         }
@@ -1685,72 +1711,75 @@
 </nav>
 
 <!-- ============================================================ -->
-<!-- HERO -->
+<!-- HERO (ROZDĚLENÝ: ZELENÉ POZADÍ + MODRÝ TEXT) -->
 <!-- ============================================================ -->
 <header class="hero" id="home">
-    <div class="container">
-
-        <div class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</div>
-
-        <h1>
-            <span class="line1">Máme za sebou kus práce.</span>
-            <span class="line2">S vámi chceme pokračovat.</span>
-        </h1>
-        <p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
-
-        <div class="hero-row">
-            <div class="col-photo">
-                <div class="hero-photo clickable-image">
-                    <img 
-                        src="vesnice.jpg" 
-                        alt="Čistá u Mladé Boleslavi – pohled na obec" 
-                        loading="lazy"
-                    >
-                </div>
-            </div>
-
-            <div class="col-stats">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="emoji">🚧</span>
-                        <span class="number">dokončujeme</span>
-                        <span class="label">splaškovou kanalizaci</span>
-                        <span class="desc">za 188,58 mil. Kč s dotacemi</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="emoji">🚶</span>
-                        <span class="number">nový</span>
-                        <span class="label">chodník + osvětlení</span>
-                        <span class="desc">3. etapa za 10,68 mil. Kč</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="emoji">🏫</span>
-                        <span class="number">podpoříme</span>
-                        <span class="label">moderní školu</span>
-                        <span class="desc">aktivizační metody a individuální přístup</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="emoji">🌿</span>
-                        <span class="number">obnovíme</span>
-                        <span class="label">zeleň a veřejný prostor</span>
-                        <span class="desc">revitalizace návsi a výsadba stromů</span>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- HORNÍ POLOVINA – ZELENÉ POZADÍ, MODRÝ TEXT -->
+    <div class="hero-top">
+        <div class="container">
+            <div class="badge"><i class="fas fa-check-circle"></i> 4 roky práce pro Čistou</div>
+            <h1>
+                <span class="line1">Máme za sebou kus práce.</span>
+                <span class="line2">S vámi chceme pokračovat.</span>
+            </h1>
+            <p class="subheadline">Čistá u Mladé Boleslavi – náš domov.</p>
         </div>
-
-        <div class="hero-bottom">
-            <p class="hero-text">
-                Stabilizovali jsme skalní svah, vybudovali nový chodník s osvětlením a <strong>dokončujeme splaškovou kanalizaci.</strong>
-                Čistá se mění k lepšímu. Pojďte s námi dotáhnout další projekty, které dávají smysl.
-            </p>
-            <div class="btn-group">
-                <a href="#vysledky" class="btn"><i class="fas fa-arrow-right"></i> Co jsme dokázali</a>
-                <a href="#tym" class="btn btn-outline"><i class="fas fa-users"></i> Kandidáti</a>
-            </div>
-        </div>
-
     </div>
+    
+    <!-- DOLNÍ POLOVINA – MODRÁ (fotka + statistiky + text + tlačítka) -->
+    <div class="hero-bottom-section">
+        <div class="container">
+            <div class="hero-row">
+                <div class="col-photo">
+                    <div class="hero-photo clickable-image">
+                        <img 
+                            src="vesnice.jpg" 
+                            alt="Čistá u Mladé Boleslavi – pohled na obec" 
+                            loading="lazy"
+                        >
+                    </div>
+                </div>
+
+                <div class="col-stats">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="number">dokončujeme</span>
+                            <span class="label">splaškovou kanalizaci</span>
+                            <span class="desc">za 188,58 mil. Kč s dotacemi</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number">nový</span>
+                            <span class="label">chodník + osvětlení</span>
+                            <span class="desc">3. etapa za 10,68 mil. Kč</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number">podpoříme</span>
+                            <span class="label">moderní školu</span>
+                            <span class="desc">aktivizační metody a individuální přístup</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="number">obnovíme</span>
+                            <span class="label">zeleň a veřejný prostor</span>
+                            <span class="desc">revitalizace návsi a výsadba stromů</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-bottom-text">
+                <p class="hero-text">
+                    Stabilizovali jsme skalní svah, vybudovali nový chodník s osvětlením a <strong>dokončujeme splaškovou kanalizaci.</strong>
+                    Čistá se mění k lepšímu. Pojďte s námi dotáhnout další projekty, které dávají smysl.
+                </p>
+                <div class="btn-group">
+                    <a href="#vysledky" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Co jsme dokázali</a>
+                    <a href="#tym" class="btn btn-outline"><i class="fas fa-users"></i> Kandidáti</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </header>
 
 <!-- ============================================================ -->
@@ -1760,7 +1789,7 @@
     <div class="container">
         <span class="section-tag">🌱 Co se v Čisté povedlo</span>
         <h2 class="section-title">Čistá se mění k lepšímu</h2>
-        <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali spoustu dobrých věcí. To je teprve začátek.</p>
+        <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To je teprve začátek.</p>
 
         <div class="timeline" id="timeline">
             <div class="timeline-item active">
@@ -1796,7 +1825,7 @@
                     <span class="year">🚀 Chystáme</span>
                     <span class="icon">💡</span>
                     <h3>Další projekty pro rozvoj obce</h3>
-                    <p>Máme plány na další roky – od rozvoje kultury až po moderní služby. Chceme v tom pokračovat.</p>
+                    <p>Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
                 </div>
             </div>
         </div>
@@ -1834,7 +1863,7 @@
 <section id="program">
     <div class="container">
         <h2 class="section-title">Náš program pro Čistou 2026–2030</h2>
-        <p class="section-subtitle">Reálný plán, který stojí na zkušenosti a odpovědnosti. Nejdříve dokončíme kanalizaci a poté stabilizujeme finance.</p>
+        <p class="section-subtitle"><strong>Reálný plán</strong>, který stojí na zkušenosti a odpovědnosti. Nejdříve dokončíme kanalizaci a poté stabilizujeme finance.</p>
 
         <div class="program-timeline" id="programTimeline">
             <div class="line-fill" id="lineFill"></div>
@@ -1997,7 +2026,7 @@
                 <span class="num">03</span>
                 <span class="icon"><i class="fas fa-users"></i></span>
                 <h3>Žijeme tu s vámi</h3>
-                <p>Chodíme po stejných ulicích, naše děti chodí do stejné školy. Nejsme cizí lidé, jsme vaši sousedé. Děláme to pro svůj domov.</p>
+                <p>Chodíme po stejných ulicích, naše děti chodí do stejné školy. Nejsme cizí lidé, jsme vaši sousedé. <strong>Děláme to pro svůj domov.</strong></p>
                 <span class="tag">Sousedé</span>
             </div>
             <div class="why-card">
