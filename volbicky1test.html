@@ -17,6 +17,7 @@
             --primary: #1a3a6b;
             --primary-dark: #0f2a4a;
             --secondary: #2a7ad8;
+            --secondary-light: #5a9ee8;
             --green: #2e7d32;
             --green-soft: #e8f5e9;
             --white: #ffffff;
@@ -156,11 +157,32 @@
             border-radius: 99px;
             transition: width 0.3s ease;
         }
-        .nav-links a:hover::after { width: 60%; }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a.active::after { width: 60%; }
-        .nav-links a.active { color: var(--primary); }
-        .nav-links a.banner-active::after { width: 0 !important; }
+        .nav-links a:hover::after {
+            width: 60%;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(26, 58, 107, 0.08);
+            border-radius: 999px;
+        }
+        .nav-links a.active {
+            color: var(--primary) !important;
+            background: transparent !important;
+        }
+        .nav-links a.active::after {
+            width: 60% !important;
+        }
+        .nav-links a.banner-active::after {
+            width: 0 !important;
+        }
+        .nav-links a.banner-active {
+            background: transparent !important;
+            color: var(--text-muted) !important;
+        }
+        .nav-links a.banner-active:hover {
+            background: rgba(26, 58, 107, 0.08) !important;
+            color: var(--primary) !important;
+        }
 
         .burger {
             display: none;
@@ -337,7 +359,7 @@
             .stat-card .label { font-size: 13px !important; font-weight: 700 !important; color: var(--text-dark) !important; }
             .stat-card .desc { font-size: 10px !important; color: var(--text-muted) !important; }
 
-            .btn-group { justify-content: center !important; gap: 12px !important; margin-top: 4px !important; margin-bottom: 12px !important; flex-wrap: wrap !important; }
+            .btn-group { justify-content: center !important; gap: 12px !important; margin-top: 8px !important; margin-bottom: 16px !important; flex-wrap: wrap !important; }
             .btn { font-size: 14px !important; padding: 12px 24px !important; border-radius: 50px !important; font-weight: 700 !important; box-shadow: 0 4px 16px rgba(26,58,107,0.25) !important; flex: 0 1 auto !important; min-width: 140px !important; justify-content: center !important; }
             .btn-primary { background: var(--primary) !important; color: var(--white) !important; border: none !important; }
             .btn-outline { background: transparent !important; color: var(--primary) !important; border: 2px solid var(--primary) !important; backdrop-filter: none !important; }
@@ -469,6 +491,49 @@
             .menu-title .menu-logo { width: 28px; height: 28px; }
         }
 
+        /* ===== PC – TEXT NAHOŘE, TLAČÍTKA DOLE ===== */
+        @media (min-width: 769px) {
+            .hero-bottom-text {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+            .hero-bottom-text .hero-text {
+                order: 0 !important;
+                margin-bottom: 16px !important;
+            }
+            .hero-bottom-text .btn-group {
+                order: 1 !important;
+                justify-content: flex-start !important;
+            }
+        }
+
+        /* ===== SKRYTÍ FOTKY NA PC ===== */
+        @media (min-width: 769px) {
+            section[style*="padding: 40px 0; background: var(--bg-light)"] {
+                display: none !important;
+            }
+        }
+
+        /* ===== BANNERY – TMAVŠÍ ===== */
+        .banner-section {
+            background: var(--primary-dark) !important;
+            border-bottom: 4px solid var(--primary);
+        }
+        .banner-section h2 i {
+            color: var(--secondary-light);
+        }
+
+        /* ===== SCROLL-MARGIN – PO KLIKNUTÍ NA MENU VIDĚT CELÝ TEXT ===== */
+        section {
+            scroll-margin-top: 80px;
+        }
+        .banner-section {
+            scroll-margin-top: 80px;
+        }
+        #home {
+            scroll-margin-top: 0;
+        }
+
         /* ===== SECTION COMMON ===== */
         section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         .section-tag {
@@ -502,10 +567,8 @@
 
         /* ===== BANNER ===== */
         .banner-section {
-            background: var(--primary);
             padding: 48px 0;
             text-align: center;
-            border-bottom: 4px solid var(--secondary);
         }
         .banner-section h2 {
             color: var(--white);
@@ -513,7 +576,7 @@
             font-weight: 900;
             letter-spacing: -0.02em;
         }
-        .banner-section h2 i { color: var(--secondary); margin-right: 12px; }
+        .banner-section h2 i { margin-right: 12px; }
         @media (max-width: 768px) { .banner-section { padding: 32px 0; } }
         @media (max-width: 480px) { .banner-section { padding: 24px 0; } }
 
@@ -968,6 +1031,7 @@
                         <li>Konsolidovat rozpočet a nastavit splátky úvěrů</li>
                         <li>Nastavit desetiletý obecní provoz kanalizace</li>
                         <li>Pomoci občanům s realizací domovních přípojek</li>
+                        <li>Vytvořit víceletý přehled investic</li>
                     </ul>
                 </div>
             </div>
@@ -982,10 +1046,11 @@
                 <div class="tl-right">
                     <ul class="detail-list">
                         <li>Modernizace Domu služeb – prostory pro seniory</li>
-                        <li>4. etapa chodníků a cyklostezek</li>
+                        <li>4. etapa chodníků a cyklostezek na propojení centrální části obce a místní části Stránka</li>
                         <li>Revitalizace návsi – dětské hřiště, zeleň</li>
                         <li>Zateplení Kulturního domu a úspory energií</li>
                         <li>Výsadba stromů a zadržování vody v krajině</li>
+                        <li>Bezpečné cesty pro děti a veřejné osvětlení</li>
                     </ul>
                 </div>
             </div>
@@ -1504,6 +1569,25 @@
         if (e.key === 'Escape' && lightbox.style.display === 'flex') {
             closeLightbox();
         }
+    });
+
+    // ===== OPRAVA SCROLLU – POSUN O VÝŠKU MENU =====
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#') return;
+        
+        link.addEventListener('click', function(e) {
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                const menuHeight = 72;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - menuHeight - 10;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 </script>
 
