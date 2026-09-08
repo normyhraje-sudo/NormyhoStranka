@@ -12,495 +12,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
+
+        /* ============================================================ */
+/* RESPONSIVE – MOBIL (768px) – FOTKA POUZE ZA HORNÍM TEXTEM */
 /* ============================================================ */
-/* ROOT VARIABLES */
-/* ============================================================ */
-:root {
-    --primary: #1a3a6b;
-    --primary-light: #2a5a9b;
-    --primary-dark: #0f2a4a;
-    --secondary: #2a7ad8;
-    --secondary-light: #5a9ee8;
-    --green: #2e7d32;
-    --green-light: #4caf50;
-    --green-soft: #e8f5e9;
-    --bg-light: #f0f4fa;
-    --white: #ffffff;
-    --text-dark: #1a2a3a;
-    --text-muted: #5a6a7e;
-    --border: #dce4ec;
-    --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 16px 48px rgba(26, 58, 107, 0.15);
-    --radius: 16px;
-    --radius-lg: 24px;
-    --transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
 
-/* ============================================================ */
-/* RESET */
-/* ============================================================ */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--white);
-    color: var(--text-dark);
-    line-height: 1.7;
-    padding-top: 72px;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-img { max-width: 100%; display: block; }
-a { text-decoration: none; color: inherit; }
-
-/* ============================================================ */
-/* BUTTONS */
-/* ============================================================ */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 4px 16px rgba(26, 58, 107, 0.25);
-}
-.btn-primary {
-    background: var(--primary);
-    color: var(--white);
-}
-.btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 32px rgba(26, 58, 107, 0.35);
-    background: var(--primary-dark);
-}
-.btn-outline {
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    box-shadow: none;
-}
-.btn-outline:hover {
-    background: rgba(26, 58, 107, 0.06);
-    border-color: var(--primary);
-    color: var(--primary);
-    transform: translateY(-3px) scale(1.02);
-}
-
-/* ============================================================ */
-/* NAVBAR */
-/* ============================================================ */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    z-index: 1000;
-    border-bottom: 3px solid var(--primary);
-    box-shadow: 0 2px 12px rgba(26, 58, 107, 0.15);
-    transition: background 0.2s;
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 72px;
-}
-
-.logo {
-    font-size: 1.25rem;
-    font-weight: 900;
-    color: var(--primary);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.logo-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.logo-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.logo:hover .logo-icon {
-    transform: scale(1.05);
-}
-
-.logo .logo-text {
-    color: var(--primary);
-    white-space: nowrap;
-}
-
-.logo .logo-text-highlight {
-    color: var(--secondary);
-    white-space: nowrap;
-}
-
-.logo .logo-text-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    white-space: nowrap;
-}
-
-.nav-links {
-    display: flex;
-    gap: 0.5rem;
-    list-style: none;
-    align-items: center;
-}
-
-.nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 0.5rem 1.2rem;
-    border-radius: 999px;
-    transition: 0.25s;
-    position: relative;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 99px;
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-    width: 60%;
-}
-
-.nav-links a:hover {
-    color: var(--primary);
-    background: transparent;
-}
-
-.nav-links a.active::after {
-    width: 60%;
-}
-.nav-links a.active {
-    color: var(--primary);
-}
-
-.nav-links a.banner-active::after {
-    width: 0 !important;
-}
-
-.burger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: rgba(26, 58, 107, 0.06);
-    border: 2px solid var(--primary);
-    cursor: pointer;
-    padding: 10px 12px;
-    border-radius: 99px;
-    transition: 0.25s;
-}
-
-.burger:hover {
-    background: var(--primary);
-    transform: scale(1.02);
-}
-
-.burger:hover span {
-    background: var(--white);
-}
-
-.burger span {
-    display: block;
-    width: 24px;
-    height: 2.5px;
-    background: var(--primary);
-    border-radius: 99px;
-    transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.burger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-.burger.active span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-}
-.burger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
-
-.menu-header,
-.close-menu,
-.menu-title,
-.nav-overlay {
-    display: none;
-}
-
-/* ============================================================ */
-/* HERO – PC VERZE (zelená + modrá, fotka vpravo) */
-/* ============================================================ */
-.hero {
-    text-align: left;
-    padding: 0;
-    border-bottom: 3px solid var(--primary);
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-top {
-    background: linear-gradient(120deg, #e8f5e9 0%, #c8e6c9 100%);
-    padding: 60px 0 20px;
-}
-
-.hero-bottom-section {
-    background: linear-gradient(135deg, #dce8f5 0%, #b8d4e8 100%);
-    padding: 60px 0 40px;
-}
-
-.hero .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--primary);
-    color: var(--white);
-    font-weight: 700;
-    font-size: 13px;
-    padding: 6px 18px;
-    border-radius: 50px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 16px rgba(26, 58, 107, 0.2);
-}
-
-.hero h1 {
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-    text-align: left;
-}
-.hero h1 .line1 { color: var(--primary); }
-.hero h1 .line2 {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero .subheadline {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 24px;
-    opacity: 0.8;
-    text-align: left;
-}
-
-.hero-row {
-    display: flex;
-    gap: 40px;
-    align-items: stretch;
-    max-width: 1100px;
-    margin: 0 auto 20px;
-}
-
-.hero-row .col-photo {
-    flex: 1 1 48%;
-    min-width: 0;
-}
-
-.hero-row .col-stats {
-    flex: 1 1 48%;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.hero-photo {
-    width: 100%;
-    height: 100%;
-    min-height: 220px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    background: var(--white);
-    cursor: pointer;
-    transition: var(--transition);
-    aspect-ratio: 21 / 9;
-}
-.hero-photo:hover { 
-    transform: scale(1.01); 
-    box-shadow: var(--shadow-hover); 
-}
-.hero-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* ============================================================ */
-/* STATISTIKY */
-/* ============================================================ */
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.stat-card {
-    background: var(--white);
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 16px;
-    text-align: center;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 130px;
-    color: var(--text-dark);
-}
-.stat-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--primary);
-    box-shadow: var(--shadow-hover);
-}
-
-.stat-card .emoji {
-    font-size: 32px;
-    line-height: 1.2;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.stat-card .number {
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--primary);
-    display: block;
-    line-height: 1.2;
-}
-.stat-card .label {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--text-dark);
-    display: block;
-    margin-top: 2px;
-}
-.stat-card .desc {
-    font-size: 12px;
-    color: var(--text-muted);
-    display: block;
-    margin-top: 4px;
-}
-
-.hero-bottom-text {
-    max-width: 800px;
-    margin: 0;
-    text-align: left;
-}
-.hero-text {
-    font-size: 17px;
-    color: var(--text-dark);
-    margin-bottom: 20px;
-    line-height: 1.8;
-    text-align: left;
-}
-.hero-text strong { color: var(--primary); }
-
-.btn-group {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
-
-/* ============================================================ */
-/* RESPONSIVE – TABLET (992px) */
-/* ============================================================ */
-@media (max-width: 992px) {
-    .hero-row {
-        flex-direction: column;
-        gap: 24px;
-    }
-    .hero-row .col-photo {
-        flex: 1 1 auto;
-    }
-    .hero-row .col-stats {
-        flex: 1 1 auto;
-    }
-    .hero-photo {
-        min-height: 160px;
-        max-height: 240px;
-        aspect-ratio: 21 / 9;
-    }
-    .stats-grid {
-        gap: 8px;
-    }
-    .stat-card {
-        min-height: 100px;
-        padding: 12px 8px;
-        border-radius: 12px;
-    }
-    .stat-card .emoji { font-size: 28px; }
-    .stat-card .number { font-size: 18px; }
-    .stat-card .label { font-size: 13px; }
-    .stat-card .desc { font-size: 11px; }
-    .hero-top { padding: 40px 0 30px; }
-    .hero-bottom-section { padding: 20px 0 30px; }
-}
-
-/* ============================================================ */
-/* RESPONSIVE – MOBIL (768px) – FOTKA NA POZADÍ */
-/* ============================================================ */
 @media (max-width: 768px) {
     
-    /* Celý hero – fotka jako pozadí na celou obrazovku */
-    .hero {
+    /* ===== HORNÍ ČÁST – fotka na pozadí ===== */
+    .hero-top {
         background: url('vesnice.jpg') no-repeat center center / cover;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        padding: 40px 0 30px !important;
         position: relative;
-        border-bottom: none;
+        min-height: 280px;
+        display: flex;
+        align-items: center;
     }
 
     /* Tmavý překryv pro čitelnost textu */
-    .hero::before {
+    .hero-top::before {
         content: '';
         position: absolute;
         top: 0;
@@ -511,32 +41,15 @@ a { text-decoration: none; color: inherit; }
         z-index: 1;
     }
 
-    /* Všechno v hero bude nad překryvem */
-    .hero .container,
-    .hero-top,
-    .hero-bottom-section,
-    .hero-row,
-    .hero-bottom-text,
-    .btn-group {
+    /* Text bude nad překryvem */
+    .hero-top .container {
         position: relative;
         z-index: 2;
-    }
-
-    /* Horní část (zelená) – průhledná */
-    .hero-top {
-        background: transparent !important;
-        padding: 20px 0 10px !important;
-    }
-
-    /* Dolní část (modrá) – průhledná */
-    .hero-bottom-section {
-        background: transparent !important;
-        padding: 10px 0 30px !important;
-        box-shadow: none !important;
+        width: 100%;
     }
 
     /* Odznak */
-    .hero .badge {
+    .hero-top .badge {
         background: rgba(26, 58, 107, 0.85);
         backdrop-filter: blur(4px);
         font-size: 12px;
@@ -545,52 +58,35 @@ a { text-decoration: none; color: inherit; }
     }
 
     /* Nadpis – bílý */
-    .hero h1 {
+    .hero-top h1 {
         font-size: 32px !important;
         color: #ffffff !important;
         text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
     }
-    .hero h1 .line1 {
+    .hero-top h1 .line1 {
         color: #ffffff !important;
     }
-    .hero h1 .line2 {
+    .hero-top h1 .line2 {
         background: none !important;
         -webkit-text-fill-color: #ffffff !important;
         color: #ffffff !important;
     }
 
     /* Podnadpis */
-    .hero .subheadline {
+    .hero-top .subheadline {
         color: rgba(255, 255, 255, 0.85) !important;
         font-size: 18px !important;
         text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
         font-weight: 500;
     }
 
-    /* Hlavní text */
-    .hero-text {
-        color: #ffffff !important;
-        font-size: 16px !important;
-        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-        background: rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(4px);
-        padding: 16px 20px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .hero-text strong {
-        color: #8abfff !important;
-        font-weight: 700;
+    /* ===== DOLNÍ ČÁST – modrá zůstává ===== */
+    .hero-bottom-section {
+        background: linear-gradient(135deg, #dce8f5 0%, #b8d4e8 100%) !important;
+        padding: 30px 0 30px !important;
     }
 
-    /* Řádek s fotkou a statistikami */
-    .hero-row {
-        flex-direction: column !important;
-        gap: 16px !important;
-        margin-bottom: 8px !important;
-    }
-
-    /* Původní fotku schováme */
+    /* Fotka vpravo – schováme (už je na pozadí nahoře) */
     .hero-row .col-photo {
         display: none !important;
     }
@@ -600,24 +96,23 @@ a { text-decoration: none; color: inherit; }
         width: 100% !important;
     }
 
-    /* Statistiky – průhledné kartičky */
+    /* Statistiky – bílé kartičky (jako na PC) */
     .stats-grid {
         gap: 10px !important;
     }
 
     .stat-card {
-        background: rgba(255, 255, 255, 0.92) !important;
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
-        border-radius: 14px !important;
+        background: var(--white) !important;
+        border: 2px solid var(--border) !important;
+        border-radius: var(--radius) !important;
         padding: 14px 10px !important;
         min-height: 90px !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
-        transition: 0.3s ease;
+        box-shadow: var(--shadow) !important;
     }
     .stat-card:hover {
-        transform: translateY(-3px) scale(1.02);
-        background: rgba(255, 255, 255, 0.98);
+        transform: translateY(-4px);
+        border-color: var(--primary);
+        box-shadow: var(--shadow-hover);
     }
 
     .stat-card .emoji {
@@ -626,218 +121,85 @@ a { text-decoration: none; color: inherit; }
     }
     .stat-card .number {
         font-size: 18px !important;
-        color: #1a3a6b !important;
+        color: var(--primary) !important;
     }
     .stat-card .label {
         font-size: 13px !important;
         font-weight: 700 !important;
-        color: #1a2a3a !important;
+        color: var(--text-dark) !important;
     }
     .stat-card .desc {
         font-size: 10px !important;
-        color: #5a6a7e !important;
+        color: var(--text-muted) !important;
     }
 
-    /* Tlačítka */
+    /* Text pod statistikami – tmavý (jako na PC) */
+    .hero-text {
+        color: var(--text-dark) !important;
+        font-size: 15px !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+        border: none !important;
+        text-shadow: none !important;
+    }
+    .hero-text strong {
+        color: var(--primary) !important;
+    }
+
+    /* Tlačítka – jako na PC */
     .btn-group {
-        justify-content: center !important;
+        justify-content: flex-start !important;
         gap: 12px !important;
-        margin-top: 8px !important;
         flex-wrap: wrap !important;
     }
 
     .btn {
-        font-size: 15px !important;
-        padding: 14px 28px !important;
+        font-size: 14px !important;
+        padding: 12px 24px !important;
         border-radius: 50px !important;
         font-weight: 700 !important;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 4px 16px rgba(26, 58, 107, 0.25) !important;
         flex: 0 1 auto !important;
         min-width: 140px !important;
         justify-content: center !important;
     }
 
     .btn-primary {
-        background: #ffffff !important;
-        color: #1a3a6b !important;
-        border: 2px solid #1a3a6b !important;
+        background: var(--primary) !important;
+        color: var(--white) !important;
+        border: none !important;
     }
     .btn-primary:hover {
-        background: #1a3a6b !important;
-        color: #ffffff !important;
+        background: var(--primary-dark) !important;
     }
 
     .btn-outline {
-        background: rgba(255, 255, 255, 0.15) !important;
-        backdrop-filter: blur(4px);
-        color: #ffffff !important;
-        border: 2px solid rgba(255, 255, 255, 0.7) !important;
+        background: transparent !important;
+        color: var(--primary) !important;
+        border: 2px solid var(--primary) !important;
+        backdrop-filter: none !important;
     }
     .btn-outline:hover {
-        background: #ffffff !important;
-        color: #1a3a6b !important;
+        background: rgba(26, 58, 107, 0.06) !important;
     }
 
     /* Dolní text */
     .hero-bottom-text {
         max-width: 100% !important;
-        margin-top: 4px !important;
-        text-align: center !important;
+        margin-top: 16px !important;
+        text-align: left !important;
+    }
+
+    /* Úprava řádku pro mobil */
+    .hero-row {
+        flex-direction: column !important;
+        gap: 16px !important;
+        margin-bottom: 8px !important;
     }
 
     .hero-bottom-section .container {
         padding: 0 16px !important;
-    }
-
-    /* --- MENU (z původního kódu) --- */
-    .burger {
-        display: flex;
-    }
-
-    .nav-links {
-        display: flex;
-        position: fixed;
-        top: 12px;
-        left: 12px;
-        right: 12px;
-        width: auto;
-        height: auto;
-        max-height: 80vh;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        padding: 1.8rem 1.5rem 2rem;
-        gap: 0.25rem;
-        border-radius: var(--radius-lg);
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
-        z-index: 1001;
-        border: 2px solid var(--primary);
-        transform: translateY(-20px) scale(0.96);
-        opacity: 0;
-        pointer-events: none;
-        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
-        overflow-y: auto;
-    }
-
-    .nav-links.open {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .nav-links a::after {
-        display: none !important;
-    }
-    .nav-links a.active::after {
-        display: none !important;
-    }
-    .nav-links a.active {
-        background: rgba(26, 58, 107, 0.08);
-        border-color: var(--primary);
-    }
-
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.25);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        z-index: 1000;
-        opacity: 0;
-        transition: opacity 0.35s ease;
-    }
-
-    .nav-overlay.active {
-        display: block;
-        opacity: 1;
-    }
-
-    .menu-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.2rem;
-        padding-bottom: 0.8rem;
-        border-bottom: 2px solid var(--primary);
-    }
-
-    .menu-title {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 800;
-        font-size: 1rem;
-        color: var(--primary);
-        letter-spacing: -0.3px;
-    }
-
-    .menu-title .menu-logo {
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
-        overflow: hidden;
-        flex-shrink: 0;
-    }
-
-    .menu-title .menu-logo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    .close-menu {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: rgba(26, 58, 107, 0.08);
-        border: 2px solid var(--primary);
-        border-radius: 99px;
-        color: var(--primary);
-        font-size: 1.4rem;
-        cursor: pointer;
-        transition: 0.25s;
-        flex-shrink: 0;
-    }
-
-    .close-menu:hover,
-    .close-menu:active {
-        background: var(--primary);
-        transform: rotate(90deg) scale(1.05);
-        color: var(--white);
-    }
-
-    .nav-links a {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding: 0.8rem 1.2rem;
-        border-radius: var(--radius-sm);
-        transition: 0.2s;
-        text-align: left;
-        display: flex;
-        align-items: center;
-        gap: 0.7rem;
-        border: 1px solid transparent;
-        background: transparent;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:active,
-    .nav-links a.active {
-        background: rgba(26, 58, 107, 0.08);
-        border-color: var(--primary);
-        transform: translateX(4px);
     }
 }
 
@@ -845,11 +207,14 @@ a { text-decoration: none; color: inherit; }
 /* RESPONSIVE – MALÝ MOBIL (480px) */
 /* ============================================================ */
 @media (max-width: 480px) {
-    .hero-top { padding: 20px 0 15px !important; }
-    .hero-bottom-section { padding: 10px 0 20px !important; }
-    .hero h1 { font-size: 28px !important; }
-    .hero .badge { font-size: 11px; padding: 4px 14px; }
-    .hero .subheadline { font-size: 16px !important; }
+    .hero-top {
+        padding: 30px 0 20px !important;
+        min-height: 220px;
+    }
+    .hero-top h1 { font-size: 28px !important; }
+    .hero-top .badge { font-size: 11px; padding: 4px 14px; }
+    .hero-top .subheadline { font-size: 16px !important; }
+    
     .stat-card { 
         min-height: 75px !important; 
         padding: 10px 6px !important; 
@@ -859,44 +224,18 @@ a { text-decoration: none; color: inherit; }
     .stat-card .number { font-size: 16px !important; }
     .stat-card .label { font-size: 12px !important; }
     .stat-card .desc { font-size: 9px !important; }
+    
     .btn { 
-        font-size: 14px !important; 
-        padding: 12px 24px !important; 
+        font-size: 13px !important; 
+        padding: 10px 20px !important; 
         min-width: 120px !important;
     }
     .hero-text {
-        font-size: 15px !important;
-        padding: 14px 16px !important;
-    }
-
-    .nav-links {
-        padding: 1.5rem 1.2rem 1.8rem;
-        border-radius: 20px;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-    }
-
-    .nav-links a {
-        font-size: 1rem;
-        padding: 0.7rem 1rem;
-    }
-
-    .close-menu {
-        width: 36px;
-        height: 36px;
-        font-size: 1.2rem;
-    }
-
-    .menu-title {
-        font-size: 0.9rem;
-    }
-
-    .menu-title .menu-logo {
-        width: 28px;
-        height: 28px;
+        font-size: 14px !important;
     }
 }
+
+        
     </style>
 
 
