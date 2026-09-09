@@ -732,12 +732,71 @@
         .timeline-item.active .dot { background: var(--primary); box-shadow: 0 0 0 2px var(--primary); color: var(--white); transform: scale(1.15); }
         .timeline-item .content { background: var(--white); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px 24px; transition: var(--transition); box-shadow: var(--shadow); }
         .timeline-item.active .content { border-color: var(--primary); box-shadow: var(--shadow-hover); }
-        .timeline-item .year { display: inline-block; font-size: 12px; font-weight: 700; color: var(--green); background: var(--green-soft); padding: 2px 14px; border-radius: 50px; border: 1px solid var(--green); margin-bottom: 6px; }
+        .timeline-item .year {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 2px 14px;
+            border-radius: 50px;
+            border: 1px solid;
+            margin-bottom: 6px;
+        }
+        /* Barevné varianty roku */
+        .timeline-item .year.hotovo {
+            color: #155724;
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .timeline-item .year.probiha {
+            color: #0c5460;
+            background: #d1ecf1;
+            border-color: #17a2b8;
+        }
+        .timeline-item .year.chystame {
+            color: #856404;
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
         .timeline-item .icon { font-size: 28px; display: block; margin-bottom: 4px; }
         .timeline-item h3 { font-size: 18px; font-weight: 800; color: var(--primary); }
-        .timeline-item p { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
+        .timeline-item .desc { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
+        .timeline-item .price {
+            color: var(--green);
+            font-weight: 700;
+            margin-top: 4px;
+        }
 
-        /* ===== SLIBY ===== */
+        /* ===== STATUS BADGE ===== */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+        .status-badge i { margin-right: 6px; }
+        /* Hotovo – zelená */
+        .status-hotovo {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #28a745;
+        }
+        /* Probíhá – modrá */
+        .status-probiha {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #17a2b8;
+        }
+        /* Chystáme – žlutá */
+        .status-chystame {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffc107;
+        }
+
+        /* ===== SLIBY – PŮVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
         .sliby { max-width: 900px; margin: 40px auto 0; padding-top: 32px; border-top: 3px solid var(--primary); }
         .sliby h3 { text-align: center; font-size: 24px; font-weight: 800; color: var(--primary); }
         .sliby h3 i { color: var(--green); }
@@ -1178,69 +1237,69 @@
     </div>
 </header>
 
-<!-- ===== VÝSLEDKY ===== -->
+<!-- ===== VÝSLEDKY – SLOUČENÁ SEKCE ===== -->
 <section id="vysledky">
     <div class="container">
         <span class="section-tag">🌱 Co se v Čisté povedlo</span>
         <h2 class="section-title">Čistá se mění k lepšímu</h2>
         <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To je teprve začátek.</p>
+
         <div class="timeline" id="timeline">
+            <!-- 1. Stabilizace skalního svahu – HOTOVO (zelená) -->
             <div class="timeline-item active">
                 <div class="dot">1</div>
                 <div class="content">
-                    <span class="year">✔️ Dokončeno 02/2025</span>
+                    <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2025</span>
                     <span class="icon">⛰️</span>
                     <h3>Stabilizace skalního svahu</h3>
-                    <p>Zajistili jsme skalní stěnu nad domy čp. 91 a 92. Celkové náklady: 4,59 mil. Kč s 80% dotací.</p>
+                    <p class="desc">Zajistili jsme skalní stěnu nad domy čp. 91 a 92.</p>
+                    <p class="price">💰 4,59 mil. Kč s 80% dotací</p>
+                    <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
                 </div>
             </div>
+
+            <!-- 2. Chodník, opěrné zdi a osvětlení – HOTOVO (zelená) -->
             <div class="timeline-item">
                 <div class="dot">2</div>
                 <div class="content">
-                    <span class="year">✔️ Dokončeno 02/2026</span>
+                    <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2026</span>
                     <span class="icon">🚶</span>
                     <h3>Chodník, opěrné zdi a osvětlení – 3. etapa</h3>
-                    <p>Vybudovali jsme nový chodník podél místní komunikace, opěrné zdi a osvětlení. Konečná cena: 10,68 mil. Kč.</p>
+                    <p class="desc">Vybudovali jsme nový chodník podél místní komunikace, opěrné zdi a osvětlení.</p>
+                    <p class="price">💰 10,68 mil. Kč</p>
+                    <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
                 </div>
             </div>
+
+            <!-- 3. Splašková kanalizace – PROBÍHÁ (modrá) -->
             <div class="timeline-item">
                 <div class="dot">3</div>
                 <div class="content">
-                    <span class="year">🔧 Dokončení 09/2026</span>
+                    <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
                     <span class="icon">🚧</span>
                     <h3>Splašková kanalizace – hlavní projekt</h3>
-                    <p>Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno. Rozpočet: 188,58 mil. Kč.</p>
+                    <p class="desc">Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno.</p>
+                    <p class="price">💰 188,58 mil. Kč</p>
+                    <span class="status-badge status-probiha"><i class="fas fa-sync-alt fa-spin"></i> Probíhá</span>
                 </div>
             </div>
+
+            <!-- 4. Další projekty – CHYSTÁME (žlutá) -->
             <div class="timeline-item">
                 <div class="dot">4</div>
                 <div class="content">
-                    <span class="year">🚀 Chystáme</span>
+                    <span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
                     <span class="icon">💡</span>
                     <h3>Další projekty pro rozvoj obce</h3>
-                    <p>Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
+                    <p class="desc">Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
+                    <span class="status-badge status-chystame"><i class="fas fa-clock"></i> Chystáme</span>
                 </div>
             </div>
         </div>
-        <div class="sliby">
-            <h3><i class="fas fa-check-double"></i> Co jsme řekli, to jsme udělali</h3>
-            <p class="sub">Žádné prázdné sliby, jen výsledky s reálnými čísly.</p>
-            <div class="sliby-table">
-                <div class="sliby-header"><div>Projekt</div><div>Stav</div></div>
-                <div class="sliby-row">
-                    <div class="text">Stabilizace skalního svahu nad domy čp. 91 a 92 <span class="detail">Dokončeno 02/2025</span><span class="price">💰 4,59 mil. Kč</span></div>
-                    <div class="status-wrap"><span class="status status-hotovo">✅ Hotovo</span></div>
-                </div>
-                <div class="sliby-row">
-                    <div class="text">Chodník, opěrné zdi a osvětlení – 3. etapa <span class="detail">Dokončeno 02/2026</span><span class="price">💰 10,68 mil. Kč</span></div>
-                    <div class="status-wrap"><span class="status status-hotovo">✅ Hotovo</span></div>
-                </div>
-                <div class="sliby-row">
-                    <div class="text">Splašková kanalizace v obci Čistá <span class="detail">Zahájeno 10/2024, dokončení 09/2026</span><span class="price">💰 188,58 mil. Kč</span></div>
-                    <div class="status-wrap"><span class="status status-probiha">🟡 Probíhá</span></div>
-                </div>
-            </div>
-        </div>
+
+        <!-- ===== PŮVODNÍ TABULKA BYLA ODSTRANĚNA ===== -->
+        <!-- Veškeré informace (ceny + statusy) jsou nyní v timeline výše -->
+
     </div>
 </section>
 
@@ -1251,7 +1310,7 @@
 <section id="program">
     <div class="container">
         <h2 class="section-title">Náš program pro Čistou 2026–2030</h2>
-        <p class="section-subtitle"><strong>Reálný plán</strong>, který stojí na zkušenosti a odpovědnosti. Nejdříve dokončíme kanalizaci a poté stabilizujeme finance.</p>
+        <p class="section-subtitle"><strong>Reálný plán</strong>, který stojí na zkušenosti a&nbsp;odpovědnosti. Nejdříve dokončíme kanalizaci a poté stabilizujeme finance.</p>
         <div class="program-timeline" id="programTimeline">
             <div class="line-fill" id="lineFill"></div>
             <div class="tl-step active" data-step="0">
@@ -1379,9 +1438,9 @@
     <div class="container">
         <div class="intro-box">
             <p><strong>Čistá je náš domov.</strong> Chceme, aby se tu dobře žilo všem.</p>
-            <p>Neslibujeme nemožné. <span class="highlight">Chceme pokračovat v projektech, které dávají smysl.</span></p>
+            <p>Neslibujeme nemožné. <span class="highlight">Chceme pokračovat v&nbsp;projektech, které dávají smysl.</span></p>
             <div class="intro-divider"></div>
-            <p><strong>Společně tvoříme budoucnost. Ta začíná tady, v Čisté.</strong></p>
+            <p><strong>Společně tvoříme budoucnost. Ta začíná tady, v&nbsp;Čisté.</strong></p>
         </div>
 
         <div class="why-grid">
@@ -1403,7 +1462,7 @@
                 <span class="num">03</span>
                 <span class="icon"><i class="fas fa-users"></i></span>
                 <h3>Žijeme tu s vámi</h3>
-                <p>Chodíme po stejných ulicích, naše děti chodí do stejné školy. Nejsme cizí lidé, jsme vaši sousedé. <strong>Děláme to pro svůj domov.</strong></p>
+                <p>Chodíme po stejných ulicích, naše děti chodí do stejné školy a školky. Nejsme cizí lidé, jsme vaši sousedé. <strong>Děláme to pro svůj domov.</strong></p>
                 <span class="tag">Sousedé</span>
             </div>
             <div class="why-card">
