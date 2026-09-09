@@ -776,7 +776,13 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     }
 
     .timeline-item.left .timeline-image-text .program-label {
-        display: block;
+        width: 260px;
+        height: 440px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         font-size: 18px;
         font-weight: 900;
         color: var(--primary);
@@ -788,8 +794,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         line-height: 1.2;
         letter-spacing: -0.02em;
         transition: var(--transition);
-        min-width: 440px;
-        max-height: 240px;
+        box-sizing: border-box; 
     }
 
     .timeline-item.left .timeline-image-text .program-label:hover {
@@ -867,8 +872,9 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         line-height: 1.2;
         letter-spacing: -0.02em;
         transition: var(--transition);
-        min-width: 100px;
+        min-width: 440px;
     }
+
 
     .timeline-item.right .timeline-image-text .program-label:hover {
         transform: scale(1.05);
