@@ -688,14 +688,13 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .section-title.center, .section-subtitle.center { text-align: center; margin-left: auto; margin-right: auto; }
 
 /* =============================================================== */
-/* ===== TIMELINE – CYK-CAK NA PC S OBRÁZKY ===== */
+/* ===== TIMELINE – OBRÁZKY VELKOSTÍ JAKO BUBLINA (PC) ===== */
 /* =============================================================== */
 
-/* ===== PC – OBRÁZKY VEDLE BUBLINEK ===== */
 @media (min-width: 769px) {
     .timeline {
         position: relative;
-        max-width: 960px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 30px 0;
     }
@@ -716,12 +715,13 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 
     .timeline-item {
         position: relative;
-        margin-bottom: 90px;
+        margin-bottom: 40px;
         padding: 0;
         display: flex;
-        align-items: center;
+        align-items: stretch;
         z-index: 1;
-        min-height: 120px;
+        min-height: 160px;
+        gap: 20px;
     }
 
     .timeline-item:last-child { margin-bottom: 0; }
@@ -729,157 +729,244 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     /* ===== LEVÁ STRANA ===== */
     .timeline-item.left {
         flex-direction: row;
-        padding-right: calc(50% + 40px);
+        padding-right: calc(50% + 30px);
         text-align: right;
     }
 
-    /* Obrázek vpravo od čáry (na střed) */
-    .timeline-item.left .timeline-image {
-        position: absolute;
-        left: calc(50% + 52px);
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 3;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 3px solid var(--border);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        background: var(--white);
-        transition: var(--transition);
-        flex-shrink: 0;
-    }
-
-    .timeline-item.left .timeline-image:hover {
-        transform: translateY(-50%) scale(1.08);
-        border-color: var(--primary);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    }
-
-    .timeline-item.left .timeline-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
-
-    /* Bod 4 – text místo obrázku (vlevo) */
+    .timeline-item.left .timeline-image,
     .timeline-item.left .timeline-image-text {
-        position: absolute;
-        left: calc(50% + 52px);
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 3;
-        text-align: center;
-        flex-shrink: 0;
+        order: 1;
+        flex: 1;
+        max-width: 420px;
+        min-width: 200px;
     }
 
-    .timeline-item.left .timeline-image-text .program-label {
-        display: block;
-        font-size: 18px;
-        font-weight: 900;
-        color: var(--primary);
-        background: var(--white);
-        padding: 12px 16px;
-        border-radius: var(--radius);
-        border: 3px solid var(--primary);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-        transition: var(--transition);
-        min-width: 100px;
-    }
-
-    .timeline-item.left .timeline-image-text .program-label:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 32px rgba(26,58,107,0.2);
-    }
-
-    .timeline-item.left .timeline-image-text .program-label small {
-        display: block;
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--text-muted);
-        letter-spacing: 0;
+    .timeline-item.left .content {
+        order: 0;
+        flex: 1;
+        max-width: 420px;
+        min-width: 200px;
     }
 
     /* ===== PRAVÁ STRANA ===== */
     .timeline-item.right {
-        flex-direction: row-reverse;
-        padding-left: calc(50% + 40px);
+        flex-direction: row;
+        padding-left: calc(50% + 30px);
         text-align: left;
     }
 
-    /* Obrázek vlevo od čáry (na střed) */
-    .timeline-item.right .timeline-image {
-        position: absolute;
-        right: calc(50% + 52px);
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 3;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
+    .timeline-item.right .timeline-image,
+    .timeline-item.right .timeline-image-text {
+        order: 0;
+        flex: 1;
+        max-width: 420px;
+        min-width: 200px;
+    }
+
+    .timeline-item.right .content {
+        order: 1;
+        flex: 1;
+        max-width: 420px;
+        min-width: 200px;
+    }
+
+    /* ===== OBRÁZEK ===== */
+    .timeline-item .timeline-image {
+        border-radius: var(--radius-lg);
         overflow: hidden;
         border: 3px solid var(--border);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         background: var(--white);
         transition: var(--transition);
-        flex-shrink: 0;
+        aspect-ratio: 16 / 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .timeline-item.right .timeline-image:hover {
-        transform: translateY(-50%) scale(1.08);
+    .timeline-item .timeline-image:hover {
         border-color: var(--primary);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 32px rgba(26,58,107,0.15);
+        transform: scale(1.01);
     }
 
-    .timeline-item.right .timeline-image img {
+    .timeline-item .timeline-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
     }
 
-    /* Bod 4 – text místo obrázku (vpravo) */
-    .timeline-item.right .timeline-image-text {
-        position: absolute;
-        right: calc(50% + 52px);
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 3;
-        text-align: center;
-        flex-shrink: 0;
+    /* ===== TEXT "PROGRAM 2026–2030" ===== */
+    .timeline-item .timeline-image-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-lg);
+        aspect-ratio: 16 / 10;
+        min-height: 120px;
     }
 
-    .timeline-item.right .timeline-image-text .program-label {
-        display: block;
-        font-size: 18px;
+    .timeline-item .timeline-image-text .program-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        border-radius: var(--radius-lg);
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: var(--white);
+        font-size: 24px;
         font-weight: 900;
-        color: var(--primary);
-        background: var(--white);
-        padding: 12px 16px;
-        border-radius: var(--radius);
-        border: 3px solid var(--primary);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         line-height: 1.2;
-        letter-spacing: -0.02em;
+        text-align: center;
+        border: 3px solid var(--primary);
+        box-shadow: 0 4px 20px rgba(26,58,107,0.15);
         transition: var(--transition);
-        min-width: 100px;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
     }
 
-    .timeline-item.right .timeline-image-text .program-label:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 32px rgba(26,58,107,0.2);
+    .timeline-item .timeline-image-text .program-label:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 32px rgba(26,58,107,0.25);
+        background: var(--primary-dark);
+        border-color: var(--secondary);
     }
 
-    .timeline-item.right .timeline-image-text .program-label small {
+    .timeline-item .timeline-image-text .program-label small {
         display: block;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
-        color: var(--text-muted);
+        opacity: 0.8;
         letter-spacing: 0;
+        text-transform: none;
+        margin-top: 2px;
+    }
+
+    /* ===== PRAVÁ STRANA – text zarovnaný vlevo ===== */
+    .timeline-item.right .timeline-image-text .program-label {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    /* ===== LEVÁ STRANA – text zarovnaný vpravo ===== */
+    .timeline-item.left .timeline-image-text .program-label {
+        text-align: right;
+        align-items: flex-end;
+    }
+
+    /* ===== BUBLINA (CONTENT) ===== */
+    .timeline-item .content {
+        background: var(--white);
+        border: 2px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 24px 28px;
+        transition: var(--transition);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index: 1;
+        aspect-ratio: 16 / 10;
+        min-height: 120px;
+    }
+
+    .timeline-item .content:hover {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
+    }
+
+    .timeline-item.active .content {
+        border-color: var(--primary);
+        box-shadow: var(--shadow-hover);
+    }
+
+    /* ===== CONTENT – STYLY ===== */
+    .timeline-item .content .year {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 2px 14px;
+        border-radius: 50px;
+        border: 1px solid;
+        margin-bottom: 4px;
+        align-self: flex-start;
+    }
+    .timeline-item.left .content .year {
+        align-self: flex-end;
+    }
+
+    .timeline-item .content .year.hotovo {
+        color: #155724;
+        background: #d4edda;
+        border-color: #28a745;
+    }
+    .timeline-item .content .year.hotovo i { color: #28a745; }
+
+    .timeline-item .content .year.probiha {
+        color: #0c5460;
+        background: #d1ecf1;
+        border-color: #17a2b8;
+    }
+    .timeline-item .content .year.probiha i { color: #17a2b8; }
+
+    .timeline-item .content .year.chystame {
+        color: #856404;
+        background: #fff3cd;
+        border-color: #ffc107;
+    }
+    .timeline-item .content .year.chystame i { color: #ffc107; }
+
+    .timeline-item .content .icon { font-size: 28px; display: block; margin-bottom: 2px; }
+    .timeline-item .content h3 { font-size: 17px; font-weight: 800; color: var(--primary); margin-bottom: 2px; line-height: 1.3; }
+    .timeline-item .content .desc { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+    .timeline-item .content .price {
+        font-weight: 700;
+        font-size: 14px;
+        margin-top: 4px;
+        color: var(--green);
+        padding: 2px 12px;
+        background: var(--green-soft);
+        border-radius: 50px;
+        display: inline-block;
+        border: 1px solid var(--green);
+        align-self: flex-start;
+    }
+    .timeline-item.left .content .price {
+        align-self: flex-end;
+    }
+
+    .timeline-item .content .status-badge {
+        display: inline-block;
+        padding: 3px 14px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 12px;
+        margin-top: 6px;
+        align-self: flex-start;
+    }
+    .timeline-item.left .content .status-badge {
+        align-self: flex-end;
+    }
+    .timeline-item .content .status-badge i { margin-right: 4px; }
+    .status-hotovo {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #28a745;
+    }
+    .status-probiha {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #17a2b8;
+    }
+    .status-chystame {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffc107;
     }
 
     /* ===== TEČKA ===== */
@@ -911,102 +998,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         transform: translate(-50%, -50%) scale(1.15);
     }
 
-    /* ===== BUBLINKY ===== */
-    .timeline-item .content {
-        background: var(--white);
-        border: 2px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 24px 28px;
-        transition: var(--transition);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        width: 100%;
-        position: relative;
-        z-index: 1;
-    }
-
-    .timeline-item .content:hover {
-        border-color: var(--primary);
-        box-shadow: var(--shadow-hover);
-        transform: translateY(-2px);
-    }
-
-    .timeline-item.active .content {
-        border-color: var(--primary);
-        box-shadow: var(--shadow-hover);
-    }
-
-    .timeline-item .content .year {
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 700;
-        padding: 2px 14px;
-        border-radius: 50px;
-        border: 1px solid;
-        margin-bottom: 6px;
-    }
-
-    .timeline-item .content .year.hotovo {
-        color: #155724;
-        background: #d4edda;
-        border-color: #28a745;
-    }
-    .timeline-item .content .year.hotovo i { color: #28a745; }
-
-    .timeline-item .content .year.probiha {
-        color: #0c5460;
-        background: #d1ecf1;
-        border-color: #17a2b8;
-    }
-    .timeline-item .content .year.probiha i { color: #17a2b8; }
-
-    .timeline-item .content .year.chystame {
-        color: #856404;
-        background: #fff3cd;
-        border-color: #ffc107;
-    }
-    .timeline-item .content .year.chystame i { color: #ffc107; }
-
-    .timeline-item .content .icon { font-size: 32px; display: block; margin-bottom: 6px; }
-    .timeline-item .content h3 { font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 4px; line-height: 1.3; }
-    .timeline-item .content .desc { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-top: 2px; }
-    .timeline-item .content .price {
-        font-weight: 700;
-        font-size: 16px;
-        margin-top: 6px;
-        color: var(--green);
-        padding: 4px 14px;
-        background: var(--green-soft);
-        border-radius: 50px;
-        display: inline-block;
-        border: 1px solid var(--green);
-    }
-
-    .timeline-item .content .status-badge {
-        display: inline-block;
-        padding: 4px 18px;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 13px;
-        margin-top: 8px;
-    }
-    .timeline-item .content .status-badge i { margin-right: 6px; }
-    .status-hotovo {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #28a745;
-    }
-    .status-probiha {
-        background: #d1ecf1;
-        color: #0c5460;
-        border: 1px solid #17a2b8;
-    }
-    .status-chystame {
-        background: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffc107;
-    }
-
-    /* Čára mezi body */
+    /* ===== ČÁRA MEZI BODY ===== */
     .timeline-item::after {
         content: '';
         position: absolute;
@@ -1084,6 +1076,8 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         padding: 20px 24px;
         transition: var(--transition);
         box-shadow: var(--shadow);
+        aspect-ratio: auto;
+        min-height: auto;
     }
     .timeline-item.active .content {
         border-color: var(--primary);
@@ -1128,7 +1122,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item .content .status-badge i { margin-right: 6px; }
 }
 
-/* ===== SLIBY – PŮVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
+/* ===== SLIBY – PŮVODNÍ STYLY ===== */
 .sliby { max-width: 900px; margin: 40px auto 0; padding-top: 32px; border-top: 3px solid var(--primary); }
 .sliby h3 { text-align: center; font-size: 24px; font-weight: 800; color: var(--primary); }
 .sliby h3 i { color: var(--green); }
@@ -1579,7 +1573,7 @@ footer p strong { font-weight: 900; }
         <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To&nbsp;je teprve začátek.</p>
 
         <div class="timeline" id="timeline">
-            <!-- BOD 1 – LEVÁ STRANA (HOTOVO) + OBRÁZEK VPRAVO -->
+            <!-- BOD 1 – LEVÁ STRANA + OBRÁZEK VPRAVO -->
             <div class="timeline-item left active">
                 <div class="dot">1</div>
                 <div class="timeline-image">
@@ -1595,7 +1589,7 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 2 – PRAVÁ STRANA (HOTOVO) + OBRÁZEK VLEVO -->
+            <!-- BOD 2 – PRAVÁ STRANA + OBRÁZEK VLEVO -->
             <div class="timeline-item right">
                 <div class="dot">2</div>
                 <div class="timeline-image">
@@ -1611,7 +1605,7 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 3 – LEVÁ STRANA (PROBÍHÁ) + OBRÁZEK VPRAVO -->
+            <!-- BOD 3 – LEVÁ STRANA + OBRÁZEK VPRAVO -->
             <div class="timeline-item left">
                 <div class="dot">3</div>
                 <div class="timeline-image">
@@ -1627,11 +1621,11 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 4 – PRAVÁ STRANA (CHYSTÁME) + TEXT MÍSTO OBRÁZKU -->
+            <!-- BOD 4 – PRAVÁ STRANA + TEXT MÍSTO OBRÁZKU -->
             <div class="timeline-item right">
                 <div class="dot">4</div>
                 <div class="timeline-image-text">
-                    <span class="program-label">Program<br><small>2026–2030</small></span>
+                    <span class="program-label">Program <small>2026–2030</small></span>
                 </div>
                 <div class="content">
                     <span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
