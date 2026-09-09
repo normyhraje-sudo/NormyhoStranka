@@ -688,7 +688,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .section-title.center, .section-subtitle.center { text-align: center; margin-left: auto; margin-right: auto; }
 
 /* =============================================================== */
-/* ===== TIMELINE – OBRÁZKY VELKOSTÍ JAKO BUBLINA (PC) ===== */
+/* ===== TIMELINE – OBRÁZKY NA OPAČNÉ STRANĚ, STEJNĚ VELKÉ ===== */
 /* =============================================================== */
 
 @media (min-width: 769px) {
@@ -726,11 +726,19 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 
     .timeline-item:last-child { margin-bottom: 0; }
 
-    /* ===== LEVÁ STRANA ===== */
+    /* ===== LEVÁ STRANA – bublina vlevo, obrázek vpravo ===== */
     .timeline-item.left {
         flex-direction: row;
         padding-right: calc(50% + 30px);
         text-align: right;
+        justify-content: flex-end;
+    }
+
+    .timeline-item.left .content {
+        order: 0;
+        flex: 1;
+        max-width: 420px;
+        min-width: 200px;
     }
 
     .timeline-item.left .timeline-image,
@@ -741,30 +749,24 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         min-width: 200px;
     }
 
-    .timeline-item.left .content {
-        order: 0;
-        flex: 1;
-        max-width: 420px;
-        min-width: 200px;
-    }
-
-    /* ===== PRAVÁ STRANA ===== */
+    /* ===== PRAVÁ STRANA – bublina vpravo, obrázek vlevo ===== */
     .timeline-item.right {
         flex-direction: row;
         padding-left: calc(50% + 30px);
         text-align: left;
+        justify-content: flex-start;
+    }
+
+    .timeline-item.right .content {
+        order: 1;
+        flex: 1;
+        max-width: 420px;
+        min-width: 200px;
     }
 
     .timeline-item.right .timeline-image,
     .timeline-item.right .timeline-image-text {
         order: 0;
-        flex: 1;
-        max-width: 420px;
-        min-width: 200px;
-    }
-
-    .timeline-item.right .content {
-        order: 1;
         flex: 1;
         max-width: 420px;
         min-width: 200px;
@@ -1573,12 +1575,9 @@ footer p strong { font-weight: 900; }
         <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To&nbsp;je teprve začátek.</p>
 
         <div class="timeline" id="timeline">
-            <!-- BOD 1 – LEVÁ STRANA + OBRÁZEK VPRAVO -->
+            <!-- BOD 1 – BUBLINA VLEVO, OBRÁZEK VPRAVO -->
             <div class="timeline-item left active">
                 <div class="dot">1</div>
-                <div class="timeline-image">
-                    <img src="svah.png" alt="Stabilizace skalního svahu" loading="lazy">
-                </div>
                 <div class="content">
                     <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2025</span>
                     <span class="icon">⛰️</span>
@@ -1587,9 +1586,12 @@ footer p strong { font-weight: 900; }
                     <p class="price">💰 4,59 mil. Kč s 80% dotací</p>
                     <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
                 </div>
+                <div class="timeline-image">
+                    <img src="svah.png" alt="Stabilizace skalního svahu" loading="lazy">
+                </div>
             </div>
 
-            <!-- BOD 2 – PRAVÁ STRANA + OBRÁZEK VLEVO -->
+            <!-- BOD 2 – BUBLINA VPRAVO, OBRÁZEK VLEVO -->
             <div class="timeline-item right">
                 <div class="dot">2</div>
                 <div class="timeline-image">
@@ -1605,12 +1607,9 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 3 – LEVÁ STRANA + OBRÁZEK VPRAVO -->
+            <!-- BOD 3 – BUBLINA VLEVO, OBRÁZEK VPRAVO -->
             <div class="timeline-item left">
                 <div class="dot">3</div>
-                <div class="timeline-image">
-                    <img src="kanalizace.png" alt="Splašková kanalizace" loading="lazy">
-                </div>
                 <div class="content">
                     <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
                     <span class="icon">🚧</span>
@@ -1619,9 +1618,12 @@ footer p strong { font-weight: 900; }
                     <p class="price">💰 188,58 mil. Kč</p>
                     <span class="status-badge status-probiha"><i class="fas fa-sync-alt fa-spin"></i> Probíhá</span>
                 </div>
+                <div class="timeline-image">
+                    <img src="kanalizace.png" alt="Splašková kanalizace" loading="lazy">
+                </div>
             </div>
 
-            <!-- BOD 4 – PRAVÁ STRANA + TEXT MÍSTO OBRÁZKU -->
+            <!-- BOD 4 – BUBLINA VPRAVO, TEXT "PROGRAM" VLEVO -->
             <div class="timeline-item right">
                 <div class="dot">4</div>
                 <div class="timeline-image-text">
