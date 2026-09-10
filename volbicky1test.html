@@ -688,6 +688,47 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .section-title.center, .section-subtitle.center { text-align: center; margin-left: auto; margin-right: auto; }
 
 /* =============================================================== */
+/* ===== STATUS BADGES – GLOBÁLNÍ (fungují na všech zařízeních) ===== */
+/* =============================================================== */
+.status-hotovo {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #28a745;
+}
+.status-probiha {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #17a2b8;
+}
+.status-chystame {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
+
+/* Barvy pro "year" badge – také globálně */
+.timeline-item .content .year.hotovo {
+    color: #155724;
+    background: #d4edda;
+    border-color: #28a745;
+}
+.timeline-item .content .year.hotovo i { color: #28a745; }
+
+.timeline-item .content .year.probiha {
+    color: #0c5460;
+    background: #d1ecf1;
+    border-color: #17a2b8;
+}
+.timeline-item .content .year.probiha i { color: #17a2b8; }
+
+.timeline-item .content .year.chystame {
+    color: #856404;
+    background: #fff3cd;
+    border-color: #ffc107;
+}
+.timeline-item .content .year.chystame i { color: #ffc107; }
+
+/* =============================================================== */
 /* ===== TIMELINE – CYK-CAK NA PC S OBRÁZKY ===== */
 /* =============================================================== */
 
@@ -719,9 +760,8 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         margin-bottom: 90px;
         padding: 0;
         display: flex;
-        align-items: center;
+        align-items: stretch;
         z-index: 1;
-        min-height: 120px;
     }
 
     .timeline-item:last-child { margin-bottom: 0; }
@@ -733,15 +773,12 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         text-align: right;
     }
 
-    /* Obrázek vpravo od čáry (na střed) */
     .timeline-item.left .timeline-image {
         position: absolute;
         left: calc(50% + 52px);
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 3;
+        top: 0;
+        bottom: 0;
         width: 440px;
-        height: 250px;
         border-radius: 5%;
         overflow: hidden;
         border: 3px solid var(--border);
@@ -749,10 +786,13 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         background: var(--white);
         transition: var(--transition);
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .timeline-item.left .timeline-image:hover {
-        transform: translateY(-50%) scale(1.08);
+        transform: scale(1.04);
         border-color: var(--primary);
         box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     }
@@ -764,17 +804,15 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         display: block;
     }
 
-    /* ===== TEXT PROGRAMU – NASTAVENÍ NA 440px 240px ===== */
     .timeline-item.left .timeline-image-text {
         position: absolute;
         left: calc(50% + 52px);
-        top: 50%;
-        transform: translateY(-50%);
+        top: 0;
+        bottom: 0;
+        width: 440px;
         z-index: 3;
         text-align: center;
         flex-shrink: 0;
-        width: 440px;
-        height: 240px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -827,15 +865,12 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         text-align: left;
     }
 
-    /* Obrázek vlevo od čáry (na střed) */
     .timeline-item.right .timeline-image {
         position: absolute;
         right: calc(50% + 52px);
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 3;
+        top: 0;
+        bottom: 0;
         width: 440px;
-        height: 240px;
         border-radius: 5%;
         overflow: hidden;
         border: 3px solid var(--border);
@@ -843,10 +878,13 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         background: var(--white);
         transition: var(--transition);
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .timeline-item.right .timeline-image:hover {
-        transform: translateY(-50%) scale(1.08);
+        transform: scale(1.04);
         border-color: var(--primary);
         box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     }
@@ -858,17 +896,15 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         display: block;
     }
 
-    /* ===== TEXT PROGRAMU – PRAVÁ STRANA ===== */
     .timeline-item.right .timeline-image-text {
         position: absolute;
         right: calc(50% + 52px);
-        top: 50%;
-        transform: translateY(-50%);
+        top: 0;
+        bottom: 0;
+        width: 440px;
         z-index: 3;
         text-align: center;
         flex-shrink: 0;
-        width: 440px;
-        height: 240px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -954,6 +990,9 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         width: 100%;
         position: relative;
         z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .timeline-item .content:hover {
@@ -977,65 +1016,52 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         margin-bottom: 6px;
     }
 
-    .timeline-item .content .year.hotovo {
-        color: #155724;
-        background: #d4edda;
-        border-color: #28a745;
-    }
-    .timeline-item .content .year.hotovo i { color: #28a745; }
-
-    .timeline-item .content .year.probiha {
-        color: #0c5460;
-        background: #d1ecf1;
-        border-color: #17a2b8;
-    }
-    .timeline-item .content .year.probiha i { color: #17a2b8; }
-
-    .timeline-item .content .year.chystame {
-        color: #856404;
-        background: #fff3cd;
-        border-color: #ffc107;
-    }
-    .timeline-item .content .year.chystame i { color: #ffc107; }
-
     .timeline-item .content .icon { font-size: 32px; display: block; margin-bottom: 6px; }
     .timeline-item .content h3 { font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 4px; line-height: 1.3; }
     .timeline-item .content .desc { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-top: 2px; }
+
+    /* ===== CENOVKA A STATUS POD SEBOU ===== */
     .timeline-item .content .price {
         font-weight: 700;
         font-size: 16px;
-        margin-top: 6px;
+        margin-top: 8px;
         color: var(--green);
         padding: 4px 14px;
         background: var(--green-soft);
         border-radius: 50px;
-        display: inline-block;
+        display: block;
         border: 1px solid var(--green);
+        width: fit-content;
     }
 
     .timeline-item .content .status-badge {
-        display: inline-block;
+        display: block;
         padding: 4px 18px;
         border-radius: 50px;
         font-weight: 700;
         font-size: 13px;
         margin-top: 8px;
+        width: fit-content;
     }
     .timeline-item .content .status-badge i { margin-right: 6px; }
-    .status-hotovo {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #28a745;
+
+    /* Zarovnání vlevo/vpravo podle strany */
+    .timeline-item.left .content {
+        align-items: flex-end;
+        text-align: right;
     }
-    .status-probiha {
-        background: #d1ecf1;
-        color: #0c5460;
-        border: 1px solid #17a2b8;
+    .timeline-item.left .content .price,
+    .timeline-item.left .content .status-badge {
+        align-self: flex-end;
     }
-    .status-chystame {
-        background: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffc107;
+
+    .timeline-item.right .content {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .timeline-item.right .content .price,
+    .timeline-item.right .content .status-badge {
+        align-self: flex-start;
     }
 
     /* Čára mezi body */
@@ -1130,32 +1156,24 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         border: 1px solid;
         margin-bottom: 6px;
     }
-    .timeline-item .content .year.hotovo {
-        color: #155724;
-        background: #d4edda;
-        border-color: #28a745;
-    }
-    .timeline-item .content .year.probiha {
-        color: #0c5460;
-        background: #d1ecf1;
-        border-color: #17a2b8;
-    }
-    .timeline-item .content .year.chystame {
-        color: #856404;
-        background: #fff3cd;
-        border-color: #ffc107;
-    }
     .timeline-item .content .icon { font-size: 28px; display: block; margin-bottom: 4px; }
     .timeline-item .content h3 { font-size: 18px; font-weight: 800; color: var(--primary); }
     .timeline-item .content .desc { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
-    .timeline-item .content .price { font-weight: 700; margin-top: 4px; color: var(--green); }
+    .timeline-item .content .price {
+        font-weight: 700;
+        margin-top: 8px;
+        color: var(--green);
+        display: block;
+        width: fit-content;
+    }
     .timeline-item .content .status-badge {
-        display: inline-block;
+        display: block;
         padding: 4px 18px;
         border-radius: 50px;
         font-weight: 700;
         font-size: 13px;
         margin-top: 8px;
+        width: fit-content;
     }
     .timeline-item .content .status-badge i { margin-right: 6px; }
 }
@@ -1659,10 +1677,9 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 4 – PRAVÁ STRANA: PROGRAM VPRAVO, CHYSTÁME VLEVO -->
+            <!-- BOD 4 – PRAVÁ STRANA: CHYSTÁME VLEVO, PROGRAM VPRAVO -->
             <div class="timeline-item right">
                 <div class="dot">4</div>
-                <!-- Chystáme okno vlevo od časové osy -->
                 <div class="content">
                     <span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
                     <span class="icon">💡</span>
@@ -1670,7 +1687,6 @@ footer p strong { font-weight: 900; }
                     <p class="desc">Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
                     <span class="status-badge status-chystame"><i class="fas fa-clock"></i> Chystáme</span>
                 </div>
-                <!-- Program tabulka vpravo od časové osy -->
                 <div class="timeline-image-text">
                     <span class="program-label">Program<br><small>2026–2030</small></span>
                 </div>
