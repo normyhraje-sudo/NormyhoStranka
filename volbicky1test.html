@@ -858,6 +858,62 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         display: block;
     }
 
+    /* ===== TEXT PROGRAMU – PRAVÁ STRANA ===== */
+    .timeline-item.right .timeline-image-text {
+        position: absolute;
+        right: calc(50% + 52px);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 3;
+        text-align: center;
+        flex-shrink: 0;
+        width: 440px;
+        height: 240px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .timeline-item.right .timeline-image-text .program-label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 28px;
+        font-weight: 900;
+        color: var(--white);
+        background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+        padding: 16px 20px;
+        border-radius: 5%;
+        border: 3px solid var(--secondary-light);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        transition: var(--transition);
+        text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        gap: 4px;
+    }
+
+    .timeline-item.right .timeline-image-text .program-label:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 32px rgba(26,58,107,0.3);
+        border-color: var(--white);
+    }
+
+    .timeline-item.right .timeline-image-text .program-label small {
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.85);
+        letter-spacing: 0;
+        margin-top: 4px;
+        background: rgba(255,255,255,0.1);
+        padding: 4px 16px;
+        border-radius: 50px;
+    }
+
     /* ===== TEČKA ===== */
     .timeline-item .dot {
         position: absolute;
@@ -1603,20 +1659,20 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 4 – LEVÁ STRANA (PROGRAM) + PRAVÁ STRANA (CHYSTÁME) -->
-            <div class="timeline-item left">
+            <!-- BOD 4 – PRAVÁ STRANA: PROGRAM VPRAVO, CHYSTÁME VLEVO -->
+            <div class="timeline-item right">
                 <div class="dot">4</div>
-                <!-- Program tabulka vlevo od časové osy -->
-                <div class="timeline-image-text">
-                    <span class="program-label">Program<br><small>2026–2030</small></span>
-                </div>
-                <!-- Chystáme okno vpravo od časové osy -->
+                <!-- Chystáme okno vlevo od časové osy -->
                 <div class="content">
                     <span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
                     <span class="icon">💡</span>
                     <h3>Další projekty pro rozvoj obce</h3>
                     <p class="desc">Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
                     <span class="status-badge status-chystame"><i class="fas fa-clock"></i> Chystáme</span>
+                </div>
+                <!-- Program tabulka vpravo od časové osy -->
+                <div class="timeline-image-text">
+                    <span class="program-label">Program<br><small>2026–2030</small></span>
                 </div>
             </div>
         </div>
