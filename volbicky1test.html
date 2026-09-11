@@ -2033,259 +2033,282 @@ footer p strong { font-weight: 900; }
 
 <!-- ===== SCRIPTS ===== -->
 <script>
-    // ===== BURGER MENU =====
-    const burger = document.getElementById('burger');
-    const navLinks = document.getElementById('navLinks');
-    const closeMenu = document.getElementById('closeMenu');
-    const navOverlay = document.getElementById('navOverlay');
+// ===== OPTIMALIZOVANÝ THROTTLE PRO SCROLL (Zabraňuje sekání webu) =====
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
 
-    function openMenu() {
-        burger.classList.add('active');
-        navLinks.classList.add('open');
-        navOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+// ===== BURGER MENU =====
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+const closeMenu = document.getElementById('closeMenu');
+const navOverlay = document.getElementById('navOverlay');
+
+function openMenu() {
+    burger.classList.add('active');
+    navLinks.classList.add('open');
+    navOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMenuFn() {
+    burger.classList.remove('active');
+    navLinks.classList.remove('open');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', openMenu);
+closeMenu.addEventListener('click', closeMenuFn);
+navOverlay.addEventListener('click', closeMenuFn);
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenuFn);
+});
+
+document.getElementById('logoLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ===== AKTIVNÍ POLOŽKA MENU =====
+const navItems = document.querySelectorAll('.nav-links a[data-section]');
+const sections = {};
+
+navItems.forEach(link => {
+    const sectionId = link.getAttribute('data-section');
+    let element = document.getElementById(sectionId);
+    if (!element) {
+        element = document.getElementById(sectionId + '-banner');
+    }
+    if (element) {
+        sections[sectionId] = element;
+    }
+});
+
+function updateActiveNav() {
+    const scrollPos = window.scrollY + 150;
+    let activeSection = null;
+    let isBanner = false;
+
+    for (const [id, element] of Object.entries(sections)) {
+        const top = element.offsetTop;
+        const height = element.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+            activeSection = id;
+            if (element.id && element.id.includes('banner')) {
+                isBanner = true;
+            }
+            break;
+        }
     }
 
-    function closeMenuFn() {
-        burger.classList.remove('active');
-        navLinks.classList.remove('open');
-        navOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+    if (!activeSection) {
+        let lastId = null;
+        let lastBottom = 0;
+        for (const [id, element] of Object.entries(sections)) {
+            const bottom = element.offsetTop + element.offsetHeight;
+            if (bottom > lastBottom) {
+                lastBottom = bottom;
+                lastId = id;
+            }
+        }
+        if (lastId && scrollPos >= lastBottom) {
+            activeSection = lastId;
+        } else {
+            activeSection = 'home';
+        }
     }
-
-    burger.addEventListener('click', openMenu);
-    closeMenu.addEventListener('click', closeMenuFn);
-    navOverlay.addEventListener('click', closeMenuFn);
-
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', closeMenuFn);
-    });
-
-    document.getElementById('logoLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // ===== AKTIVNÍ POLOŽKA MENU =====
-    const navItems = document.querySelectorAll('.nav-links a[data-section]');
-    const sections = {};
 
     navItems.forEach(link => {
         const sectionId = link.getAttribute('data-section');
-        let element = document.getElementById(sectionId);
-        if (!element) {
-            element = document.getElementById(sectionId + '-banner');
-        }
-        if (element) {
-            sections[sectionId] = element;
-        }
-    });
-
-    function updateActiveNav() {
-        const scrollPos = window.scrollY + 150;
-        let activeSection = null;
-        let isBanner = false;
-
-        for (const [id, element] of Object.entries(sections)) {
-            const top = element.offsetTop;
-            const height = element.offsetHeight;
-            if (scrollPos >= top && scrollPos < top + height) {
-                activeSection = id;
-                if (element.id && element.id.includes('banner')) {
-                    isBanner = true;
-                }
-                break;
-            }
-        }
-
-        if (!activeSection) {
-            let lastId = null;
-            let lastBottom = 0;
-            for (const [id, element] of Object.entries(sections)) {
-                const bottom = element.offsetTop + element.offsetHeight;
-                if (bottom > lastBottom) {
-                    lastBottom = bottom;
-                    lastId = id;
-                }
-            }
-            if (lastId && scrollPos >= lastBottom) {
-                activeSection = lastId;
-            } else {
-                activeSection = 'home';
-            }
-        }
-
-        navItems.forEach(link => {
-            const sectionId = link.getAttribute('data-section');
-            const isActive = sectionId === activeSection;
-            link.classList.toggle('active', isActive);
-            
-            if (isActive && isBanner) {
-                link.classList.add('banner-active');
-            } else {
-                link.classList.remove('banner-active');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', updateActiveNav);
-    setTimeout(updateActiveNav, 50);
-
-    // ===== TIMELINE =====
-    const items = document.querySelectorAll('.timeline-item');
-
-    function updateTimeline() {
-        const center = window.scrollY + window.innerHeight / 2;
-        let active = 0;
-
-        items.forEach((item, i) => {
-            const rect = item.getBoundingClientRect();
-            const itemCenter = rect.top + window.scrollY + rect.height / 2;
-            if (itemCenter < center) active = i;
-        });
-
-        items.forEach(item => item.classList.remove('active'));
-        if (items[active]) items[active].classList.add('active');
-    }
-
-    window.addEventListener('scroll', updateTimeline, { passive: true });
-    updateTimeline();
-
-    // ===== PROGRAM TIMELINE =====
-    const tlSteps = document.querySelectorAll('.tl-step');
-    const lineFill = document.getElementById('lineFill');
-
-    function updateProgramStep(index) {
-        tlSteps.forEach((s, i) => {
-            s.classList.toggle('active', i === index);
-        });
-
-        const total = tlSteps.length - 1;
-        const progress = total > 0 ? (index / total) * 100 : 0;
-        lineFill.style.height = progress + '%';
-    }
-
-    tlSteps.forEach((step, index) => {
-        step.addEventListener('click', () => {
-            updateProgramStep(index);
-        });
-    });
-
-    const programSection = document.querySelector('#programTimeline');
-
-    function updateProgramOnScroll() {
-        const center = window.scrollY + window.innerHeight / 2;
-
-        let closestIndex = 0;
-        let closestDist = Infinity;
-
-        tlSteps.forEach((step, i) => {
-            const r = step.getBoundingClientRect();
-            const stepCenter = r.top + window.scrollY + r.height / 2;
-            const dist = Math.abs(stepCenter - center);
-            if (dist < closestDist) {
-                closestDist = dist;
-                closestIndex = i;
-            }
-        });
-
-        const progRect = programSection.getBoundingClientRect();
-        if (progRect.top < window.innerHeight && progRect.bottom > 0) {
-            const currentActive = document.querySelector('.tl-step.active');
-            const activeIndex = currentActive ? parseInt(currentActive.dataset.step) : -1;
-            if (activeIndex !== closestIndex) {
-                updateProgramStep(closestIndex);
-            }
-        }
-    }
-
-    window.addEventListener('scroll', updateProgramOnScroll, { passive: true });
-    updateProgramStep(0);
-    setTimeout(updateProgramOnScroll, 100);
-
-    // ===== ACCORDION =====
-    function toggleAccordion(header) {
-        const item = header.parentElement;
-        const isOpen = item.classList.contains('open');
-
-        document.querySelectorAll('.accordion-item').forEach(el => {
-            el.classList.remove('open');
-        });
-
-        if (!isOpen) {
-            item.classList.add('open');
-        }
-    }
-
-    if (window.innerWidth <= 768) {
-        const firstItem = document.querySelector('.accordion-item');
-        if (firstItem) {
-            firstItem.classList.add('open');
-        }
-    }
-
-    // ===== LIGHTBOX =====
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxClose = document.getElementById('lightboxClose');
-
-    function openLightbox(src) {
-        lightboxImage.src = src;
-        lightboxImage.alt = '';
-        lightbox.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-        lightbox.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('.clickable-image').forEach(element => {
-        element.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const img = this.querySelector('img');
-            if (img) {
-                openLightbox(img.src);
-            }
-        });
-    });
-
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeLightbox();
-        }
-    });
-
-    lightboxClose.addEventListener('click', function(e) {
-        e.stopPropagation();
-        closeLightbox();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && lightbox.style.display === 'flex') {
-            closeLightbox();
-        }
-    });
-
-    // ===== OPRAVA SCROLLU – POSUN O VÝŠKU MENU =====
-    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === '#') return;
+        const isActive = sectionId === activeSection;
+        link.classList.toggle('active', isActive);
         
-        link.addEventListener('click', function(e) {
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                const menuHeight = 72;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - menuHeight - 10;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
+        if (isActive && isBanner) {
+            link.classList.add('banner-active');
+        } else {
+            link.classList.remove('banner-active');
+        }
     });
+}
+
+// Navázání s throtlem 60ms pro hladký běh na telefonech
+window.addEventListener('scroll', throttle(updateActiveNav, 60));
+setTimeout(updateActiveNav, 50);
+
+// ===== TIMELINE =====
+const items = document.querySelectorAll('.timeline-item');
+
+function updateTimeline() {
+    const center = window.scrollY + window.innerHeight / 2;
+    let active = 0;
+
+    items.forEach((item, i) => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = rect.top + window.scrollY + rect.height / 2;
+        if (itemCenter < center) active = i;
+    });
+
+    items.forEach(item => item.classList.remove('active'));
+    if (items[active]) items[active].classList.add('active');
+}
+
+window.addEventListener('scroll', throttle(updateTimeline, 60));
+updateTimeline();
+
+// ===== PROGRAM TIMELINE =====
+const tlSteps = document.querySelectorAll('.tl-step');
+const lineFill = document.getElementById('lineFill');
+
+function updateProgramStep(index) {
+    tlSteps.forEach((s, i) => {
+        s.classList.toggle('active', i === index);
+    });
+
+    const total = tlSteps.length - 1;
+    const progress = total > 0 ? (index / total) * 100 : 0;
+    lineFill.style.height = progress + '%';
+}
+
+tlSteps.forEach((step, index) => {
+    step.addEventListener('click', () => {
+        updateProgramStep(index);
+    });
+});
+
+const programSection = document.querySelector('#programTimeline');
+
+function updateProgramOnScroll() {
+    const center = window.scrollY + window.innerHeight / 2;
+    let closestIndex = 0;
+    let closestDist = Infinity;
+
+    tlSteps.forEach((step, i) => {
+        const r = step.getBoundingClientRect();
+        const stepCenter = r.top + window.scrollY + r.height / 2;
+        const dist = Math.abs(stepCenter - center);
+        if (dist < closestDist) {
+            closestDist = dist;
+            closestIndex = i;
+        }
+    });
+
+    const progRect = programSection.getBoundingClientRect();
+    if (progRect.top < window.innerHeight && progRect.bottom > 0) {
+        const currentActive = document.querySelector('.tl-step.active');
+        const activeIndex = currentActive ? parseInt(currentActive.dataset.step) : -1;
+        if (activeIndex !== closestIndex) {
+            updateProgramStep(closestIndex);
+        }
+    }
+}
+
+window.addEventListener('scroll', throttle(updateProgramOnScroll, 60));
+updateProgramStep(0);
+setTimeout(updateProgramOnScroll, 100);
+
+// ===== ACCORDION (Bezpečná dynamická výška) =====
+function toggleAccordion(header) {
+    const item = header.parentElement;
+    const body = item.querySelector('.accordion-body');
+    const isOpen = item.classList.contains('open');
+
+    // Zavřít ostatní
+    document.querySelectorAll('.accordion-item').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.accordion-body').style.maxHeight = null;
+    });
+
+    if (!isOpen) {
+        item.classList.add('open');
+        // Nastavení přesné výšky podle obsahu + rezerva pro padding
+        body.style.maxHeight = body.scrollHeight + "px";
+    }
+}
+
+if (window.innerWidth <= 768) {
+    const firstItem = document.querySelector('.accordion-item');
+    if (firstItem) {
+        firstItem.classList.add('open');
+        const firstBody = firstItem.querySelector('.accordion-body');
+        firstBody.style.maxHeight = firstBody.scrollHeight + "px";
+    }
+}
+
+// ===== LIGHTBOX (Oprava SEO a přístupnosti) =====
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxClose = document.getElementById('lightboxClose');
+
+function openLightbox(src, altText) {
+    lightboxImage.src = src;
+    lightboxImage.alt = altText || 'Prezentace obce Čistá'; // OPRAVENO: zachování popisku
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxImage.src = ''; // Uvolnění paměti prohlížeče
+    document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.clickable-image').forEach(element => {
+    element.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const img = this.querySelector('img');
+        if (img) {
+            openLightbox(img.src, img.alt);
+        }
+    });
+});
+
+lightbox.addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeLightbox();
+    }
+});
+
+lightboxClose.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closeLightbox();
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+        closeLightbox();
+    }
+});
+
+// ===== OPRAVA SCROLLU – POSUN O VÝŠKU MENU =====
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === '#') return;
+    
+    link.addEventListener('click', function(e) {
+        const target = document.querySelector(href);
+        if (target) {
+            e.preventDefault();
+            const menuHeight = 75; // OPRAVENO: Skutečná výška menu vč. borderu
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - menuHeight - 10;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
 </script>
 
 </body>
