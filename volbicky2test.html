@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
+
 /* ===== ROOT ===== */
 :root {
     --primary: #1a3a6b;
@@ -63,7 +64,10 @@ a { text-decoration: none; color: inherit; }
     transition: var(--transition);
     box-shadow: 0 4px 16px rgba(26, 58, 107, 0.25);
 }
-.btn-primary { background: var(--primary); color: var(--white); }
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+}
 .btn-primary:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 8px 32px rgba(26, 58, 107, 0.35);
@@ -117,7 +121,11 @@ a { text-decoration: none; color: inherit; }
     overflow: hidden;
     flex-shrink: 0;
 }
-.logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .logo .logo-text-wrapper {
     display: flex;
     align-items: center;
@@ -200,7 +208,7 @@ a { text-decoration: none; color: inherit; }
 .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 .menu-header, .close-menu, .menu-title, .nav-overlay { display: none; }
 
-/* ===== HERO ===== */
+/* ===== HERO – SVĚTLÉ BARVY ===== */
 .hero { text-align: left; padding: 0; border-bottom: 3px solid var(--primary); position: relative; overflow: hidden; }
 .hero-top {
     background: linear-gradient(120deg, #e8f5e9 0%, #c8e6c9 100%);
@@ -208,7 +216,7 @@ a { text-decoration: none; color: inherit; }
 }
 .hero-bottom-section {
     background: linear-gradient(135deg, #dce8f5 0%, #b8d4e8 100%);
-    padding: 60px 0 40px;
+    padding: 80px 0 60px;
 }
 .hero .badge {
     display: inline-flex;
@@ -274,12 +282,12 @@ a { text-decoration: none; color: inherit; }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ===== STATISTIKY ===== */
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .stat-card {
     background: var(--white);
     border: 2px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 16px;
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
     text-align: center;
     transition: var(--transition);
     box-shadow: var(--shadow);
@@ -287,14 +295,14 @@ a { text-decoration: none; color: inherit; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 130px;
+    min-height: 160px;
     color: var(--text-dark);
 }
 .stat-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
-.stat-card .emoji { font-size: 32px; line-height: 1.2; display: block; margin-bottom: 4px; }
-.stat-card .number { font-size: 22px; font-weight: 900; color: var(--primary); display: block; line-height: 1.2; }
-.stat-card .label { font-weight: 700; font-size: 15px; color: var(--text-dark); display: block; margin-top: 2px; }
-.stat-card .desc { font-size: 12px; color: var(--text-muted); display: block; margin-top: 4px; }
+.stat-card .emoji { font-size: 36px; line-height: 1.2; display: block; margin-bottom: 8px; }
+.stat-card .number { font-size: 24px; font-weight: 900; color: var(--primary); display: block; line-height: 1.2; }
+.stat-card .label { font-weight: 700; font-size: 16px; color: var(--text-dark); display: block; margin-top: 4px; }
+.stat-card .desc { font-size: 13px; color: var(--text-muted); display: block; margin-top: 6px; }
 
 .hero-bottom-text { max-width: 800px; margin: 0; text-align: left; }
 .hero-text {
@@ -308,7 +316,7 @@ a { text-decoration: none; color: inherit; }
 
 .btn-group { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; }
 
-/* ===== INTRO BOX ===== */
+/* ===== INTRO BOX – BUBLINA ===== */
 .intro-box {
     max-width: 800px;
     margin: 0 auto 32px auto;
@@ -331,9 +339,16 @@ a { text-decoration: none; color: inherit; }
     line-height: 1.8;
     margin-bottom: 12px;
 }
-.intro-box p:last-child { margin-bottom: 0; }
-.intro-box p strong { color: var(--primary); }
-.intro-box .highlight { color: var(--green); font-weight: 700; }
+.intro-box p:last-child {
+    margin-bottom: 0;
+}
+.intro-box p strong {
+    color: var(--primary);
+}
+.intro-box .highlight {
+    color: var(--green);
+    font-weight: 700;
+}
 .intro-divider {
     width: 60px;
     height: 3px;
@@ -391,7 +406,9 @@ a { text-decoration: none; color: inherit; }
         color: #ffffff !important;
         text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
     }
-    .hero-top h1 .line1 { color: #ffffff !important; }
+    .hero-top h1 .line1 {
+        color: #ffffff !important;
+    }
     .hero-top h1 .line2 {
         background: none !important;
         -webkit-text-fill-color: #ffffff !important;
@@ -670,19 +687,52 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .section-subtitle strong { color: var(--green); }
 .section-title.center, .section-subtitle.center { text-align: center; margin-left: auto; margin-right: auto; }
 
-/* ===== STATUS BADGES ===== */
-.status-hotovo { background: #d4edda; color: #155724; border: 1px solid #28a745; }
-.status-probiha { background: #d1ecf1; color: #0c5460; border: 1px solid #17a2b8; }
-.status-chystame { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+/* =============================================================== */
+/* ===== STATUS BADGES – GLOBÁLNÍ (fungují na všech zařízeních) ===== */
+/* =============================================================== */
+.status-hotovo {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #28a745;
+}
+.status-probiha {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #17a2b8;
+}
+.status-chystame {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
 
-.timeline-item .content .year.hotovo { color: #155724; background: #d4edda; border-color: #28a745; }
+/* Barvy pro "year" badge – také globálně */
+.timeline-item .content .year.hotovo {
+    color: #155724;
+    background: #d4edda;
+    border-color: #28a745;
+}
 .timeline-item .content .year.hotovo i { color: #28a745; }
-.timeline-item .content .year.probiha { color: #0c5460; background: #d1ecf1; border-color: #17a2b8; }
+
+.timeline-item .content .year.probiha {
+    color: #0c5460;
+    background: #d1ecf1;
+    border-color: #17a2b8;
+}
 .timeline-item .content .year.probiha i { color: #17a2b8; }
-.timeline-item .content .year.chystame { color: #856404; background: #fff3cd; border-color: #ffc107; }
+
+.timeline-item .content .year.chystame {
+    color: #856404;
+    background: #fff3cd;
+    border-color: #ffc107;
+}
 .timeline-item .content .year.chystame i { color: #ffc107; }
 
-/* ===== TIMELINE – PC ===== */
+/* =============================================================== */
+/* ===== TIMELINE – CYK-CAK NA PC S OBRÁZKY ===== */
+/* =============================================================== */
+
+/* ===== PC – OBRÁZKY VEDLE BUBLINEK ===== */
 @media (min-width: 769px) {
     .timeline {
         position: relative;
@@ -716,6 +766,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 
     .timeline-item:last-child { margin-bottom: 0; }
 
+    /* ===== LEVÁ STRANA ===== */
     .timeline-item.left {
         flex-direction: row;
         padding-right: calc(50% + 40px);
@@ -807,6 +858,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         border-radius: 50px;
     }
 
+    /* ===== PRAVÁ STRANA ===== */
     .timeline-item.right {
         flex-direction: row-reverse;
         padding-left: calc(50% + 40px);
@@ -898,6 +950,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         border-radius: 50px;
     }
 
+    /* ===== TEČKA ===== */
     .timeline-item .dot {
         position: absolute;
         left: 50%;
@@ -926,6 +979,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         transform: translate(-50%, -50%) scale(1.15);
     }
 
+    /* ===== BUBLINKY ===== */
     .timeline-item .content {
         background: var(--white);
         border: 2px solid var(--border);
@@ -966,6 +1020,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item .content h3 { font-size: 19px; font-weight: 800; color: var(--primary); margin-bottom: 4px; line-height: 1.3; }
     .timeline-item .content .desc { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-top: 2px; }
 
+    /* ===== CENOVKA A STATUS POD SEBOU ===== */
     .timeline-item .content .price {
         font-weight: 700;
         font-size: 16px;
@@ -990,6 +1045,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     }
     .timeline-item .content .status-badge i { margin-right: 6px; }
 
+    /* Zarovnání vlevo/vpravo podle strany */
     .timeline-item.left .content {
         align-items: flex-end;
         text-align: right;
@@ -1008,6 +1064,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         align-self: flex-start;
     }
 
+    /* Čára mezi body */
     .timeline-item::after {
         content: '';
         position: absolute;
@@ -1023,7 +1080,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item:last-child::after { display: none; }
 }
 
-/* ===== TIMELINE – MOBIL ===== */
+/* ===== MOBIL – PVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
 @media (max-width: 768px) {
     .timeline {
         position: relative;
@@ -1048,6 +1105,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     }
     .timeline-item:last-child { margin-bottom: 0; }
 
+    /* Skrytí obrázků na mobilu */
     .timeline-image,
     .timeline-image-text {
         display: none !important;
@@ -1118,6 +1176,28 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         width: fit-content;
     }
     .timeline-item .content .status-badge i { margin-right: 6px; }
+}
+
+/* ===== SLIBY – PVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
+.sliby { max-width: 900px; margin: 40px auto 0; padding-top: 32px; border-top: 3px solid var(--primary); }
+.sliby h3 { text-align: center; font-size: 24px; font-weight: 800; color: var(--primary); }
+.sliby h3 i { color: var(--green); }
+.sliby .sub { text-align: center; color: var(--text-muted); margin-bottom: 20px; }
+.sliby-table { background: var(--white); border-radius: var(--radius); border: 2px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
+.sliby-header { display: grid; grid-template-columns: 1fr 1fr; padding: 14px 20px; background: var(--primary); color: var(--white); font-weight: 800; text-align: center; border-bottom: 2px solid var(--primary); }
+.sliby-row { display: grid; grid-template-columns: 1fr 1fr; padding: 14px 20px; border-bottom: 1px solid var(--border); align-items: center; }
+.sliby-row:last-child { border-bottom: none; }
+.sliby-row .text { font-weight: 600; color: var(--text-dark); }
+.sliby-row .text .detail { display: block; font-weight: 400; font-size: 13px; color: var(--text-muted); }
+.sliby-row .text .price { display: block; font-weight: 700; font-size: 14px; color: var(--green); }
+.sliby-row .status-wrap { text-align: right; }
+.status { display: inline-block; padding: 4px 18px; border-radius: 50px; font-weight: 700; font-size: 13px; }
+.status-hotovo { background: #d4edda; color: #155724; border: 1px solid #b8daff; }
+.status-probiha { background: #d1ecf1; color: #0c5460; border: 1px solid #17a2b8; }
+@media (max-width: 768px) {
+    .sliby-header { display: none; }
+    .sliby-row { grid-template-columns: 1fr; gap: 4px; text-align: left; padding: 12px 16px; }
+    .sliby-row .status-wrap { text-align: left; }
 }
 
 /* ===== PROGRAM TIMELINE ===== */
@@ -1259,7 +1339,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .priorities-scroll .priority-card { flex: 0 0 250px; scroll-snap-align: start; min-height: 180px; }
 @media (max-width: 768px) { .priorities { display: none; } .priorities-scroll { display: flex; } }
 
-/* ===== SCHOOL GRID – 2×2, horizontální fotky ===== */
+/* ===== SCHOOL GRID - 2×2 LAYOUT ===== */
 .school-grid-desktop { 
     display: grid; 
     grid-template-columns: repeat(2, 1fr);
@@ -1282,19 +1362,42 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     box-shadow: var(--shadow-hover); 
 }
 
-.school-card .icon { font-size: 32px; }
-.school-card h4 { font-weight: 700; font-size: 18px; color: var(--primary); margin: 8px 0 4px; }
-.school-card ul { list-style: none; }
-.school-card ul li { padding: 4px 0; font-size: 15px; color: var(--text-muted); }
-.school-card ul li::before { content: "•"; color: var(--green); margin-right: 6px; }
+.school-card .icon { 
+    font-size: 32px; 
+}
 
-/* Fotky školy a hřiště – horizontální */
-.school-photo-wrapper { margin: 0; }
+.school-card h4 { 
+    font-weight: 700; 
+    font-size: 18px; 
+    color: var(--primary); 
+    margin: 8px 0 4px; 
+}
+
+.school-card ul { 
+    list-style: none; 
+}
+
+.school-card ul li { 
+    padding: 4px 0; 
+    font-size: 15px; 
+    color: var(--text-muted); 
+}
+
+.school-card ul li::before { 
+    content: "•"; 
+    color: var(--green); 
+    margin-right: 6px; 
+}
+
+/* Škola foto bublina */
+.school-photo-wrapper {
+    margin: 0;
+}
 
 .school-photo-bubble {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 4 / 3;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -1316,10 +1419,35 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     transition: var(--transition);
 }
 
-.school-photo-bubble:hover img { transform: scale(1.05); }
+.school-photo-bubble:hover img {
+    transform: scale(1.05);
+}
 
-/* Mobil – accordion */
-.accordion { max-width: 900px; margin: 0 auto; }
+.school-photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(26, 58, 107, 0.9), transparent);
+    padding: 16px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.school-photo-text {
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Mobil - accordion */
+.accordion { 
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+
 .accordion-item { 
     border: 2px solid var(--border); 
     border-radius: var(--radius); 
@@ -1328,7 +1456,11 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     transition: var(--transition); 
     background: var(--white); 
 }
-.accordion-item:hover { border-color: var(--primary); }
+
+.accordion-item:hover { 
+    border-color: var(--primary); 
+}
+
 .accordion-header { 
     display: flex; 
     align-items: center; 
@@ -1339,27 +1471,73 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     transition: var(--transition); 
     gap: 12px; 
 }
-.accordion-header:hover { background: var(--green-soft); }
-.accordion-header .icon-left { font-size: 24px; flex-shrink: 0; }
-.accordion-header .title-group h4 { font-size: 16px; font-weight: 700; color: var(--primary); margin: 0; }
-.accordion-toggle { font-size: 16px; color: var(--green); transition: var(--transition); flex-shrink: 0; }
-.accordion-item.open .accordion-toggle { transform: rotate(180deg); }
+
+.accordion-header:hover { 
+    background: var(--green-soft); 
+}
+
+.accordion-header .icon-left { 
+    font-size: 24px; 
+    flex-shrink: 0; 
+}
+
+.accordion-header .title-group h4 { 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: var(--primary); 
+    margin: 0; 
+}
+
+.accordion-toggle { 
+    font-size: 16px; 
+    color: var(--green); 
+    transition: var(--transition); 
+    flex-shrink: 0; 
+}
+
+.accordion-item.open .accordion-toggle { 
+    transform: rotate(180deg); 
+}
+
 .accordion-body { 
     max-height: 0; 
     overflow: hidden; 
     transition: max-height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.3s ease; 
     padding: 0 20px; 
 }
-.accordion-item.open .accordion-body { max-height: 300px; padding: 0 20px 16px 20px; }
-.accordion-body ul { list-style: none; font-size: 15px; color: var(--text-muted); }
-.accordion-body ul li { padding: 4px 0; display: flex; align-items: center; gap: 6px; }
-.accordion-body ul li::before { content: "•"; color: var(--green); font-weight: 700; }
 
-@media (min-width: 769px) { .accordion { display: none !important; } }
+.accordion-item.open .accordion-body { 
+    max-height: 300px; 
+    padding: 0 20px 16px 20px; 
+}
+
+.accordion-body ul { 
+    list-style: none; 
+    font-size: 15px; 
+    color: var(--text-muted); 
+}
+
+.accordion-body ul li { 
+    padding: 4px 0; 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+}
+
+.accordion-body ul li::before { 
+    content: "•"; 
+    color: var(--green); 
+    font-weight: 700; 
+}
+
+@media (min-width: 769px) { 
+    .accordion { display: none !important; } 
+}
 
 @media (max-width: 768px) { 
     .school-grid-desktop { display: none !important; }
     
+    /* Mobil - fotky mezi accordion items */
     .school-photo-wrapper {
         margin: 0 auto 16px;
         padding: 0 16px;
@@ -1369,6 +1547,14 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         aspect-ratio: 16 / 10;
         border-radius: var(--radius);
         border: 2px solid var(--border);
+    }
+    
+    .school-photo-text {
+        font-size: 18px;
+    }
+    
+    .school-photo-overlay {
+        padding: 12px;
     }
 }
 
@@ -1408,7 +1594,9 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     object-fit: cover;
     transition: var(--transition);
 }
-.team-photo-section .photo-placeholder:hover img { transform: scale(1.02); }
+.team-photo-section .photo-placeholder:hover img {
+    transform: scale(1.02);
+}
 
 .candidates {
     display: grid;
@@ -1458,29 +1646,56 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     display: inline-block;
     border: 1px solid var(--green);
 }
-.candidate-info h3 { font-size: 18px; font-weight: 800; color: var(--primary); margin: 4px 0 2px; }
-.candidate-info .position { font-weight: 600; color: var(--green); font-size: 13px; margin-bottom: 4px; }
-.candidate-info .bio { color: var(--text-muted); font-size: 14px; flex: 1; margin-bottom: 8px; line-height: 1.6; }
-.candidate-info .bio strong { color: var(--text-dark); }
-.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.candidate-info h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 4px 0 2px;
+}
+.candidate-info .position {
+    font-weight: 600;
+    color: var(--green);
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+.candidate-info .bio {
+    color: var(--text-muted);
+    font-size: 14px;
+    flex: 1;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+.candidate-info .bio strong {
+    color: var(--text-dark);
+}
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+}
 .tags span {
-    background: var(--white);
+    background: var(--green-soft);
     font-size: 11px;
     padding: 2px 12px;
     border-radius: 50px;
-    font-weight: 500;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
+    font-weight: 700;
+    border: 1px solid var(--green);
+    color: var(--green);
 }
 
-@media (max-width: 992px) { .candidates { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 992px) {
+    .candidates { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 768px) {
     .candidates { grid-template-columns: 1fr; gap: 12px; }
     .team-slogan { font-size: 22px; }
     .candidate { padding: 16px; }
     .team-photo-section .photo-placeholder { aspect-ratio: 2.2 / 1; border-radius: 1rem; }
 }
-@media (max-width: 480px) { .team-photo-section .photo-placeholder { aspect-ratio: 2.2 / 1; border-radius: 0.8rem; } }
+@media (max-width: 480px) {
+    .team-photo-section .photo-placeholder { aspect-ratio: 2.2 / 1; border-radius: 0.8rem; }
+}
 
 /* ===== FOOTER ===== */
 footer { background: var(--primary); text-align: center; padding: 48px 24px; color: var(--white); border-top: 4px solid var(--primary-dark); }
@@ -1495,6 +1710,7 @@ footer p strong { font-weight: 900; }
 #lightboxClose:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
 #lightboxImage { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); cursor: default; }
 @media (max-width: 480px) { #lightboxClose { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 18px; } #lightboxImage { max-width: 95vw; max-height: 80vh; } }
+
         
     </style>
 </head>
@@ -1576,7 +1792,7 @@ footer p strong { font-weight: 900; }
                             <span class="desc">aktivizační metody a individuální přístup</span>
                         </div>
                         <div class="stat-card">
-                            <span class="emoji">🌿</span>
+                            <span class="emoji"></span>
                             <span class="number">obnovíme</span>
                             <span class="label">zeleň a veřejný prostor</span>
                             <span class="desc">revitalizace návsi a výsadba stromů</span>
@@ -1601,11 +1817,12 @@ footer p strong { font-weight: 900; }
 <!-- ===== VÝSLEDKY ===== -->
 <section id="vysledky">
     <div class="container">
-        <span class="section-tag"> Co se v Čisté povedlo</span>
+        <span class="section-tag">🌱 Co se v Čisté povedlo</span>
         <h2 class="section-title">Čistá se mění k lepšímu</h2>
         <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To&nbsp;je teprve začátek.</p>
 
         <div class="timeline" id="timeline">
+            <!-- BOD 1 – LEVÁ STRANA (HOTOVO) + OBRÁZEK VPRAVO -->
             <div class="timeline-item left active">
                 <div class="dot">1</div>
                 <div class="timeline-image">
@@ -1616,11 +1833,12 @@ footer p strong { font-weight: 900; }
                     <span class="icon">⛰️</span>
                     <h3>Stabilizace skalního svahu</h3>
                     <p class="desc">Zajistili jsme skalní stěnu nad domy čp. 91 a 92.</p>
-                    <p class="price">💰 4,59 mil. Kč s 80% dotací</p>
+                    <p class="price"> 4,59 mil. Kč s 80% dotací</p>
                     <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
                 </div>
             </div>
 
+            <!-- BOD 2 – PRAVÁ STRANA (HOTOVO) + OBRÁZEK VLEVO -->
             <div class="timeline-item right">
                 <div class="dot">2</div>
                 <div class="timeline-image">
@@ -1636,6 +1854,7 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
+            <!-- BOD 3 – LEVÁ STRANA (PROBÍHÁ) + OBRÁZEK VPRAVO -->
             <div class="timeline-item left">
                 <div class="dot">3</div>
                 <div class="timeline-image">
@@ -1643,7 +1862,7 @@ footer p strong { font-weight: 900; }
                 </div>
                 <div class="content">
                     <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
-                    <span class="icon"></span>
+                    <span class="icon">🚧</span>
                     <h3>Splašková kanalizace – hlavní projekt</h3>
                     <p class="desc">Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno.</p>
                     <p class="price">💰 188,58 mil. Kč</p>
@@ -1651,6 +1870,7 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
+            <!-- BOD 4 – PRAVÁ STRANA: CHYSTÁME VLEVO, PROGRAM VPRAVO -->
             <div class="timeline-item right">
                 <div class="dot">4</div>
                 <div class="content">
@@ -1716,13 +1936,11 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
         </div>
-        
-        <!-- ŠKOLA, RODINY A AKTIVNÍ ŽIVOT -->
         <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
-            <h3 class="section-title center" style="font-size: 28px;">🌱 Škola, rodiny a aktivní život</h3>
+            <h3 class="section-title center" style="font-size: 28px;"> Škola, rodiny a aktivní život</h3>
             
-            <!-- PC: 2×2 grid s horizontálními fotkami -->
             <div class="school-grid-desktop">
+                <!-- Karta 1: Moderní vzdělávání -->
                 <div class="school-card">
                     <span class="icon">📚</span>
                     <h4>Moderní vzdělávání</h4>
@@ -1733,18 +1951,17 @@ footer p strong { font-weight: 900; }
                     </ul>
                 </div>
                 
+                <!-- Karta 2: Fotka školy -->
                 <div class="school-photo-wrapper">
                     <div class="school-photo-bubble clickable-image">
                         <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text">📚<br>Naše<br>škola</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="school-photo-wrapper">
-                    <div class="school-photo-bubble clickable-image">
-                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
-                    </div>
-                </div>
-                
+                <!-- Karta 3: Sport a volný čas -->
                 <div class="school-card">
                     <span class="icon">🏃</span>
                     <h4>Sport a volný čas</h4>
@@ -1754,9 +1971,19 @@ footer p strong { font-weight: 900; }
                         <li>Podpora spolků a kulturních akcí</li>
                     </ul>
                 </div>
+                
+                <!-- Karta 4: Fotka hřiště -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text"><br>Dětské<br>hřiště</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <!-- Mobil: accordion + fotky až pod ním -->
+            <!-- Mobil - accordion s fotkami -->
             <div class="accordion">
                 <div class="accordion-item open">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -1770,6 +1997,16 @@ footer p strong { font-weight: 900; }
                             <li>Projektová a badatelská výuka</li>
                             <li>Individuální přístup k dětem</li>
                         </ul>
+                    </div>
+                </div>
+                
+                <!-- Fotka školy na mobilu -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text"><br>Naše<br>škola</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -1788,24 +2025,19 @@ footer p strong { font-weight: 900; }
                     </div>
                 </div>
                 
-                <!-- Fotky až pod accordion -->
-                <div class="school-photo-wrapper">
-                    <div class="school-photo-bubble clickable-image">
-                        <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
-                    </div>
-                </div>
-                
+                <!-- Fotka hřiště na mobilu -->
                 <div class="school-photo-wrapper">
                     <div class="school-photo-bubble clickable-image">
                         <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text"><br>Dětské<br>hřiště</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- ČISTÁ, ZELENÁ A BEZPEČNÁ OBEC -->
         <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
-            <h3 class="section-title center" style="font-size: 28px;">🌿 Čistá, zelená a bezpečná obec</h3>
+            <h3 class="section-title center" style="font-size: 28px;"> Čistá, zelená a bezpečná obec</h3>
             <div class="priorities">
                 <div class="priority-card">
                     <span class="icon">♻️</span>
@@ -1834,7 +2066,7 @@ footer p strong { font-weight: 900; }
                     <span class="tag">Klíčová oblast</span>
                 </div>
                 <div class="priority-card">
-                    <span class="icon"></span>
+                    <span class="icon">🌳</span>
                     <h3>Zeleň a voda</h3>
                     <ul><li>Výsadba stromů</li><li>Zadržování vody v krajině</li><li>Revitalizace zeleně</li></ul>
                     <span class="tag">Důležité téma</span>
@@ -1903,125 +2135,134 @@ footer p strong { font-weight: 900; }
 <!-- ===== BANNER: KANDIDÁTI ===== -->
 <div class="banner-section" id="tym-banner"><div class="container"><h2><i class="fas fa-users"></i> Kandidáti</h2></div></div>
 
-<!-- ===== TÝM ===== -->
-<section id="tym">
-    <div class="container">
-        <h2 class="section-title center">Lidé, kteří to tu znají</h2>
-        <div class="team-slogan">Jsme tým, ne soubor jednotlivců</div>
+    <!-- ===== TÝM ===== -->
+    <section id="tym">
+        <div class="container">
+            <h2 class="section-title center">Lidé, kteří to tu znají</h2>
+            <div class="team-slogan">Jsme tým, ne soubor jednotlivců</div>
 
-        <div class="team-photo-section">
-            <div class="photo-placeholder clickable-image">
-                <img src="ffoo.jpg" alt="Společná fotka týmu Volba pro zítřek">
+            <div class="team-photo-section">
+                <div class="photo-placeholder clickable-image">
+                    <img src="ffoo.jpg" alt="Společná fotka týmu Volba pro zítřek">
+                </div>
+            </div>
+
+            <div class="candidates">
+                <!-- 1. Zdeněk Tyšer -->
+                <div class="candidate">
+                    <div class="candidate-number">1</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">starosta obce</span>
+                        <h3>Zdeněk Tyšer</h3>
+                        <div class="position">64 let, Nová Čistá • bez politické příslušnosti</div>
+                        <p class="bio">V současné době dokončuje již třetí volební období ve funkci starosty obce. Pod jeho vedením se podařilo konsolidovat obecní rozpočet, dokončit řadu investičních akcí, jež zlepšily jak vizuální, tak bezpečnostní stránku obce a zejména dokončit významný a pro obec velice potřebný projekt „Čistá – Výstavba splaškové kanalizace". Rád by ve své funkci pokračoval i v dalším volebním období, a i nadále pomáhal všem občanům naší obce při napojování domácností na dokončenou veřejnou část splaškové kanalizace.</p>
+                        <div class="tags"><span>Veřejná správa</span><span>Rozvoj obce</span><span>Kanalizace</span><span>Dotace</span></div>
+                    </div>
+                </div>
+
+                <!-- 2. Leoš Miler -->
+                <div class="candidate">
+                    <div class="candidate-number">2</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">místostarosta</span>
+                        <h3>Leoš Miler</h3>
+                        <div class="position">58 let, Velká Strana • bez politické příslušnosti</div>
+                        <p class="bio">OSVČ – soukromý zemědělec. Dlouholetý zastupitel. V zastupitelstvu obce působil nepřetržitě od voleb v roce 1994 až do konce volebního období 2010-2014. Od roku 2018 opět působí v zastupitelstvu obce ve funkci místostarosty. Nyní je znovu ochoten pomoci svými letitými zkušenostmi v zastupitelstvu obce Čistá.</p>
+                        <div class="tags"><span>Zemědělství</span><span>Infrastruktura</span><span>Zkušenosti</span></div>
+                    </div>
+                </div>
+
+                <!-- 3. Libor Bárta -->
+                <div class="candidate">
+                    <div class="candidate-number">3</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">OSVČ – elektromontážní práce</span>
+                        <h3>Libor Bárta</h3>
+                        <div class="position">48 let, Velká Strana • bez politické příslušnosti</div>
+                        <p class="bio">V zastupitelstvu obce dokončuje první volební období, kde byl předsedou Finančního výboru obce. Avšak již několik let zajišťuje pro obec kompletní údržbu veřejného osvětlení a ostatní elektromontážní práce na všech obecních budovách. Pro naši obec je i nadále ochoten pomoci v zastupitelstvu obce Čistá.</p>
+                        <div class="tags"><span>Elektrikář</span><span>Finanční výbor</span><span>Veřejné osvětlení</span></div>
+                    </div>
+                </div>
+
+                <!-- 4. Pavel Šlégr -->
+                <div class="candidate">
+                    <div class="candidate-number">4</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">OSVČ – zemědělec a včelař</span>
+                        <h3>Pavel Šlégr</h3>
+                        <div class="position">28 let, Velká Strana • bez politické příslušnosti</div>
+                        <p class="bio">V zastupitelstvu obce prozatím nepůsobil, avšak již několik let zajišťuje pro obec veškeré technické práce. Je ochoten pomoci svými zkušenostmi, a to v oblasti životního prostředí, veřejné zeleně a rozvoje obce.</p>
+                        <div class="tags"><span>Mladá generace</span><span>Zemědělství</span><span>Včelařství</span><span>Životní prostředí</span></div>
+                    </div>
+                </div>
+
+                <!-- 5. Klára Zahrádková -->
+                <div class="candidate">
+                    <div class="candidate-number">5</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">obchodní zástupce</span>
+                        <h3>Klára Zahrádková</h3>
+                        <div class="position">32 let, Nová Čistá • bez politické příslušnosti</div>
+                        <p class="bio">V zastupitelstvu obce prozatím nepůsobila. Je ochotna pomoci svými několikaletými zkušenostmi v oblasti odpadového hospodářství a veřejné zeleně.</p>
+                        <div class="tags"><span>Odpadové hospodářství</span><span>Veřejná zeleň</span><span>Modernizace</span></div>
+                    </div>
+                </div>
+
+                <!-- 6. Danuše Horáčková -->
+                <div class="candidate">
+                    <div class="candidate-number">6</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">VaK Mladá Boleslav – logistik</span>
+                        <h3>Danuše Horáčková</h3>
+                        <div class="position">63 let, Velká Strana • bez politické příslušnosti</div>
+                        <p class="bio">V zastupitelstvu obce působila nepřetržitě ve volebních obdobích 1998-2010 a dále od období 2014 až doposud. V tomto volebním období je předsedkyní Kulturního výboru obce a pracuje pro Sbor pro občanské záležitosti. Nyní je opět připravena pomoci svými zkušenostmi, a to zejména v oblasti společenského a kulturního dění.</p>
+                        <div class="tags"><span>Logistika</span><span>Kultura</span><span>Komunita</span></div>
+                    </div>
+                </div>
+
+                <!-- 7. Ing. Zdeňka Doušová -->
+                <div class="candidate">
+                    <div class="candidate-number">7</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">OSVČ – projektantka</span>
+                        <h3>Ing. Zdeňka Doušová</h3>
+                        <div class="position">54 let, Stránka • bez politické příslušnosti</div>
+                        <p class="bio">V zastupitelstvu obce již působila ve volebním období 2018-2022, avšak již od roku 2015 zajišťuje pro obec vyřizování různých stavebních povolení a souhlasných stanovisek. Nyní je ochotna pomoci svými odbornými zkušenostmi v zastupitelstvu obce, a to zejména v oblasti projektů a výstavby.</p>
+                        <div class="tags"><span>Projektování</span><span>Stavebnictví</span><span>Rozvoj</span></div>
+                    </div>
+                </div>
+
+                <!-- 8. Martina Kolářová -->
+                <div class="candidate">
+                    <div class="candidate-number">8</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">učitelka</span>
+                        <h3>Martina Kolářová</h3>
+                        <div class="position">53 let, Týnec • bez politické příslušnosti</div>
+                        <p class="bio">V zastupitelstvu obce prozatím nepůsobila. Naší obci je ochotna pomoci v oblasti školství a společenského a kulturního dění.</p>
+                        <div class="tags"><span>Učitelka</span><span>Vzdělávání</span><span>Kultura</span></div>
+                    </div>
+                </div>
+
+                <!-- 9. Jaroslav Martinec -->
+                <div class="candidate">
+                    <div class="candidate-number">9</div>
+                    <div class="candidate-info">
+                        <span class="role-tag">důchodce</span>
+                        <h3>Jaroslav Martinec</h3>
+                        <div class="position">67 let, Velká Strana • bez politické příslušnosti</div>
+                        <p class="bio">V zastupitelstvu obce působil ve volebním období 2002–2006 a dále od volebního období 2014 až doposud. V tomto volebním období byl předsedou Sportovního výboru. Je ochoten i nadále pomoci v oblasti sportu a odpadového hospodářství.</p>
+                        <div class="tags"><span>Zkušenosti</span><span>Sport</span><span>Odpadové hospodářství</span></div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="candidates">
-            <div class="candidate">
-                <div class="candidate-number">1</div>
-                <div class="candidate-info">
-                    <span class="role-tag">starosta obce</span>
-                    <h3>Zdeněk Tyšer</h3>
-                    <div class="position">64 let, Nová Čistá • bez politické příslušnosti</div>
-                    <p class="bio">V současné době dokončuje již třetí volební období ve funkci starosty obce. Pod jeho vedením se podařilo konsolidovat obecní rozpočet, dokončit řadu investičních akcí, jež zlepšily jak vizuální, tak bezpečnostní stránku obce a zejména dokončit významný a pro obec velice potřebný projekt „Čistá – Výstavba splaškové kanalizace". Rád by ve své funkci pokračoval i v dalším volebním období, a i nadále pomáhal všem občanům naší obce při napojování domácností na dokončenou veřejnou část splaškové kanalizace.</p>
-                    <div class="tags"><span>Veřejná správa</span><span>Rozvoj obce</span><span>Kanalizace</span><span>Dotace</span></div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-number">2</div>
-                <div class="candidate-info">
-                    <span class="role-tag">místostarosta</span>
-                    <h3>Leoš Miler</h3>
-                    <div class="position">58 let, Velká Strana • bez politické příslušnosti</div>
-                    <p class="bio">OSVČ – soukromý zemědělec. Dlouholetý zastupitel. V zastupitelstvu obce působil nepřetržitě od voleb v roce 1994 až do konce volebního období 2010-2014. Od roku 2018 opět působí v zastupitelstvu obce ve funkci místostarosty. Nyní je znovu ochoten pomoci svými letitými zkušenostmi v zastupitelstvu obce Čistá.</p>
-                    <div class="tags"><span>Zemědělství</span><span>Infrastruktura</span><span>Zkušenosti</span></div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-number">3</div>
-                <div class="candidate-info">
-                    <span class="role-tag">OSVČ – elektromontážní práce</span>
-                    <h3>Libor Bárta</h3>
-                    <div class="position">48 let, Velká Strana • bez politické příslušnosti</div>
-                    <p class="bio">V zastupitelstvu obce dokončuje první volební období, kde byl předsedou Finančního výboru obce. Avšak již několik let zajišťuje pro obec kompletní údržbu veřejného osvětlení a ostatní elektromontážní práce na všech obecních budovách. Pro naši obec je i nadále ochoten pomoci v zastupitelstvu obce Čistá.</p>
-                    <div class="tags"><span>Elektrikář</span><span>Finanční výbor</span><span>Veřejné osvětlení</span></div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-number">4</div>
-                <div class="candidate-info">
-                    <span class="role-tag">OSVČ – zemědělec a včelař</span>
-                    <h3>Pavel Šlégr</h3>
-                    <div class="position">28 let, Velká Strana • bez politické příslušnosti</div>
-                    <p class="bio">V zastupitelstvu obce prozatím nepůsobil, avšak již několik let zajišťuje pro obec veškeré technické práce. Je ochoten pomoci svými zkušenostmi, a to v oblasti životního prostředí, veřejné zeleně a rozvoje obce.</p>
-                    <div class="tags"><span>Mladá generace</span><span>Zemědělství</span><span>Včelařství</span><span>Životní prostředí</span></div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-number">5</div>
-                <div class="candidate-info">
-                    <span class="role-tag">obchodní zástupce</span>
-                    <h3>Klára Zahrádková</h3>
-                    <div class="position">32 let, Nová Čistá • bez politické příslušnosti</div>
-                    <p class="bio">V zastupitelstvu obce prozatím nepůsobila. Je ochotna pomoci svými několikaletými zkušenostmi v oblasti odpadového hospodářství a veřejné zeleně.</p>
-                    <div class="tags"><span>Odpadové hospodářství</span><span>Veřejná zeleň</span><span>Modernizace</span></div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-number">6</div>
-                <div class="candidate-info">
-                    <span class="role-tag">VaK Mladá Boleslav – logistik</span>
-                    <h3>Danuše Horáčková</h3>
-                    <div class="position">63 let, Velká Strana • bez politické příslušnosti</div>
-                    <p class="bio">V zastupitelstvu obce působila nepřetržitě ve volebních obdobích 1998-2010 a dále od období 2014 až doposud. V tomto volebním období je předsedkyní Kulturního výboru obce a pracuje pro Sbor pro občanské záležitosti. Nyní je opět připravena pomoci svými zkušenostmi, a to zejména v oblasti společenského a kulturního dění.</p>
-                    <div class="tags"><span>Logistika</span><span>Kultura</span><span>Komunita</span></div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-number">7</div>
-                <div class="candidate-info">
-                    <span class="role-tag">OSVČ – projektantka</span>
-                    <h3>Ing. Zdeňka Doušová</h3>
-                    <div class="position">54 let, Stránka • bez politické příslušnosti</div>
-                    <p class="bio">V zastupitelstvu obce již působila ve volebním období 2018-2022, avšak již od roku 2015 zajišťuje pro obec vyřizování různých stavebních povolení a souhlasných stanovisek. Nyní je ochotna pomoci svými odbornými zkušenostmi v zastupitelstvu obce, a to zejména v oblasti projektů a výstavby.</p>
-                    <div class="tags"><span>Projektování</span><span>Stavebnictví</span><span>Rozvoj</span></div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-number">8</div>
-                <div class="candidate-info">
-                    <span class="role-tag">učitelka</span>
-                    <h3>Martina Kolářová</h3>
-                    <div class="position">53 let, Týnec • bez politické příslušnosti</div>
-                    <p class="bio">V zastupitelstvu obce prozatím nepůsobila. Naší obci je ochotna pomoci v oblasti školství a společenského a kulturního dění.</p>
-                    <div class="tags"><span>Učitelka</span><span>Vzdělávání</span><span>Kultura</span></div>
-                </div>
-            </div>
-
-            <div class="candidate">
-                <div class="candidate-number">9</div>
-                <div class="candidate-info">
-                    <span class="role-tag">důchodce</span>
-                    <h3>Jaroslav Martinec</h3>
-                    <div class="position">67 let, Velká Strana • bez politické příslušnosti</div>
-                    <p class="bio">V zastupitelstvu obce působil ve volebním období 2002–2006 a dále od volebního období 2014 až doposud. V tomto volebním období byl předsedou Sportovního výboru. Je ochoten i nadále pomoci v oblasti sportu a odpadového hospodářství.</p>
-                    <div class="tags"><span>Zkušenosti</span><span>Sport</span><span>Odpadové hospodářství</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== FOTKA ČISTÉ ===== -->
+<!-- ===== FOTKA ČISTÉ – NA ROZKLIKNUTÍ ===== -->
 <section style="padding: 40px 0; background: var(--bg-light); border-bottom: 1px solid var(--border);">
     <div class="container">
-        <h2 class="section-title center" style="font-size: 28px; text-align: center;">🌿 Čistá – naše obec</h2>
+        <h2 class="section-title center" style="font-size: 28px; text-align: center;"> Čistá – naše obec</h2>
         <div style="max-width: 900px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; transition: var(--transition);" class="clickable-image">
             <img 
                 src="vesnice.jpg" 
@@ -2052,7 +2293,7 @@ footer p strong { font-weight: 900; }
 
 <!-- ===== SCRIPTS ===== -->
 <script>
-    // Burger menu
+    // ===== BURGER MENU =====
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('navLinks');
     const closeMenu = document.getElementById('closeMenu');
@@ -2085,7 +2326,7 @@ footer p strong { font-weight: 900; }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Aktivní položka menu
+    // ===== AKTIVNÍ POLOŽKA MENU =====
     const navItems = document.querySelectorAll('.nav-links a[data-section]');
     const sections = {};
 
@@ -2150,7 +2391,7 @@ footer p strong { font-weight: 900; }
     window.addEventListener('scroll', updateActiveNav);
     setTimeout(updateActiveNav, 50);
 
-    // Timeline
+    // ===== TIMELINE =====
     const items = document.querySelectorAll('.timeline-item');
 
     function updateTimeline() {
@@ -2170,7 +2411,7 @@ footer p strong { font-weight: 900; }
     window.addEventListener('scroll', updateTimeline, { passive: true });
     updateTimeline();
 
-    // Program timeline
+    // ===== PROGRAM TIMELINE =====
     const tlSteps = document.querySelectorAll('.tl-step');
     const lineFill = document.getElementById('lineFill');
 
@@ -2222,7 +2463,7 @@ footer p strong { font-weight: 900; }
     updateProgramStep(0);
     setTimeout(updateProgramOnScroll, 100);
 
-    // Accordion
+    // ===== ACCORDION =====
     function toggleAccordion(header) {
         const item = header.parentElement;
         const isOpen = item.classList.contains('open');
@@ -2243,7 +2484,7 @@ footer p strong { font-weight: 900; }
         }
     }
 
-    // Lightbox
+    // ===== LIGHTBOX =====
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxClose = document.getElementById('lightboxClose');
@@ -2287,7 +2528,7 @@ footer p strong { font-weight: 900; }
         }
     });
 
-    // Scroll na sekce
+    // ===== OPRAVA SCROLLU – POSUN O VÝŠKU MENU =====
     document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
         const href = link.getAttribute('href');
         if (href === '#') return;
@@ -2305,6 +2546,7 @@ footer p strong { font-weight: 900; }
             }
         });
     });
+
 </script>
 
 </body>
