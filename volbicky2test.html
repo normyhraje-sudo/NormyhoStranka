@@ -216,7 +216,7 @@ a { text-decoration: none; color: inherit; }
 }
 .hero-bottom-section {
     background: linear-gradient(135deg, #dce8f5 0%, #b8d4e8 100%);
-    padding: 80px 0 60px;
+    padding: 60px 0 40px;
 }
 .hero .badge {
     display: inline-flex;
@@ -282,12 +282,12 @@ a { text-decoration: none; color: inherit; }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ===== STATISTIKY ===== */
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .stat-card {
     background: var(--white);
     border: 2px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 28px 24px;
+    border-radius: var(--radius);
+    padding: 20px 16px;
     text-align: center;
     transition: var(--transition);
     box-shadow: var(--shadow);
@@ -295,14 +295,14 @@ a { text-decoration: none; color: inherit; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 160px;
+    min-height: 130px;
     color: var(--text-dark);
 }
 .stat-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
-.stat-card .emoji { font-size: 36px; line-height: 1.2; display: block; margin-bottom: 8px; }
-.stat-card .number { font-size: 24px; font-weight: 900; color: var(--primary); display: block; line-height: 1.2; }
-.stat-card .label { font-weight: 700; font-size: 16px; color: var(--text-dark); display: block; margin-top: 4px; }
-.stat-card .desc { font-size: 13px; color: var(--text-muted); display: block; margin-top: 6px; }
+.stat-card .emoji { font-size: 32px; line-height: 1.2; display: block; margin-bottom: 4px; }
+.stat-card .number { font-size: 22px; font-weight: 900; color: var(--primary); display: block; line-height: 1.2; }
+.stat-card .label { font-weight: 700; font-size: 15px; color: var(--text-dark); display: block; margin-top: 2px; }
+.stat-card .desc { font-size: 12px; color: var(--text-muted); display: block; margin-top: 4px; }
 
 .hero-bottom-text { max-width: 800px; margin: 0; text-align: left; }
 .hero-text {
@@ -757,7 +757,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 
     .timeline-item {
         position: relative;
-        margin-bottom: 90px;
+        margin-bottom: 120px;
         padding: 0;
         display: flex;
         align-items: stretch;
@@ -984,7 +984,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         background: var(--white);
         border: 2px solid var(--border);
         border-radius: var(--radius-lg);
-        padding: 24px 28px;
+        padding: 32px 36px;
         transition: var(--transition);
         box-shadow: 0 4px 20px rgba(0,0,0,0.06);
         width: 100%;
@@ -1080,7 +1080,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item:last-child::after { display: none; }
 }
 
-/* ===== MOBIL – PVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
+/* ===== MOBIL – PŮVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
 @media (max-width: 768px) {
     .timeline {
         position: relative;
@@ -1178,7 +1178,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item .content .status-badge i { margin-right: 6px; }
 }
 
-/* ===== SLIBY – PVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
+/* ===== SLIBY – PŮVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
 .sliby { max-width: 900px; margin: 40px auto 0; padding-top: 32px; border-top: 3px solid var(--primary); }
 .sliby h3 { text-align: center; font-size: 24px; font-weight: 800; color: var(--primary); }
 .sliby h3 i { color: var(--green); }
@@ -1343,8 +1343,8 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .school-grid-desktop { 
     display: grid; 
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px; 
-    max-width: 1100px;
+    gap: 24px; 
+    max-width: 1200px;
     margin: 0 auto; 
 }
 
@@ -1397,7 +1397,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .school-photo-bubble {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 21 / 9;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -1792,7 +1792,7 @@ footer p strong { font-weight: 900; }
                             <span class="desc">aktivizační metody a individuální přístup</span>
                         </div>
                         <div class="stat-card">
-                            <span class="emoji"></span>
+                            <span class="emoji">🌿</span>
                             <span class="number">obnovíme</span>
                             <span class="label">zeleň a veřejný prostor</span>
                             <span class="desc">revitalizace návsi a výsadba stromů</span>
@@ -1833,7 +1833,7 @@ footer p strong { font-weight: 900; }
                     <span class="icon">⛰️</span>
                     <h3>Stabilizace skalního svahu</h3>
                     <p class="desc">Zajistili jsme skalní stěnu nad domy čp. 91 a 92.</p>
-                    <p class="price"> 4,59 mil. Kč s 80% dotací</p>
+                    <p class="price">💰 4,59 mil. Kč s 80% dotací</p>
                     <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
                 </div>
             </div>
@@ -1937,7 +1937,7 @@ footer p strong { font-weight: 900; }
             </div>
         </div>
         <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
-            <h3 class="section-title center" style="font-size: 28px;"> Škola, rodiny a aktivní život</h3>
+            <h3 class="section-title center" style="font-size: 28px;">🌱 Škola, rodiny a aktivní život</h3>
             
             <div class="school-grid-desktop">
                 <!-- Karta 1: Moderní vzdělávání -->
@@ -1977,7 +1977,7 @@ footer p strong { font-weight: 900; }
                     <div class="school-photo-bubble clickable-image">
                         <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
                         <div class="school-photo-overlay">
-                            <span class="school-photo-text"><br>Dětské<br>hřiště</span>
+                            <span class="school-photo-text">🛝<br>Dětské<br>hřiště</span>
                         </div>
                     </div>
                 </div>
@@ -2005,7 +2005,7 @@ footer p strong { font-weight: 900; }
                     <div class="school-photo-bubble clickable-image">
                         <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
                         <div class="school-photo-overlay">
-                            <span class="school-photo-text"><br>Naše<br>škola</span>
+                            <span class="school-photo-text">📚<br>Naše<br>škola</span>
                         </div>
                     </div>
                 </div>
@@ -2030,14 +2030,14 @@ footer p strong { font-weight: 900; }
                     <div class="school-photo-bubble clickable-image">
                         <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
                         <div class="school-photo-overlay">
-                            <span class="school-photo-text"><br>Dětské<br>hřiště</span>
+                            <span class="school-photo-text">🛝<br>Dětské<br>hřiště</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
-            <h3 class="section-title center" style="font-size: 28px;"> Čistá, zelená a bezpečná obec</h3>
+            <h3 class="section-title center" style="font-size: 28px;">🌿 Čistá, zelená a bezpečná obec</h3>
             <div class="priorities">
                 <div class="priority-card">
                     <span class="icon">♻️</span>
@@ -2262,7 +2262,7 @@ footer p strong { font-weight: 900; }
 <!-- ===== FOTKA ČISTÉ – NA ROZKLIKNUTÍ ===== -->
 <section style="padding: 40px 0; background: var(--bg-light); border-bottom: 1px solid var(--border);">
     <div class="container">
-        <h2 class="section-title center" style="font-size: 28px; text-align: center;"> Čistá – naše obec</h2>
+        <h2 class="section-title center" style="font-size: 28px; text-align: center;">🌿 Čistá – naše obec</h2>
         <div style="max-width: 900px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; transition: var(--transition);" class="clickable-image">
             <img 
                 src="vesnice.jpg" 
