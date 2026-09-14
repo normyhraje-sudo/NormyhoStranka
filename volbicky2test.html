@@ -736,7 +736,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 @media (min-width: 769px) {
     .timeline {
         position: relative;
-        max-width: 960px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 30px 0;
     }
@@ -778,7 +778,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         left: calc(50% + 52px);
         top: 0;
         bottom: 0;
-        width: 440px;
+        width: 520px;
         border-radius: 5%;
         overflow: hidden;
         border: 3px solid var(--border);
@@ -809,7 +809,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         left: calc(50% + 52px);
         top: 0;
         bottom: 0;
-        width: 440px;
+        width: 520px;
         z-index: 3;
         text-align: center;
         flex-shrink: 0;
@@ -870,7 +870,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         right: calc(50% + 52px);
         top: 0;
         bottom: 0;
-        width: 440px;
+        width: 520px;
         border-radius: 5%;
         overflow: hidden;
         border: 3px solid var(--border);
@@ -901,7 +901,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         right: calc(50% + 52px);
         top: 0;
         bottom: 0;
-        width: 440px;
+        width: 520px;
         z-index: 3;
         text-align: center;
         flex-shrink: 0;
@@ -1339,10 +1339,10 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .priorities-scroll .priority-card { flex: 0 0 250px; scroll-snap-align: start; min-height: 180px; }
 @media (max-width: 768px) { .priorities { display: none; } .priorities-scroll { display: flex; } }
 
-/* ===== SCHOOL GRID ===== */
+/* ===== SCHOOL GRID - 2×2 LAYOUT ===== */
 .school-grid-desktop { 
     display: grid; 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px; 
     max-width: 1100px;
     margin: 0 auto; 
@@ -1397,7 +1397,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .school-photo-bubble {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -1537,7 +1537,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 @media (max-width: 768px) { 
     .school-grid-desktop { display: none !important; }
     
-    /* Mobil - fotka školy mezi accordion items */
+    /* Mobil - fotky mezi accordion items */
     .school-photo-wrapper {
         margin: 0 auto 16px;
         padding: 0 16px;
@@ -1774,7 +1774,7 @@ footer p strong { font-weight: 900; }
                 <div class="col-stats">
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <span class="emoji">🚧</span>
+                            <span class="emoji"></span>
                             <span class="number">dokončujeme</span>
                             <span class="label">splaškovou kanalizaci</span>
                             <span class="desc">za 188,58 mil. Kč s dotacemi</span>
@@ -1786,7 +1786,7 @@ footer p strong { font-weight: 900; }
                             <span class="desc">3. etapa za 10,68 mil. Kč</span>
                         </div>
                         <div class="stat-card">
-                            <span class="emoji">🏫</span>
+                            <span class="emoji"></span>
                             <span class="number">podpoříme</span>
                             <span class="label">moderní školu</span>
                             <span class="desc">aktivizační metody a individuální přístup</span>
@@ -1826,7 +1826,7 @@ footer p strong { font-weight: 900; }
             <div class="timeline-item left active">
                 <div class="dot">1</div>
                 <div class="timeline-image">
-                    <img src="svah.png" alt="Stabilizace skalního svahu" loading="lazy">
+                    <img src="svah.jpg" alt="Stabilizace skalního svahu" loading="lazy">
                 </div>
                 <div class="content">
                     <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2025</span>
@@ -1842,11 +1842,11 @@ footer p strong { font-weight: 900; }
             <div class="timeline-item right">
                 <div class="dot">2</div>
                 <div class="timeline-image">
-                    <img src="chodnik.png" alt="Chodník, opěrné zdi a osvětlení" loading="lazy">
+                    <img src="chodnik.jpg" alt="Chodník, opěrné zdi a osvětlení" loading="lazy">
                 </div>
                 <div class="content">
                     <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2026</span>
-                    <span class="icon">🚶</span>
+                    <span class="icon"></span>
                     <h3>Chodník, opěrné zdi a osvětlení – 3. etapa</h3>
                     <p class="desc">Vybudovali jsme nový chodník podél místní komunikace, opěrné zdi a osvětlení.</p>
                     <p class="price">💰 10,68 mil. Kč</p>
@@ -1858,7 +1858,7 @@ footer p strong { font-weight: 900; }
             <div class="timeline-item left">
                 <div class="dot">3</div>
                 <div class="timeline-image">
-                    <img src="kanalizace.png" alt="Splašková kanalizace" loading="lazy">
+                    <img src="kanalizace.jpg" alt="Splašková kanalizace" loading="lazy">
                 </div>
                 <div class="content">
                     <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
@@ -1918,12 +1918,12 @@ footer p strong { font-weight: 900; }
             </div>
             <div class="tl-step" data-step="1">
                 <div class="tl-left">
-                    <span class="year-tag"> 2028–2030</span>
+                    <span class="year-tag">🌿 2028–2030</span>
                     <span class="label">Rozvíjet & modernizovat</span>
                     <span class="desc">Obecní dům, chodníky, úspory, zeleň</span>
                     <div class="badge-list"><span>Infrastruktura</span><span>Životní prostředí</span><span>Modernizace</span></div>
                 </div>
-                <div class="tl-dot"><span class="step-num">2</span><span class="inner-icon">🚀</span></div>
+                <div class="tl-dot"><span class="step-num">2</span><span class="inner-icon"></span></div>
                 <div class="tl-right">
                     <ul class="detail-list">
                         <li>Modernizace Domu služeb – prostory pro seniory</li>
@@ -1961,7 +1961,17 @@ footer p strong { font-weight: 900; }
                     </div>
                 </div>
                 
-                <!-- Karta 3: Sport a volný čas -->
+                <!-- Karta 3: Fotka hřiště -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text"><br>Dětské<br>hřiště</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Karta 4: Sport a volný čas -->
                 <div class="school-card">
                     <span class="icon">🏃</span>
                     <h4>Sport a volný čas</h4>
@@ -1973,11 +1983,11 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
             
-            <!-- Mobil - accordion s fotkou uprostřed -->
+            <!-- Mobil - accordion s fotkami -->
             <div class="accordion">
                 <div class="accordion-item open">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="icon-left"></span>
+                        <span class="icon-left">📚</span>
                         <div class="title-group"><h4>Moderní vzdělávání</h4></div>
                         <span class="accordion-toggle">▼</span>
                     </div>
@@ -2000,9 +2010,19 @@ footer p strong { font-weight: 900; }
                     </div>
                 </div>
                 
+                <!-- Fotka hřiště na mobilu -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text"><br>Dětské<br>hřiště</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="icon-left"></span>
+                        <span class="icon-left">🏃</span>
                         <div class="title-group"><h4>Sport a volný čas</h4></div>
                         <span class="accordion-toggle">▼</span>
                     </div>
@@ -2267,7 +2287,7 @@ footer p strong { font-weight: 900; }
 
 <!-- ===== LIGHTBOX ===== -->
 <div id="lightbox">
-    <button id="lightboxClose" aria-label="Zavřít"></button>
+    <button id="lightboxClose" aria-label="Zavřít">✕</button>
     <img id="lightboxImage" src="" alt="">
 </div>
 
