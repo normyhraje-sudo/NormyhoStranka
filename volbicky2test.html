@@ -1080,7 +1080,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item:last-child::after { display: none; }
 }
 
-/* ===== MOBIL – PŮVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
+/* ===== MOBIL – PVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
 @media (max-width: 768px) {
     .timeline {
         position: relative;
@@ -1365,6 +1365,86 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 @media (min-width: 769px) { .accordion { display: none !important; } }
 @media (max-width: 768px) { .school-grid-desktop { display: none !important; } }
 
+/* ===== ŠKOLA - FOTO BUBLINA ===== */
+.school-photo-wrapper {
+    max-width: 900px;
+    margin: 0 auto 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.school-photo-bubble {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 3px solid var(--border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.school-photo-bubble:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+}
+
+.school-photo-bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.school-photo-bubble:hover img {
+    transform: scale(1.05);
+}
+
+.school-photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(26, 58, 107, 0.9), transparent);
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.school-photo-text {
+    color: var(--white);
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ===== MOBIL ===== */
+@media (max-width: 768px) {
+    .school-photo-wrapper {
+        margin: 0 auto 20px;
+        padding: 0 16px;
+    }
+    
+    .school-photo-bubble {
+        max-width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: var(--radius);
+        border: 2px solid var(--border);
+    }
+    
+    .school-photo-text {
+        font-size: 18px;
+    }
+    
+    .school-photo-overlay {
+        padding: 12px;
+    }
+}
+
 /* ===== CANDIDATES ===== */
 .team-slogan {
     text-align: center;
@@ -1587,13 +1667,13 @@ footer p strong { font-weight: 900; }
                             <span class="desc">za 188,58 mil. Kč s dotacemi</span>
                         </div>
                         <div class="stat-card">
-                            <span class="emoji">🚶</span>
+                            <span class="emoji"></span>
                             <span class="number">nový</span>
                             <span class="label">chodník + osvětlení</span>
                             <span class="desc">3. etapa za 10,68 mil. Kč</span>
                         </div>
                         <div class="stat-card">
-                            <span class="emoji">🏫</span>
+                            <span class="emoji"></span>
                             <span class="number">podpoříme</span>
                             <span class="label">moderní školu</span>
                             <span class="desc">aktivizační metody a individuální přístup</span>
@@ -1707,12 +1787,12 @@ footer p strong { font-weight: 900; }
             <div class="line-fill" id="lineFill"></div>
             <div class="tl-step active" data-step="0">
                 <div class="tl-left">
-                    <span class="year-tag">🌱 2026–2028</span>
+                    <span class="year-tag"> 2026–2028</span>
                     <span class="label">Dokončit & stabilizovat</span>
                     <span class="desc">Dokončíme kanalizaci, zklidníme rozpočet</span>
                     <div class="badge-list"><span>Kanalizace</span><span>Finance</span><span>Komunikace</span></div>
                 </div>
-                <div class="tl-dot"><span class="step-num">1</span><span class="inner-icon">🏗️</span></div>
+                <div class="tl-dot"><span class="step-num">1</span><span class="inner-icon">️</span></div>
                 <div class="tl-right">
                     <ul class="detail-list">
                         <li>Dokončit kanalizaci a připojit domácnosti</li>
@@ -1745,6 +1825,17 @@ footer p strong { font-weight: 900; }
         </div>
         <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
             <h3 class="section-title center" style="font-size: 28px;">🌱 Škola, rodiny a aktivní život</h3>
+            
+            <!-- FOTKA ŠKOLY -->
+            <div class="school-photo-wrapper">
+                <div class="school-photo-bubble clickable-image">
+                    <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+                    <div class="school-photo-overlay">
+                        <span class="school-photo-text">📚<br>Naše<br>škola</span>
+                    </div>
+                </div>
+            </div>
+            
             <div class="school-grid-desktop">
                 <div class="school-card">
                     <span class="icon">📚</span>
@@ -1760,7 +1851,7 @@ footer p strong { font-weight: 900; }
             <div class="accordion">
                 <div class="accordion-item open">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="icon-left">📚</span>
+                        <span class="icon-left"></span>
                         <div class="title-group"><h4>Moderní vzdělávání</h4></div>
                         <span class="accordion-toggle">▼</span>
                     </div>
@@ -1768,7 +1859,7 @@ footer p strong { font-weight: 900; }
                 </div>
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="icon-left">🏃</span>
+                        <span class="icon-left"></span>
                         <div class="title-group"><h4>Sport a volný čas</h4></div>
                         <span class="accordion-toggle">▼</span>
                     </div>
@@ -1777,7 +1868,7 @@ footer p strong { font-weight: 900; }
             </div>
         </div>
         <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
-            <h3 class="section-title center" style="font-size: 28px;">🌿 Čistá, zelená a bezpečná obec</h3>
+            <h3 class="section-title center" style="font-size: 28px;"> Čistá, zelená a bezpečná obec</h3>
             <div class="priorities">
                 <div class="priority-card">
                     <span class="icon">♻️</span>
