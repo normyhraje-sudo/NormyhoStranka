@@ -736,7 +736,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 @media (min-width: 769px) {
     .timeline {
         position: relative;
-        max-width: 960px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 30px 0;
     }
@@ -757,7 +757,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 
     .timeline-item {
         position: relative;
-        margin-bottom: 90px;
+        margin-bottom: 120px;
         padding: 0;
         display: flex;
         align-items: stretch;
@@ -778,7 +778,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         left: calc(50% + 52px);
         top: 0;
         bottom: 0;
-        width: 440px;
+        width: 520px;
         border-radius: 5%;
         overflow: hidden;
         border: 3px solid var(--border);
@@ -809,7 +809,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         left: calc(50% + 52px);
         top: 0;
         bottom: 0;
-        width: 440px;
+        width: 520px;
         z-index: 3;
         text-align: center;
         flex-shrink: 0;
@@ -870,7 +870,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         right: calc(50% + 52px);
         top: 0;
         bottom: 0;
-        width: 440px;
+        width: 520px;
         border-radius: 5%;
         overflow: hidden;
         border: 3px solid var(--border);
@@ -901,7 +901,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         right: calc(50% + 52px);
         top: 0;
         bottom: 0;
-        width: 440px;
+        width: 520px;
         z-index: 3;
         text-align: center;
         flex-shrink: 0;
@@ -984,7 +984,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         background: var(--white);
         border: 2px solid var(--border);
         border-radius: var(--radius-lg);
-        padding: 24px 28px;
+        padding: 32px 36px;
         transition: var(--transition);
         box-shadow: 0 4px 20px rgba(0,0,0,0.06);
         width: 100%;
@@ -1080,7 +1080,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item:last-child::after { display: none; }
 }
 
-/* ===== MOBIL – PŮVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
+/* ===== MOBIL – HORIZONTÁLNÍ SWIPE ===== */
 @media (max-width: 768px) {
     .timeline {
         position: relative;
@@ -1105,8 +1105,103 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     }
     .timeline-item:last-child { margin-bottom: 0; }
 
-    /* Skrytí obrázků na mobilu */
-    .timeline-image,
+    /* Swipe container - horizontální slider */
+    .swipe-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius);
+        background: var(--white);
+        border: 2px solid var(--border);
+        box-shadow: var(--shadow);
+    }
+
+    .swipe-wrapper {
+        display: flex;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        touch-action: pan-y;
+    }
+
+    .swipe-page {
+        flex: 0 0 100%;
+        width: 100%;
+        min-height: 200px;
+    }
+
+    /* Text stránka */
+    .swipe-page-text {
+        padding: 20px 24px;
+    }
+
+    /* Fotka stránka */
+    .swipe-page-image {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .swipe-page-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Indikátor swipu */
+    .swipe-indicator {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background: rgba(26, 58, 107, 0.9);
+        color: var(--white);
+        padding: 6px 12px;
+        border-radius: 50px;
+        font-size: 11px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 10;
+        pointer-events: none;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .swipe-indicator i {
+        font-size: 12px;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 0.7; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* Skrytí indikátoru když je zobrazena fotka */
+    .swipe-container.show-image .swipe-indicator {
+        display: none;
+    }
+
+    /* Tečky pro navigaci */
+    .swipe-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .swipe-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--border);
+        transition: var(--transition);
+        cursor: pointer;
+    }
+
+    .swipe-dot.active {
+        background: var(--primary);
+        transform: scale(1.3);
+    }
+
+    /* Skrytí textové bubliny programu */
     .timeline-image-text {
         display: none !important;
     }
@@ -1128,6 +1223,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         font-weight: 800;
         color: var(--text-muted);
         transition: var(--transition);
+        z-index: 2;
     }
     .timeline-item.active .dot {
         background: var(--primary);
@@ -1135,18 +1231,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         color: var(--white);
         transform: scale(1.15);
     }
-    .timeline-item .content {
-        background: var(--white);
-        border: 2px solid var(--border);
-        border-radius: var(--radius);
-        padding: 20px 24px;
-        transition: var(--transition);
-        box-shadow: var(--shadow);
-    }
-    .timeline-item.active .content {
-        border-color: var(--primary);
-        box-shadow: var(--shadow-hover);
-    }
+
     .timeline-item .content .year {
         display: inline-block;
         font-size: 12px;
@@ -1178,7 +1263,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item .content .status-badge i { margin-right: 6px; }
 }
 
-/* ===== SLIBY – PŮVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
+/* ===== SLIBY – PVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
 .sliby { max-width: 900px; margin: 40px auto 0; padding-top: 32px; border-top: 3px solid var(--primary); }
 .sliby h3 { text-align: center; font-size: 24px; font-weight: 800; color: var(--primary); }
 .sliby h3 i { color: var(--green); }
@@ -1339,31 +1424,224 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
 .priorities-scroll .priority-card { flex: 0 0 250px; scroll-snap-align: start; min-height: 180px; }
 @media (max-width: 768px) { .priorities { display: none; } .priorities-scroll { display: flex; } }
 
-/* ===== SCHOOL GRID ===== */
-.school-grid-desktop { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
-.school-card { background: var(--white); border-radius: var(--radius); padding: 24px; border: 2px solid var(--border); transition: var(--transition); box-shadow: var(--shadow); }
-.school-card:hover { border-color: var(--primary); box-shadow: var(--shadow-hover); }
-.school-card .icon { font-size: 32px; }
-.school-card h4 { font-weight: 700; font-size: 18px; color: var(--primary); margin: 8px 0 4px; }
-.school-card ul { list-style: none; }
-.school-card ul li { padding: 4px 0; font-size: 15px; color: var(--text-muted); }
-.school-card ul li::before { content: "•"; color: var(--green); margin-right: 6px; }
-.accordion { max-width: 900px; margin: 0 auto; }
-.accordion-item { border: 2px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; transition: var(--transition); background: var(--white); }
-.accordion-item:hover { border-color: var(--primary); }
-.accordion-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; cursor: pointer; background: var(--white); transition: var(--transition); gap: 12px; }
-.accordion-header:hover { background: var(--green-soft); }
-.accordion-header .icon-left { font-size: 24px; flex-shrink: 0; }
-.accordion-header .title-group h4 { font-size: 16px; font-weight: 700; color: var(--primary); margin: 0; }
-.accordion-toggle { font-size: 16px; color: var(--green); transition: var(--transition); flex-shrink: 0; }
-.accordion-item.open .accordion-toggle { transform: rotate(180deg); }
-.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.3s ease; padding: 0 20px; }
-.accordion-item.open .accordion-body { max-height: 300px; padding: 0 20px 16px 20px; }
-.accordion-body ul { list-style: none; font-size: 15px; color: var(--text-muted); }
-.accordion-body ul li { padding: 4px 0; display: flex; align-items: center; gap: 6px; }
-.accordion-body ul li::before { content: "•"; color: var(--green); font-weight: 700; }
-@media (min-width: 769px) { .accordion { display: none !important; } }
-@media (max-width: 768px) { .school-grid-desktop { display: none !important; } }
+/* ===== SCHOOL GRID - 2×2 LAYOUT ===== */
+.school-grid-desktop { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px; 
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+
+.school-card { 
+    background: var(--white); 
+    border-radius: var(--radius); 
+    padding: 24px; 
+    border: 2px solid var(--border); 
+    transition: var(--transition); 
+    box-shadow: var(--shadow); 
+}
+
+.school-card:hover { 
+    border-color: var(--primary); 
+    box-shadow: var(--shadow-hover); 
+}
+
+.school-card .icon { 
+    font-size: 32px; 
+}
+
+.school-card h4 { 
+    font-weight: 700; 
+    font-size: 18px; 
+    color: var(--primary); 
+    margin: 8px 0 4px; 
+}
+
+.school-card ul { 
+    list-style: none; 
+}
+
+.school-card ul li { 
+    padding: 4px 0; 
+    font-size: 15px; 
+    color: var(--text-muted); 
+}
+
+.school-card ul li::before { 
+    content: "•"; 
+    color: var(--green); 
+    margin-right: 6px; 
+}
+
+/* Škola foto bublina */
+.school-photo-wrapper {
+    margin: 0;
+}
+
+.school-photo-bubble {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 3px solid var(--border);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.school-photo-bubble:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+}
+
+.school-photo-bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.school-photo-bubble:hover img {
+    transform: scale(1.05);
+}
+
+.school-photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(26, 58, 107, 0.9), transparent);
+    padding: 16px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.school-photo-text {
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Mobil - accordion */
+.accordion { 
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+
+.accordion-item { 
+    border: 2px solid var(--border); 
+    border-radius: var(--radius); 
+    margin-bottom: 10px; 
+    overflow: hidden; 
+    transition: var(--transition); 
+    background: var(--white); 
+}
+
+.accordion-item:hover { 
+    border-color: var(--primary); 
+}
+
+.accordion-header { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 14px 20px; 
+    cursor: pointer; 
+    background: var(--white); 
+    transition: var(--transition); 
+    gap: 12px; 
+}
+
+.accordion-header:hover { 
+    background: var(--green-soft); 
+}
+
+.accordion-header .icon-left { 
+    font-size: 24px; 
+    flex-shrink: 0; 
+}
+
+.accordion-header .title-group h4 { 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: var(--primary); 
+    margin: 0; 
+}
+
+.accordion-toggle { 
+    font-size: 16px; 
+    color: var(--green); 
+    transition: var(--transition); 
+    flex-shrink: 0; 
+}
+
+.accordion-item.open .accordion-toggle { 
+    transform: rotate(180deg); 
+}
+
+.accordion-body { 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), padding 0.3s ease; 
+    padding: 0 20px; 
+}
+
+.accordion-item.open .accordion-body { 
+    max-height: 300px; 
+    padding: 0 20px 16px 20px; 
+}
+
+.accordion-body ul { 
+    list-style: none; 
+    font-size: 15px; 
+    color: var(--text-muted); 
+}
+
+.accordion-body ul li { 
+    padding: 4px 0; 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+}
+
+.accordion-body ul li::before { 
+    content: "•"; 
+    color: var(--green); 
+    font-weight: 700; 
+}
+
+@media (min-width: 769px) { 
+    .accordion { display: none !important; } 
+}
+
+@media (max-width: 768px) { 
+    .school-grid-desktop { display: none !important; }
+    
+    /* Mobil - fotky mezi accordion items */
+    .school-photo-wrapper {
+        margin: 0 auto 16px;
+        padding: 0 16px;
+    }
+    
+    .school-photo-bubble {
+        aspect-ratio: 16 / 10;
+        border-radius: var(--radius);
+        border: 2px solid var(--border);
+    }
+    
+    .school-photo-text {
+        font-size: 18px;
+    }
+    
+    .school-photo-overlay {
+        padding: 12px;
+    }
+}
 
 /* ===== CANDIDATES ===== */
 .team-slogan {
@@ -1482,13 +1760,13 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     margin-top: 4px;
 }
 .tags span {
-    background: var(--white);
+    background: var(--green-soft);
     font-size: 11px;
     padding: 2px 12px;
     border-radius: 50px;
-    font-weight: 500;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
+    font-weight: 700;
+    border: 1px solid var(--green);
+    color: var(--green);
 }
 
 @media (max-width: 992px) {
@@ -1629,66 +1907,109 @@ footer p strong { font-weight: 900; }
         <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To&nbsp;je teprve začátek.</p>
 
         <div class="timeline" id="timeline">
-            <!-- BOD 1 – LEVÁ STRANA (HOTOVO) + OBRÁZEK VPRAVO -->
+            <!-- BOD 1 -->
             <div class="timeline-item left active">
                 <div class="dot">1</div>
-                <div class="timeline-image">
-                    <img src="svah.png" alt="Stabilizace skalního svahu" loading="lazy">
+                <div class="swipe-container" data-current="0">
+                    <div class="swipe-wrapper">
+                        <!-- Stránka 1: Text -->
+                        <div class="swipe-page swipe-page-text">
+                            <div class="content">
+                                <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2025</span>
+                                <span class="icon">⛰️</span>
+                                <h3>Stabilizace skalního svahu</h3>
+                                <p class="desc">Zajistili jsme skalní stěnu nad domy čp. 91 a 92.</p>
+                                <p class="price">💰 4,59 mil. Kč s 80% dotací</p>
+                                <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
+                            </div>
+                        </div>
+                        <!-- Stránka 2: Fotka -->
+                        <div class="swipe-page swipe-page-image">
+                            <img src="svah.jpg" alt="Stabilizace skalního svahu" loading="lazy">
+                        </div>
+                    </div>
+                    <!-- Indikátor -->
+                    <div class="swipe-indicator">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Fotka</span>
+                    </div>
                 </div>
-                <div class="content">
-                    <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2025</span>
-                    <span class="icon">⛰️</span>
-                    <h3>Stabilizace skalního svahu</h3>
-                    <p class="desc">Zajistili jsme skalní stěnu nad domy čp. 91 a 92.</p>
-                    <p class="price">💰 4,59 mil. Kč s 80% dotací</p>
-                    <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
+                <!-- Tečky -->
+                <div class="swipe-dots">
+                    <div class="swipe-dot active"></div>
+                    <div class="swipe-dot"></div>
                 </div>
             </div>
 
-            <!-- BOD 2 – PRAVÁ STRANA (HOTOVO) + OBRÁZEK VLEVO -->
+            <!-- BOD 2 -->
             <div class="timeline-item right">
                 <div class="dot">2</div>
-                <div class="timeline-image">
-                    <img src="chodnik.png" alt="Chodník, opěrné zdi a osvětlení" loading="lazy">
+                <div class="swipe-container" data-current="0">
+                    <div class="swipe-wrapper">
+                        <div class="swipe-page swipe-page-text">
+                            <div class="content">
+                                <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2026</span>
+                                <span class="icon">🚶</span>
+                                <h3>Chodník, opěrné zdi a osvětlení – 3. etapa</h3>
+                                <p class="desc">Vybudovali jsme nový chodník podél místní komunikace, opěrné zdi a osvětlení.</p>
+                                <p class="price">💰 10,68 mil. Kč</p>
+                                <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
+                            </div>
+                        </div>
+                        <div class="swipe-page swipe-page-image">
+                            <img src="chodnik.jpg" alt="Chodník, opěrné zdi a osvětlení" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="swipe-indicator">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Fotka</span>
+                    </div>
                 </div>
-                <div class="content">
-                    <span class="year hotovo"><i class="fas fa-check-circle"></i> Dokončeno 02/2026</span>
-                    <span class="icon">🚶</span>
-                    <h3>Chodník, opěrné zdi a osvětlení – 3. etapa</h3>
-                    <p class="desc">Vybudovali jsme nový chodník podél místní komunikace, opěrné zdi a osvětlení.</p>
-                    <p class="price">💰 10,68 mil. Kč</p>
-                    <span class="status-badge status-hotovo"><i class="fas fa-check-circle"></i> Hotovo</span>
+                <div class="swipe-dots">
+                    <div class="swipe-dot active"></div>
+                    <div class="swipe-dot"></div>
                 </div>
             </div>
 
-            <!-- BOD 3 – LEVÁ STRANA (PROBÍHÁ) + OBRÁZEK VPRAVO -->
+            <!-- BOD 3 -->
             <div class="timeline-item left">
                 <div class="dot">3</div>
-                <div class="timeline-image">
-                    <img src="kanalizace.png" alt="Splašková kanalizace" loading="lazy">
+                <div class="swipe-container" data-current="0">
+                    <div class="swipe-wrapper">
+                        <div class="swipe-page swipe-page-text">
+                            <div class="content">
+                                <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
+                                <span class="icon">🚧</span>
+                                <h3>Splašková kanalizace – hlavní projekt</h3>
+                                <p class="desc">Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno.</p>
+                                <p class="price">💰 188,58 mil. Kč</p>
+                                <span class="status-badge status-probiha"><i class="fas fa-sync-alt fa-spin"></i> Probíhá</span>
+                            </div>
+                        </div>
+                        <div class="swipe-page swipe-page-image">
+                            <img src="kanalizace.jpg" alt="Splašková kanalizace" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="swipe-indicator">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Fotka</span>
+                    </div>
                 </div>
-                <div class="content">
-                    <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
-                    <span class="icon">🚧</span>
-                    <h3>Splašková kanalizace – hlavní projekt</h3>
-                    <p class="desc">Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno.</p>
-                    <p class="price">💰 188,58 mil. Kč</p>
-                    <span class="status-badge status-probiha"><i class="fas fa-sync-alt fa-spin"></i> Probíhá</span>
+                <div class="swipe-dots">
+                    <div class="swipe-dot active"></div>
+                    <div class="swipe-dot"></div>
                 </div>
             </div>
 
-            <!-- BOD 4 – PRAVÁ STRANA: CHYSTÁME VLEVO, PROGRAM VPRAVO -->
+            <!-- BOD 4 - POUZE TEXT (Program) -->
             <div class="timeline-item right">
                 <div class="dot">4</div>
                 <div class="content">
                     <span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
-                    <span class="icon">💡</span>
+                    <span class="icon"></span>
                     <h3>Další projekty pro rozvoj obce</h3>
                     <p class="desc">Máme plány na další roky – od rozvoje kultury až po moderní služby. <strong>Chceme v tom pokračovat.</strong></p>
                     <span class="status-badge status-chystame"><i class="fas fa-clock"></i> Chystáme</span>
-                </div>
-                <div class="timeline-image-text">
-                    <span class="program-label">Program<br><small>2026–2030</small></span>
                 </div>
             </div>
         </div>
@@ -1744,19 +2065,53 @@ footer p strong { font-weight: 900; }
             </div>
         </div>
         <div style="margin-top: 40px; padding-top: 32px; border-top: 3px solid var(--primary);">
-            <h3 class="section-title center" style="font-size: 28px;">🌱 Škola, rodiny a aktivní život</h3>
+            <h3 class="section-title center" style="font-size: 28px;"> Škola, rodiny a aktivní život</h3>
+            
             <div class="school-grid-desktop">
+                <!-- Karta 1: Moderní vzdělávání -->
                 <div class="school-card">
                     <span class="icon">📚</span>
                     <h4>Moderní vzdělávání</h4>
-                    <ul><li>Aktivizační metody výuky</li><li>Projektová a badatelská výuka</li><li>Individuální přístup k dětem</li></ul>
+                    <ul>
+                        <li>Aktivizační metody výuky</li>
+                        <li>Projektová a badatelská výuka</li>
+                        <li>Individuální přístup k dětem</li>
+                    </ul>
                 </div>
+                
+                <!-- Karta 2: Fotka školy -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text">📚<br>Naše<br>škola</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Karta 3: Sport a volný čas -->
                 <div class="school-card">
                     <span class="icon">🏃</span>
                     <h4>Sport a volný čas</h4>
-                    <ul><li>Pumptrack pro děti a mládež</li><li>Senior park – setkávání a pohyb</li><li>Podpora spolků a kulturních akcí</li></ul>
+                    <ul>
+                        <li>Pumptrack pro děti a mládež</li>
+                        <li>Senior park – setkávání a pohyb</li>
+                        <li>Podpora spolků a kulturních akcí</li>
+                    </ul>
+                </div>
+                
+                <!-- Karta 4: Fotka hřiště -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text"><br>Dětské<br>hřiště</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Mobil - accordion s fotkami -->
             <div class="accordion">
                 <div class="accordion-item open">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -1764,15 +2119,48 @@ footer p strong { font-weight: 900; }
                         <div class="title-group"><h4>Moderní vzdělávání</h4></div>
                         <span class="accordion-toggle">▼</span>
                     </div>
-                    <div class="accordion-body"><ul><li>Aktivizační metody výuky</li><li>Projektová a badatelská výuka</li><li>Individuální přístup k dětem</li></ul></div>
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Aktivizační metody výuky</li>
+                            <li>Projektová a badatelská výuka</li>
+                            <li>Individuální přístup k dětem</li>
+                        </ul>
+                    </div>
                 </div>
+                
+                <!-- Fotka školy na mobilu -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="skola.jpg" alt="Naše škola v Čisté" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text">📚<br>Naše<br>škola</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
                         <span class="icon-left">🏃</span>
                         <div class="title-group"><h4>Sport a volný čas</h4></div>
                         <span class="accordion-toggle">▼</span>
                     </div>
-                    <div class="accordion-body"><ul><li>Pumptrack pro děti a mládež</li><li>Senior park – setkávání a pohyb</li><li>Podpora spolků a kulturních akcí</li></ul></div>
+                    <div class="accordion-body">
+                        <ul>
+                            <li>Pumptrack pro děti a mládež</li>
+                            <li>Senior park – setkávání a pohyb</li>
+                            <li>Podpora spolků a kulturních akcí</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Fotka hřiště na mobilu -->
+                <div class="school-photo-wrapper">
+                    <div class="school-photo-bubble clickable-image">
+                        <img src="hriste.jpg" alt="Dětské hřiště" loading="lazy">
+                        <div class="school-photo-overlay">
+                            <span class="school-photo-text">🛝<br>Dětské<br>hřiště</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1780,7 +2168,7 @@ footer p strong { font-weight: 900; }
             <h3 class="section-title center" style="font-size: 28px;">🌿 Čistá, zelená a bezpečná obec</h3>
             <div class="priorities">
                 <div class="priority-card">
-                    <span class="icon">♻️</span>
+                    <span class="icon">️</span>
                     <h3>Odpadové hospodářství</h3>
                     <ul><li>Čipování nádob</li><li>Spravedlivější systém</li><li>Motivace k odpovědnosti</li></ul>
                     <span class="tag">Klíčová oblast</span>
@@ -2223,6 +2611,59 @@ footer p strong { font-weight: 900; }
             firstItem.classList.add('open');
         }
     }
+
+    // ===== MOBILE HORIZONTAL SWIPE =====
+    const swipeContainers = document.querySelectorAll('.swipe-container');
+    
+    swipeContainers.forEach(container => {
+        const wrapper = container.querySelector('.swipe-wrapper');
+        const pages = container.querySelectorAll('.swipe-page');
+        const dots = container.parentElement.querySelectorAll('.swipe-dot');
+        let currentPage = 0;
+        let startX = 0;
+        let endX = 0;
+        
+        function updateSwipe() {
+            wrapper.style.transform = `translateX(-${currentPage * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentPage);
+            });
+            container.classList.toggle('show-image', currentPage === 1);
+        }
+        
+        // Touch events
+        wrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        wrapper.addEventListener('touchmove', (e) => {
+            endX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        wrapper.addEventListener('touchend', () => {
+            const swipeThreshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentPage < pages.length - 1) {
+                    // Swipe doleva -> fotka
+                    currentPage++;
+                } else if (diff < 0 && currentPage > 0) {
+                    // Swipe doprava -> text
+                    currentPage--;
+                }
+                updateSwipe();
+            }
+        });
+        
+        // Klik na tečky
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                currentPage = i;
+                updateSwipe();
+            });
+        });
+    });
 
     // ===== LIGHTBOX =====
     const lightbox = document.getElementById('lightbox');
