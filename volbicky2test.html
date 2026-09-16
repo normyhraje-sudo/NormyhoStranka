@@ -1080,7 +1080,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     .timeline-item:last-child::after { display: none; }
 }
 
-/* ===== MOBIL – PŮVODNÍ VZHLED (BEZ OBRÁZKŮ) ===== */
+/* ===== MOBIL – INTERAKTIVNÍ TIMELINE ===== */
 @media (max-width: 768px) {
     .timeline {
         position: relative;
@@ -1105,8 +1105,29 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
     }
     .timeline-item:last-child { margin-bottom: 0; }
 
-    /* Skrytí obrázků na mobilu */
-    .timeline-image,
+    /* Skrytí obrázků ve výchozím stavu */
+    .timeline-image {
+        display: none; 
+        margin-top: 12px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 2px solid var(--border);
+        box-shadow: var(--shadow);
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    /* Třída pro zobrazení fotky */
+    .timeline-image.show-mobile {
+        display: block;
+    }
+
+    .timeline-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Skrytí textové bubliny programu na mobilu (ta je jen grafická) */
     .timeline-image-text {
         display: none !important;
     }
@@ -1128,6 +1149,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         font-weight: 800;
         color: var(--text-muted);
         transition: var(--transition);
+        z-index: 2;
     }
     .timeline-item.active .dot {
         background: var(--primary);
@@ -1135,6 +1157,7 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         color: var(--white);
         transform: scale(1.15);
     }
+    
     .timeline-item .content {
         background: var(--white);
         border: 2px solid var(--border);
@@ -1142,11 +1165,55 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         padding: 20px 24px;
         transition: var(--transition);
         box-shadow: var(--shadow);
+        position: relative;
     }
+    
+    /* Přidání místa pro šipku */
+    .timeline-item .content {
+        padding-right: 50px; 
+    }
+
     .timeline-item.active .content {
         border-color: var(--primary);
         box-shadow: var(--shadow-hover);
     }
+    
+    /* ŠIPKA PRO ROZBALOVÁNÍ */
+    .mobile-toggle-btn {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        background: var(--green-soft);
+        border: 1px solid var(--green);
+        border-radius: 50%;
+        color: var(--green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+        z-index: 5;
+    }
+    
+    .mobile-toggle-btn:hover {
+        background: var(--green);
+        color: var(--white);
+        transform: translateY(-50%) scale(1.1);
+    }
+    
+    .mobile-toggle-btn i {
+        font-size: 14px;
+        transition: transform 0.3s;
+    }
+    
+    /* Otočení šipky když je otevřeno */
+    .timeline-item.open .mobile-toggle-btn i {
+        transform: rotate(90deg);
+    }
+
     .timeline-item .content .year {
         display: inline-block;
         font-size: 12px;
@@ -1176,6 +1243,11 @@ section { padding: 56px 0; border-bottom: 1px solid var(--border); }
         width: fit-content;
     }
     .timeline-item .content .status-badge i { margin-right: 6px; }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== SLIBY – PŮVODNÍ STYLY (ZACHOVÁNY PRO KOMPATIBILITU) ===== */
@@ -1822,9 +1894,14 @@ footer p strong { font-weight: 900; }
         <p class="section-subtitle">Za poslední 4 roky jsme připravili a realizovali <strong>spoustu dobrých věcí</strong>. To&nbsp;je teprve začátek.</p>
 
         <div class="timeline" id="timeline">
-            <!-- BOD 1 – LEVÁ STRANA (HOTOVO) + OBRÁZEK VPRAVO -->
+            <!-- BOD 1 -->
             <div class="timeline-item left active">
                 <div class="dot">1</div>
+                <!-- Tlačítko pro mobil -->
+                <div class="mobile-toggle-btn" onclick="toggleTimelineImage(this)">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
                 <div class="timeline-image">
                     <img src="svah.jpg" alt="Stabilizace skalního svahu" loading="lazy">
                 </div>
@@ -1838,9 +1915,14 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 2 – PRAVÁ STRANA (HOTOVO) + OBRÁZEK VLEVO -->
+            <!-- BOD 2 -->
             <div class="timeline-item right">
                 <div class="dot">2</div>
+                <!-- Tlačítko pro mobil -->
+                <div class="mobile-toggle-btn" onclick="toggleTimelineImage(this)">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+
                 <div class="timeline-image">
                     <img src="chodnik.jpg" alt="Chodník, opěrné zdi a osvětlení" loading="lazy">
                 </div>
@@ -1854,15 +1936,20 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 3 – LEVÁ STRANA (PROBÍHÁ) + OBRÁZEK VPRAVO -->
+            <!-- BOD 3 -->
             <div class="timeline-item left">
                 <div class="dot">3</div>
+                <!-- Tlačítko pro mobil -->
+                <div class="mobile-toggle-btn" onclick="toggleTimelineImage(this)">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+
                 <div class="timeline-image">
                     <img src="kanalizace.jpg" alt="Splašková kanalizace" loading="lazy">
                 </div>
                 <div class="content">
                     <span class="year probiha"><i class="fas fa-sync-alt fa-spin"></i> Dokončení 09/2026</span>
-                    <span class="icon">🚧</span>
+                    <span class="icon"></span>
                     <h3>Splašková kanalizace – hlavní projekt</h3>
                     <p class="desc">Stavba zahájena v 10/2024, k 25. 9. 2026 bude dílo dokončeno a předáno.</p>
                     <p class="price">💰 188,58 mil. Kč</p>
@@ -1870,9 +1957,10 @@ footer p strong { font-weight: 900; }
                 </div>
             </div>
 
-            <!-- BOD 4 – PRAVÁ STRANA: CHYSTÁME VLEVO, PROGRAM VPRAVO -->
+            <!-- BOD 4 -->
             <div class="timeline-item right">
                 <div class="dot">4</div>
+                
                 <div class="content">
                     <span class="year chystame"><i class="fas fa-clock"></i> Chystáme</span>
                     <span class="icon">💡</span>
@@ -2262,7 +2350,7 @@ footer p strong { font-weight: 900; }
 <!-- ===== FOTKA ČISTÉ – NA ROZKLIKNUTÍ ===== -->
 <section style="padding: 40px 0; background: var(--bg-light); border-bottom: 1px solid var(--border);">
     <div class="container">
-        <h2 class="section-title center" style="font-size: 28px; text-align: center;">🌿 Čistá – naše obec</h2>
+        <h2 class="section-title center" style="font-size: 28px; text-align: center;"> Čistá – naše obec</h2>
         <div style="max-width: 900px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; transition: var(--transition);" class="clickable-image">
             <img 
                 src="vesnice.jpg" 
@@ -2481,6 +2569,21 @@ footer p strong { font-weight: 900; }
         const firstItem = document.querySelector('.accordion-item');
         if (firstItem) {
             firstItem.classList.add('open');
+        }
+    }
+
+    // ===== TOGGLE TIMELINE IMAGE ON MOBILE =====
+    function toggleTimelineImage(btn) {
+        // Najdi rodičovský element (timeline-item)
+        const item = btn.closest('.timeline-item');
+        // Najdi obrázek uvnitř tohoto elementu
+        const image = item.querySelector('.timeline-image');
+        
+        if (image) {
+            // Přepni třídu pro zobrazení/skrytí
+            image.classList.toggle('show-mobile');
+            // Přepni třídu pro otočení šipky
+            item.classList.toggle('open');
         }
     }
 
